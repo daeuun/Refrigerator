@@ -1,1 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- Author : SE -->
+	<entry key="selectReplyList">
+	
+		
+		SELECT REPLY_NO
+		    ,NICKNAME
+		    ,TO_CHAR(R.ENROLL_DATE,'YYYY"년" MM"월" DD"일"') CREATE_DATE
+		    ,REPLY_CONTENT
+		FROM REPLY R
+		JOIN MEMBER M USING (USER_NO)
+		WHERE M.STATUS = 'Y'
+		AND RECIPE_NO = ?
+		ORDER BY R.ENROLL_DATE DESC
+	
+	</entry>
+
+</properties>
