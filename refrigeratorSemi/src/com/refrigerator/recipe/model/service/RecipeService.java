@@ -1,13 +1,16 @@
 package com.refrigerator.recipe.model.service;
 
-import static com.refrigerator.common.JDBCTemplate.*;
+import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.commit;
 import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.refrigerator.recipe.model.dao.RecipeDao;
 import com.refrigerator.recipe.model.vo.Reply;
+import com.refrigerator.recipe.model.vo.Review;
 
 public class RecipeService {
 
@@ -54,6 +57,31 @@ public class RecipeService {
 		return result;
 		
 	}
+	
+	
+
+	/**
+	 * 레시피 후기 작성 기능
+	 * @author seong
+	 */
+	
+	public int insertReview(Review rv) {
+		
+		Connection conn = getConnection();
+		
+		int result = new RecipeDao().insertReview(conn,rv);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
+	}
+	
 		
 	
 }

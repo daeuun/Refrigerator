@@ -39,5 +39,29 @@
     	)
 	
 	</entry>
+	
+	<!-- @author seong -->
+	<!-- 레시피 후기 작성 기능 -->
+	<entry key="insertReview">
+	
+	INSERT INTO REVIEW
+	    (
+	        REVIEW_NO
+	        ,USER_NO
+	        ,RECIPE_NO
+	        ,REVIEW_CONTENT
+	        ,STAR
+	        ,IMG_NAME
+	    ) VALUES
+	    (
+	        SEQ_RVNO.NEXTVAL
+	        , ?
+	        , ?
+	        , ?
+	        , ?
+	        , ?
+	    )
+	    
+	</entry>  
 
 </properties>

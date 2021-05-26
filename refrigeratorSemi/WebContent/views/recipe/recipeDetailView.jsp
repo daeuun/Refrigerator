@@ -3,6 +3,15 @@
 
 
 
+															<!-- @author seong -->
+
+<%
+	//menubar.jsp로 가져갈 구문
+	String contextPath = request.getContextPath(); 
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
+	
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -271,6 +280,20 @@
 </head>
 <body>
 
+	<!-- @author seong -->
+	<script>
+	
+		// menubar.jsp로 가져갈 구문
+		var msg = "<%= alertMsg %>";
+			
+		if(msg != "null"){ 
+			alert(msg);
+			
+			<% session.removeAttribute("alertMsg");%>
+		}
+	
+	</script>
+	
 	
     <!--전체 감싸는 div-->
     <div class="outer">
@@ -575,14 +598,14 @@
 
             <div class="recipe-review-area">
 
-                <div class="recipe-review-header">
+                 <div class="recipe-review-header">
                     <!--요리 후기 추가 및 삭제시 숫자 증감-->
                     <div><h5>요리 후기 <b>2</b></h5></div>
                     <!--로그인한 회원만 보여지는 버튼 ! -->
                     <div class="recipe-review-body" >
-                        <a href="" style="text-decoration: none; color: rgb(0, 153, 102);" id="review-enroll-btn">
+                        <a href="<%=contextPath %>/enrollForm.recipe" style="text-decoration: none; color: rgb(0, 153, 102);" id="review-enroll-btn">
                             
-                            작성하기
+                         		  작성하기
                         
                         </a>
                     </div>

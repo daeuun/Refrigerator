@@ -2,6 +2,14 @@ package com.refrigerator.recipe.model.vo;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author seong
+ * 
+ */
+
+
+
 public class Reply {
 
 	 private int replyNo;

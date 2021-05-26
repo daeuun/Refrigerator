@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.refrigerator.recipe.model.vo.Reply;
+import com.refrigerator.recipe.model.vo.Review;
 
 
 public class RecipeDao{
@@ -56,7 +57,7 @@ public class RecipeDao{
 			}
 
 			
-			System.out.println(list);
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,6 +100,42 @@ public class RecipeDao{
 		
 		
 	}
+	
+	/**
+	 * 레시피 후기 작성 기능
+	 * @author seong
+	 */
+	
+	public int insertReview(Connection conn, Review rv) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rv.getReviewWriter());
+			pstmt.setInt(2, rv.getRecipeNo());
+			pstmt.setString(3, rv.getReviewContent());
+			pstmt.setDouble(4, rv.getStar());
+			pstmt.setString(5, rv.getReviewImg());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+		
+		
+		
+	}
+	
+	
 	
 	
 	
