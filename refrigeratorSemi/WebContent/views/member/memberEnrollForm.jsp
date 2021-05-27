@@ -88,16 +88,16 @@
                         <span class="birth-input_separator">::</span>
                         <span class="birth-input_month">
                             <select class="form-control" name="birthMonth" id="">
-                                <option selected="" value="" disabled="">월</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
+                                <option selected disabled>월</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -121,7 +121,7 @@
                     <div class="sign-up_form-group_input"> <!-- 입력란div -->
                         <span class="gender-input">
                             <select class="form-control" name="gender" id="gender">
-                                <option selected="" value="" disabled="">성별</option>
+                                <option selected disabled>성별</option>
                                 <option value="M">남</option>
                                 <option value="F">여</option>
                                 <option value="N">선택안함</option>

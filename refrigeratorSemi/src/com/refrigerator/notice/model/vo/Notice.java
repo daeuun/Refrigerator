@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Notice {
 	
 	private int noticeNo;
-	private int userNo;
+	private String userNo;
 	private String noticeTitle;
 	private String noticeContent;
 	private String deleteStatus;
@@ -15,7 +15,7 @@ public class Notice {
 
 	public Notice() {}
 
-	public Notice(int noticeNo, int userNo, String noticeTitle, String noticeContent, String deleteStatus,
+	public Notice(int noticeNo, String userNo, String noticeTitle, String noticeContent, String deleteStatus,
 			Date enrollDate, Date modifyDate, int count) {
 		super();
 		this.noticeNo = noticeNo;
@@ -23,6 +23,26 @@ public class Notice {
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.deleteStatus = deleteStatus;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.count = count;
+	}
+
+	public Notice(int noticeNo,  String noticeTitle, String userNo,Date enrollDate, int count) {
+		super();
+		this.noticeNo = noticeNo;
+		this.userNo = userNo;
+		this.noticeTitle = noticeTitle;
+		this.enrollDate = enrollDate;
+		this.count = count;
+	}
+
+	public Notice(String userNo, String noticeTitle, String noticeContent, Date enrollDate, Date modifyDate,
+			int count) {
+		super();
+		this.userNo = userNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.count = count;
@@ -36,11 +56,11 @@ public class Notice {
 		this.noticeNo = noticeNo;
 	}
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
