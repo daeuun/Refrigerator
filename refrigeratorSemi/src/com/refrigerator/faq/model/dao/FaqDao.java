@@ -21,7 +21,7 @@ public class FaqDao {
 	public FaqDao() {
 			
 		try {
-			prop.loadFromXML(new FileInputStream(NoticeDao.class.getResource("/sql/notice/notice-mapper.xml").getPath()));
+			prop.loadFromXML(new FileInputStream(FaqDao.class.getResource("/sql/notice/notice-mapper.xml").getPath()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
