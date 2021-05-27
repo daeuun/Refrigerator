@@ -29,7 +29,7 @@
 	</entry>
 
 	<!-- @author yeji -->
-	<!-- 공지사항 한 개 조회 -->
+	<!-- 공지사항 상세 조회 -->
 	<entry key="selectNotice">
 		SELECT 
 		       USER_ID

@@ -43,7 +43,7 @@ public class NoticeService {
 	}
 	
 	/**
-	 * 공지사항 한 개 조회
+	 * 공지사항 상세 조회
 	 * @author yeji
 	 */
 	
