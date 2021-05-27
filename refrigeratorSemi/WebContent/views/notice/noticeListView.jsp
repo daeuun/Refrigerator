@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList, com.refrigerator.notice.model.vo.Notice"%>
+<%
+	String contextPath = request.getContextPath();
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +15,110 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
+    .outer{
+        background: white;
+        color: black;
+        width: 1200px;
+        margin: auto;
+        margin-top: 50px;
+    }
     
+    .notice-list-area>thead>tr{
+        border-bottom: 2px solid rgb(0, 120, 51);
+        border-top: 2px solid rgb(0, 120, 51);
+        font-weight: bold;
+        text-align: center;
+        height: 50px;
+    }
+    .notice-list-area>tbody>tr:hover{
+        color: rgb(0, 120, 51);
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .notice-list-area>tbody>tr{
+        height: 45px;
+        text-align: center;
+        border-bottom: 1px solid darkgray;
+    }
+    #btn-noticeWrite{
+        background: rgb(0, 120, 51);
+        color: white;
+    }
+    #btn-noticeWrite:hover{
+        background: white;
+        color: rgb(0, 120, 51);
+        border: 1px solid rgb(0, 120, 51);
+        font-weight: bold;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
 
-	 
+		 <div class="outer">
+
+        <br>
+        <h2 align="center" style="font-weight:bold;">공지사항</h2>
+        <br>
+
+        <%@ include file="../common/user/userSideBar.jsp" %>
+
+	
+		<!-- 글작성 버튼 클릭시 -->
+	    <div align="right" style="width: 1050px;">
+            <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
+	        <br><br>
+	    </div>
+		
+		<div class="noticeListView">
+	        <!-- 게시판 틀-->
+	        <div id="notice-list">
+	            <table class="notice-list-area" align="center">
+	
+	                <thead>
+	                    <tr id="headline">
+	                        <th width="70">글번호</th>
+	                        <th width="400">글제목</th>
+	                        <th width="100">작성자</th>
+	                        <th width="100">작성일</th>
+	                        <th width="70">조회수</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                	<%if(list.isEmpty()) {%>
+	                		<tr>
+	                			<td colspan="5"> 존재하는 공지사항이 없습니다.</td>
+	                		</tr>
+	                	<%} else{ %>
+	                		<%for(Notice n : list) {%>
+		                        <tr>
+		                            <td><%=n.getNoticeNo() %></td>
+		                            <td><%=n.getNoticeTitle() %></td>
+		                            <td><%=n.getUserNo() %></td>
+		                            <td><%=n.getEnrollDate() %></td>
+		                            <td><%=n.getCount() %></td>
+		                        </tr>
+	                        <%} %>
+	                    <%} %>
+	                </tbody>
+	            </table>
+	            
+	        </div>
+        
+        </div>
+        
+        <script>
+        	$(function(){
+        		$(".notice-list-area>tbody>tr").click(function(){
+        			var nno = $(this).children().eq(0).text();
+        			//console.log(nno);
+        			location.href = '<%=contextPath%>/detail.no?nno=' + nno;
+        		})
+        	})
+        </script>
+        
+         
+    </div>
     
 
 </body>
