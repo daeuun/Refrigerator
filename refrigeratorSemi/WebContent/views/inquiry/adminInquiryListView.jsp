@@ -1,8 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <!--윤희락 05.26 작성-->
-    
+<!--윤희락 05.26 작성-->
+<%@ page import="com.refrigerator.common.model.vo.PageInfo, java.util.ArrayList, com.refrigerator.inquiry.model.vo.Inquiry" %>
+<%
+	// 지울것!!!!!!!!!!!!!!!!!
+	String contextPath = request.getContextPath();
+
+
+	PageInfo unSolvedListpi = (PageInfo)request.getAttribute("unSolvedListpi");
+	PageInfo solvedListpi = (PageInfo)request.getAttribute("solvedListpi");
+	
+	ArrayList<Inquiry> unSolvedList = (ArrayList<Inquiry>)request.getAttribute("unSolvedList");
+	ArrayList<Inquiry> solvedList = (ArrayList<Inquiry>)request.getAttribute("solvedList");
+	
+	int unSolCurrentPage = unSolvedListpi.getCurrentPage();
+	int unSolStartPage = unSolvedListpi.getStartPage();
+	int unSolEndPage = unSolvedListpi.getEndPage();
+	int unSolMaxPage = unSolvedListpi.getMaxPage();
+	
+	int solCurrentPage = solvedListpi.getCurrentPage();
+	int solStartPage = solvedListpi.getStartPage();
+	int solEndPage = solvedListpi.getEndPage();
+	int solMaxPage = solvedListpi.getMaxPage();
+	
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +157,7 @@
         <br>
 
         <div class="table-label">
-            <span><b>미해결문의</b></span> <span class="count-area">5</span>
+            <span><b>미해결문의</b></span> <span class="count-area">4</span>
         </div>
         <table class="unsolQ">
             <thead>
@@ -149,41 +170,22 @@
                     </tr>
             </thead>
             <tbody>
+            <%if(unSolvedList.isEmpty()) {%>
+            	<tr>
+            		<td colspan="5">조회된 문의가 없습니다.</td>
+            	</tr>
+            <%}else{ %>
+            	
+            	<% for(Inquiry i : unSolvedList) {%>
                 <tr>
-                    <td>1</td>
-                    <td>비밀번호를 잃어버렸어요?</td>
-                    <td>user011111111</td>
-                    <td>2010-11-11</td>
+                    <td><%=i.getInqryNo()%></td>
+                    <td><%=i.getInqryTitle()%></td>
+                    <td><%=i.getInqryWriter()%></td>
+                    <td><%=i.getModifyDate()%></td>
                     <td><button type="button" data-toggle="modal" data-target="#answer-modal">답변하기</button></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>비밀번호를 잃어버렸어 요요요요요요요요?</td>
-                    <td>user01</td>
-                    <td>2010-11-11</td>
-                    <td><button>답변하기</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>비밀번호를 잃어버렸어요?</td>
-                    <td>user01</td>
-                    <td>2010-11-11</td>
-                    <td><button>답변하기</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>비밀번호를 잃어버렸어요?</td>
-                    <td>user01</td>
-                    <td>2010-11-11</td>
-                    <td><button>답변하기</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>비밀번호를 잃어버렸어요?</td>
-                    <td>user01</td>
-                    <td>2010-11-11</td>
-                    <td><button>답변하기</button></td>
-                </tr>
+            	<%} %>
+            <%} %>
             </tbody>
         </table>
 
@@ -221,14 +223,21 @@
         </div>
 
         <br>
-        <div class="page-area" align="center">
-            <button>&lt;</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>&gt;</button>
+       <br>
+         <div align="center" class="page-area">
+        	<%if(unSolCurrentPage != 1) {%>
+            <button onclick="location.href='<%=contextPath%>/adList.inq?unSolCurrentPage=<%=unSolCurrentPage-1%>&solCurrentPage=<%=solCurrentPage%>';">&lt;</button>
+            <%} %>
+            <%for(int p=unSolStartPage; p<=unSolEndPage; p++) {%>
+            	<%if(p != unSolCurrentPage) { %>
+            		<button onclick="location.href='<%=contextPath%>/adList.inq?unSolCurrentPage=<%= p%>&solCurrentPage=<%=solCurrentPage%>';"><%=p %></button>
+            	<%}else { %>
+            		<button class="cp" disabled><%=p%></button>
+            	<%} %>
+            <%}  %>
+            <%if(unSolCurrentPage != unSolMaxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/adList.inq?unSolCurrentPage=<%=unSolCurrentPage+1%>&solCurrentPage=<%=solCurrentPage%>';">&gt;</button>
+            <%} %>
         </div>
         <br>
 
@@ -246,55 +255,42 @@
                 </tr>
             </thead>
             <tbody>
+            <%if(solvedList.isEmpty()) {%>
+            	<tr>
+            		<td colspan="5">조회된 문의가 없습니다.</td>
+            	</tr>
+            <%}else{ %>
+            	
+            	<% for(Inquiry i : solvedList) {%>
                 <tr>
-                    <td>51</td>
-                    <td>비밀번호를 잃어버렸어요</td>
-                    <td>user02</td>
-                    <td>2021-05-13</td>
-                    <td>2021-05-14</td>
+                    <td><%=i.getInqryNo()%></td>
+                    <td><%=i.getInqryTitle()%></td>
+                    <td><%=i.getInqryWriter()%></td>
+                    <td><%=i.getModifyDate()%></td>
+                    <td><%=i.getAnswerDate()%></td>
                 </tr>
-                <tr>
-                    <td>50</td>
-                    <td>비밀번호를 잃어버렸어요</td>
-                    <td>user02</td>
-                    <td>2021-05-13</td>
-                    <td>2021-05-14</td>
-                </tr>
-                <tr>
-                    <td>49</td>
-                    <td>비밀번호를 잃어버렸어요</td>
-                    <td>user02</td>
-                    <td>2021-05-13</td>
-                    <td>2021-05-14</td>
-                </tr>
-                <tr>
-                    <td>48</td>
-                    <td>비밀번호를 잃어버렸어요</td>
-                    <td>user02</td>
-                    <td>2021-05-13</td>
-                    <td>2021-05-14</td>
-                </tr>
-                <tr>
-                    <td>47</td>
-                    <td>비밀번호를 잃어버렸어요</td>
-                    <td>user02</td>
-                    <td>2021-05-13</td>
-                    <td>2021-05-14</td>
-                </tr>
+            	<%} %>
+            <%} %>
             </tbody>
         </table>
 
         <br>
-        <div class="page-area" align="center">
-            <button>&lt;</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>&gt;</button>
+         <div align="center" class="page-area">
+        	<%if(solCurrentPage != 1) {%>
+            <button onclick="location.href='<%=contextPath%>/adList.inq?unSolCurrentPage=<%=unSolCurrentPage%>&solCurrentPage=<%=solCurrentPage-1%>';">&lt;</button>
+            <%} %>
+            <%for(int p=solStartPage; p<=solEndPage; p++) {%>
+            	<%if(p != solCurrentPage) { %>
+            		<button onclick="location.href='<%=contextPath%>/adList.inq?unSolCurrentPage=<%=unSolCurrentPage%>&solCurrentPage=<%= p%>';"><%=p %></button>
+            	<%}else { %>
+            		<button class="cp" disabled><%=p%></button>
+            	<%} %>
+            <%}  %>
+            <%if(solCurrentPage != solMaxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/adList.inq?unSolCurrentPage=<%=unSolCurrentPage%>&solCurrentPage=<%=solCurrentPage+1%>';">&gt;</button>
+            <%} %>
         </div>
-        <br>
+        
     </div>	
 </body>
 </html>
