@@ -18,7 +18,7 @@ import com.refrigerator.inquiry.model.vo.Inquiry;
  * 
  * Servlet implementation class AdminInquiryListController
  */
-//?unSolCurrentPage=1&solCurrentPage=6
+//?unSolCurrentPage=1&solCurrentPage=1 값 넣어서 요청할것!!
 @WebServlet("/adList.inq")
 public class AdminInquiryListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
