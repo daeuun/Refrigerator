@@ -23,5 +23,8 @@
 	<!-- @author yeji 추후 수정할 예정입니다. -->
 	<div><a href="<%=contextPath%>/list.no">공지사항 페이지</a></div>
 	
+	<!-- @author yeji -->
+	<div><a href="<%=contextPath%>/list.faq">FAQ 페이지</a></div>
+	
 </body>
 </html>
