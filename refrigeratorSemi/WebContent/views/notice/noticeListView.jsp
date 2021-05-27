@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
+    
+<!-- @author yeji -->
+
 <%@ page import="java.util.ArrayList, com.refrigerator.notice.model.vo.Notice"%>
 <%
 	String contextPath = request.getContextPath();
