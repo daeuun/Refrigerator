@@ -157,7 +157,7 @@
         <br>
 
         <div class="table-label">
-            <span><b>미해결문의</b></span> <span class="count-area">4</span>
+            <span><b>미해결문의</b></span> <span class="count-area"><%=unSolvedListpi.getListCount() %></span>
         </div>
         <table class="unsolQ">
             <thead>
