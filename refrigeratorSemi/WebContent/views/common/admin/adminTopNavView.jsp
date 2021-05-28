@@ -80,7 +80,7 @@
 
 	<div class="top-nav">
 
-        <div class="logo" a>
+        <div class="logo" a> 
             <img src="../../resources/img/logo.png" width="" align="left">
         </div>
 

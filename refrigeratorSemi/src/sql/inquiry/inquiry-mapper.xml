@@ -54,4 +54,36 @@
  WHERE RNUM BETWEEN ? AND ?
 </entry>
 
+<entry key="selectUnSolvedInquiry">
+	SELECT 
+		   INQRY_TITLE
+		 , INQRY_CONTENT
+  	  FROM INQUIRY
+  	 WHERE ANSWER_DATE IS NULL
+  	   AND INQRY_ANSWER IS NULL
+  	   AND INQRY_NO = ?
+</entry>
+
+<entry key="selectSolvedInquiry">
+	SELECT 
+		   INQRY_TITLE
+		 , INQRY_CONTENT
+		 , INQRY_ANSWER
+  	  FROM INQUIRY
+  	 WHERE ANSWER_DATE IS NOT NULL
+  	   AND INQRY_ANSWER IS NOT NULL
+  	   AND INQRY_NO = ?
+</entry>
+
+<entry key="updateInquiryAnswer">
+	UPDATE INQUIRY
+	   SET INQRY_ANSWER = ?
+	     , ANSWER_DATE = SYSDATE
+	 WHERE INQRY_NO = ?
+	   
+</entry>
+
+
+
+
 </properties>

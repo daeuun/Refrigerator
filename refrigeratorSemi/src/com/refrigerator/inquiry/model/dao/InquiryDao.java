@@ -1,5 +1,7 @@
 package com.refrigerator.inquiry.model.dao;
 
+import static com.refrigerator.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,8 +13,6 @@ import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.inquiry.model.vo.Inquiry;
-
-import static com.refrigerator.common.JDBCTemplate.*;
 
 /**
  * @author Heerak 05.27
@@ -176,6 +176,108 @@ public class InquiryDao {
 		
 		return solvedList;
 	}
+
+	/**
+	 * HeeRak 미해결문의 번호 받아 해당문의 내용 조회
+	 * @param conn
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectUnSolvedInquiry(Connection conn, int inqNo) {
+		// select문 rset 한행 조회
+		Inquiry inq = new Inquiry();
+		inq.setInqryNo(inqNo);
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectUnSolvedInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inqNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				inq.setInqryTitle(rset.getString("inqry_title"));
+				inq.setInqryContent(rset.getString("inqry_content"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return inq;
+	}
+
+	/**
+	 * HeeRak 해결문의 번호 받아 해당문의 내용 DB 조회
+	 * @param conn
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectSolvedInquiry(Connection conn, int inqNo) {
+		// select -> rset 한행 조회
+		Inquiry inq = new Inquiry();
+		inq.setInqryNo(inqNo);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectSolvedInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inqNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				inq.setInqryTitle(rset.getString("inqry_title"));
+				inq.setInqryContent(rset.getString("inqry_content"));
+				inq.setInqryAnswer(rset.getString("inqry_answer"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return inq;
+	}
+
+	/**
+	 * HeeRak [미해결|해결] 답변내용 update 후 처리된 행수 반환
+	 * @param conn
+	 * @param inq
+	 * @return
+	 */
+	public int updateInquiryAnswer(Connection conn, Inquiry inq) {
+		// update 문 => 처리된행수 반환
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateInquiryAnswer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, inq.getInqryAnswer());
+			pstmt.setInt(2, inq.getInqryNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	
 	
 	

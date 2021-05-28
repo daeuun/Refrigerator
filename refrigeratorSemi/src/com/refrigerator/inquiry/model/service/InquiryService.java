@@ -61,6 +61,47 @@ public class InquiryService {
 		return solvedList;
 	}
 
+	/**
+	 * HeeRak 미해결문의 번호 받아 해당문의 내용 조회
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectUnSolvedInquiry(int inqNo) {
+		Connection conn = getConnection();
+		Inquiry inq = new InquiryDao().selectUnSolvedInquiry(conn, inqNo);
+		close(conn);
+		return inq;
+	}
+
+	/**
+	 * HeeRak 해결문의 번호 받아 해당문의 내용 조회
+	 * @param inqNo
+	 * @return
+	 */
+	public Inquiry selectSolvedInquiry(int inqNo) {
+		Connection conn = getConnection();
+		Inquiry inq = new InquiryDao().selectSolvedInquiry(conn, inqNo);
+		close(conn);
+		return inq;
+	}
+
+	/**
+	 * HeeRak [미해결|해결] 답변내용 update => commit/rollback
+	 * @param inqryNo
+	 * @param inqryContent
+	 * @return
+	 */
+	public int updateInquiryAnswer(Inquiry inq) {
+		Connection conn = getConnection();
+		int result = new InquiryDao().updateInquiryAnswer(conn, inq);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+
 	
 	
 	

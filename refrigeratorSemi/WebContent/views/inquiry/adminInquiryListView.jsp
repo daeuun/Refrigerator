@@ -76,12 +76,12 @@
         }
         /*답변하기 모달 영역*/
         .modal-content{
-            width: 600px;
-            height: 600px;
+            width: 1000px;
+            height: 800px;
         }
         .modal-header{
             border-bottom: 5px solid rgb(0, 153, 102);
-            width: 450px;
+            width: 800px;
             margin-top: 0;
             margin: 35px 74px 35px 74px;
             padding: 2px;
@@ -96,12 +96,12 @@
             color: black;
         }
         .answer-form{
-            width:450px;
+            width:800px;
             height:380px;
             margin: 0px 74px 0px 74px;
         }
         .form-group{
-            margin-bottom:40px;
+            margin-bottom:20px;
         }
         .form-group>label{
             color:rgb(0, 153, 102);
@@ -113,7 +113,7 @@
         .form-btn{
             height:60px;
         }
-        .form-btn a{
+        .form-btn button{
             box-sizing: border-box;
             width:46%;
             height:100%;
@@ -126,6 +126,7 @@
             line-height:50px;
             font-weight:500;
         }
+        
         #btn-s{
             background: rgb(0, 153, 102);
             opacity:0.85;
@@ -133,6 +134,14 @@
         #btn-s:hover{
             background: rgb(0, 153, 102);
             opacity:1;
+        }
+        
+        /* 해결문의내역 제목내역 css*/
+        .solved-title{
+        	color:black;
+        }
+        .solved-title:hover{
+        	cursor:pointer;
         }
 
         .current-page{
@@ -157,7 +166,7 @@
         <br>
 
         <div class="table-label">
-            <span><b>미해결문의</b></span> <span class="count-area"><%=unSolvedListpi.getListCount() %></span>
+            <span><b>미해결 문의</b></span> <span class="count-area"><%=unSolvedListpi.getListCount() %></span>
         </div>
         <table class="unsolQ">
             <thead>
@@ -178,49 +187,17 @@
             	
             	<% for(Inquiry i : unSolvedList) {%>
                 <tr>
-                    <td><%=i.getInqryNo()%></td>
+                    <td><span id="inqNo"><%=i.getInqryNo()%></span></td>
                     <td><%=i.getInqryTitle()%></td>
                     <td><%=i.getInqryWriter()%></td>
                     <td><%=i.getModifyDate()%></td>
-                    <td><button type="button" data-toggle="modal" data-target="#answer-modal">답변하기</button></td>
+                    <td><button class="answer-btn" type="button" data-toggle="modal" data-target="#answer-modal" onclick="answer(<%=i.getInqryNo()%>);">답변하기</button></td>
                 </tr>
             	<%} %>
             <%} %>
             </tbody>
         </table>
 
-        <!-- The Modal -->
-        <div class="modal fade" id="answer-modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-        
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">관리자_답변</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="answer-form">
-                        <form action="" method="POST">
-                            <div class="form-group">
-                                <label for="qus">Q. 질문</label>
-                                <input type="text" class="form-control" id="qus" value="질문들어올자리" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="answer">A. 답변</label>
-                                <textarea name="content" class="form-control" id="answer" style="resize:none;" placeholder="답변을입력해주세요"></textarea>
-                            </div>
-                            <div class="form-btn">
-                                <a href="" class="btn btn-secondary ">취소</a>
-                                <a href="" id="btn-s" class="btn btn-success">등록</a>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>                  
-            </div>
-        </div>
 
         <br>
        <br>
@@ -264,7 +241,7 @@
             	<% for(Inquiry i : solvedList) {%>
                 <tr>
                     <td><%=i.getInqryNo()%></td>
-                    <td><%=i.getInqryTitle()%></td>
+                    <td><a class="solved-title" data-toggle="modal" data-target="#answer-modal" onclick="viewSolvedList(<%=i.getInqryNo()%>);"><%=i.getInqryTitle()%></a></td>
                     <td><%=i.getInqryWriter()%></td>
                     <td><%=i.getModifyDate()%></td>
                     <td><%=i.getAnswerDate()%></td>
@@ -291,6 +268,95 @@
             <%} %>
         </div>
         
+       
+        <!-- 미해결 문의 답변하기 | 해결 문의 답변 수정 Modal -->
+        
+        <div class="modal fade" id="answer-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">관리자_답변</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="answer-form">
+                        <form action="<%=contextPath %>/adminUpdate.inq" method="POST">
+                        <input type="hidden" id="answerInqNo" name="inqNo">
+                        
+                            <div class="form-group">
+                                <label for="qus">Q. 질문_제목</label>
+                                <input type="text" class="form-control" id="inqTitle" value="질문들어올자리" readonly>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label for="qus">Q. 질문_내용</label>
+                                <textarea name="qusTitle" class="form-control" id="inqContent" readonly style="resize:none"></textarea>
+                            </div>
+                            
+	                            <div class="form-group">
+	                                <label for="answer">A. 답변</label>
+	                                <textarea name="inqContent" class="form-control" id="answerContent" style="resize:none;" placeholder="답변을입력해주세요"></textarea>
+	                            </div>
+	                            
+	                            <div class="form-btn">
+	                                <button type="button" data-dismiss="modal" class="btn btn-secondary">취소</a>
+	                                <button type="submit" id="btn-s" class="btn btn-success">등록</a>
+                            	</div>
+                            
+                        </form>
+                    </div>
+
+                </div>                  
+            </div>
+        </div>
     </div>	
+    
+    <script>
+    	// 해결 문의글 목록 중 '글제목' 클릭 시  해당 글의 번호를 가지고 데이터 요청
+    	function viewSolvedList(no){
+    		
+    		$.ajax({
+    			url:"JqAjaxAdminSolModal.inq",
+    			data:{inqNo: no},
+    			success:function(result){
+    				
+    				$("#answerInqNo").val(result.inqryNo);
+    				$("#inqTitle").val(result.inqryTitle);
+    				$("#inqContent").val(result.inqryContent);
+    				$("#answerContent").val(result.inqryAnswer);
+    				
+    			},error:function(){
+    				
+    			}
+    		})
+    		
+    	}
+    
+    
+    	// 미해결 문의글 목록중 '답변하기' 클릭 시 해당 글의 번호를 가지고 데이터 요청 (게시글 만들때 모달창도 여러개 만들면 되지만 무거워질것 같아서 이 방법으로..)
+    	function answer(no){
+    		
+    		$("#answerContent").val("");
+    		
+    		$.ajax({
+    			url:"JqAjaxAdminModal.inq",
+    			data:{inqNo: no},
+    			success:function(result){
+    				$("#answerInqNo").val(result.inqryNo);
+    				$("#inqTitle").val(result.inqryTitle);
+    				$("#inqContent").val(result.inqryContent);
+    			},error:function(){
+    				
+    			}
+    		})
+    		
+    	}
+    	
+    	
+    	
+    </script>
 </body>
 </html>
