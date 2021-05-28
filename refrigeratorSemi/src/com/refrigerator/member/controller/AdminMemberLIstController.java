@@ -28,6 +28,8 @@ public class AdminMemberLIstController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
 		request.getRequestDispatcher("views/member/adminMemberListView.jsp").forward(request, response);
 		
 	}
