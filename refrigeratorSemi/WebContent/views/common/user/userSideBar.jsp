@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- @author leeyeji -->
 <%
-	String contextPath = request.getContextPath();
+	//String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -43,10 +43,10 @@
         <table id="userSideNav-area" align="left" border="1px">
 
             <tr>
-                <th><a href="<%=contextPath%>/list.no">공지사항</a></th>
+                <th><a href="">공지사항</a></th>
             </tr>
             <tr>
-                <th><a href="<%=contextPath%>/list.faq">FAQ</a></th>
+                <th><a href="">FAQ</a></th>
             </tr>
             <tr>
                 <th><a href="">1:1문의</a></th>
