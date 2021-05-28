@@ -19,6 +19,7 @@ public class RecipeService {
 	/**
 	 * 레시피 상세 페이지의 댓글 전체 목록 조회 리스트 
 	 * @author seong
+	 * @date 0528
 	 * @return
 	 */
 	public ArrayList<Reply> selectReplyList(int recipeNo){
@@ -39,6 +40,7 @@ public class RecipeService {
 	/**
 	 * 레시피 상세 페이지 댓글 작성 기능 
 	 * @author seong
+	 * @date 0528
 	 */
 	
 	public int insertReply(Reply r) {
@@ -59,10 +61,29 @@ public class RecipeService {
 	}
 	
 	
-
+	/**
+	 * 레시피 전체 목록 조회 리스트
+	 * @author seong
+	 * @date  0528
+	 */
+	
+	public ArrayList<Review> selectReviewList(int recipeNo){
+		
+		
+		Connection conn = getConnection();
+		ArrayList<Review> list = new RecipeDao().selectReviewList(conn,recipeNo);
+		
+		close(conn);
+		return list;
+		
+		
+	}
+	
+	
 	/**
 	 * 레시피 후기 작성 기능
 	 * @author seong
+	 * @date 0528
 	 */
 	
 	public int insertReview(Review rv) {
@@ -70,6 +91,8 @@ public class RecipeService {
 		Connection conn = getConnection();
 		
 		int result = new RecipeDao().insertReview(conn,rv);
+		
+		System.out.println(rv);
 		
 		if(result>0) {
 			commit(conn);
@@ -82,6 +105,7 @@ public class RecipeService {
 		
 	}
 	
-		
+	
+
 	
 }

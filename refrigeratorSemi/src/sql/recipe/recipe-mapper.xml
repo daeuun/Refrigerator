@@ -40,6 +40,28 @@
 	
 	</entry>
 	
+		
+	<!-- @author seong -->
+	<!-- 레시피 후기 조회하기 -->
+	
+	<entry key="selectReviewList">
+		SELECT 
+		    REVIEW_NO
+		    ,NICKNAME
+		    ,REVIEW_CONTENT
+		    ,STAR
+		    ,IMG_NAME
+		    ,R.ENROLL_DATE ENROLL_DATE
+		   
+		    
+		FROM REVIEW R
+		JOIN MEMBER USING(USER_NO)
+		WHERE RECIPE_NO = ?
+		ORDER BY ENROLL_DATE DESC
+	</entry>
+	
+	
+	
 	<!-- @author seong -->
 	<!-- 레시피 후기 작성 기능 -->
 	<entry key="insertReview">

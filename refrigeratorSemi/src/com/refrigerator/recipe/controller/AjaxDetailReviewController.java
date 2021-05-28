@@ -1,25 +1,34 @@
 package com.refrigerator.recipe.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.refrigerator.recipe.model.service.RecipeService;
+import com.refrigerator.recipe.model.vo.Review;
+
+
 /**
  * @author seong
  * @date 0528
- * Servlet implementation class RecipeDetailController
+ * Servlet implementation class AjaxDetailReviewController
  */
-@WebServlet("/list.recipe")
-public class RecipeDetailController extends HttpServlet {
+
+
+@WebServlet("/list.review")
+public class AjaxDetailReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecipeDetailController() {
+    public AjaxDetailReviewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +39,13 @@ public class RecipeDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
+		ArrayList <Review> list = new RecipeService().selectReviewList(recipeNo);
 		
-		request.getRequestDispatcher("views/recipe/recipeDetailView.jsp").forward(request, response);
+		response.setContentType("application/json;charset=utf-8");
+		request.setAttribute("list",list);
+		new Gson().toJson(list,response.getWriter());
+		
 		
 		
 	}

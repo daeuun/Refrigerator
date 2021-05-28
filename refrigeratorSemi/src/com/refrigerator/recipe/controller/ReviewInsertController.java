@@ -17,6 +17,7 @@ import com.refrigerator.recipe.model.vo.Review;
 
 /**
  * @author seong
+ * @date 0528
  * Servlet implementation class ReviewInsertController
  */
 @WebServlet("/insertReview.recipe")
@@ -48,7 +49,7 @@ public class ReviewInsertController extends HttpServlet {
 			String reivewWriter = multiRequest.getParameter("userNo");
 			int recipeNo = Integer.parseInt(multiRequest.getParameter("recipeNo"));
 			String reviewContent = multiRequest.getParameter("content");
-			Double star = Double.parseDouble(multiRequest.getParameter("star"));
+			Double star = Double.parseDouble(multiRequest.getParameter("starCount"));
 			String reviewImg = multiRequest.getFilesystemName("reviewUpfile");
 			
 			
@@ -59,6 +60,7 @@ public class ReviewInsertController extends HttpServlet {
 			rv.setReviewContent(reviewContent);
 			rv.setStar(star);								
 			rv.setReviewImg( "resources/review_upfiles/" + reviewImg);
+			
 			
 			
 			int result = new RecipeService().insertReview(rv);

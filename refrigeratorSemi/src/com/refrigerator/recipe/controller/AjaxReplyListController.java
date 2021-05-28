@@ -15,6 +15,7 @@ import com.refrigerator.recipe.model.vo.Reply;
 
 /**
  * @author seong
+ * @date 0528
  * Servlet implementation class AjaxReplyListController
  */
 @WebServlet("/rlist.recipe")

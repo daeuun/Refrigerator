@@ -5,10 +5,8 @@ import java.util.Date;
 /**
  * 
  * @author seong
- * 
+ * @date 0528
  */
-
-
 
 public class Reply {
 

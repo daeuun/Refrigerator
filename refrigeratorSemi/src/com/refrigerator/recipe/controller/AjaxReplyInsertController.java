@@ -12,16 +12,19 @@ import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Reply;
 
 /**
- * @author seong
  * Servlet implementation class AjaxReplyInsertController
  */
+
+/**@author seong
+ * @date 0528
+ * @see HttpServlet#HttpServlet()
+ */
+
 @WebServlet("/rinsert.recipe")
 public class AjaxReplyInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**@author seong
-     * @see HttpServlet#HttpServlet()
-     */
+  
     public AjaxReplyInsertController() {
         super();
         // TODO Auto-generated constructor stub

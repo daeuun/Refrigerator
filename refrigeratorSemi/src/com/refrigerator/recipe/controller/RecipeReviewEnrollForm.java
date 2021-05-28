@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * @author seong
+ * @date 0528
  * Servlet implementation class RecipeReviewEnrollForm
  */
-@WebServlet("/enrollForm.recipe")
+@WebServlet("/enrollForm.review")
 public class RecipeReviewEnrollForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -7,7 +7,8 @@
 	
 %>
 
-
+																						<!-- @author seong -->
+																						<!-- @date 0528 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +62,6 @@
     .star.on{
     background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
     }
-
 	
 
 
@@ -83,10 +83,7 @@
 	
 	</head>
 	<body>
-		
-		
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-
+	
 
     
 	    	<form action="<%=contextPath%>/insertReview.recipe" method="post" id="enroll-form" enctype="multipart/form-data">
@@ -109,61 +106,104 @@
 	                <h5>이 요리의 별점은?</h5>
 	
 	               
-	            		
-	                    <div class="star-box" name="star">
-	                        <span class="star star_left">
-								<input type="hidden" name="star" value="0.5">
-							</span>
-	                        <span class="star star_right">
-	                        	<input type="hidden" name="star" value="1">
-	                        </span>
-	                    
-	                        <span class="star star_left">
-	                        	<input type="hidden" name="star" value="1.5">
-	                        </span>
-	                        <span class="star star_right">
-	                        	<input type="hidden" name="star" value="2">
-	                        </span>
-	                    
-	                        <span class="star star_left" >
-	                        	<input type="hidden" name="star" value="2.5">
-	                        </span>
-	                        <span class="star star_right">
-	                        	<input type="hidden" name="star" value="3">
-	                        </span>
-	                    
-	                        <span class="star star_left" >
-	                        	<input type="hidden" name="star" value="3.5">
-	                        </span>
-	                        <span class="star star_right">
-	                        	<input type="hidden" name="star" value="4">
-	                        </span>
-	                        
-	                        <span class="star star_left">
-	                        	<input type="hidden" name="star" value="4.5">
-	                        </span>
-	                        <span class="star star_right">
-	                        	<input type="hidden" name="star" value="5">
-	                        </span>
-	                    </div>
+					
+					<!-- 별점은 아래의 코드로 입력 부탁드립니다.-->
+					<div>
+						<br>
+						<select name="starCount" id="starCount" >
+							<option value="0.5">0.5</option>
+							<option value="1">1</option>
+							<option value="1.5">1.5</option>
+							<option value="2">2</option>
+							<option value="2.5">2.5</option>
+							<option value="3" selected>3</option>
+							<option value="3.5">3.5</option>
+							<option value="4">4</option>
+							<option value="4.5">4.5</option>
+							<option value="5">5</option>
+						</select>
+					</div>
 					
 
-							
+	            		<!-- 이 영역은 작업 중입니다.-->	
+						<!--
+	                    <div class="star-box" name="star">
+	                        <span class="star star_left">
+								<input type="hidden" value="0.5" name="starCount">
+							</span>
+	                        <span class="star star_right" >
+								<input type="hidden" value="1" name="starCount">
+							</span>
+	                    
+	                        <span class="star star_left">
+								<input type="hidden" value="1.5" name="starCount">
+							</span>
+	                        <span class="star star_right">
+								<input type="hidden" value="2" name="starCount">
+							</span>
+	                    
+	                        <span class="star star_left" >
+								<input type="hidden" value="2.5" name="starCount">
+							</span>
+	                        <span class="star star_right">
+								<input type="hidden" value="3" name="starCount">
+							</span>
+	                    
+	                        <span class="star star_left" >
+								<input type="hidden" value="3.5" name="starCount">
+							</span>
+	                        <span class="star star_right">
+								<input type="hidden" value="4" name="starCount">
+							</span>
+	                        
+	                        <span class="star star_left">
+								<input type="hidden" value="4.5" name="starCount">
+							</span>
+	                        <span class="star star_right">
+								<input type="hidden" value="5" name="starCount">
+							</span>
+	                    </div>
+						-->
+					
+
+						
+
 	                    <!--별점 관련 스크립트-->
 	                    <script>
 							
 							
-	                        $(".star").on('click',function(){
+	                       		$(".star").on('click',function(){
 								
+	                            var idx = $(this).index();
+								
+	                            	$(".star").removeClass("on");
 
+	                                for(var i=0; i<=idx; i++){
+										
+										$(".star").eq(i).addClass("on");
+										console.log($(".star").children().eq(i).val());
+
+									}
+									
+		                        });
+
+								/* 
+								백업용
+
+								$(".star").on('click',function(){
+								
 	                            var idx = $(this).index();
 	                            $(".star").removeClass("on");
 	                                for(var i=0; i<=idx; i++){
-	                                    $(".star").eq(i).addClass("on");
-	                            }
+	                                    $(".star").eq(i).addClass("on").;
+	                           		 }
 								
 	                               
 		                        });
+
+								*/
+								
+	
 
 	                    </script>
 						

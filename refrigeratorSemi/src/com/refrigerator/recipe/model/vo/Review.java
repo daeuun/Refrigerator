@@ -5,7 +5,7 @@ import java.sql.Date;
 /**
  * 
  * @author seong
- *
+ * @date 0528
  */
 
 public class Review {
@@ -36,6 +36,18 @@ public class Review {
 		this.modifyDate = modifyDate;
 	}
 
+	public Review(int reviewNo, String reviewWriter, String reviewContent, double star, String reviewImg,
+			Date enrollDate) {
+		super();
+		this.reviewNo = reviewNo;
+		this.reviewWriter = reviewWriter;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.reviewImg = reviewImg;
+		this.enrollDate = enrollDate;
+	}
+
+	
 
 	public int getReviewNo() {
 		return reviewNo;

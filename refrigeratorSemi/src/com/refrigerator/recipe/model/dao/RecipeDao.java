@@ -31,7 +31,7 @@ public class RecipeDao{
 	
 	/**
 	 * 레시피 상세 페이지의 댓글 전체 목록 조회 리스트 
-	 * @author seong
+	 *@author seong
 	 */
 	
 	public ArrayList <Reply> selectReplyList(Connection conn, int recipeNo){
@@ -89,7 +89,7 @@ public class RecipeDao{
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -100,6 +100,56 @@ public class RecipeDao{
 		
 		
 	}
+	
+	/**
+	 * 레시피 후기 상세 조회하기 기능
+	 * @author seong
+	 */
+	
+	
+	public ArrayList<Review> selectReviewList(Connection conn,int recipeNo ){
+		
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReviewList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				
+				list.add(new Review(
+						
+						rset.getInt("REVIEW_NO")
+						,rset.getString("NICKNAME")
+						,rset.getString("REVIEW_CONTENT")
+						,rset.getDouble("STAR")
+						,rset.getString("IMG_NAME")
+						,rset.getDate("ENROLL_DATE")
+						
+						
+						));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
 	
 	/**
 	 * 레시피 후기 작성 기능
@@ -134,8 +184,6 @@ public class RecipeDao{
 		
 		
 	}
-	
-	
 	
 	
 	
