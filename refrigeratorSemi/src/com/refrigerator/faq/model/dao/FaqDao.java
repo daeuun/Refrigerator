@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.refrigerator.faq.model.vo.Faq;
-import com.refrigerator.notice.model.dao.NoticeDao;
+import com.refrigerator.faq.model.dao.FaqDao;
 
 public class FaqDao {
 	
