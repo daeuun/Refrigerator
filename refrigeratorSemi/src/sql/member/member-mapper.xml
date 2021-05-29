@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	
-	<!-- 회원가입 폼 -->
+	
 	<entry key="insertMember">
 		INSERT 
 		  INTO MEMBER
@@ -25,6 +25,34 @@
 		  , ?
 		  , ?
 		  )
+	</entry>
+	
+	<!-- 로그인 요청 -->
+	<entry key="loginMember">
+		SELECT 
+		       USER_NO
+		     , USER_ID
+		     , USER_PWD
+		     , USER_NAME
+             , USER_TYPE
+		     , GRADE
+		     , BIRTHDAY
+		     , GENDER
+		     , EMAIL
+             , PHONE
+             , PROFILE_IMG
+             , NICKNAME
+             , INTRO	     
+		     , MODIFY_DATE
+		     , SCRAP_COUNT
+             , LIKE_COUNT
+             , FOL_COUNT
+             , ENROLL_DATE
+		     , STATUS
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+		   AND USER_PWD = ?
+		   AND STATUS = 'Y'
 	</entry>
 
 

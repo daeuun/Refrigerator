@@ -26,6 +26,9 @@
 	<!-- @author leeyeji -->
 	<div><a href="<%=contextPath%>/list.faq">FAQ 페이지</a></div>
 	
+	<!-- @author daeun -->
+	<div><a href="<%=contextPath%>/menubar">메뉴바</a></div>
+	
 	
 	
 </body>

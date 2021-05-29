@@ -1,13 +1,15 @@
 package com.refrigerator.member.model.dao;
 
+import static com.refrigerator.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static com.refrigerator.common.JDBCTemplate.*;
 import com.refrigerator.member.model.vo.Member;
 
 public class MemberDao {
@@ -56,6 +58,60 @@ public class MemberDao {
 		}
 		
 		return result;
+		
+	}
+	
+	/** 로그인 요청
+	 * @param userId 사용자가 입력한 아이디값
+	 * @param userPwd 사용자가 입력한 비밀번호값
+	 * @return 
+	 */
+	public Member loginMember(Connection conn, String userId, String userPwd) {
+		// select문 => ResultSet객체에 조회결과 받아주기 (unique제약조건때문에 "한행"만 조회됨)
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("loginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPwd);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("user_no")
+						     , rset.getString("user_id")
+						     , rset.getString("user_pwd")
+						     , rset.getString("user_name")
+						     , rset.getString("user_type")
+						     , rset.getString("grade")
+						     , rset.getString("birthday")
+						     , rset.getString("gender")
+						     , rset.getString("email")
+						     , rset.getString("phone")
+						     , rset.getString("profile_img")
+						     , rset.getString("nickname")
+						     , rset.getString("intro")
+						     , rset.getDate("modify_date")
+						     , rset.getInt("scrap_count")
+						     , rset.getInt("like_count")
+						     , rset.getInt("fol_count")
+						     , rset.getDate("enroll_date")
+						     , rset.getString("status"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
 		
 	}
 
