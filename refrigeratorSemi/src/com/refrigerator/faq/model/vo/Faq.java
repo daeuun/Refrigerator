@@ -9,10 +9,19 @@ public class Faq {
 	private String answerContent;
 	private Date enrollDate;
 	private Date modifyDate;
-	private int Count;
+	private int count;
 	private String status;
 
 	public Faq() {}
+	
+	public Faq(int faqNo, String quesContent, String answerContent, Date modifyDate, int count) {
+		super();
+		this.faqNo = faqNo;
+		this.quesContent = quesContent;
+		this.answerContent = answerContent;
+		this.modifyDate = modifyDate;
+		this.count = count;
+	}
 
 	public Faq(int faqNo, String quesContent, String answerContent, Date enrollDate, Date modifyDate, int count,
 			String status) {
@@ -22,7 +31,7 @@ public class Faq {
 		this.answerContent = answerContent;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
-		Count = count;
+		this.count = count;
 		this.status = status;
 	}
 
@@ -33,7 +42,7 @@ public class Faq {
 		this.answerContent = answerContent;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
-		Count = count;
+		this.count = count;
 	}
 
 	public int getFaqNo() {
@@ -77,11 +86,11 @@ public class Faq {
 	}
 
 	public int getCount() {
-		return Count;
+		return count;
 	}
 
 	public void setCount(int count) {
-		Count = count;
+		this.count = count;
 	}
 
 	public String getStatus() {
@@ -95,7 +104,7 @@ public class Faq {
 	@Override
 	public String toString() {
 		return "Faq [faqNo=" + faqNo + ", quesContent=" + quesContent + ", answerContent=" + answerContent
-				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", Count=" + Count + ", status="
+				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", count=" + count + ", status="
 				+ status + "]";
 	}
 	

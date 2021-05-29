@@ -1,8 +1,24 @@
+<%@page import="com.refrigerator.inquiry.model.vo.Inquiry"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.refrigerator.faq.model.vo.Faq, 
+				 java.util.ArrayList, 
+				 com.refrigerator.common.model.vo.PageInfo" %>
     <!--윤희락 05.26 작성-->
-    
+<%
+	// header 들어가고 지울것!
+	String contextPath = request.getContextPath();
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Faq> faqList = (ArrayList<Faq>)request.getAttribute("faqList");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +31,7 @@
         <style>
         .outer{
             width:900px;
+            margin:40px 40px;
         }
 
         .table-label{
@@ -60,6 +77,8 @@
             font-size:75%;
             border: none;
         }
+        
+       
 
     /*글 삭제 모달 영역*/
     
@@ -70,7 +89,7 @@
         margin:25px 35px;
         text-align: center;
     }
-    .modal-btn>a{
+    .modal-btn> button{
         width:100px;
         height:35px;
         font-size:16px;
@@ -125,7 +144,7 @@
         .form-btn{
             height:60px;
         }
-        .form-btn a{
+        .form-btn>button{
             box-sizing: border-box;
             width:46%;
             height:100%;
@@ -168,7 +187,7 @@
         <br>
 
         <div class="table-label">
-            <span>FAQ 전체목록</span><span class="count-area">32</span>
+            <span>FAQ 전체목록</span><span class="count-area"><%=pi.getListCount()%></span>
         </div>
         <div class="enroll-btn">
             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enroll-form">등록</button>
@@ -186,134 +205,38 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>32</td>
-                    <td><span class="list-qus">비밀번호를 잊어버렸어요</span></td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modify-form" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete-form" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr class="list-answer">
-                    <td></td>
-                    <td colspan="3">저희 사이트에서는 비밀번호 찾기는 제공하지 않고 있으며 대신 비밀번호를 잊어버렸을때 이메일 인증을 통해 비밀번호인증을 제공하고 있습니다.</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>32</td>
-                    <td><span class="list-qus">비밀번호를 잊어버렸어요</span></td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modify-form" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete-form" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr class="list-answer">
-                    <td></td>
-                    <td colspan="3">저희 사이트에서는 비밀번호 찾기는 제공하지 않고 있으며 대신 비밀번호를 잊어버렸을때 이메일 인증을 통해 비밀번호인증을 제공하고 있습니다.</td>
-                    <td></td>
-                </tr>
-                
-                
-                <tr>
-                    <td>31</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>비밀번호를 잊어버렸어요</td>
-                    <td>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn1">글수정▶</a>
-                        <a href="" class="btn btn-secondary btn-sm" id="btn2">글삭제▶</a>
-                    </td>
-                    <td>2010-11-11</td>
-                    <td>324</td>
-                </tr>
+            <%if(faqList.isEmpty()) {%>
+            	<tr>
+            		<td colspan="5">조회된 결과가 없습니다.</td>
+            	</tr>
+            <%}else { %>
+            
+            	<%for(Faq f : faqList) {%>
+	                <tr class="list-qus">
+	                    <td><%=f.getFaqNo()%></td>
+	                    <td><span class="list-qus"><%=f.getQuesContent()%></span></td>
+	                    <td>
+	                        <button class="btn btn-secondary btn-sm" onclick="modify(<%=f.getFaqNo()%>);" data-toggle="modal" data-target="#modify-form" id="btn1">글수정▶</button>
+	                        <button class="btn btn-secondary btn-sm" onclick="deleteFaq(<%=f.getFaqNo()%>);" data-toggle="modal" data-target="#delete-form" id="btn2">글삭제▶</button>
+	                    </td>
+	                    <td><%=f.getModifyDate()%></td>
+	                    <td><%=f.getCount()%></td>
+	                </tr>
+	                <tr class="list-answer">
+	                	<td></td>
+	                    <td colspan="3"><%=f.getAnswerContent()%></td>
+	                    <td></td>
+	                </tr>
+            	<%} %>
+            	
+            <%} %>
+            
             </tbody>
         </table>
 
         <script>
             $(function(){
-                $("tr").click(function(){
+                $(".list-qus").click(function(){
                     var $tr = $(this).next();
 
                     if($tr.css("display") == "none"){
@@ -321,7 +244,7 @@
                         $(this).siblings(".list-answer").slideUp(500);
 
                         // 보여주게끔
-                        $tr.slideDown(1000);
+                        $tr.slideDown(500);
                     }else{
                         $tr.slideUp(500);
                     }
@@ -329,7 +252,8 @@
             })
         </script>
 
-        <!-- 글 삭제 모달 -->
+        <!-- 글 "삭제" 모달 -->
+        
         <div class="modal fade" id="delete-form">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -341,12 +265,15 @@
                     
                     <!-- Modal body -->
                     <div class="modal-body" style="margin:auto">
-                        <p><span style="color:red">해당 FAQ를 삭제</span>하시겠습니까?</p>
+                        <p><span style="color:red"><span id="deleteNo"></span>FAQ를 삭제</span>하시겠습니까?</p>
                     </div>
                     
                     <div class="modal-btn">
-                        <a href="" class="btn btn-secondary btn-sm">취소</a>
-                        <a href="" class="btn btn-danger btn-sm">삭제</a>
+                    	<form action="delete.faq">
+                    		<input type="hidden" id="deleteFaqNo" name="faqNo">
+	                        <button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</button>
+	                        <button class="btn btn-danger btn-sm">삭제</button>
+                    	</form>
                     </div>
 
                 </div>                  
@@ -366,22 +293,23 @@
                     
                     <!-- Modal body -->
                     <div class="answer-form">
-                        <form action="" method="POST">
+                        <form action="<%=contextPath %>/update.faq" method="POST">
+                        	<input type="hidden" name="faqNo" id="updateNo">
                             <div class="form-group">
                                 <label for="qus">Q. 질문</label>
-                                <input type="text" class="form-control" id="qus" value="레시피를 어디서 써야하는지 모르겠어요">
+                                <input type="text" name="quesContent" class="form-control" id="qus" value="레시피를 어디서 써야하는지 모르겠어요">
                             </div>
                             <div class="form-group">
                                 <label for="answer">A. 답변</label>
-                                <textarea name="content" class="form-control" id="answer" style="resize:none;" placeholder="답변을입력해주세요">레시피등록은...</textarea>
+                                <textarea name="answerContent" class="form-control" id="answer" style="resize:none;" placeholder="답변을입력해주세요">레시피등록은...</textarea>
                             </div>
                             <div class="form-btn">
-                                <a href="" class="btn btn-secondary ">취소</a>
-                                <a href="" id="btn-s" class="btn btn-success">게시</a>
+                                <button type="button" class="btn btn-secondary ">취소</a>
+                                <button type="submit" id="btn-s" class="btn btn-success">게시</a>
                             </div>
                         </form>
                     </div>
-
+						
                 </div>                  
             </div>
         </div>
@@ -399,7 +327,7 @@
                     
                     <!-- Modal body -->
                     <div class="answer-form">
-                        <form action="" method="POST">
+                        <form action="<%=contextPath %>/insert.faq" method="POST">
                             <div class="form-group">
                                 <label for="qus">Q. 질문</label>
                                 <input type="text" class="form-control" id="qus" name="title" placeholder="FAQ 질문을 입력해주세요">
@@ -409,8 +337,8 @@
                                 <textarea name="content" class="form-control" name="content" id="answer" style="resize:none;" placeholder="FAQ답변을입력해주세요"></textarea>
                             </div>
                             <div class="form-btn">
-                                <a href="" class="btn btn-secondary ">취소</a>
-                                <a href="" id="btn-s" class="btn btn-success">게시</a>
+                                <button data-dismiss="modal" class="btn btn-secondary ">취소</a>
+                                <button type="submit" id="btn-s" class="btn btn-success">게시</button>
                             </div>
                         </form>
                     </div>
@@ -421,20 +349,51 @@
         
         
         <br>
-        <div align="center">
-            <button><</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>></button>
+         <div align="center" class="paging-area">
+        	<%if(currentPage != 1) {%>
+            <button onclick="location.href='<%=contextPath%>/adList.faq?currentPage=<%=currentPage-1%>';">&lt;</button>
+            <%} %>
+            <%for(int p=startPage; p<=endPage; p++) {%>
+            	<%if(p != currentPage) { %>
+            		<button onclick="location.href='<%=contextPath%>/adList.faq?currentPage=<%= p%>';"><%=p %></button>
+            	<%}else { %>
+            		<button class="cp" disabled><%=p%></button>
+            	<%} %>
+            <%}  %>
+            <%if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/adList.faq?currentPage=<%=currentPage+1%>';">&gt;</button>
+            <%} %>
         </div>
         
         <br>
         
        
     </div>
+    
+    <script>
+    	// 글수정 버튼 클릭시 해당 글번호 받아 faq내용 수정모달창에 반환
+    	function modify(no){
+    		
+    		$.ajax({
+    			url:"jqAjaxSelect.faq",
+    			data:{faqNo:no},
+    			success:function(faq){
+    				
+    				$("#updateNo").val(faq.faqNo);
+    				$("#qus").val(faq.quesContent);
+    				$("#answer").val(faq.answerContent);
+    				
+    			},error:function(){
+    				
+    			}
+    		})
+    	}
+    	
+    	function deleteFaq(no){
+	    	$("#deleteNo").text(no + "번 ");
+	    	$("#deleteFaqNo").val(no);
+    	}
+    </script>
 
 </body>
 </html>
