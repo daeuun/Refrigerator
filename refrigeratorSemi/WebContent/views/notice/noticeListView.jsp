@@ -83,7 +83,7 @@
 	                        <th width="70">글번호</th>
 	                        <th width="400">글제목</th>
 	                        <th width="100">작성자</th>
-	                        <th width="100">작성일</th>
+	                        <th width="130">작성일</th>
 	                        <th width="70">조회수</th>
 	                    </tr>
 	                </thead>

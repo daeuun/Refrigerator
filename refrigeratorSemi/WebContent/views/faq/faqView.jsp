@@ -23,26 +23,6 @@
         margin: auto;
         margin-top: 50px;
     }
-    #userSideNav-area{
-        border: 1px solid lightgray;
-        width: 200px;
-        height: 150px;
-        text-align: center;
-        margin-top: 50px;
-        margin-left: 20px;
-    }
-    #userSideNav-area a{
-        display: block;
-        height: 100%;
-        line-height: 75px;
-        color: black;
-        font-size: 20px;
-    }
-    #userSideNav-area a:hover{
-        text-decoration: none;
-        background: rgba(211, 211, 211, 0.5);
-        color: rgb(0, 120, 51);
-    }
     .FAQ-list-area>thead>tr{
         border-bottom: 2px solid rgb(0, 120, 51);
         border-top: 2px solid rgb(0, 120, 51);
@@ -50,7 +30,7 @@
         text-align: center;
         height: 50px;
     }
-    .FAQ-list-area>tbody>tr:hover{
+    .FAQ-list-area>tbody>.FAQ-question:hover{
         color: rgb(0, 120, 51);
         font-weight: bold;
         cursor: pointer;
@@ -61,7 +41,7 @@
         border-bottom: 1px solid darkgray;
     }
     .FAQ-answer{
-        color: rgb(0, 120, 51);
+        background: rgba(0, 120, 51, 0.1);
         font-weight: bold;
         display: none;
     }
@@ -86,21 +66,7 @@
         <h2 align="center" style="font-weight:bold;">FAQ</h2>
         <br>
 
-        <div id="user-side-nav">
-            <table id="userSideNav-area" align="left" border="1px">
-
-                <tr>
-                    <th><a href="">공지사항</a></th>
-                </tr>
-                <tr>
-                    <th><a href="">FAQ</a></th>
-                </tr>
-                <tr>
-                    <th><a href="">1:1문의</a></th>
-                </tr>
-
-            </table> 
-        </div>
+        <%@ include file="../common/user/userSideBar.jsp" %>
 
 	    <div align="right" style="width: 1050px;">
 	        <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
@@ -115,9 +81,9 @@
                 <thead>
                     <tr id="headline">
                         <th width="70">글번호</th>
-                        <th width="450">글제목</th>
+                        <th width="400">글제목</th>
                         <th width="100">작성자</th>
-                        <th width="100">작성일</th>
+                        <th width="130">작성일</th>
                         <th width="70">조회수</th>
                     </tr>
                 </thead>
@@ -136,7 +102,9 @@
 	                            <td><%=f.getCount() %></td>
 	                        </tr>
 	                        <tr class="FAQ-answer">
-	                            <td colspan="5" align="left" style="padding-left: 20px;"><%=f.getAnswerContent() %></td>
+	                            <td colspan="5" align="left" style="padding: 20px;" width="700px">
+	                            	<%=f.getAnswerContent() %>
+	                            </td>
 	                        </tr>
                         <%} %>
                     <%} %>
@@ -155,7 +123,7 @@
                 if($answer.css("display") == ("none")){
                     $(this).siblings(".FAQ-answer").hide();
                     $answer.show();
-                    $(this).css("background","rgb(0, 120, 51, 0.1)");
+                    
                     $(this).css("color", "black");
                 }else{
                     $answer.hide();
