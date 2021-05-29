@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.member.model.service.MemberService;
 import com.refrigerator.member.model.vo.Member;
 
@@ -16,7 +17,7 @@ import com.refrigerator.member.model.vo.Member;
  * @author leeyeji
  * Servlet implementation class AdminMemberLIstController
  */
-@WebServlet("/AdList.me")
+@WebServlet("/adList.me")
 public class AdminMemberLIstController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +34,41 @@ public class AdminMemberLIstController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Member> list = new MemberService().selectMemberList();
+		// 페이징처리 셋팅
+		int listCount; 	
+		int currentPage;
+		int pageLimit;	
+		int boardLimit;	
+		
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		// 총 갯수
+		listCount = new MemberService().selectListCount();
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		pageLimit = 10;
+		
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		
+		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		ArrayList<Member> pageList = new MemberService().selectList(pi);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("pageList", pageList);
 		
 		
 		request.getRequestDispatcher("views/member/adminMemberListView.jsp").forward(request, response);
