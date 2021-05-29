@@ -110,7 +110,20 @@
     .navigation-first-warp, .navigation-secondary-warp{
         border-bottom: 1px solid #009764;
     }
-    
+    #write{
+        border-radius: 5px;
+        background-color: #009764;
+        color: #fff;
+        border: none;
+        height: 36px;
+        margin: 8px px;
+        padding: 8px 10px 9px 10px;
+    }
+    #write:hover{
+        text-decoration: none;
+        color: #fff;
+        background-color: rgb(106, 189, 161);
+    }
 </style>
 </head>
 <body>
@@ -174,7 +187,7 @@
                             <% }else { %>
                             	<a href="" class="navigation-login-area_item">프사</a>
                             	<a href="" class="navigation-login-area_item"><%= loginUser.getUserId() %></a>
-	                            <a href="" class="navigation-login-area_item">글쓰기</a>
+	                            <a href="" class="navigation-login-area_item" id="write">글쓰기</a>
                             
                             <% }%>
                         </div>
