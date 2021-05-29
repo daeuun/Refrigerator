@@ -16,6 +16,44 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
+    .navigation-first-warp{
+        height: 80px;
+    }
+    .navigation-search{
+        height: 45px;
+        background-color: #009764;
+        margin: 10px 0;
+        
+    }
+    .navigation-search_content{
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px solid #fff;
+        height: 40px;
+        width: 650px;
+    }
+    .navigation-search input{
+        display: inline-block;
+        width: 350px;
+        border: none;
+        caret-color: #fff;
+        background-color: #009764;
+        outline: 0;
+        margin: 8px 80px 8px 60px;
+    }
+    .navigation-search input::placeholder{
+        text-align: center;
+        color: #fff;
+    }
+    .navigation-search button{
+        color: transparent;
+        background-color: transparent;
+        border: none;
+        width: 30px;
+        height: 30px;
+        margin-right: -100px;
+
+    }
     #login-form, #user-info{float:right}
     #user-info a{
         text-decoration: none;
@@ -26,13 +64,9 @@
         background: #fff;
         display: flex;
     }
-    .navigation-first-warp{
-        height: 80px;
-        padding: 10px 40px;
-    }
+    
     .navigation-secondary_menu {
         padding: 0 0 0 320px;
-        
     }
     .navigation-secondary_menu_item{
         position: relative;
@@ -100,8 +134,11 @@
 
                     <!--중앙검색바-->
                     <div class="navigation-search">
-                        <a href="">검색바</a>
-                        <button class="" type="button">검색버튼</button>
+                        <div class="navigation-search_content">
+                            <input type="text" placeholder="알고 싶은 레시피나 가진 재료로 검색해보세요!">
+                            <button type="button"><img src="../../../resources/image/searchicon.png">검색버튼</button>
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -131,11 +168,12 @@
                         	<% if(loginUser == null){ %>
                         	
                         		<a href="<%= contextPath %>/loginView.me" class="navigation-login-area_item_login">로그인</a>
-                            
+                            	<a href="" class="navigation-login-area_item">회원가입</a>
+                            	
                             <!-- 로그인 후 => 프로필사진 + 닉네임 -->
                             <% }else { %>
+                            	<a href="" class="navigation-login-area_item">프사</a>
                             	<a href="" class="navigation-login-area_item"><%= loginUser.getUserId() %></a>
-	                            <a href="" class="navigation-login-area_item">회원가입</a>
 	                            <a href="" class="navigation-login-area_item">글쓰기</a>
                             
                             <% }%>
