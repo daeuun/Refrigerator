@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.refrigerator.member.model.vo.Member
+				 , com.refrigerator.common.model.vo.PageInfo" %>
+<!-- @author leeyeji -->
+<%
+	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
+	
+	String contextPath = request.getContextPath();
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,25 +237,31 @@
                                     <th width="50">번호</th>
                                     <th colspan="2" width="120">아아디</th>
                                     <th width="100">이름</th>
-                                    <th width="200">전화번호</th>
+                                    <th width="150">전화번호</th>
                                     <th width="250">이메일</th>
                                     <th width="150">회원등급</th>
+                                    <th width="100">회원상태</th>
                                 </tr>
     
                             </thead>
     
                             <tbody class="checked-memberList">
-                                <tr align="center">
-                                    <td><input type="checkbox"></td>
-                                    <td>1</td>
-                                    <td colspan="2">user01</td>
-                                    <td>홍길동</td>
-                                    <td>010-2222-3333</td>
-                                    <td>honghong@gmail.com</td>
-                                    <td>프리미엄쉐프</td>
-    
-                                </tr>
-    
+                            	<%for(Member m : pageList) {%>
+	                                <tr align="center">
+	                                    <td><input type="checkbox"></td>
+	                                    <td><%= m.getUserNo()%></td>
+	                                    <td colspan="2"><%= m.getUserId() %></td>
+	                                    <td><%= m.getUserName() %></td>
+	                                    <td><%= m.getPhone() %></td>
+	                                    <td><%= m.getEmail() %></td>
+	                                    <%if(m.getGrade().equals("1")){ %>
+	                                    	<td>프리미엄쉐프</td>
+	                                    <%} else{%>
+	                                    	<td>일반쉐프</td>
+	                                    <%} %>
+	                                    <td><%=m.getStatus() %></td>
+	                                </tr>
+    							<%} %>
     
                             </tbody>
     
@@ -255,6 +275,30 @@
     
             </div>
             <!--mem content-->
+            
+            <!-- 페이징바 영역 -->
+            <div align="center" class="paging-area">
+        
+				<% if(currentPage != 1) { %>
+	            <button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage-1%>';"> &lt; </button>
+				<% } %>
+				
+	            <% for(int p=startPage; p<=endPage; p++) {%>
+	            	
+	            	<% if(p != currentPage){ %>
+		            	<button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=p%>';"><%= p %></button>
+		            <% }else{ %>
+		            	<button disabled><%= p %></button>
+	            	<%} %>
+	            	
+	            <% } %>
+	
+				<% if(currentPage != maxPage) { %>
+	            <button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage+1%>'"> &gt; </button>
+				<% } %>
+			
+       		</div>
+            
         </div>
         <!--container-->
     </div>
