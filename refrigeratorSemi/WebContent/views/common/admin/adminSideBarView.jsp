@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- @author leeyeji -->
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +64,7 @@
                 회원 관리
             </button>
             <div id="side-sub" class="collapse1">
-                <a href="">회원 목록</a><br>
+                <a href="<%=contextPath%>/adList.me?currentPage=1">회원 목록</a><br>
                 <a href="">신고 내역</a>
             </div>
         </div>
