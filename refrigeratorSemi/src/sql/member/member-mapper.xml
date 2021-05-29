@@ -54,6 +54,41 @@
 		   AND USER_PWD = ?
 		   AND STATUS = 'Y'
 	</entry>
+	
+	<!-- @author leeyeji
+		 페이징 총 페이지 수 -->
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
+		   AND USER_TYPE = 'N'	
+	</entry>
+	
+	<!-- @author leeyeji
+		 페이징 전체 목록 -->
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+			    SELECT ROWNUM RNUM, M.*
+		          FROM (
+				        SELECT
+				               USER_NO
+		                     , USER_ID
+		                     , USER_NAME
+		                     , GRADE
+		                     , GENDER
+		                     , EMAIL
+		                     , PHONE
+		                     , STATUS
+		                  FROM MEMBER
+		                 WHERE USER_TYPE = 'N'
+		                 ORDER
+		                    BY ENROLL_DATE DESC
+		                ) M
+		        )
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
 
 
 </properties>

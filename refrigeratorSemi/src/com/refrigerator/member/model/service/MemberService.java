@@ -1,8 +1,14 @@
 package com.refrigerator.member.model.service;
 
-import java.sql.Connection;
+import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.commit;
+import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
-import static com.refrigerator.common.JDBCTemplate.*;
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.member.model.dao.MemberDao;
 import com.refrigerator.member.model.vo.Member;
 
@@ -43,5 +49,29 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 페이징 - 총 페이지 수 
+	 */
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new MemberDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 멤버 전체 목록 조회  
+	 */
+	public ArrayList<Member> selectList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Member> list = new MemberDao().selectList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	
 
 }
