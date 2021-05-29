@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- @author leeyeji -->
 <%
-	String contextPath = request.getContextPath();
+	//String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
