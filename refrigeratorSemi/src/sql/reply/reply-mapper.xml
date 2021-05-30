@@ -5,34 +5,36 @@
 
 
 <!-- 사용자단에서 신고된 댓글 전체 조회 -->
-<!-- @Author seong 5/29 -->
+<!-- @Author seong 5/30 -->
 
 <entry key="adminSelectReplyList">
 
   SELECT * 
   FROM (
-     SELECT ROWNUM RNUM, A.*
-     FROM
-        (SELECT 
-    
-        USER_ID
-        ,REPLY_NO
-        ,REPORT_CONTENT
-        ,RECIPE_TITLE
-        ,REPLY_CONTENT
-        ,R.ENROLL_DATE 
-        ,REPORT_STATUS
+         SELECT ROWNUM RNUM, A.*
+         FROM
+                (SELECT 
             
-        FROM REPLY R
-        JOIN MEMBER USING(USER_NO)
-        JOIN REPORT USING(USER_NO)
-        JOIN RECIPE USING(RECIPE_NO)
-        WHERE REPORT_STATUS = 'Y' AND DELETE_STATUS = 'N'
-        ORDER BY ENROLL_DATE DESC)A
+                    USER_ID
+                    ,REPLY_NO
+                    ,REPORT_CONTENT
+                    ,RECIPE_TITLE
+                    ,REPLY_CONTENT
+                    ,R.ENROLL_DATE 
+                    ,REPORT_STATUS
+                        
+                    FROM REPLY R
+                    JOIN MEMBER USING(USER_NO)
+                    JOIN REPORT USING(USER_NO)
+                    JOIN RECIPE USING(RECIPE_NO)
+                    WHERE REPORT_STATUS = 'Y' AND DELETE_STATUS = 'N'
+                    ORDER BY ENROLL_DATE DESC
+                
+                )A
         
         )
         
-        WHERE ROWNUM BETWEEN ? AND ?
+    WHERE RNUM BETWEEN ? AND ?
         
 </entry>
 
