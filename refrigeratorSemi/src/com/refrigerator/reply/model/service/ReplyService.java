@@ -16,11 +16,10 @@ public class ReplyService {
 
 	
 	/**
-	 * 
 	 * 전체 댓글 갯수  조회
 	 * @author seong
 	 * @Date 05/29
-	 * 
+	 * @return
 	 */
 		
 	public int selectReplyListCount() {
@@ -35,10 +34,11 @@ public class ReplyService {
 		
 	
 	/**
-	 * 관리자단, 신고된 댓글 전체 조회
+	 * 
+	 * 관리자단에서 신고된 댓글 전체 조회 
 	 * @author seong
 	 * @Date 5/29
-	 * @return
+	 *
 	 */
 		
 		public ArrayList<AdmReply> adminSelectReplyList(PageInfo pi){
@@ -54,11 +54,12 @@ public class ReplyService {
 			
 		}	
 		
-		
 	/**
-	 * 관리자단, 사용자 댓글 삭제
+	 * 
+	 * 관리자단에서 신고된 댓글 삭제
 	 * @author seong
 	 * @Date 5/29
+	 *
 	 */
 		
 		public int adminDeleteReply(int replyNo) {
