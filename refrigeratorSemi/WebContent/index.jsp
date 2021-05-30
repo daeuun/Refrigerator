@@ -23,11 +23,11 @@
 	<!-- Author : seong 5/29 -->
 	<div><a href="<%=contextPath%>/rlist.admin?currentPage=1">관리자 페이지</a></div>
 	
-	<!-- @author leeyeji 추후 수정할 예정입니다. -->
-	<div><a href="<%=contextPath%>/list.no">공지사항 페이지</a></div>
+	<!-- @author leeyeji -->
+	<div><a href="<%=contextPath%>/list.no?currentPage=1">공지사항 페이지</a></div>
 	
 	<!-- @author leeyeji -->
-	<div><a href="<%=contextPath%>/list.faq">FAQ 페이지</a></div>
+	<div><a href="<%=contextPath%>/list.faq?currentPage=1">FAQ 페이지</a></div>
 	
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/menubar">메뉴바</a></div>
