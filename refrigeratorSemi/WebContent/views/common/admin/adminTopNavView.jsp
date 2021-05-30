@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<!-- Jaewon.s -->    
+<%
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
+%>    
+    
 <!-- @author leeyeji -->
 <!DOCTYPE html>
 <html>
@@ -102,6 +108,15 @@
         </div>
 
     </div>
+    
+    <!-- Jaewon.s -->
+	<script>
+	 	var msg = "<%= alertMsg %>"; 
+	 	if(msg != "null"){
+		 	alert(msg);	 
+			<% session.removeAttribute("alertMsg"); %>
+	 	}
+	</script>
 
 </body>
 </html>

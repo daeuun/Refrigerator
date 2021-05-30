@@ -114,7 +114,7 @@
 	<%@ include file="../common/admin/adminSideBarView.jsp" %>
         <div id="content">     
 <!-------------------------------------------------------------------------------------------------------------->            
-            <div class="outer">
+            <div class="outer" style="float:right;">
                 <div class="top-box">
                     <a href="어드민 페이지 HOME이 있나?">홈</a> >
                     <%-- ANCHOR태그 안달아도 된다 --%>

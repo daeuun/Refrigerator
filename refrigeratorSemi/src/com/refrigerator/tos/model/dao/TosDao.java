@@ -1,15 +1,16 @@
 package com.refrigerator.tos.model.dao;
 
-import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
@@ -154,7 +155,9 @@ public class TosDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, tosNo);
+			pstmt.setInt(1,tosNo);
+			
+			System.out.println(tosNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -185,19 +188,21 @@ public class TosDao {
 		String sql = prop.getProperty("updateTos");
 
 		//util에 있는것 import해야함 
-//		Date sysdate = new Date();
-//		
-//		Date uploadDate = null;
-//		if(t.getTosCategory().equals("게시중")){
-//			uploadDate = sysdate;
-//		}
+		Date sysdate = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yy/MM/dd");
+
+		
+		String uploadDate = null;
+		if(t.getTosCategory().equals("게시중")){
+			uploadDate = fm.format(sysdate);
+		}
 				
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, t.getTosTitle());
 			pstmt.setString(2, t.getTosCategory());
 			pstmt.setString(3, t.getTosPage());
-			pstmt.setString(4, t.getUploadDate());
+			pstmt.setString(4, uploadDate);
 			pstmt.setString(5, t.getTosContent());
 			pstmt.setString(6, t.getTosNote());
 			pstmt.setInt(7, t.getTosNo());
@@ -212,6 +217,61 @@ public class TosDao {
 		
 		return result;
 	}
-	
+//----------------------------------------------------------------------
+	public int deleteTos(Connection conn, int tosNo) {
+		// delete문 => 처리된 행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteTos");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tosNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+
+	}
+//----------------------------------------------------------------------
+	public Tos selectUsableTos(Connection conn,String page) {
+		// select문 => ResultSet객체 (한행만 조회된다.)
+		Tos t = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTos");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, page);
+						
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				//이제 rset에 담긴것을 Notice객체에 넣어주자 (매개변수 생성자 이용해서 )
+				t = new Tos(rset.getInt("tos_no"),
+							rset.getString("tos_category"),	
+							rset.getString("tos_page"),
+							rset.getString("tos_note"),
+							rset.getString("tos_title"),	
+							rset.getString("tos_content")
+							);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return t;
+	}
 	
 }

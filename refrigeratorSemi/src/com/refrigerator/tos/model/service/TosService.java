@@ -70,4 +70,27 @@ public class TosService {
 				
 		return result;		
 	}
+//-----------------------------------------------------------------	
+	public int deleteTos(int tosNo) {
+		Connection conn = getConnection();
+		int result = new TosDao().deleteTos(conn, tosNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+				
+		return result;		
+	}
+	//-----------------------------------------------------------------
+		public Tos selectUsableTos(String page) {
+			Connection conn = getConnection();
+			Tos t = new TosDao().selectUsableTos(conn, page);
+			close(conn);
+			return t;
+		}
+
 }

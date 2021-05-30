@@ -115,8 +115,7 @@
 /* ----------------------- 삭제 모달 영역임 ---------------------------------- */
 	.delete-box{
 		text-align: center;
-		margin-top: 350px;
-        width: 400px;
+		margin-top: 300px;
 	}
 
 	.modal-title{
@@ -244,23 +243,24 @@
 			<!-- The Modal -->
 			<div class="modal fade" id="tos-del-modal">
 				<div class=" modal-dialog modal-sm">
-					<div class="delete-box modal-content">
+					<div class="delete-box modal-content" style="width: 400px;">
 				
 						<!-- Modal Header -->
 						<div class="modal-header">
-							<h5 class="modal-title">이용약관 : 냉장고에뭐있지? 서비스 이용약관 </h5>
+							<h5 class="modal-title">이용약관 : <%= t.getTosTitle() %></h5>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 						
 						<!-- Modal body -->
 						<div class="modal-body" style="color: red;">
-							작성한 이용약관을 삭제하시겠습니까?
+							한번 삭제하시면 되돌릴 수 없습니다.<br>
+							작성한 이용약관을 삭제하시겠습니까? 
 						</div>
 						
 						<!-- Modal footer -->
 						<div class="modal-footer" style="justify-content: space-around; border-top: none;">
 							<button type="button" class="btn btn-light btn-bg" data-dismiss="modal" style="background-color: #BEBEBE; color: white;">취소</button>
-							<button type="button" class="btn btn-danger btn-bg" data-dismiss="modal" onclick="">삭제</button>
+							<button type="button" class="btn btn-danger btn-bg" data-dismiss="modal" onclick="location.href='<%= request.getContextPath() %>/delete.tos?bno=<%= t.getTosNo() %>';">삭제</button>
 						</div>
 					
 					</div>

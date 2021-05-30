@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- inquiry 글작성하는것 !! servlet따와서 박으면된다.. 
+	header에 로그인 정보가 있어야 아를 가지고 로그인 종고가 있네 없네를 판단해서 login 창으로 넘기거나 혹은 문의하기로 넘길텐데 일단 기다리자..
+ -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +25,8 @@
         <%-- 혹여나 contextPath변수를 header에서 세팅을 안하거나 header는 필요없으나 footer는 필요한 경우를 대비하여 함수로 작성하자--%>
 
         <div>
-            <a href="<%= request.getContextPath() %>/service.tos">이용약관</a> |
-            <a href="<%= request.getContextPath() %>/personal.tos" >개인정보취급방침</a> |
+            <a href="<%= request.getContextPath() %>/tos.tos?page=service">이용약관</a> |
+            <a href="<%= request.getContextPath() %>/tos.tos?page=personal">개인정보취급방침</a> |
             <a href="<%= request.getContextPath() %>/">문의하기</a>   
         </div>
         <p>Copyright 2021 What's in my refrigerator All rights reserved</p>

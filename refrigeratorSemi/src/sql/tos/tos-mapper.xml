@@ -65,7 +65,7 @@
 		 WHERE TOS_NO = ?
 	</entry>
 	
-		<entry key="updateTos">
+	<entry key="updateTos">
 		UPDATE 
 		       TOS
 		   SET TOS_TITLE = ?
@@ -75,6 +75,26 @@
 		     , TOS_CONTENT = ?
 		     , TOS_NOTE = ? 
 		 WHERE TOS_NO = ?
+	</entry>
+	
+	<entry key="deleteTos">
+		DELETE 
+		  FROM TOS
+		 WHERE TOS_NO = ?
+	</entry>
+	
+		<entry key="selectTos">
+		SELECT
+			   TOS_NO	
+		     , TOS_TITLE
+		     , TOS_CATEGORY
+		     , TOS_PAGE
+		     , TOS_CONTENT
+		     , TOS_NOTE
+		  FROM TOS
+		 WHERE TOS_PAGE = ?
+		   AND UPLOAD_DATE IS NOT NULL
+		   AND TOS_CATEGORY = '게시중'  
 	</entry>
 	
 	
