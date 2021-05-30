@@ -185,6 +185,40 @@ public class RecipeDao{
 		
 	}
 	
+	/**
+	 * 관리자페이지 - 배너 레시피 조회
+	 * @author daeun
+	 */
+	public Recipe selectRecipe(Connection conn, int recipeNo) {
+		Recipe rc = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				rc = new Recipe(rset.getInt("recipe_no")
+							  , rset.getString("user_id")
+						      , rset.getString("recipe_title")
+						      , rset.getString("main_img")
+						 );
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(conn);
+		}
+		
+		return rc;
+	}
+	
 	
 	
 }

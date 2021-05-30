@@ -85,5 +85,18 @@
 	    )
 	    
 	</entry>  
+	
+	<!-- @author daeun -->
+	<!-- 관리자페이지 - 배너 레시피 조회 -->
+	<entry key="selectRecipe">
+		SELECT RECIPE_NO
+		     , USER_ID
+		     , RECIPE_TITLE
+		     , MAIN_IMG
+		  FROM RECIPE R
+		  JOIN MEMBER USING (USER_NO)
+		 WHERE RECIPE_NO = ?
+		   AND R.STATUS = 'Y'
+	</entry>
 
 </properties>
