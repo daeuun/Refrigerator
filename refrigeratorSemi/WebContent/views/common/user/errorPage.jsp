@@ -28,18 +28,18 @@
 </head>
 <body>
     <%-- 단순한 에러페이지이기에 로그인 정보같은것을 넘겨받을 필요가 없다. 단순히 에러페이지 제목과 세부 문구를 전달해주면된다. 
-        servlet에서 requset에 attribute에 담아서 이페이지에서 받아주고 그리고 뿌려주기만 하면 된다. --%>
-    <div id="logo-area"><img src="../../resources/images/logo.png"></div>
+        servlet에서 request에 attribute에 담아서 이페이지에서 받아주고 그리고 뿌려주기만 하면 된다. --%>
+    <div id="logo-area"><img src="<%= request.getContextPath() %>/resources/image/logo.png"></div>
     <%-- 팀프로젝트로 옮길때! 이미지 위치 다시 잡아줘야한다. --%>
     <div id="err-info-area">
         <table align="center">
             <tr>
-                <td rowspan="3" width=220><img src="../../resources/images/exclamationmark.png" width="215"><br><br><br><br><br><br> </td>
+                <td rowspan="3" width=220><img src="<%= request.getContextPath() %>/resources/image/exclamationmark.png" width="215"><br><br><br><br><br><br> </td>
                 <%-- 팀프로젝트로 옮길때! 이미지 위치 다시 잡아줘야한다. --%>
-                <th height=70>페이지를 찾을 수 없습니다.</th><%-- <%errorTitleMsg%> 출력식으로 대체해주면된다 --%>
+                <th height=70><%= errorTitleMsg %></th><%-- <%errorTitleMsg%> 출력식으로 대체해주면된다 --%>
             </tr>
             <tr> 
-                <td height=100>방문하시려는 페이지의 주소가 잘못 입력되었거나,<br> 페이지의 주소가 변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다. <br>입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다.</td>
+                <td height=100><%= errorMsg %></td>
                     <%-- <%errorMsg%> 출력식으로 대체해주면된다 --%>
             </tr>
             <tr>

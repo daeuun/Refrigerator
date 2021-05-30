@@ -83,7 +83,7 @@
 
 </head>
 <body>
-	<%@ include file="../common/tempJWHeader.jsp" %>
+	<%@ include file="../common/user/tempJWHeader.jsp" %>
 
     <div class="outer">   
         <!-- action 에 서블릿 호출 ~ -->
@@ -100,6 +100,6 @@
         </form>
     </div>
 
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/user/footer.jsp" %>
 </body>
 </html>

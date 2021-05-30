@@ -120,8 +120,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/tempJWHeader.jsp" %>
-	<%@ include file="../common/myPageVerticalNav.jsp" %>
+	<%@ include file="../common/user/tempJWHeader.jsp" %>
+	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
 		<!-- 마이페이지 작업영역  시작-->
 		<div class="outer">
 			<p>최근본레시피</p> 
@@ -131,8 +131,8 @@
 				<tr>
 					<td>
 						<div class="thumbnail-box" onclick="">
-							<img src="../../resources/images/sampleFood.jpg"> <br>
-							<img src="../../resources/images/user.png"><br>
+							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
+							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
 							<span>프로필명 01</span>
 							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
 							<div class="star-box">
@@ -157,8 +157,8 @@
 					</td>
 					<td>
 						<div class="thumbnail-box" onclick="">
-							<img src="../../resources/images/sampleFood.jpg"> <br>
-							<img src="../../resources/images/user.png"><br>
+							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
+							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
 							<span>프로필명 01</span>
 							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
 							<div class="star-box">
@@ -183,8 +183,8 @@
 					</td>
 					<td>
 						<div class="thumbnail-box" onclick="">
-							<img src="../../resources/images/sampleFood.jpg"> <br>
-							<img src="../../resources/images/user.png"><br>
+							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
+							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
 							<span>프로필명 01</span>
 							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
 							<div class="star-box">
@@ -211,8 +211,8 @@
 				<tr>
 					<td>
 						<div class="thumbnail-box" onclick="">
-							<img src="../../resources/images/sampleFood.jpg"> <br>
-							<img src="../../resources/images/user.png"><br>
+							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
+							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
 							<span>프로필명 01</span>
 							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
 							<div class="star-box">
@@ -237,8 +237,8 @@
 					</td>
 					<td>
 						<div class="thumbnail-box" onclick="">
-							<img src="../../resources/images/sampleFood.jpg"> <br>
-							<img src="../../resources/images/user.png"><br>
+							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
+							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
 							<span>프로필명 01</span>
 							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
 							<div class="star-box">
@@ -263,8 +263,8 @@
 					</td>
 					<td>
 						<div class="thumbnail-box" onclick="">
-							<img src="../../resources/images/sampleFood.jpg"> <br>
-							<img src="../../resources/images/user.png"><br>
+							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
+							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
 							<span>프로필명 01</span>
 							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
 							<div class="star-box">
@@ -292,7 +292,7 @@
 		</div>
 		<!-- 마이페이지 작업영역  끝-->
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/user/footer.jsp" %>
 
 </body>
 </html>

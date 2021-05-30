@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="com.refrigerator.tos.model.vo.Tos"%>   
+
+<%
+	Tos t = (Tos)request.getAttribute("tos");
+%>    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +27,10 @@
 <!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
 <!-- --------------------------------------------------------------------------------------------------- -->
 <style>
+    #for-height{height: 1170px;} 
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
-    #horizontal-bar{width: 100%; height: 50px; box-sizing: border-box; background-color: palegoldenrod;}
-    #vertical-bar{width: 150px; height: 1150px; background-color: rgb(0,153,102); float: left;}
-    .outer{border: 3px solid blue; width: 1000px; float: right; margin-right: 25px;}
+    .outer{ width: 1000px; float: right; margin-right: 5px;}
 /* ----------------------------------------------------------------------------------------------------------- */
     .top-box a{
         color: gray;
@@ -86,6 +92,10 @@
         height: 635px;
     }
 
+    #tos_cnt{
+    	float:right;
+    }
+
     .btn-area{
         height: 80px;
         text-align: center;
@@ -124,10 +134,10 @@
     </style>
 </head>
 <body>
+    <%@ include file="../common/admin/adminTopNavView.jsp" %>
     <div class="wrap">
-        <div id="horizontal-bar"></div>
+   	<%@ include file="../common/admin/adminSideBarView.jsp" %> 
         <div id="content">
-            <div id="vertical-bar"></div>            
 <!-------------------------------------------------------------------------------------------------------------->            
             <div class="outer">
                 <div class="top-box">
@@ -137,77 +147,68 @@
                 </div>
                 <div class="outer-body">
                     <h2><b>이용약관 수정 및 삭제</b></h2>
-                    <form action="" method="POST">
+                    <form action="update.tos" method="POST">
+                    	<input type="hidden" name="tosNo" value="<%= t.getTosNo() %>">
                         <table border="1" style="border: rgb(204,204,204);">
                             <tr>
                                 <th>이용약관명</th>
                                 <td>
-                                    <input type="text" name="" id="" value="냉장고에뭐있지? 서비스 이용약관">
+                                    <input type="text" name="tosTitle" placeholder="이용약관 제목을 입력하세요" required value="<%= t.getTosTitle() %>">
                                 </td>
                             </tr>
                             <tr>
                                 <th>상태</th>
                                 <td>
-                                    <select name="" id="" style="width: 150px;">
-                                        <option value="">게시중</option>
-                                        <option value="">작성중</option>
-                                        <option value="">보류</option>
+                                     <select id="tosStatus" name="tosCategory" style="width: 150px;">
+                                        <option value="작성중">작성중</option>
+                                        <option value="보류중">보류중</option>
+                                        <option value="게시중">게시중</option>                                        
                                     </select>
+                                 	<span style="color:red; font-size:12px"><b>※ 게시중 선택시 곧바로 게시됩니다. 신중하게 선택해주세요</b></span>
+                                    
+               						<script>
+										$('#tosStatus').val('<%= t.getTosCategory()%>').prop("selected",true);
+									</script>
+                                    
                                 </td>
                             </tr>
                             <tr>
                                 <th>작성자</th>
-                                <td>
-                                    <input type="text" name="" id="" value="신재원">
-                                </td>
+                                <td><b>냉장고에 뭐있지?</b></td>
                             </tr>
                             <tr>
                                 <th>사용될 페이지 영역</th>
                                 <td>
-                                    <select name="" id="" style="width: 300px;">
-                                        <!-- value값은 다다르게 들어가야한다.  -->
-                                        <option value="">채워줘야함</option>
-                                        <option value="">채워줘야함</option>
-                                        <option value="">채워줘야함</option>
-                                        <option value="">채워줘야함</option>
-                                        <option value="">채워줘야함</option>
-                                        <option value="">채워줘야함</option>
+                                   <select id="needOptionCheck" name="tosPage" style="width: 300px;" >
+                                        <option value="FOOTER_1" >푸터 이용약관 </option>
+                                        <option value="FOOTER_2">푸터 개인정보취급방침</option>
+                                        <option value="MEMBER_ENROLL_1">회원가입 이용약관</option>
+                                        <option value="MEMBER_ENROLL_2">회원가입 개인정보취급방침</option>
+                                        <option value="undecided_1">테스트용01</option>                                        
+                                        <option value="undecided_2">테스트용02</option>                                        
+                                        <option value="undecided_3">테스트용03</option>                                        
+                                        <option value="undecided_4">테스트용04</option>                                        
+                                        <option value="undecided_5">테스트용05</option>                                        
+                                        <option value="undecided_6">테스트용06</option>                                        
+                                        <option value="undecided_7">테스트용07</option>                                        
                                     </select>
+									<span style="color:red; font-size:12px"><b>※ 페이지 변경시 기존에 지정하지 않은 페이지를 선택해야합니다.</b></span>
+                                    
+									<script>
+										$('#needOptionCheck').val('<%= t.getTosPage() %>').prop("selected",true);
+									</script>
                                 </td>
                             </tr>
                             <tr class="tos-area">
                                 <td colspan="2" style="padding: 15px 0px 15px 0px; border: none; resize: none;">
-                                    <textarea name="" id="" style="resize: none;">서비스 이용약관
-냉장고에 뭐있지? 약관은 "요리하는 보람있조"팀이 운영하는 인터넷사이트 이용에 대한 “레시피 조회 서비스”, “냉장고에 뭐있지 회원포인트 서비스”, “회원가입 서비스” "개인정보 이용" 약관 으로 구성 됩니다.
-
-제 1 장
-(냉장고에 뭐있지? 웹사이트 서비스)
-제 1 절 총칙
-제 1 조 (목적)
-이 약관은 "요리하는 보람있조" 팀이 제공하는 서비스(이하 "서비스") 의 이용 조건 및 절차에 관한 기본적인 사항 등을 규정하는 데 그 목적이 있습니다.
-
-제 2 조 (용어의 정의)
-이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
-
-① 회원
-서비스를 제공 받기 위하여 회사와 이용계약을 체결하거나 이용자 아이디(ID)를 부여 받은 자를 말합니다.
-
-② 아이디(ID)
-회원의 식별과 서비스를 이용을 위하여 회원이 정하고 회사가 승인하는 문자와 숫자의 조합을 말합니다.
-
-③ 비밀번호
-회원이 부여 받은 아이디(ID)와 일치된 회원임을 확인하고 회원 자신의 비밀을 보호하기 위하여 회원이 정한 문자와 숫자의 조합을 말합니다.
-
-④ 해지
-회사 또는 회원이 서비스를 개통 후 이용계약을 해약 하는 것을 말합니다.
-</textarea>
-
-                                </td>
+                                    <textarea name="tosContent" id="tos-write" style="resize: none;" placeholder="1300자 이내로 작성해주세요" required><%= t.getTosContent() %></textarea>
+									<div id="tos_cnt">(0 / 1300)</div>
+                                </td>                            
                             </tr>
                             <tr>
                                 <th style="height: 38px;">비고</th>
                                 <td>
-                                    <input type="text" name="" id="" placeholder="내용을 입력해주세요">
+                                    <input type="text" name="tosNote" placeholder="내용을 입력해주세요" value="<% if(t.getTosNote() !=null){%><%= t.getTosNote() %><%}else{} %>">
                                 </td>
                             </tr>
                             <tr>
@@ -220,6 +221,24 @@
                     </div>
                 </form>
             </div>
+            <!-- 글자수 제한 스크립트  -->
+            <script type="text/javascript">
+             $(document).ready(function() {
+                 $('#tos-write').on('keyup', function() {
+                     $('#tos_cnt').html("("+$(this).val().length+" / 1300)");
+              
+                     if($(this).val().length > 1300) {
+                         $(this).val($(this).val().substring(0, 1300));
+                         $('#test_cnt').html("(1300 / 1300)");
+                     }
+                 });
+             });
+             
+             $(function(){
+                 $('#tos_cnt').html("("+$("#tos-write").val().length+" / 1300)");
+             })
+            </script>
+           
 <!------------------------------------------------------------------------------------------------------------->    
 <!------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------->
 			<!-- The Modal -->

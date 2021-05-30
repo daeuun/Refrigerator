@@ -30,7 +30,7 @@
 
         <div class="sign-up_form-wrap">
 
-            <form action="<%= contextPath %>/insert.me" class="sign-up_form" id="sign-up_form" method="post">
+            <form action="<%= request.getContextPath() %>/insert.me" class="sign-up_form" id="sign-up_form" method="post">
 
                 <div class="sign-up_form-group"> <!-- 아이디 -->
                     <div class="sign-up_form-group_label"> <!-- 텍스트div -->

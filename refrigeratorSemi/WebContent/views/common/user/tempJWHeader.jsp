@@ -107,7 +107,7 @@
 <body>
     <header align="center">
         <div class="logo-area">
-            <img src="../../resources/images/logo.png" style="width: 170px; height: 75px;">
+            <img src="<%= request.getContextPath() %>/resources/image/logo.png" style="width: 170px; height: 75px;">
         </div>
         <div class="header-bottom-area">
             <div class="search-bar">검색영역</div>

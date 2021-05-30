@@ -159,8 +159,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/tempJWHeader.jsp" %>
-	<%@ include file="../common/myPageVerticalNav.jsp" %>
+	<%@ include file="../common/user/tempJWHeader.jsp" %>
+	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
     
         <div class="outer">
             <p>회원정보수정</p> 
@@ -246,7 +246,7 @@
         </div>
     </div><%-- 여기가 사실상 vertical-nav랑 .outer랑 묶은 div닫는 태그이다.  --%>
 	
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/user/footer.jsp" %>
 
 </body>
 </html>

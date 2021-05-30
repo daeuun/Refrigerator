@@ -182,8 +182,8 @@
 </head>
 
 <body>
-	<%@ include file="../common/tempJWHeader.jsp" %>
-	<%@ include file="../common/myPageVerticalNav.jsp" %>
+	<%@ include file="../common/user/tempJWHeader.jsp" %>
+	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
 		<!-- 마이페이지 작업영역  시작-->
 		<div class="outer">
 			<p>내 댓글 관리</p> 
@@ -334,7 +334,7 @@
 		</div>
 		<!-- 마이페이지 작업영역  끝-->
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/user/footer.jsp" %>
 
 </body>
 </html>

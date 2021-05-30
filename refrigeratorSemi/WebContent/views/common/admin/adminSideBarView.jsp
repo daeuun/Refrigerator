@@ -61,7 +61,7 @@
 </head>
 <body>
 
-	<div class="side-nav" align="left">
+	<div class="side-nav" align="left" id="for-height">
         <!--회원관리-->
         <div class="side-title">
             <button type="button" data-toggle="collapse1" data-target="#side-sub" class="btn side-btn">
@@ -91,7 +91,7 @@
                 사이트 관리
             </button>
             <div id="side-sub" class="collapse3">
-                <a href="">이용약관</a><br>
+                <a href="<%= request.getContextPath()%>/list.tos?currentPage=1">이용약관</a><br>
                 <a href="">카테고리</a><br>
                 <a href="">네비게이션바</a><br>
                 <a href="">배너</a>

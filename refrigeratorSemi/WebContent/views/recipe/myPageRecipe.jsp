@@ -114,8 +114,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/tempJWHeader.jsp" %>
-	<%@ include file="../common/myPageVerticalNav.jsp" %>
+	<%@ include file="../common/user/tempJWHeader.jsp" %>
+	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
 		<!-- 마이페이지 작업영역  시작-->
 		<div class="outer">
 			<p>내가 쓴 레시피</p> 
@@ -136,7 +136,7 @@
 						<td>21-04-01</td>
 						<td  class="list-box" onclick="">
 							<div>
-								<img src="../../resources/images/sampleFood.jpg" alt="" width="110" height="110">
+								<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg" alt="" width="110" height="110">
 							</div>
 							<div>
 								<p>매운떡볶이 그만 먹엉</p>
@@ -153,7 +153,7 @@
 						<td>21-04-01</td>
 						<td  class="list-box" onclick="">
 							<div>
-								<img src="../../resources/images/sampleFood.jpg" alt="" width="110" height="110">
+								<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg" alt="" width="110" height="110">
 							</div>
 							<div>
 								<p>매운떡볶이 그만 먹엉</p>
@@ -170,7 +170,7 @@
 						<td>21-04-01</td>
 						<td  class="list-box" onclick="">
 							<div>
-								<img src="../../resources/images/sampleFood.jpg" alt="" width="110" height="110">
+								<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg" alt="" width="110" height="110">
 							</div>
 							<div>
 								<p>매운떡볶이 그만 먹엉</p>
@@ -187,7 +187,7 @@
 						<td>21-04-01</td>
 						<td  class="list-box" onclick="">
 							<div>
-								<img src="../../resources/images/sampleFood.jpg" alt="" width="110" height="110">
+								<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg" alt="" width="110" height="110">
 							</div>
 							<div>
 								<p>매운떡볶이 그만 먹엉</p>
@@ -204,7 +204,7 @@
 						<td>21-04-01</td>
 						<td  class="list-box" onclick="">
 							<div>
-								<img src="../../resources/images/sampleFood.jpg" alt="" width="110" height="110">
+								<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg" alt="" width="110" height="110">
 							</div>
 							<div>
 								<p>매운떡볶이 그만 먹엉</p>
@@ -260,7 +260,7 @@
 		</div>
 	</div>
 <!------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------->
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/user/footer.jsp" %>
 
 </body>
 </html>

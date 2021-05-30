@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/tempJWHeader.jsp" %>
+	<%@ include file="../../common/user/tempJWHeader.jsp" %>
     <div class="outer">
         <p>이용약관 | 개인정보취급방침 | 등등 </p>
         <%-- 출력식으로 뿌려주면된다. --%>
@@ -93,7 +93,7 @@
 (시행일) 본 약관은 2021년 6월 10일부터 적용됩니다.</pre>
     </div>
 
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../../common/user/footer.jsp" %>
 
 </body>
 </html>
