@@ -34,34 +34,39 @@ public class FaqDao {
 	 * @author leeyeji
 	 */
 	
-	public ArrayList<Faq> selectFaqList(Connection conn){
+	public ArrayList<Faq> selectFaqList(Connection conn, PageInfo pi){
 		// ArrayList => ResultSet 여러행
 		ArrayList<Faq> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectFaqList");
-		
+				
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+					
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+					
 			rset = pstmt.executeQuery();
-			
+					
 			while(rset.next()) {
 				list.add(new Faq(rset.getInt("faq_no"),
 								 rset.getString("ques_content"),
 								 rset.getString("answer_content"),
 								 rset.getDate("enroll_date"),
 								 rset.getDate("modify_date"),
-								 rset.getInt("count")
-								 ));
+								 rset.getInt("count")));
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
+					
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
 		return list;
 	}
 

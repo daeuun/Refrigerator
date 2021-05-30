@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.refrigerator.faq.model.vo.Faq" %>
+<%@ page import="java.util.ArrayList, com.refrigerator.faq.model.vo.Faq,
+				 com.refrigerator.common.model.vo.PageInfo" %>
 <!-- @author leeyeji -->
 <%
 	String contextPath = request.getContextPath();
-	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+	ArrayList<Faq> pageList = (ArrayList<Faq>)request.getAttribute("pageList");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -81,25 +89,23 @@
                 <thead>
                     <tr id="headline">
                         <th width="70">글번호</th>
-                        <th width="400">글제목</th>
-                        <th width="100">작성자</th>
-                        <th width="130">작성일</th>
-                        <th width="70">조회수</th>
+                        <th width="450">글제목</th>
+                        <th width="120">작성자</th>
+                        <th width="150">작성일</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%if(list.isEmpty()) {%>
+                    <%if(pageList.isEmpty()) {%>
                     	<tr>
 	                		<td colspan="5"> 존재하는 FAQ가 없습니다.</td>
 	                	</tr>
                     <%} else{%>
-                    	<%for(Faq f : list) { %>
+                    	<%for(Faq f : pageList) { %>
 	                        <tr class="FAQ-question">
 	                            <td><%=f.getFaqNo()%></td>
 	                            <td><%=f.getQuesContent() %></td>
 	                            <td>관리자</td>
 	                            <td><%=f.getModifyDate() %></td>
-	                            <td><%=f.getCount() %></td>
 	                        </tr>
 	                        <tr class="FAQ-answer">
 	                            <td colspan="5" align="left" style="padding: 20px;" width="700px">
@@ -136,6 +142,29 @@
     	})
         
     </script>
+    <br>
+    <!-- 페이징 -->
+    <div align="center" class="paging-area">
+        
+		<% if(currentPage != 1) { %>
+			<button onclick="location.href='<%= contextPath%>/list.faq?currentPage=<%=currentPage-1%>';"> &lt; </button>
+		<% } %>
+				
+		<% for(int p=startPage; p<=endPage; p++) {%>
+	            	
+			<% if(p != currentPage){ %>
+				<button onclick="location.href='<%= contextPath%>/list.faq?currentPage=<%=p%>';"><%= p %></button>
+			<% }else{ %>
+				<button disabled><%= p %></button>
+			<%} %>
+	            	
+		<% } %>
+	
+		<% if(currentPage != maxPage) { %>
+			<button onclick="location.href='<%= contextPath%>/list.faq?currentPage=<%=currentPage+1%>'"> &gt; </button>
+		<% } %>
+			
+	</div>
     
 
 </body>

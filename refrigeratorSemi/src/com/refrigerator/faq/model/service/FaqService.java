@@ -18,13 +18,14 @@ public class FaqService {
 	 * FAQ 전체 목록 조회
 	 * @author leeyeji
 	 */
-	
-	public ArrayList<Faq> selectFaqList(){
+	public ArrayList<Faq> selectFaqList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Faq> list = new FaqDao().selectFaqList(conn);
+		ArrayList<Faq> list = new FaqDao().selectFaqList(conn, pi);
 		close(conn);
 		return list;
 	}
+	
+	
 
 	/**
 	 * FAQ 전체 목록 [count] 조회

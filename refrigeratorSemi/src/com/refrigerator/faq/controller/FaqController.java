@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.faq.model.service.FaqService;
 import com.refrigerator.faq.model.vo.Faq;
 
@@ -33,9 +34,42 @@ public class FaqController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Faq> list = new FaqService().selectFaqList();
+		// 페이징
+		int listCount; 		
+		int currentPage;	
+		int pageLimit;		
+		int boardLimit;		
+				
+		int maxPage;		
+		int startPage;		
+		int endPage;		
+				
+		listCount = new FaqService().selectListCount();
+				
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				
+		pageLimit = 10;
+				
+		boardLimit = 10;
+				
+		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+				
+		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
+				
 		
-		request.setAttribute("list", list);
+		endPage = startPage + pageLimit - 1;
+				
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+				
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		ArrayList<Faq> pageList = new FaqService().selectFaqList(pi);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("pageList", pageList);
 		request.getRequestDispatcher("views/faq/faqView.jsp").forward(request, response);
 		
 	}
