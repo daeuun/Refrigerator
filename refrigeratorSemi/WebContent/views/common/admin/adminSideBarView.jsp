@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- @author leeyeji -->
 <%
-	//String contextPath = request.getContextPath();
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +20,10 @@
         height: 900px;
         background: rgb(0, 153, 102);
         float: left;
+    }
+    /*희락*/
+    .outer{
+    	float:left;
     }
     .side-title button{
         text-align: left;
@@ -75,9 +79,9 @@
                 문의 관리
             </button>
             <div id="side-sub" class="collapse2">
-                <a href="">공지사항</a><br>
-                <a href="">FAQ</a><br>
-                <a href="">문의/답변</a><br>
+                <a href="<%=contextPath%>/adList.no?currentPage=1">공지사항</a><br>
+                <a href="<%=contextPath%>/adList.inq?unSolCurrentPage=1&solCurrentPage=1">FAQ</a><br>
+                <a href="<%=contextPath%>/adList.no?currentPage=1">문의/답변</a><br>
             </div>
         </div>
 
