@@ -83,7 +83,7 @@
 		 WHERE TOS_NO = ?
 	</entry>
 	
-		<entry key="selectTos">
+	<entry key="selectUsableTos">
 		SELECT
 			   TOS_NO	
 		     , TOS_TITLE

@@ -156,9 +156,7 @@ public class TosDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,tosNo);
-			
-			System.out.println(tosNo);
-			
+						
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -245,7 +243,7 @@ public class TosDao {
 		Tos t = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectTos");
+		String sql = prop.getProperty("selectUsableTos");
 
 		try {
 			pstmt = conn.prepareStatement(sql);

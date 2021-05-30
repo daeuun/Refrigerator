@@ -138,7 +138,7 @@
    	<%@ include file="../common/admin/adminSideBarView.jsp" %> 
         <div id="content">
 <!-------------------------------------------------------------------------------------------------------------->            
-            <div class="outer">
+            <div class="outer" style="float:right;">
                 <div class="top-box">
                     <a href="">홈</a> >
                     <a href="">싸이트관리</a> >
@@ -200,8 +200,8 @@
                             </tr>
                             <tr class="tos-area">
                                 <td colspan="2" style="padding: 15px 0px 15px 0px; border: none; resize: none;">
-                                    <textarea name="tosContent" id="tos-write" style="resize: none;" placeholder="1300자 이내로 작성해주세요" required><%= t.getTosContent() %></textarea>
-									<div id="tos_cnt">(0 / 1300)</div>
+                                    <textarea name="tosContent" id="tos-write" style="resize: none;" placeholder="1400자 이내로 작성해주세요" required><%= t.getTosContent() %></textarea>
+									<div id="tos_cnt">(0 / 1400)</div>
                                 </td>                            
                             </tr>
                             <tr>
@@ -224,17 +224,17 @@
             <script type="text/javascript">
              $(document).ready(function() {
                  $('#tos-write').on('keyup', function() {
-                     $('#tos_cnt').html("("+$(this).val().length+" / 1300)");
+                     $('#tos_cnt').html("("+$(this).val().length+" / 1400)");
               
-                     if($(this).val().length > 1300) {
-                         $(this).val($(this).val().substring(0, 1300));
-                         $('#test_cnt').html("(1300 / 1300)");
+                     if($(this).val().length > 1400) {
+                         $(this).val($(this).val().substring(0, 1400));
+                         $('#test_cnt').html("(1400 / 1400)");
                      }
                  });
              });
              
              $(function(){
-                 $('#tos_cnt').html("("+$("#tos-write").val().length+" / 1300)");
+                 $('#tos_cnt').html("("+$("#tos-write").val().length+" / 1400)");
              })
             </script>
            

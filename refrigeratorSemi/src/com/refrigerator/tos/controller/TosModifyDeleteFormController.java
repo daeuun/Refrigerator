@@ -33,10 +33,9 @@ public class TosModifyDeleteFormController extends HttpServlet {
 
 		int tosNo = Integer.parseInt(request.getParameter("bno"));
 		
-		System.out.println(tosNo);
 		
 		Tos t = new TosService().selectTos(tosNo);
-				
+		
 		request.setAttribute("tos", t);
 		
 		request.getRequestDispatcher("views/tos/adminTosModifyAndDeletePage.jsp").forward(request, response);
