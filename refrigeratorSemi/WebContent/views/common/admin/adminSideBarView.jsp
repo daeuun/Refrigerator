@@ -80,8 +80,8 @@
             </button>
             <div id="side-sub" class="collapse2">
                 <a href="<%=contextPath%>/adList.no?currentPage=1">공지사항</a><br>
-                <a href="<%=contextPath%>/adList.inq?unSolCurrentPage=1&solCurrentPage=1">FAQ</a><br>
-                <a href="<%=contextPath%>/adList.no?currentPage=1">문의/답변</a><br>
+                <a href="<%=contextPath%>/adList.faq?currentPage=1">FAQ</a><br>
+                <a href="<%=contextPath%>/adList.inq?unSolCurrentPage=1&solCurrentPage=1">문의/답변</a><br>
             </div>
         </div>
 

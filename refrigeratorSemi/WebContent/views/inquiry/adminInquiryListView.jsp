@@ -3,8 +3,6 @@
 <!--윤희락 05.26 작성-->
 <%@ page import="com.refrigerator.common.model.vo.PageInfo, java.util.ArrayList, com.refrigerator.inquiry.model.vo.Inquiry" %>
 <%
-	// 지울것!!!!!!!!!!!!!!!!!
-	String contextPath = request.getContextPath();
 
 
 	PageInfo unSolvedListpi = (PageInfo)request.getAttribute("unSolvedListpi");
@@ -30,15 +28,11 @@
 <meta charset="UTF-8">
 <title>관리자_문의/답변</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <style>
         .outer{
             width: 900px;
             font-size: 16px;
+            margin: 40px 40px;
         }
         
         button{
@@ -74,6 +68,7 @@
             border-bottom: 1px solid rgb(211, 211, 211);
             text-align: center;
         }
+        
         /*답변하기 모달 영역*/
         .modal-content{
             width: 1000px;
@@ -155,6 +150,9 @@
 
 </head>
 <body>
+
+	<%@ include file="../common/admin/adminTopNavView.jsp" %>
+	<%@ include file="../common/admin/adminSideBarView.jsp" %>
 
     <div class="outer">
         <div class="path-area">

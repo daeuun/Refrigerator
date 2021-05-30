@@ -6,8 +6,6 @@
 				 com.refrigerator.common.model.vo.PageInfo" %>
     <!--윤희락 05.26 작성-->
 <%
-	// header 들어가고 지울것!
-	String contextPath = request.getContextPath();
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Faq> faqList = (ArrayList<Faq>)request.getAttribute("faqList");
