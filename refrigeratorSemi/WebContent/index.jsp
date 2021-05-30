@@ -21,7 +21,11 @@
 	<div><a href="<%=contextPath%>/list.recipe">레시피 상세 페이지</a></div>
 	
 	<!-- Author : seong 5/29 -->
-	<div><a href="<%=contextPath%>/rlist.admin?currentPage=1">관리자 페이지</a></div>
+	<div><a href="<%=contextPath%>/rlist.admin?currentPage=1">관리자 댓글 관리 페이지</a></div>
+	
+	<!-- Author : seong 5/30 -->
+	<div><a href="<%=contextPath%>/reviewlist.admin?currentPage=1">관리자 요리 후기 관리 페이지</a></div>
+	
 	
 	<!-- @author leeyeji -->
 	<div><a href="<%=contextPath%>/list.no?currentPage=1">공지사항 페이지</a></div>
