@@ -1,1 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+<!-- 1. 등록된 요리 후기 전체 갯수 조회-->
+<!-- @author seong 5/30  -->
+
+<entry key="selectReviewListCount">
+	SELECT 
+		COUNT(*) COUNT
+	FROM 
+		REVIEW
+</entry>
+
+
+
+<!-- 2. 회원이 작성한 요리 후기 전체 조회 -->
+<!-- @author seong 5/30 -->
+
+<entry key="adminSelectReviewList">
+
+SELECT * 
+FROM (
+        SELECT ROWNUM RNUM, A.*
+        FROM (SELECT 
+                        REVIEW_NO
+                        , USER_ID
+                        , RECIPE_TITLE
+                        , STAR
+                        , REVIEW_CONTENT
+                        , R.ENROLL_DATE 
+                FROM REVIEW R
+                JOIN MEMBER USING(USER_NO)
+                JOIN RECIPE USING(RECIPE_NO)
+                ORDER BY R.ENROLL_DATE DESC
+                ) A 
+     ) 
+WHERE RNUM BETWEEN ? AND ?
+
+</entry>
+
+
+<!-- 3. 관리자가 선택한 요리 후기 삭제 -->
+<!-- @author seong 5/30 -->
+
+<entry key="adminDeleteReview">
+
+	DELETE REVIEW
+	WHERE REVIEW_NO = ?
+
+</entry>
+
+
+</properties>

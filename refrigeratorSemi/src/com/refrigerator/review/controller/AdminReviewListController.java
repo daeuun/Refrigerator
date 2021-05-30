@@ -1,4 +1,4 @@
-package com.refrigerator.reply.controller;
+package com.refrigerator.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.reply.model.service.ReplyService;
-import com.refrigerator.reply.model.vo.AdmReply;
+import com.refrigerator.review.model.service.ReviewService;
+import com.refrigerator.review.model.vo.AdmReview;
 
 /**
- * @author seong
- * @date 5/28
- * Servlet implementation class AdminReplyListController
+ * Servlet implementation class AdminReviewList
  */
-@WebServlet("/rlist.admin")
-public class AdminReplyListController extends HttpServlet {
+@WebServlet("/reviewlist.admin")
+public class AdminReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReplyListController() {
+    public AdminReviewListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +34,6 @@ public class AdminReplyListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-	
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -45,11 +42,11 @@ public class AdminReplyListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new ReplyService().selectReplyListCount();
+		listCount = new ReviewService().selectReviewListCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		pageLimit = 5;
+		pageLimit = 10;
 		
 		boardLimit = 10;
 		
@@ -58,21 +55,17 @@ public class AdminReplyListController extends HttpServlet {
 		startPage = (currentPage-1)/pageLimit * pageLimit+1;
 		
 		endPage = startPage + pageLimit -1;
+		
 		if(endPage>maxPage) {
 			endPage = maxPage;
 		}
 		
 		PageInfo pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
 		
-		
-		
-		/*아래 영역은 지키기*/
-		ArrayList<AdmReply>list = new ReplyService().adminSelectReplyList(pi);
+		ArrayList<AdmReview>list = new ReviewService().adminSelectReviewList(pi);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/reply/adminReplyListView.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("views/review/adminReviewListView.jsp").forward(request, response);
 		
 		
 	}
