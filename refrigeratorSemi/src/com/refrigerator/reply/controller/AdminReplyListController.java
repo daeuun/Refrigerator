@@ -70,6 +70,7 @@ public class AdminReplyListController extends HttpServlet {
 		ArrayList<AdmReply>list = new ReplyService().adminSelectReplyList(pi);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.getSession().setAttribute("alertMsg", "성공적으로 삭제 되었습니다.");
 		request.getRequestDispatcher("views/reply/adminReplyListView.jsp").forward(request, response);
 		
 		

@@ -15,6 +15,7 @@
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
 	ArrayList<AdmReply>list = (ArrayList<AdmReply>)request.getAttribute("list");
 	
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -90,6 +91,18 @@
 
 	<%@ include file = "../common/admin/adminSideBarView.jsp" %>
 
+		<script>
+	
+		// menubar.jsp로 가져갈 구문
+		var msg = "<%= alertMsg %>";
+			
+		if(msg != "null"){ 
+			alert(msg);
+			
+			<% session.removeAttribute("alertMsg");%>
+		}
+	
+	</script>
 
 	<div class="outer">
 
