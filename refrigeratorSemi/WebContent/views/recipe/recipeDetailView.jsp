@@ -300,7 +300,7 @@
 <body>
 	
 
-	
+	<%@ include file="../common/user/recipeSideBar.jsp" %>
 	
 	
 	<script>
