@@ -16,7 +16,7 @@ import com.refrigerator.reply.model.vo.AdmReply;
 
 	
 	/**
-	 * 
+	 * 작업자 
 	 * @author seong
 	 * @Date 05/29
 	 * 
@@ -78,6 +78,7 @@ import com.refrigerator.reply.model.vo.AdmReply;
 	 * @Date 5/29
 	 *
 	 */
+	
 	public ArrayList<AdmReply>adminSelectReplyList(Connection conn,PageInfo pi){
 		
 		// 여러행 조회
@@ -129,10 +130,9 @@ import com.refrigerator.reply.model.vo.AdmReply;
 		
 	}
 	
-	
 	/**
 	 * 
-	 * 
+	 * 관리자단에서 신고된 댓글 삭제
 	 * @author seong
 	 * @Date 5/29
 	 *
