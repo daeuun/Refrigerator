@@ -76,6 +76,7 @@
 </head>
 <body>
 
+<%@ include file="../common/admin/adminTopNavView.jsp" %>
 <%@ include file = "../common/admin/adminSideBarView.jsp" %>
 
 	<script>

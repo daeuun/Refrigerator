@@ -93,8 +93,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+	<%@ include file="../common/admin/adminTopNavView.jsp" %>
 	<%@ include file = "../common/admin/adminSideBarView.jsp" %>
-
+	
+	
 		<script>
 	
 		// menubar.jsp로 가져갈 구문

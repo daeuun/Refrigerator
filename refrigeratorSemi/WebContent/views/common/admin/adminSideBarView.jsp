@@ -104,8 +104,8 @@
                 게시판 관리
             </button>
             <div id="side-sub" class="collapse3">
-                <a href="">요리 후기</a><br>
-                <a href="">댓글</a><br>
+                <a href="<%=contextPath%>/reviewlist.admin?currentPage=1">요리 후기</a><br>
+                <a href="<%=contextPath%>/rlist.admin?currentPage=1">댓글</a><br>
                 <a href="">이벤트</a><br>
             </div>
         </div>
