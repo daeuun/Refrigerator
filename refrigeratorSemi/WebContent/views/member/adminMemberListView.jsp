@@ -6,8 +6,6 @@
 <%
 	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
 	
-	String contextPath = request.getContextPath();
-	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
