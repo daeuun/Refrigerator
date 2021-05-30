@@ -47,6 +47,17 @@ public class Notice {
 		this.modifyDate = modifyDate;
 		this.count = count;
 	}
+	
+	
+
+	public Notice(int noticeNo, String userNo, String noticeTitle, String noticeContent, Date modifyDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.userNo = userNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.modifyDate = modifyDate;
+	}
 
 	public int getNoticeNo() {
 		return noticeNo;

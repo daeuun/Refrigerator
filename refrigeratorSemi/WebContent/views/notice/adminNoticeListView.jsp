@@ -1,7 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.refrigerator.notice.model.vo.Notice,
+				 com.refrigerator.common.model.vo.PageInfo,
+				 java.util.ArrayList" %>    
     <!--윤희락 05.26 작성-->
+
+<%
+	// 지울것 !
+	String contextPath = request.getContextPath();
+
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int endPage = pi.getEndPage();
+	int startPage = pi.getStartPage();
+%>
     
 <!DOCTYPE html>
 <html>
@@ -15,6 +30,7 @@
     <style>
         .outer{
             width: 900px;
+            margin:40px 40px;
         }
         #notice-form{
             width: 900px;
@@ -25,7 +41,7 @@
         .head-area>h2{
             padding-bottom:20px;
             width: 900px;
-            border-bottom:3px solid rgb(0, 102, 51);
+            border-bottom:4px solid rgb(0, 102, 51);
         }
 
         button{border:none;}
@@ -35,13 +51,18 @@
             font-weight: 550;
             width:60px;
         }
-        #delete-btn{
-            background: rgb(231, 76, 60);
+        
+        #delete-btn, #update-btn{
             color: white;
-            font-weight: 550;
-            width: 60px;
+            font-weight:500;
+            width:20px;
+            height:20px;
         }
-        #enroll-btn:hover, #delete-btn:hover{
+        
+        #delete-btn{background: rgb(231, 76, 60);}
+        #update-btn{background: rgb(52, 152, 219);}
+        
+        #enroll-btn:hover, #delete-btn:hover, #update-btn{
             opacity:0.85;
         }
         
@@ -123,7 +144,6 @@
 
         <div id="notice-form">
             <div id="btn-area">
-                <a href="" id="delete-btn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete">삭제</a>
                 <a href="" id="enroll-btn" class="btn btn-secondary btn-sm">등록</a>
             </div>
             
@@ -139,13 +159,12 @@
                         
                         <!-- Modal body -->
                         <div class="modal-body" style="margin:auto">
-                            <p><span style="color:red">공지사항이 삭제</span>되면 되돌릴 수 없습니다.</p>
-                            진행하시겠습니까?
+                            <p><span style="color:red"><span class="delete-no"></span>공지사항을 삭제</span>하시겠습니까?</p>
                         </div>
                         
                         <div class="modal-btn">
                             <a href="" class="btn btn-secondary btn-sm">취소</a>
-                            <a href="" class="btn btn-danger btn-sm">삭제</a>
+                            <a href="" class="btn btn-danger btn-sm" id="modalDelete-btn">삭제</a>
                         </div>
   
                     </div>                  
@@ -155,84 +174,32 @@
             <table class="notice-list-form" border="1" width="100%">
                 <thead>
                     <tr>
-                        <th width="20"><input class="delete-check" type="checkbox"></th>
                         <th width="50">번호</th>
-                        <th width="300">제목</th>
-                        <th width="100">작성자</th>
-                        <th width="100">작성일</th>
+                        <th width="350">제목</th>
+                        <th width="50"></th>
+                        <th width="60">작성자</th>
+                        <th width="60">작성일</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>1</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>2</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <td>50</td>
-                        <td>비밀번호를 잃어버렸어요?</td>
-                        <td>user01</td>
-                        <td>2010-11-11</td>
-                    </tr>
+                <%if(list.isEmpty()) {%>
+                	<tr>
+                		<td colspan="5">요청하신 페이지 결과가 없습니다.</td>
+                	</tr>
+                <%} else {%>
+                	<%for(Notice n : list) { %>
+	                    <tr>
+	                        <td><%=n.getNoticeNo()%></td>
+	                        <td><%=n.getNoticeTitle()%></td>
+	                        <th>
+	                        	<a href="" id="update-btn" class="btn btn-secondary btn-sm">U</a>
+	                        	<a href="" id="delete-btn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteNo(<%=n.getNoticeNo()%>);">D</a>
+	                        </th>
+	                        <td><%=n.getUserNo()%></td>
+	                        <td><%=n.getModifyDate()%></td>
+	                    </tr>
+                    <%} %>
+                <%} %>
                 </tbody>
             </table>
     
@@ -241,18 +208,35 @@
         </div>
       
         <br>
-        <div class="page-area" align="center">
-            <button>&lt;</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>&gt;</button>
+         <br>
+         <div align="center" class="paging-area">
+        	<%if(currentPage != 1) {%>
+            <button onclick="location.href='<%=contextPath%>/adminList.no?currentPage=<%=currentPage-1%>';">&lt;</button>
+            <%} %>
+            <%for(int p=startPage; p<=endPage; p++) {%>
+            	<%if(p != currentPage) { %>
+            		<button onclick="location.href='<%=contextPath%>/adminList.no?currentPage=<%= p%>';"><%=p %></button>
+            	<%}else { %>
+            		<button class="cp" disabled><%=p%></button>
+            	<%} %>
+            <%}  %>
+            <%if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/adminList.no?currentPage=<%=currentPage+1%>';">&gt;</button>
+            <%} %>
         </div>
+        
+        <br>
         <br>
       
     </div>
-
+	
+	<script>
+		function deleteNo(no){
+			var href = "<%=contextPath%>/delete.no?nno=" + no;
+			console.log(href);
+			$(".delete-no").text(no + "번 ");
+			$("#modalDelete-btn").prop("href", href);
+		}
+	</script>
 </body>
 </html>

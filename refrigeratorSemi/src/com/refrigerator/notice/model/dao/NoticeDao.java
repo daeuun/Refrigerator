@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -119,6 +120,99 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		return n;
+	}
+
+	/**
+	 * 공지사항 목록(count) DB조회
+	 * @author HeeRak
+	 */
+	public int selectListCount(Connection conn) {
+		// select => rset 1행 조회
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	/**
+	 * [관리자]공지사항 _전체목록조회 p(8/5) 
+	 * @author HeeRak
+	 */
+	public ArrayList<Notice> adminSelectNoticeList(Connection conn, PageInfo pi) {
+		// select문 => rset 여러행 조회
+		ArrayList<Notice> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectNoticeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("notice_no"),
+									rset.getString("user_id"),
+									rset.getString("notice_title"),
+									rset.getString("notice_content"),
+									rset.getDate("modify_date")
+									));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	/**
+	 * [관리자]공지사항 _ 클릭된 공지사항_DB삭제 
+	 * @author HeeRak
+	 */
+	public int deleteNotice(Connection conn, int noticeNo) {
+		// update => 처리된 행수 반환
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 
