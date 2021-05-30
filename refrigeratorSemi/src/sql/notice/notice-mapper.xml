@@ -4,18 +4,25 @@
 	
 	<!-- @author yeji -->
 	<!-- 공지사항 전체 목록 조회 -->
-	<entry key="selectNoticeList">
-		SELECT
-		       NOTICE_NO
-		     , NOTICE_TITLE
-		     , USER_ID
-		     , N.ENROLL_DATE
-		     , COUNT
-		  FROM NOTICE N
-		  JOIN MEMBER USING(USER_NO)
-		 WHERE N.DELETE_STATUS = 'N'
-		 ORDER
-		    BY NOTICE_NO DESC
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, N.*
+		          FROM (
+		                SELECT
+		                       NOTICE_NO
+		                     , NOTICE_TITLE
+                             , USER_NO
+                             , ENROLL_DATE
+                             , MODIFY_DATE
+                             , COUNT
+		                  FROM NOTICE
+		                 WHERE DELETE_STATUS = 'N'
+		                 ORDER
+		                    BY NOTICE_NO DESC
+		                ) N
+		        )
+		 WHERE RNUM BETWEEN ? AND ?                           
 	</entry>
 	
 	<!-- @author yeji -->

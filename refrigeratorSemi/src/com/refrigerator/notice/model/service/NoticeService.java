@@ -16,19 +16,19 @@ public class NoticeService {
 	
 	/**
 	 * 공지사항 전체 목록 조회
-	 * @author yeji
+	 * @author leeyeji
 	 */
 	
-	public ArrayList<Notice> selectNoticeList(){
+	public ArrayList<Notice> selectList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn);
+		ArrayList<Notice> list = new NoticeDao().selectList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
 	/**
 	 * 공지사항 클릭시 조회수 증가
-	 * @author yeji
+	 * @author leeyeji
 	 */
 	
 	public int increaseCount(int noticeNo) {
@@ -45,7 +45,7 @@ public class NoticeService {
 	
 	/**
 	 * 공지사항 상세 조회
-	 * @author yeji
+	 * @author leeyeji
 	 */
 	
 	public Notice selectNotice(int noticeNo) {

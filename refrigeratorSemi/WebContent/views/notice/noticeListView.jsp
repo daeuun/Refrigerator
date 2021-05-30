@@ -3,10 +3,17 @@
     
 <!-- @author yeji -->
 
-<%@ page import="java.util.ArrayList, com.refrigerator.notice.model.vo.Notice"%>
+<%@ page import="java.util.ArrayList, com.refrigerator.notice.model.vo.Notice,
+				 com.refrigerator.common.model.vo.PageInfo"%>
 <%
 	String contextPath = request.getContextPath();
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	ArrayList<Notice> pageList = (ArrayList<Notice>)request.getAttribute("pageList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -58,7 +65,7 @@
 </head>
 <body>
 
-		 <div class="outer">
+		<div class="outer">
 
         <br>
         <h2 align="center" style="font-weight:bold;">공지사항</h2>
@@ -88,12 +95,12 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                	<%if(list.isEmpty()) {%>
+	                	<%if(pageList.isEmpty()) {%>
 	                		<tr>
 	                			<td colspan="5"> 존재하는 공지사항이 없습니다.</td>
 	                		</tr>
 	                	<%} else{ %>
-	                		<%for(Notice n : list) {%>
+	                		<%for(Notice n : pageList) {%>
 		                        <tr>
 		                            <td><%=n.getNoticeNo() %></td>
 		                            <td><%=n.getNoticeTitle() %></td>
@@ -119,8 +126,29 @@
         		})
         	})
         </script>
+        <br>
+        <!-- 페이징바 -->
+        <div align="center" class="paging-area">
         
-         
+				<% if(currentPage != 1) { %>
+	            <button onclick="location.href='<%= contextPath%>/list.no?currentPage=<%=currentPage-1%>';"> &lt; </button>
+				<% } %>
+				
+	            <% for(int p=startPage; p<=endPage; p++) {%>
+	            	
+	            	<% if(p != currentPage){ %>
+		            	<button onclick="location.href='<%= contextPath%>/list.no?currentPage=<%=p%>';"><%= p %></button>
+		            <% }else{ %>
+		            	<button disabled><%= p %></button>
+	            	<%} %>
+	            	
+	            <% } %>
+	
+				<% if(currentPage != maxPage) { %>
+	            <button onclick="location.href='<%= contextPath%>/list.no?currentPage=<%=currentPage+1%>'"> &gt; </button>
+				<% } %>
+			
+       	</div>
     </div>
     
 

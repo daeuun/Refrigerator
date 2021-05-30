@@ -28,6 +28,16 @@ public class Notice {
 		this.count = count;
 	}
 
+	public Notice(int noticeNo, String noticeTitle, String userNo, Date enrollDate, Date modifyDate, int count) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.userNo = userNo;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.count = count;
+	}
+
 	public Notice(int noticeNo,  String noticeTitle, String userNo,Date enrollDate, int count) {
 		super();
 		this.noticeNo = noticeNo;

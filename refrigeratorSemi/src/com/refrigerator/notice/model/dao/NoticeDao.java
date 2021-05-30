@@ -30,40 +30,48 @@ public class NoticeDao {
 
 	/**
 	 * 공지사항 전체 목록 조회
-	 * @author yeji
+	 * @author leeyeji
 	 */
-	
-	public ArrayList<Notice> selectNoticeList(Connection conn){
-		// select -> ResultSet (여러행)
+	public ArrayList<Notice> selectList(Connection conn, PageInfo pi){
+		// select문 => ResultSet (여러행)
 		ArrayList<Notice> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectNoticeList");
-		
+		String sql = prop.getProperty("selectList");
+				
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
 			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+					
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+					
+			rset = pstmt.executeQuery();
+					
 			while(rset.next()) {
 				list.add(new Notice(rset.getInt("notice_no"),
 									rset.getString("notice_title"),
-									rset.getString("user_id"),
+									rset.getString("user_no"),
 									rset.getDate("enroll_date"),
-									rset.getInt("count")
-									));
+									rset.getDate("modify_date"),
+									rset.getInt("count")));
 			}
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
+				
 		return list;
 	}
 	
 	/**
 	 * 공지사항 클릭시 조회수 증가
-	 * @author yeji
+	 * @author leeyeji
 	 */
 	
 	public int increaseCount(Connection conn, int noticeNo) {
@@ -88,7 +96,7 @@ public class NoticeDao {
 	
 	/**
 	 * 공지사항 상세 조회
-	 * @author yeji
+	 * @author leeyeji
 	 */
 	
 	public Notice selectNotice(Connection conn, int noticeNo) {

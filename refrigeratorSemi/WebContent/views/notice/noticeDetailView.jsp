@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <!-- @author yeji -->
+
 <%@ page import="com.refrigerator.notice.model.vo.Notice" %>
 <%
 	Notice n = (Notice)request.getAttribute("n");
@@ -101,7 +102,7 @@
         </div>
 
         <div align="right" style="width: 1100px;">
-            <a href="<%=contextPath%>/list.no" class="btn btn-secondary btn-sm">목록</a>
+            <a href="<%=contextPath%>/list.no?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
         </div>
 
         <br>
