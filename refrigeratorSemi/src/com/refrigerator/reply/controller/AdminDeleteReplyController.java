@@ -13,7 +13,7 @@ import com.refrigerator.reply.model.service.ReplyService;
 /**
  * Servlet implementation class AdminDeleteReplyController
  */
-@WebServlet("/delete.reply")
+@WebServlet("/deleteReply.admin")
 public class AdminDeleteReplyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +38,7 @@ public class AdminDeleteReplyController extends HttpServlet {
 		
 		if(result>0) {
 			
-			request.setAttribute("alertMsg", "성공적으로 삭제 되었습니다.");
+			request.setAttribute("alertMsg", "댓글 삭제 성공 !");
 			response.sendRedirect(request.getContextPath() + "/rlist.admin?currentPage=1");
 			
 		}

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8" %>
     
     
+    							<!-- @author seong 5/30 -->
+    							
+    							
 <%@ 
 	page import = "com.refrigerator.member.model.vo.Member
 				, com.refrigerator.reply.model.vo.*
@@ -10,8 +13,9 @@
 	
 %>
 
+
 <% 	
-	String contextPath = request.getContextPath();
+
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
 	ArrayList<AdmReply>list = (ArrayList<AdmReply>)request.getAttribute("list");
 	
@@ -36,7 +40,7 @@
 <!--메뉴바가 들어갈 영역 -->
 
 <!-- 검색된 회원이 조회될 영역 
-    // 신고번호 , 신고유무, 작성한 댓글 번호(?), 신고사유, 참조할 게시글 제목, 댓글 내용
+    
 
 -->
 
@@ -128,7 +132,7 @@
 
         
         <!--댓글 삭제 기능-->
-        <form action="<%=contextPath%>/delete.reply" id="admin-delete-reply" >
+        <form action="<%=contextPath%>/deleteReply.admin" id="admin-delete-reply" >
 
             <div class="btn" align="right" style="width: 440px">
 
