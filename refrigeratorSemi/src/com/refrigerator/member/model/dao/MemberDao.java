@@ -1,6 +1,7 @@
 package com.refrigerator.member.model.dao;
 
 import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.getConnection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -187,6 +188,69 @@ public class MemberDao {
 		return list;
 		
 	}
+	
+
+	/**
+	 * @author HeeRak
+	 * 멤버 프로필 DB 조회
+	 */
+	public Member selectProfile(Connection conn, int userNo) {
+		// select =>rset 결과 한행 조회
+		Member m = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m.setProfileImg(rset.getString("profile_img"));
+				m.setNickname(rset.getString("nickname"));
+				m.setIntro(rset.getString("intro"));
+				m.setModifyDate(rset.getDate("modify_date"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+
+	/**
+	 * @author HeeRak
+	 * 멤버 프로필 DB수정
+	 */
+	public int updateProfile(Connection conn, Member m) {
+		// update => 처리된 행수 반환
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getProfileImg());
+			pstmt.setString(2, m.getNickname());
+			pstmt.setString(3, m.getIntro());
+			pstmt.setInt(4, m.getUserNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
 	
 	
 	

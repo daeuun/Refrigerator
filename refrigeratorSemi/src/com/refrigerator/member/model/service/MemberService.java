@@ -71,6 +71,35 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
+
+
+	/**
+	 * @author HeeRak
+	 * 멤버 프로필 조회
+	 */
+	public Member selectProfile(int userNo) {
+		Connection conn = getConnection();
+		Member m = new MemberDao().selectProfile(conn, userNo);
+		close(conn);
+		return m;
+	}
+
+
+	/**
+	 * @author HeeRak
+	 * 멤버 프로필 수정
+	 */
+	public int updateProfile(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updateProfile(conn, m);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 	
 

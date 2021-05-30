@@ -3,8 +3,6 @@
     
     <!--윤희락 05.26 작성-->
 <%
-	// contextPath 지울것!
-	String contextPath = request.getContextPath();
 
 	String title = (String)request.getAttribute("title");
 	int noticeNo = (int)request.getAttribute("noticeNo");
@@ -106,6 +104,10 @@
     </style>
 </head>
 <body>
+
+	<%@ include file="../common/admin/adminTopNavView.jsp" %>
+	<%@ include file="../common/admin/adminSideBarView.jsp" %>
+
     <div class="outer">
     	<% if(title.equals("수정") && noticeNo != 0) {%>
 	    	

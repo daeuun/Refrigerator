@@ -89,6 +89,28 @@
 		        )
 		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<!-- Hee Rak-->
+	<!-- 회원 한명 프로필 조회 -->
+	<entry key="selectProfile">
+		SELECT PROFILE_IMG
+		     , NICKNAME
+		     , INTRO
+		     , MODIFY_DATE
+		  FROM MEMBER
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<!-- Hee Rak-->
+	<!-- 회원 한명 프로필 조회 -->
+	<entry key="updateProfile">
+		UPDATE MEMBER
+		   SET PROFILE_IMG = ?
+		     , NICKNAME = ?
+		     , INTRO = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
 
 
 </properties>

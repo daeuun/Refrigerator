@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <% 
-    int myPageNo = 1;
+    int myPageNo = (int)request.getAttribute("myPageNo");
 %>    
     <!-- 여기서 받아주면 된다 request.getAttribute로다가 !!!  -->
 

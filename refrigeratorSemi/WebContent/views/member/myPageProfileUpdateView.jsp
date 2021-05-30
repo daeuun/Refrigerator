@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.refrigerator.member.model.vo.Member"%>
+<%
+	Member m = (Member)request.getAttribute("m");
+%>
     
  			<!--윤희락   05-26등록-->
  
@@ -8,16 +11,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         
         <style>
 
         .outer{
             margin:30px 30px;
-            width:700px;
+            width:870px;
             height:460px;
         }
 
@@ -94,6 +93,9 @@
     </style>
 </head>
 <body>
+
+<%@ include file="../common/user/menubar.jsp" %>
+<%@ include file="../common/user/myPageVerticalNav.jsp" %>
     
     <div class="outer">
 
@@ -105,28 +107,28 @@
         
         <div>
             <label class="menu-title">프로필 수정</label>
-            <label class="prof-modify-date">변경일 : 2021-05-06</label>
+            <label class="prof-modify-date">변경일 : <%=m.getModifyDate()%></label>
         </div>
 
         
         <div class="prof-content">
 
-            <form action="" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="userNo" value="">
+            <form action="<%=contextPath%>/update.pro" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="userNo" value="<%=m.getUserNo()%>">
 
                 <div class="profImg-area">
                     
-                    <img id="profile-img" width="250" height="250">
+                    <img src="<%=contextPath%>/<%=m.getProfileImg()%>" id="profile-img" width="250" height="250">
 
-                    <input type="file" id="img-load" name="file1" onchange="loadImg(this, 1)">
+                    <input type="file" id="img-load" name="file1" onchange="loadImg(this, 1)" required>
                 </div>
                 
                 <div class="profIntro-area">
 
                     <label for="nic">닉네임</label>
-                    <input type="text" name="nickName" class="form-control" id="nic" value="마법의 소라고동">
+                    <input type="text" name="nickName" class="form-control" id="nic" value="<%=m.getNickname()%>" required>
                     <label for="intro">소개글</label>
-                    <textarea name="intro" id="intro" class="form-control" style="resize:none;">먹기 위해 삽니다.</textarea>
+                    <textarea name="intro" id="intro" class="form-control" style="resize:none;" required><%=m.getIntro()%></textarea>
 
                     <br>
 
@@ -152,7 +154,7 @@
         })
         
         function loadImg(inputFile, num){
-            		console.log(inputFile.files.length);
+			
             if(inputFile.files.length == 1){    //선택한 파일이 존재하는 경우
             	
                 var reader = new FileReader();
