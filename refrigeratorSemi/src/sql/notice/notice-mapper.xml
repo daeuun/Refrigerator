@@ -99,4 +99,40 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="deleteNotice">
+		UPDATE NOTICE
+		   SET DELETE_STATUS = 'Y'
+		 WHERE NOTICE_NO = ?
+		   AND DELETE_STATUS = 'N'
+	</entry>
+	
+	<entry key="insertNotice">
+		INSERT
+		  INTO NOTICE
+		     (
+		       NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , USER_NO  
+		     )
+		 VALUES
+		 	 (
+		 	   SEQ_NNO.NEXTVAL
+		 	 , ?
+		 	 , ?
+		 	 , 1
+		 	 )
+	</entry>
+	
+	<entry key="updateNotice">
+		UPDATE NOTICE
+		   SET NOTICE_TITLE = ?
+		     , NOTICE_CONTENT = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE NOTICE_NO = ?
+		   AND DELETE_STATUS = 'N'
+	</entry>
+	
+	
+	
 </properties>

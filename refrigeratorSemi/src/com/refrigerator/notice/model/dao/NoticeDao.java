@@ -214,6 +214,58 @@ public class NoticeDao {
 		}
 		return result;
 	}
+
+	/**
+	 * [관리자] 공지사항_ 새로운 글 DB등록
+	 */
+	public int insertNotice(Connection conn, Notice n) {
+		// insert 문 => 처리된 행수 반환
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * [관리자] 공지사항_ 기존 글 DB수정
+	 * @author HeeRak
+	 */
+	public int updateNotice(Connection conn, Notice n) {
+		// update => 처리된 행수 반환
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setInt(3, n.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 }

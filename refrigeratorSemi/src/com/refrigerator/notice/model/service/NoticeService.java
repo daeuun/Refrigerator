@@ -93,4 +93,36 @@ public class NoticeService {
 		return result;
 	}
 
+	/**
+	 *[관리자]공지사항_ 새로운 글 등록
+	 *@author HeeRak
+	 */
+	public int insertNotice(Notice n) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().insertNotice(conn, n);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	/**
+	 * [관리자] 공지사항_ 기존 글 수정
+	 * @author HeeRak
+	 */
+	public int updateNotice(Notice n) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().updateNotice(conn, n);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

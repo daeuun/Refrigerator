@@ -144,7 +144,7 @@
 
         <div id="notice-form">
             <div id="btn-area">
-                <a href="" id="enroll-btn" class="btn btn-secondary btn-sm">등록</a>
+                <a href="<%=contextPath%>/adminDetail.no?title=등록&noticeNo=0" id="enroll-btn" class="btn btn-secondary btn-sm">등록</a>
             </div>
             
             <!-- The Modal -->
@@ -190,9 +190,9 @@
                 	<%for(Notice n : list) { %>
 	                    <tr>
 	                        <td><%=n.getNoticeNo()%></td>
-	                        <td><%=n.getNoticeTitle()%></td>
+	                        <td><a href="<%=contextPath%>/adminDetail.no?title=조회&noticeNo=<%=n.getNoticeNo()%>" id="notice-title"><%=n.getNoticeTitle()%></a></td>
 	                        <th>
-	                        	<a href="" id="update-btn" class="btn btn-secondary btn-sm">U</a>
+	                        	<a href="<%=contextPath%>/adminDetail.no?title=수정&noticeNo=<%=n.getNoticeNo()%>" id="update-btn" class="btn btn-secondary btn-sm">U</a>
 	                        	<a href="" id="delete-btn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteNo(<%=n.getNoticeNo()%>);">D</a>
 	                        </th>
 	                        <td><%=n.getUserNo()%></td>
@@ -211,17 +211,17 @@
          <br>
          <div align="center" class="paging-area">
         	<%if(currentPage != 1) {%>
-            <button onclick="location.href='<%=contextPath%>/adminList.no?currentPage=<%=currentPage-1%>';">&lt;</button>
+            <button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%=currentPage-1%>';">&lt;</button>
             <%} %>
             <%for(int p=startPage; p<=endPage; p++) {%>
             	<%if(p != currentPage) { %>
-            		<button onclick="location.href='<%=contextPath%>/adminList.no?currentPage=<%= p%>';"><%=p %></button>
+            		<button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%= p%>';"><%=p %></button>
             	<%}else { %>
             		<button class="cp" disabled><%=p%></button>
             	<%} %>
             <%}  %>
             <%if(currentPage != maxPage) { %>
-            <button onclick="location.href='<%=contextPath%>/adminList.no?currentPage=<%=currentPage+1%>';">&gt;</button>
+            <button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%=currentPage+1%>';">&gt;</button>
             <%} %>
         </div>
         
