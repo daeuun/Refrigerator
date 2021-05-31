@@ -17,6 +17,10 @@ import com.refrigerator.recipe.model.vo.Review;
 
 public class RecipeDao{
 
+	/** 
+	 * @author  daeun / seong 
+	 */
+	
 	
 	private Properties prop = new Properties();
 	
@@ -28,6 +32,7 @@ public class RecipeDao{
 		}
 	}
 	
+
 	
 	/**
 	 * 레시피 상세 페이지의 댓글 전체 목록 조회 리스트 

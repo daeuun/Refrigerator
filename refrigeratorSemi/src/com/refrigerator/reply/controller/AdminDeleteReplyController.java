@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.reply.model.service.ReplyService;
 
+
+/**
+ * @author seong 
+ */
+
+
 /**
  * Servlet implementation class AdminDeleteReplyController
  */

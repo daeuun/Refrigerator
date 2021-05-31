@@ -28,12 +28,7 @@ public class AdmReply {
 			this.status = status;
 		}
 
-		
-		
-		
 
-
-		
 
 		public AdmReply(String userId, int replyNo, String reportContent, String recipeTitle, String replyContent,
 				Date enrollDate, String status) {

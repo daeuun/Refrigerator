@@ -14,6 +14,9 @@ import com.refrigerator.member.model.vo.Member;
 
 public class MemberService {
 	
+
+	
+	
 	/** 회원가입폼
 	 * @param m 회원가입 폼에 작성한 사용자가 입력한 값들을 담아놓은 Member객체
 	 * @return 처리된 행수

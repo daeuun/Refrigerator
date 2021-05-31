@@ -14,6 +14,9 @@ import com.refrigerator.recipe.model.vo.Review;
 
 public class RecipeService {
 
+	/** 
+	 * @author  daeun / seong 
+	 */
 	
 	
 	/**
@@ -22,6 +25,7 @@ public class RecipeService {
 	 * @date 0528
 	 * @return
 	 */
+	
 	public ArrayList<Reply> selectReplyList(int recipeNo){
 		
 		Connection conn = getConnection();

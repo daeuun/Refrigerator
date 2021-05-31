@@ -18,6 +18,7 @@ import com.refrigerator.reply.model.vo.AdmReply;
  * @date 5/28
  * Servlet implementation class AdminReplyListController
  */
+
 @WebServlet("/rlist.admin")
 public class AdminReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

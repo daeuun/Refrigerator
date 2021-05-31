@@ -4,8 +4,17 @@
 
 
 
+<!-- 전체 댓글 갯수  조회-->
+<!-- @author seong 5/29  -->
+
+<entry key="selectReplyListCount">
+	SELECT COUNT(*) COUNT
+	FROM REPLY
+	WHERE DELETE_STATUS = 'N'
+</entry>
+
 <!-- 사용자단에서 신고된 댓글 전체 조회 -->
-<!-- @Author seong 5/30 -->
+<!-- @author seong 5/30 -->
 
 <entry key="adminSelectReplyList">
 
@@ -54,14 +63,7 @@
 </entry>
 
 
-<!-- 전체 댓글 갯수  조회-->
-<!-- @author seong 5/29  -->
 
-<entry key="selectReplyListCount">
-	SELECT COUNT(*) COUNT
-	FROM REPLY
-	WHERE DELETE_STATUS = 'N'
-</entry>
 
 
 

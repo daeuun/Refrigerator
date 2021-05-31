@@ -16,7 +16,7 @@ import com.refrigerator.reply.model.vo.AdmReply;
 
 	
 	/**
-	 * 작업자 
+	 * 
 	 * @author seong
 	 * @Date 05/29
 	 * 
