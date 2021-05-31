@@ -75,6 +75,15 @@ public class Member {
 		this.phone = phone;
 		this.status = status;
 	}
+	
+	public Member(String userId, String userName, String email, String phone, Date enrollDate) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.email = email;
+		this.phone = phone;
+		this.enrollDate = enrollDate;
+	}
 
 	public int getUserNo() {
 		return userNo;

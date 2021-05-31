@@ -36,6 +36,12 @@
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/menubar">메뉴바</a></div>
 	
+	<!-- @author daeun -->
+	<div><a href="<%=contextPath%>/findId.me">아이디찾기</a></div>
+	
+	<!-- @author daeun -->
+	<div><a href="<%=contextPath%>/findPwd.me">비밀번호재설정</a></div>
+	
 	
 	
 </body>

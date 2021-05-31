@@ -33,7 +33,7 @@ public class MemberDao {
 	}
 	
 	/** 회원가입폼
-	 * @param conn
+	 * @author daeun
 	 * @param m 회원가입 폼에 작성한 사용자가 입력한 값들을 담아놓은 Member객체
 	 * @return 처리된 행수
 	 */
@@ -65,6 +65,7 @@ public class MemberDao {
 	}
 	
 	/** 로그인 요청
+	 * @author daeun
 	 * @param userId 사용자가 입력한 아이디값
 	 * @param userPwd 사용자가 입력한 비밀번호값
 	 * @return 
@@ -249,7 +250,45 @@ public class MemberDao {
 		return result;
 	}
 
-
+	/** 아이디 찾기
+	 * @author daeun
+	 * @return
+	 */
+	public Member findId(Connection conn, String userName, String phone, String email) {
+		//select문 => Rset
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, phone);
+			pstmt.setString(3, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getString("user_id")
+						     , rset.getString("user_name")
+						     , rset.getString("email")
+						     , rset.getString("phone")
+						     , rset.getDate("enroll_date"));
+			}
+			
+			System.out.println(m); // null반환함 왜ㅠㅠㅠ??????
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+		
+	}
 
 	
 	
