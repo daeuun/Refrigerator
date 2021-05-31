@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.refrigerator.inquiry.model.vo.Inquiry,
+				 com.refrigerator.common.model.vo.PageInfo" %>
+<!-- @author leeyeji -->
+<%
+	String contextPath = request.getContextPath();
+	ArrayList<Inquiry> pageList = (ArrayList<Inquiry>)request.getAttribute("pageList");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,19 +90,7 @@
         <br>
 
         <div class="user-side-nav">
-            <table id="userSideNav-area" align="left" border="1px">
-
-                <tr>
-                    <th><a href="">공지사항</a></th>
-                </tr>
-                <tr>
-                    <th><a href="">FAQ</a></th>
-                </tr>
-                <tr>
-                    <th><a href="">1:1문의</a></th>
-                </tr>
-
-            </table>
+            <%@ include file="../common/user/userSideBar.jsp" %>
         </div>
 
 	    <div align="right" style="width: 1050px;">
@@ -104,40 +106,52 @@
                 <thead>
                     <tr id="headline">
                         <th width="70">글번호</th>
-                        <th width="400">글제목</th>
-                        <th width="100">작성자</th>
+                        <th width="450">글제목</th>
+                        <th width="120">작성자</th>
                         <th width="150">작성일</th>
                     </tr>
                 </thead>
                 <tbody>
-                            <tr>
-                                <td>4</td>
-                                <td>글제목입니다.</td>
-                                <td>관리자</td>
-                                <td>2020-07-01</td>
+                	<%if(pageList.isEmpty()) {%>
+                    	<tr>
+	                		<td colspan="4"> 존재하는 FAQ가 없습니다.</td>
+	                	</tr>
+                    <%} else{%>
+                    	<%for(Inquiry i : pageList) { %>
+	                        <tr>
+                                <td><%= i.getInqryNo() %></td>
+                                <td><%= i.getInqryTitle() %></td>
+                                <td><%= i.getInqryWriter() %></td>
+                                <td><%= i.getModifyDate() %></td>
                             </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>글제목입니다.</td>
-                                <td>관리자</td>
-                                <td>2020-07-01</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>글제목입니다.</td>
-                                <td>관리자</td>
-                                <td>2020-07-01</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>글제목입니다.</td>
-                                <td>관리자</td>
-                                <td>2020-07-01</td>
-                            </tr>
-                        
+                        <%} %>
+                    <%} %>
                 </tbody>
             </table>
         </div>
+        <br>
+	    <!-- 페이징 -->
+	    <div align="center" class="paging-area">
+	        
+			<% if(currentPage != 1) { %>
+				<button onclick="location.href='<%= contextPath%>/list.faq?currentPage=<%=currentPage-1%>';"> &lt; </button>
+			<% } %>
+					
+			<% for(int p=startPage; p<=endPage; p++) {%>
+		            	
+				<% if(p != currentPage){ %>
+					<button onclick="location.href='<%= contextPath%>/list.faq?currentPage=<%=p%>';"><%= p %></button>
+				<% }else{ %>
+					<button disabled><%= p %></button>
+				<%} %>
+		            	
+			<% } %>
+		
+			<% if(currentPage != maxPage) { %>
+				<button onclick="location.href='<%= contextPath%>/list.faq?currentPage=<%=currentPage+1%>'"> &gt; </button>
+			<% } %>
+				
+		</div>
     </div>
 </body>
 </html>

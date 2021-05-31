@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.faq.model.vo.Faq;
 import com.refrigerator.inquiry.model.vo.Inquiry;
 
 /**
@@ -277,8 +278,73 @@ public class InquiryDao {
 		return result;
 	}
 	
+	/**
+	 * 페이징 - 총 목록 count
+	 * @author leeyeji
+	 */
+	public int selectListCount(Connection conn) {
+		// select => ResultSet 한 행 
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
 	
-	
+	/**
+	 * 페이징 - 전체 목록 조회
+	 * @author leeyeji
+	 */
+	public ArrayList<Inquiry> selectList(Connection conn, PageInfo pi){
+		// select => ResultSet 여러행
+		ArrayList<Inquiry> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectList");
+				
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+					
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+					
+			rset = pstmt.executeQuery();
+					
+			while(rset.next()) {
+				list.add(new Inquiry(rset.getInt("inqry_no"),
+									 rset.getString("user_no"),
+									 rset.getString("inqry_title"),
+									 rset.getDate("enroll_date"),
+									 rset.getDate("modify_date")));
+			}		
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		return list;
+	}
 	
 	
 	

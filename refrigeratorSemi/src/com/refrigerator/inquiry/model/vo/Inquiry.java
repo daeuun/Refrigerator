@@ -51,6 +51,15 @@ public class Inquiry {
 		this.inqryAnswer = inqryAnswer;
 	}
 
+	public Inquiry(int inqryNo, String inqryWriter, String inqryTitle, Date enrollDate, Date modifyDate) {
+		super();
+		this.inqryNo = inqryNo;
+		this.inqryWriter = inqryWriter;
+		this.inqryTitle = inqryTitle;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+	}
+
 	public int getInqryNo() {
 		return inqryNo;
 	}

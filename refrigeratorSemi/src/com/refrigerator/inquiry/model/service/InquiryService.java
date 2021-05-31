@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.inquiry.model.dao.InquiryDao;
 import com.refrigerator.inquiry.model.vo.Inquiry;
+import com.refrigerator.notice.model.dao.NoticeDao;
+import com.refrigerator.notice.model.vo.Notice;
 
 /**
  * @author Heerak 05.27
@@ -103,6 +105,27 @@ public class InquiryService {
 	}
 
 	
+	/**
+	 * 페이징 - 총 목록 count
+	 * @author leeyeji
+	 */
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new InquiryDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+	}
+	
+	/**
+	 * 페이징 - 전체 목록 조회
+	 * @author leeyeji
+	 */
+	public ArrayList<Inquiry> selectList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Inquiry> list = new InquiryDao().selectList(conn, pi);
+		close(conn);
+		return list;
+	}
 	
 	
 }
