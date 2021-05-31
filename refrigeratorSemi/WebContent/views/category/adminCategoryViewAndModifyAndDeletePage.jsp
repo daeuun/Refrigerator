@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.ArrayList , com.refrigerator.category.model.vo.*"%>    
+   
+
+<%
+	ArrayList<MainCategory> mainList = (ArrayList<MainCategory>)request.getAttribute("mainList");
+	ArrayList<SubCategory> subList = (ArrayList<SubCategory>)request.getAttribute("subList");	
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +29,10 @@
 <!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
 <!-- --------------------------------------------------------------------------------------------------- -->
 <style>
+    #for-height{height: 700px;} 
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
-    #horizontal-bar{width: 100%; height: 50px; box-sizing: border-box; background-color: palegoldenrod;}
-    #vertical-bar{width: 150px; height: 700px; background-color: rgb(0,153,102); float: left;}
-    .outer{border: 3px solid blue; width: 1000px; height: 700px; float: right; margin-right: 25px;}
+    .outer{ width: 1000px; height: 700px; margin-right: 5px;}
 
 /* ----------------------------------------------------------------------------------------------------------- */
     .outer{
@@ -59,6 +67,7 @@
         overflow-y: scroll;
     }
 
+
     .for-seperate table{
         width: 450px;
     }
@@ -92,6 +101,7 @@
     .for-seperate button:nth-child(3){
         background-color: rgb(0,153,102);
     }
+	
 
     .majorclass-box{
         border: 3px solid tomato;
@@ -100,10 +110,17 @@
     .minorclass-box{
         border: 3px solid turquoise;
     }
+    
+    .majorclass-box tbody td, minorclass-box tbody td{
+		padding :0px;
+    	height:33px;
+    }
 
     .for-seperate label{
         width: 100%;
         height: 100%;
+        line-height:30px;
+        margin:0px;
     }
 
     .for-seperate td, .for-seperate th{
@@ -112,14 +129,10 @@
 
     .custom-check{
         display: none;   
-    }
+    }    
+    
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ----------------------- 삭제 모달 영역임 -------------------------------------------------------------------- */
-    .delete-box{
-		text-align: center;
-		margin-top: 350px;
-        width: 400px;
-	}
 
 	.modal-title{
 		text-overflow:ellipsis;
@@ -155,16 +168,25 @@
 		padding-bottom: 10px;
 	}
 
-	#major-modify-modal .modal-body span, #minor-modify-modal .modal-body span{
+	#major-modify-modal .modal-body span, #minor-modify-modal .modal-body span, #selectMainCatSpan{
 		margin-bottom: 10px;
 		color: rgb(22,160,133);
         margin-right: 10px ;
         font-size: 18px;
+	}	
+	
+	#selectMainCatSpan{
+		margin-left:15px
 	}
 
-	#major-modify-modal .modal-body input, #minor-modify-modal .modal-body input{
+	#major-modify-modal .modal-body input, #minor-modify-modal .modal-body input, #selectMainCat{
         width: 65%;
         border: 2px solid gray;
+        font-size: 18px;
+	}
+	
+	#selectMainCat{
+		width: 60%;
         font-size: 18px;
 	}
 
@@ -222,8 +244,19 @@
     #major-enroll-modal table tr, #minor-enroll-modal table tr{
         margin: 10px;
     }
-
-	#major-enroll-modal table th, #minor-enroll-modal table th{
+    
+  	#enrollrefMainCatSpan{
+  		font-weight : bold;
+		margin-left : 35px; 		
+  	}
+  	
+    #enrollrefMainCat{
+      	width :270px;
+      	margin-left : 25px;
+    	padding-left: 10px;   	
+    }
+    
+ 	#major-enroll-modal table th, #minor-enroll-modal table th{
         text-align: center;
     }
     #major-enroll-modal table td, #minor-enroll-modal table td{
@@ -265,37 +298,38 @@
 </head>
 <body>
     <div class="wrap">
-        <div id="horizontal-bar"></div>
+    <%@ include file="../common/admin/adminTopNavView.jsp" %>
         <div id="content">
-            <div id="vertical-bar"></div>            
+       	<%@ include file="../common/admin/adminSideBarView.jsp" %>
+        
 <!---------------------------------------------------------------------------------------------------------------------->            
             <script>
                 $(document).ready(function() {
                     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
-                    $('input[type="checkbox"][name="major"]').click(function(){
+                    $('input[type="checkbox"][name="categoryMainNo"]').click(function(){
                         //클릭 이벤트 발생한 요소가 체크 상태인 경우
                         if ($(this).prop('checked')) {
                             //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
-                            $('input[type="checkbox"][name="major"]').prop('checked', false);
+                            $('input[type="checkbox"][name="categoryMainNo"]').prop('checked', false);
                             $(this).prop('checked', true);
                         }
                     });
-                    $('input[type="checkbox"][name="minor"]').click(function(){
+                    $('input[type="checkbox"][name="categorySubNo"]').click(function(){
                         //클릭 이벤트 발생한 요소가 체크 상태인 경우
                         if ($(this).prop('checked')) {
                             //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
-                            $('input[type="checkbox"][name="minor"]').prop('checked', false);
+                            $('input[type="checkbox"][name="categorySubNo"]').prop('checked', false);
                             $(this).prop('checked', true);
                         }
                     });
                 });
             </script>
 <!---------------------------------------------------------------------------------------------------------------------->            
-            <div class="outer">
+            <div class="outer" style="float: right;">
                 <div class="top-box">
                     <a href="">홈</a> >
                     <a href="">싸이트관리</a> >
-                    <a href="">카테고리 관리</a>
+                    <a href="">카테고리 관리</a>s
                 </div>
                 <div class="outer-body">
                     <h2><b>카테고리 관리(<span style="color: tomato;">대분류</span>/<span style="color: turquoise;">소분류</span>)</b></h2>
@@ -306,96 +340,56 @@
                                 <thead>
                                     <tr>
                                         <td colspan="3">
-                                            <button data-toggle="modal" data-target="#major-del-modal">삭제</button>
-                                            <button data-toggle="modal" data-target="#major-modify-modal">수정</button>
+                                            <button onclick="mainDelExamination();">삭제</button>
+                                            <button onclick="mainModifyExamination();">수정</button>
                                             <button  data-toggle="modal" data-target="#major-enroll-modal"> 대분류 카테고리 등록</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>선택</th>
-                                        <th  width="160">대분류 카테고리 번호</th>
-                                        <th>대분류 카테고리명</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass1" value="1"><span ></span></td>
-                                        <td>
-                                            <label for="majorClass1">1</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass1">육류</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass2" value="2"></td>
-                                        <td>
-                                            <label for="majorClass2">2</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass2">채소류</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass3" value="3"></td>
-                                        <td>
-                                            <label for="majorClass3">3</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass3">해산물</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass4" value="4"></td>
-                                        <td>
-                                            <label for="majorClass4">4</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass4">달걀/유제품</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass5" value="5"></td>
-                                        <td>
-                                            <label for="majorClass5">5</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass5">가공식품류</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass6" value="6"></td>
-                                        <td>
-                                            <label for="majorClass6">6</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass6">쌀</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="major" id="majorClass7" value="7"></td>
-                                        <td>
-                                            <label for="majorClass7">7</label>
-                                        </td>   
-                                        <td>
-                                            <label for="majorClass7">밀가루</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                   <tr>
+	                                   	<th>선택</th>
+	                                   	<th  width="160">대분류 카테고리 번호</th>
+	              			          	<th>대분류 카테고리명</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                               <%if(mainList.isEmpty()){ %>
+			            			<tr>
+			            				<td colspan="3">조회된 리스트가 없습니다. </td>
+			            			</tr>
+			            		<% } else {%> 
+	                               	<% if(mainList.size() <=10){ %>
+						                <% for(MainCategory m : mainList){ %>
+	                                           <tr>
+		                                        <td><input type="checkbox" name="categoryMainNo" id="majorClass<%= m.getCategoryMainNo() %>" value="<%= m.getCategoryMainNo() %>"><span ></span></td>
+		                                        <td>
+		                                            <label for="majorClass<%= m.getCategoryMainNo() %>"><%= m.getCategoryMainNo() %></label>
+		                                        </td>   
+		                                        <td>
+		                                            <label for="majorClass<%= m.getCategoryMainNo() %>"><%= m.getCategoryName() %></label>
+		                                        </td>   
+		                                    </tr>								                
+						                <% } %>	
+						                <% for(int i=0; i<(10 - mainList.size()); i++){ %>
+						                	<tr >
+						                		<td></td>
+						                		<td></td>
+						                		<td></td>
+						                	</tr>
+						                <% } %>						                		            		
+				            		<% }else{ %>
+						                <% for(MainCategory m : mainList){ %>
+	                                           <tr>
+		                                        <td><input type="checkbox" name="categoryMainNo" id="majorClass<%= m.getCategoryMainNo() %>" value="<%= m.getCategoryMainNo() %>"><span ></span></td>
+		                                        <td>
+		                                            <label for="majorClass<%= m.getCategoryMainNo() %>"><%= m.getCategoryMainNo() %></label>
+		                                        </td>   
+		                                        <td>
+		                                            <label for="majorClass<%= m.getCategoryMainNo() %>"><%= m.getCategoryName() %></label>
+		                                        </td>   
+		                                    </tr>				
+                              		    <% } %>			            				            		
+				            		<% }%>
+				            	<%} %>    				                                            	
                                 </tbody>
                             </table>
                         </div>
@@ -405,8 +399,8 @@
                                 <thead>
                                     <tr>
                                         <td colspan="6">
-                                            <button  data-toggle="modal" data-target="#minor-del-modal">삭제</button>
-                                            <button  data-toggle="modal" data-target="#minor-modify-modal">수정</button>
+                                            <button  onclick="subDelExamination();">삭제</button>
+                                            <button  onclick="subModifyExamination()">수정</button>
                                             <button  data-toggle="modal" data-target="#minor-enroll-modal"> 소분류 카테고리 등록</button>
                                         </td>
                                     </tr>
@@ -416,92 +410,88 @@
                                         <th>소분류 카테고리명</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" name="minor" id="minorClass1"></td>
-                                        <td>
-                                            <label for="minorClass1">1</label>
-                                        </td>   
-                                        <td>
-                                            <label for="minorClass1">소고시</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="minor" id="minorClass2"></td>
-                                        <td>
-                                            <label for="minorClass2">2</label>
-                                        </td>   
-                                        <td>
-                                            <label for="minorClass2">돼지고기</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="minor" id="minorClass3"></td>
-                                        <td>
-                                            <label for="minorClass3">3</label>
-                                        </td>   
-                                        <td>
-                                            <label for="minorClass3">닭고기</label>
-                                        </td>   
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <tbody>                                
+                                <%if(subList.isEmpty()){ %>
+			            			<tr>
+			            				<td colspan="3">조회된 리스트가 없습니다. </td>
+			            			</tr>
+			            		<% } else {%> 
+	                               	<% if(subList.size() <=10){ %>
+						                <% for(SubCategory s : subList){  %>
+	                                           <tr>
+	                                           	<input type="hidden" name="categorySubNo" value="<%= s.getCategoryMainNo() %>">
+		                                        <td><input type="checkbox" name="categorySubNo" id="minorClass<%= s.getCategorySubNo() %>" value="<%= s.getCategorySubNo() %>"><span ></span></td>
+		                                        <td>
+		                                            <label for="minorClass<%= s.getCategorySubNo() %>"><%= s.getCategorySubNo() %></label>
+		                                        </td>   
+		                                        <td>
+		                                            <label for="minorClass<%= s.getCategorySubNo() %>"><%= s.getIngredientName() %></label>
+		                                        </td>   
+		                                    </tr>								                
+						                <% } %>	
+						                <% for(int i=0; i<(10 - subList.size()); i++){ %>
+						                	<tr >
+						                		<td></td>
+						                		<td></td>
+						                		<td></td>
+						                	</tr>
+						                <% } %>						                		            		
+				            		<% }else{ %>
+						                <% for(SubCategory s : subList){  %>
+	                                           <tr>
+	                                           	<input type="hidden" name="categorySubNo" value="<%= s.getCategoryMainNo() %>">
+		                                        <td><input type="checkbox" name="categorySubNo" id="minorClass<%= s.getCategorySubNo() %>" value="<%= s.getCategorySubNo() %>"><span ></span></td>
+		                                        <td>
+		                                            <label for="minorClass<%= s.getCategorySubNo() %>"><%= s.getCategorySubNo() %></label>
+		                                        </td>   
+		                                        <td>
+		                                            <label for="minorClass<%= s.getCategorySubNo() %>"><%= s.getIngredientName() %></label>
+		                                        </td>   
+		                                    </tr>								                
+						                <% } %>		            				            		
+				            		<% }%>
+				            	<%} %>    
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
             </div>
 <!------------------------------------------------------------------------------------------------------------->            
 <!------------------------------대분류 삭제모달 영역임  --------------------------------------------------------->
+			<script>
+                function mainDelExamination(){
+                   var mainCheck = $('input[type="checkbox"][name="categoryMainNo"]:checked');
+                   if(mainCheck.length == 0){
+                      alert("삭제하고자 하는 대분류 카테고리를 선택하고 눌러주세요");
+                      return false;
+                   }else{
+                         $("#major-del-modal").modal();                         
+                   };
+                   
+                   if(mainCheck.length != 0){
+                         var mainCatNo = mainCheck.parent().next().children().text();
+                         var mainCatName = mainCheck.parent().next().next().children().text();
+                                                  
+                         $("#delmainCatName").text(mainCatName);
+                   }
+                };
+             </script>   
+
 			<!-- The Modal -->
-			<div class="modal fade" id="major-del-modal">
+			<div class="modal fade" id="major-del-modal" style="background-color:rgba(0,0,0,0.8);">
 				<div class=" modal-dialog modal-sm">
-					<div class="delete-box modal-content">
+					<div class="delete-box modal-content" style="text-align: center; margin-top: 350px; width: 400px;">
 				
 						<!-- Modal Header -->
 						<div class="modal-header">
 							<h5 class="modal-title">대분류 카테고리</h5>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
+						</div>					
 						
 						<!-- Modal body -->
 						<div class="modal-body" style="color: red;">
-							선택하신 ???? <br>대분류 카테고리를 삭제하시겠습니까?
+							선택하신 "<span id="delmainCatName"></span>" <br>대분류 카테고리를 삭제하시겠습니까?
 						</div>
 						
 						<!-- Modal footer -->
@@ -515,10 +505,28 @@
 			</div>
 <!------------------------------대분류 삭제모달 영역임  --------------------------------------------------------->
 <!------------------------------소분류 삭제모달 영역임  --------------------------------------------------------->
+             <script>  
+                function subDelExamination(){
+                   var subCheck = $('input[type="checkbox"][name="categorySubNo"]:checked');
+
+	               if(subCheck.length == 0){
+	                  alert("삭제하고자 하는 소분류 카테고리를 선택하고 눌러주세요");
+	                  return false;
+	               }else{
+	                     $("#minor-del-modal").modal();             
+	               };
+	               
+                   if(subCheck.length != 0){
+                       var subCatNo = subCheck.parent().next().children().text();
+                       var subCatName = subCheck.parent().next().next().children().text();
+                       $("#delsubCatName").text(subCatName);
+                   };
+	            }
+            </script>
 			<!-- The Modal -->
 			<div class="modal fade" id="minor-del-modal">
 				<div class=" modal-dialog modal-sm">
-					<div class="delete-box modal-content">
+					<div class="delete-box modal-content" style="text-align: center; margin-top: 350px; width: 400px;">
 				
 						<!-- Modal Header -->
 						<div class="modal-header">
@@ -528,7 +536,7 @@
 						
 						<!-- Modal body -->
 						<div class="modal-body" style="color: red;">
-                        선택하신 ???? <br>소분류 카테고리를 삭제하시겠습니까?
+                        		선택하신 "<span id="delsubCatName"></span>" <br>소분류 카테고리를 삭제하시겠습니까?
 						</div>
 						
 						<!-- Modal footer -->
@@ -542,7 +550,25 @@
 			</div>
 <!------------------------------소분류 삭제모달 영역임  -------------------------------------------------------------->
 <!------------------------------대분류 수정모달 영역임  -------------------------------------------------------------->
-
+			<script>
+                function mainModifyExamination(){
+                   var mainCheck = $('input[type="checkbox"][name="categoryMainNo"]:checked');
+                   if(mainCheck.length == 0){
+                      alert("수정하고자하는 대분류 카테고리를 선택하고 눌러주세요");
+                      return false;
+                   }else{
+                         $("#major-modify-modal").modal();                         
+                   };
+                   
+                   if(mainCheck.length != 0){
+                         var mainCatNo = mainCheck.parent().next().children().text();
+                         var mainCatName = mainCheck.parent().next().next().children().text();
+                         
+                         $("#modifyMainCatNo").val(mainCatNo);
+                         $("#modifyMainCatName").val(mainCatName);
+                   }
+                };
+             </script>   
 			<!-- The Modal -->
 			<div class="modal fade" id="major-modify-modal">
 				<div class="modal-dialog modal-lg">
@@ -557,8 +583,9 @@
                         <form action="" method="GET">
                             <!-- Modal body -->
                             <div class="modal-body" > 
+                            	<input type="hidden" name="" id="modifyMainCatNo" value="">
                                 <span>카테고리명 : </span>
-                                <input type="text" name="" id="" value="육류"> 
+                                <input type="text" name="" id="modifyMainCatName" value=""> 
                             </div>
                             <!-- Modal footer -->
                             <div class="modal-footer">
@@ -572,6 +599,30 @@
 <!------------------------------대분류 수정모달 영역 끝  ------------------------------------------------------------------->
 <!------------------------------소분류 수정모달 영역임  -------------------------------------------------------------------->
 			<!-- The Modal -->
+			<script>
+                function subModifyExamination(){
+                   var subCheck = $('input[type="checkbox"][name="categorySubNo"]:checked');
+
+                   if(subCheck.length == 0){
+                      alert("수정하고자하는 대분류 카테고리를 선택하고 눌러주세요");
+                      return false;
+                   }else{
+                         $("#minor-modify-modal").modal();                         
+                   };
+                   
+                   if(subCheck.length != 0){
+                         var subCatNo = subCheck.parent().next().children().text();
+                         var subCatName = subCheck.parent().next().next().children().text();
+                         
+                         $("#modifySubCatNo").val(subCatNo);
+                         $("#modifySubCatName").val(subCatName);
+                   }
+
+                   		 // 다른방법이나 자바스크립트로 해당 행이 가지는 대분류 카테고리 부분을 select요소의 option에 checked 속성 부여해주는것
+                   		 // 진행해주시면될거같아요 혹시몰라서 자바스크립트로 해결하신다라고 하시면 쓰시라구 아래에 변수에 해당행의 대분류카테고리번호는 넣어두웠습니다.
+ 		                 // var mainCatNo = subCheck.parent().parent().children().eq(0).val();
+                };
+             </script>   
 			<div class="modal fade" id="minor-modify-modal">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
@@ -584,10 +635,18 @@
 						</div>
                         <form action="" method="GET">
                             <!-- Modal body -->
-                            <div class="modal-body" > 
+                            <span id="selectMainCatSpan" >대분류 선택 :</span>
+                            <select name="" id="selectMainCat">
+				                <% for(MainCategory m : mainList){ %>
+	                            	<option value="<%= m.getCategoryMainNo() %>"><%= m.getCategoryName() %></option>							
+								<%} %>
+                            </select>
+                            <div class="modal-body" >
+                            	<input type="hidden" name="" id="modifySubCatNo" value="" > 
                                 <span>카테고리명 : </span>
-                                <input type="text" name="" id="" value="육류"> 
+                                <input type="text" name="" id="modifySubCatName" value=""> 
                             </div>
+                         
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -610,7 +669,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
                             
 						</div>
-                        <form action="" method="GET">
+                        <form action="mainCatEnroll.cat" method="post">
                             <!-- Modal body -->
                             <table>
                                 <tr>
@@ -619,7 +678,7 @@
                                 </tr>
                                 <tr>
                                     <th>카테고리명</th>
-                                    <td><input type="text" name="" value="" placeholder="카테고리명을 입력하세요"></td>
+                                    <td><input type="text" name="mainCatName" value="" placeholder="카테고리명을 입력하세요"></td>
                                 </tr>
                             </table>
                             <!-- Modal footer -->
@@ -642,9 +701,14 @@
 						<div class="modal-header" style="border-bottom: none;">
 							<h2 class="modal-title">소분류 카테고리 등록하기</h2>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-                            
 						</div>
-                        <form action="" method="GET">
+                        <form action="subCatEnroll.cat" method="POST">
+                            <span id="enrollrefMainCatSpan" >대분류 선택 </span>
+                            <select name="refMainCatNo" id="enrollrefMainCat">
+				                <% for(MainCategory m : mainList){ %>
+	                            	<option value="<%= m.getCategoryMainNo() %>"><%= m.getCategoryName() %></option>							
+								<%} %>
+                            </select>
                             <!-- Modal body -->
                             <table>
                                 <tr>
@@ -653,7 +717,7 @@
                                 </tr>
                                 <tr>
                                     <th>카테고리명</th>
-                                    <td><input type="text" name="" value="" placeholder="카테고리명을 입력하세요"></td>
+                                    <td><input type="text" name="subCatName" value="" placeholder="카테고리명을 입력하세요"></td>
                                 </tr>
                             </table>
                             <!-- Modal footer -->
