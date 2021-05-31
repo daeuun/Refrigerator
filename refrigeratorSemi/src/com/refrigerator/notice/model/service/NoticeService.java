@@ -27,7 +27,7 @@ public class NoticeService {
 	}
 	
 	/**
-	 * 공지사항 클릭시 조회수 증가
+	 * 공지사항 조회수 증가
 	 * @author leeyeji
 	 */
 	
