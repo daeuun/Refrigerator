@@ -7,7 +7,6 @@
 <%
 	Notice n = (Notice)request.getAttribute("n");
 	// 작성자 아이디, 글제목, 글내용, 등록일, 수정일, 조회수
-	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -70,6 +69,8 @@
 </style>
 </head>
 <body>
+
+	<%@ include file="../common/user/menubar.jsp" %>
 
 	<div class="outer">
         <br><h2 align="center">공지사항 조회</h2><br>

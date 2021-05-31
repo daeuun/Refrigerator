@@ -4,7 +4,6 @@
 				 com.refrigerator.common.model.vo.PageInfo" %>
 <!-- @author leeyeji -->
 <%
-	String contextPath = request.getContextPath();
 	ArrayList<Inquiry> pageList = (ArrayList<Inquiry>)request.getAttribute("pageList");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -82,6 +81,8 @@
 </style>
 </head>
 <body>
+
+	<%@ include file="../common/user/menubar.jsp" %>
 	
 	<div class="outer">
 

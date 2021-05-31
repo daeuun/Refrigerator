@@ -3,7 +3,6 @@
 <%@ page import="com.refrigerator.inquiry.model.vo.Inquiry" %>
 <!-- @author leeyeji -->
 <%
-	//String contextPath = request.getContextPath();
 	Inquiry i = (Inquiry)request.getAttribute("i");
 %>
 <!DOCTYPE html>

@@ -6,7 +6,6 @@
 <%@ page import="java.util.ArrayList, com.refrigerator.notice.model.vo.Notice,
 				 com.refrigerator.common.model.vo.PageInfo"%>
 <%
-	String contextPath = request.getContextPath();
 	ArrayList<Notice> pageList = (ArrayList<Notice>)request.getAttribute("pageList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
@@ -65,7 +64,9 @@
 </head>
 <body>
 
-		<div class="outer">
+	<%@ include file="../common/user/menubar.jsp" %>
+
+	<div class="outer">
 
         <br>
         <h2 align="center" style="font-weight:bold;">공지사항</h2>
