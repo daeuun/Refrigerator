@@ -42,6 +42,9 @@
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/findPwd.me">비밀번호재설정</a></div>
 	
+	<!-- @author daeun -->
+	<div><a href="<%=contextPath%>/main">메인</a></div>
+	
 	
 	
 </body>
