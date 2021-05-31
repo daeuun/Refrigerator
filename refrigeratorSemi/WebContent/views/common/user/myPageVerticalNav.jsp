@@ -126,6 +126,6 @@
                     <a class="nav-link" href="#">팔로잉 관리<i class="fas fa-chevron-right"></i></a>
                 </li>
             </ul>
-        </nav>
+        </nav>        
 </body>
 </html>

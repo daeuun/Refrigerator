@@ -28,6 +28,11 @@
             margin: 40px 40px;
         }
 
+		/* 재원 */
+		.ddddd{margin: auto; width: 1200px;}
+
+
+
         .table-label{
             margin-bottom: 7px;
             display: inline-block;
@@ -171,6 +176,10 @@
 </head>
 <body>
 	<%@ include file="../common/admin/adminTopNavView.jsp" %>
+	
+	<!-- 재원 -->    
+	<div class="ddddd">
+		
 	<%@ include file="../common/admin/adminSideBarView.jsp" %>
 
 	<div class="outer">
@@ -390,6 +399,9 @@
 	    	$("#deleteFaqNo").val(no);
     	}
     </script>
+
+	<!-- 재원 -->    
+    </div>
 
 </body>
 </html>

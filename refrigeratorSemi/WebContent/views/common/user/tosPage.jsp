@@ -12,7 +12,6 @@
 		tosTitle = (String)request.getAttribute("tosTitleMsg");
 		tosMsg = (String)request.getAttribute("tosMsg");
 	}
-
 %>
     
     
@@ -27,7 +26,7 @@
 <title>냉뭐? Terms Of Service Page</title>
 <%-- 혹시나 pre태그 부분은 수정이 있을수 있다. --%>
 <style>
-    .outer{width: 900px; margin: auto;}
+    .outer {width: 900px; margin: auto;}
     .outer > p{width: 900px; font-size: 42px; font-weight: bolder; text-align: center; margin: auto; padding-top: 10px; padding-bottom: 15px; border-bottom: 1px solid black;}
 
     .outer > pre{
