@@ -95,7 +95,7 @@
         </div>
 
 	    <div align="right" style="width: 1050px;">
-	        <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
+	        <a href="<%=contextPath %>/enrollForm.inq" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
 	        <br><br>
 	    </div>
 

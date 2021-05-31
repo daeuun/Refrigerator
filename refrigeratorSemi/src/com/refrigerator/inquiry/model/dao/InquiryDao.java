@@ -380,4 +380,33 @@ public class InquiryDao {
 		return i;
 	}
 	
+	/**
+	 * 1:1문의 등록
+	 * @author leeyeji
+	 */
+	public int insertInquiry(Connection conn, Inquiry i) {
+		// insert => 처리된 행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(i.getInqryWriter()));
+			pstmt.setString(2, i.getInqryTitle());
+			pstmt.setString(3, i.getInqryContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
 }
