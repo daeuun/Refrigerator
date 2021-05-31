@@ -3,7 +3,7 @@
 <%@ page import="com.refrigerator.inquiry.model.vo.Inquiry" %>
 <!-- @author leeyeji -->
 <%
-	String contextPath = request.getContextPath();
+	//String contextPath = request.getContextPath();
 	Inquiry i = (Inquiry)request.getAttribute("i");
 %>
 <!DOCTYPE html>
@@ -85,6 +85,7 @@
 </head>
 <body>
 
+	<%@ include file="../common/user/menubar.jsp" %>
 
     <div class="outer">
         <br><h2 align="center">1:1문의 조회</h2><br>
@@ -134,6 +135,9 @@
             <a href="<%=contextPath %>/list.inq?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
         </div>
 
+		<br>
+		
+		
     </div>
 
 </body>
