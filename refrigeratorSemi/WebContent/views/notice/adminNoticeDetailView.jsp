@@ -16,14 +16,15 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자_공지사항등록</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-        div, h2{
+        #wrap{
+        	margin:auto;
+        	width:1200px;
         }
+        
+        #for-height{height:750px;}
+        
         .outer{
             margin:50px 50px;
             width:900px;
@@ -106,6 +107,7 @@
 <body>
 
 	<%@ include file="../common/admin/adminTopNavView.jsp" %>
+<div id="wrap">
 	<%@ include file="../common/admin/adminSideBarView.jsp" %>
 
     <div class="outer">
@@ -225,6 +227,7 @@
         
     </div>
 
+</div>
 	<script>
 		$(function(){
 			$("#back-btn").click(function(){

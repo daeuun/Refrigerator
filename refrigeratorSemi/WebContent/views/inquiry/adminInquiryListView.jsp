@@ -29,11 +29,20 @@
 <title>관리자_문의/답변</title>
 
     <style>
+        #wrap{
+        	margin:auto;
+        	width:1200px;
+        }
+        
+        #for-height{height:750px;}
+        
         .outer{
             width: 900px;
             font-size: 16px;
             margin: 40px 40px;
         }
+        
+        
         
         button{
             border: none;
@@ -68,90 +77,13 @@
             border-bottom: 1px solid rgb(211, 211, 211);
             text-align: center;
         }
-        
-        /*답변하기 모달 영역*/
-        .modal-content{
-            width: 1000px;
-            height: 800px;
-        }
-        .modal-header{
-            border-bottom: 5px solid rgb(0, 153, 102);
-            width: 800px;
-            margin-top: 0;
-            margin: 35px 74px 35px 74px;
-            padding: 2px;
-        }
-        .modal-title{
-            color:rgb(0, 153, 102);
-            font-weight: 550;
-            font-size: 36px;
-        }
-        .close{
-            font-size: 40px;
-            color: black;
-        }
-        .answer-form{
-            width:800px;
-            height:380px;
-            margin: 0px 74px 0px 74px;
-        }
-        .form-group{
-            margin-bottom:20px;
-        }
-        .form-group>label{
-            color:rgb(0, 153, 102);
-            font-weight: 500;
-        }
-        .form-group>textarea{
-            height: 200px;
-        }
-        .form-btn{
-            height:60px;
-        }
-        .form-btn button{
-            box-sizing: border-box;
-            width:46%;
-            height:100%;
-            margin: 0% 2% 0% 2%;
-            display:block;
-            float: left;
-            text-align: center;
-            font-size:24px;
-            text-decoration: none;
-            line-height:50px;
-            font-weight:500;
-        }
-        
-        #btn-s{
-            background: rgb(0, 153, 102);
-            opacity:0.85;
-        }
-        #btn-s:hover{
-            background: rgb(0, 153, 102);
-            opacity:1;
-        }
-        
-        /* 해결문의내역 제목내역 css*/
-        .solved-title{
-        	color:black;
-        }
-        .solved-title:hover{
-        	cursor:pointer;
-        }
-
-        .current-page{
-            background-color:rgb(0, 102, 51);
-            color: white;
-        }
-        .count-area{
-            color: orange;
-        }
     </style>
 
 </head>
 <body>
 
 	<%@ include file="../common/admin/adminTopNavView.jsp" %>
+<div id="wrap">
 	<%@ include file="../common/admin/adminSideBarView.jsp" %>
 
     <div class="outer">
@@ -296,7 +228,7 @@
                             
 	                            <div class="form-group">
 	                                <label for="answer">A. 답변</label>
-	                                <textarea name="inqContent" class="form-control" id="answerContent" style="resize:none;" placeholder="답변을입력해주세요"></textarea>
+	                                <textarea name="inqContent" class="form-control" id="answerContent" style="resize:none;" placeholder="답변을입력해주세요" required></textarea>
 	                            </div>
 	                            
 	                            <div class="form-btn">
@@ -311,6 +243,7 @@
             </div>
         </div>
     </div>	
+</div>
     
     <script>
     	// 해결 문의글 목록 중 '글제목' 클릭 시  해당 글의 번호를 가지고 데이터 요청
@@ -357,4 +290,87 @@
     	
     </script>
 </body>
+<style>
+		.modal-content{ /*모달창 위치*/
+            margin:20px -100px;
+        }
+        
+        /*답변하기 모달 영역*/
+        .modal-content{
+            width: 1000px;
+            height: 800px;
+        }
+        .modal-header{
+            border-bottom: 5px solid rgb(0, 153, 102);
+            width: 800px;
+            margin-top: 0;
+            margin: 35px 74px 35px 74px;
+            padding: 2px;
+        }
+        .modal-title{
+            color:rgb(0, 153, 102);
+            font-weight: 550;
+            font-size: 36px;
+        }
+        .close{
+            font-size: 40px;
+            color: black;
+        }
+        .answer-form{
+            width:800px;
+            height:380px;
+            margin: 0px 74px 0px 74px;
+        }
+        .form-group{
+            margin-bottom:20px;
+        }
+        .form-group>label{
+            color:rgb(0, 153, 102);
+            font-weight: 500;
+        }
+        .form-group>textarea{
+            height: 200px;
+        }
+        .form-btn{
+            height:60px;
+        }
+        .form-btn button{
+            box-sizing: border-box;
+            width:46%;
+            height:100%;
+            margin: 0% 2% 0% 2%;
+            display:block;
+            float: left;
+            text-align: center;
+            font-size:24px;
+            text-decoration: none;
+            line-height:50px;
+            font-weight:500;
+        }
+        
+        #btn-s{
+            background: rgb(0, 153, 102);
+            opacity:0.85;
+        }
+        #btn-s:hover{
+            background: rgb(0, 153, 102);
+            opacity:1;
+        }
+        
+        /* 해결문의내역 제목내역 css*/
+        .solved-title{
+        	color:black;
+        }
+        .solved-title:hover{
+        	cursor:pointer;
+        }
+
+        .current-page{
+            background-color:rgb(0, 102, 51);
+            color: white;
+        }
+        .count-area{
+            color: orange;
+        }
+</style>
 </html>

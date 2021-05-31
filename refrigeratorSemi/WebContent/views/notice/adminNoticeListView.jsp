@@ -20,11 +20,15 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자_공지사항 목록</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+    
+    	#wrap{/* 사이드 바 포함 div*/
+    		margin:auto;
+    		width:1200px;
+    	}
+    	
+    	#for-height{height:750px;}
+    
         .outer{
             width: 900px;
             margin:40px 40px;
@@ -98,9 +102,133 @@
             color: white;
         }
 
+    </style>
+</head>
+<body>
+
+<%@ include file="../common/admin/adminTopNavView.jsp" %>
+
+<div id="wrap">
+	
+	
+	<%@ include file="../common/admin/adminSideBarView.jsp" %>
+
+ 	<div class="outer">
+
+	    <div class="path-area">
+	        홈 > 공지사항 > <span class="current-menu">공지사항</span> 
+	    </div>
+	    
+	    <br>
+	    <div class="head-area">
+	        <h2>공지사항</h2>
+	    </div>
+	    <br>
+	    
+	
+	        <div id="notice-form">
+	            <div id="btn-area">
+	                <a href="<%=contextPath%>/adminDetail.no?title=등록&noticeNo=0" id="enroll-btn" class="btn btn-secondary btn-sm">등록</a>
+	            </div>
+	            
+	            <!-- The Modal -->
+	            <div class="modal fade" id="delete">
+	                <div class="modal-dialog">
+	                    <div class="modal-content">
+	            
+	                        <!-- Modal Header -->
+	                        <div align="right">
+	                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                        </div>
+	                        
+	                        <!-- Modal body -->
+	                        <div class="modal-body" style="margin:auto">
+	                            <p><span style="color:red"><span class="delete-no"></span>공지사항을 삭제</span>하시겠습니까?</p>
+	                        </div>
+	                        
+	                        <div class="modal-btn">
+	                            <a href="" class="btn btn-secondary btn-sm">취소</a>
+	                            <a href="" class="btn btn-danger btn-sm" id="modalDelete-btn">삭제</a>
+	                        </div>
+	  
+	                    </div>                  
+	                </div>
+	            </div>
+	            
+	            <table class="notice-list-form" border="1" width="100%">
+	                <thead>
+	                    <tr>
+	                        <th width="50">번호</th>
+	                        <th width="350">제목</th>
+	                        <th width="50"></th>
+	                        <th width="60">작성자</th>
+	                        <th width="60">작성일</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                <%if(list.isEmpty()) {%>
+	                	<tr>
+	                		<td colspan="5">요청하신 페이지 결과가 없습니다.</td>
+	                	</tr>
+	                <%} else {%>
+	                	<%for(Notice n : list) { %>
+		                    <tr>
+		                        <td><%=n.getNoticeNo()%></td>
+		                        <td><a href="<%=contextPath%>/adminDetail.no?title=조회&noticeNo=<%=n.getNoticeNo()%>" id="notice-title"><%=n.getNoticeTitle()%></a></td>
+		                        <th>
+		                        	<a href="<%=contextPath%>/adminDetail.no?title=수정&noticeNo=<%=n.getNoticeNo()%>" id="update-btn" class="btn btn-secondary btn-sm">U</a>
+		                        	<a href="" id="delete-btn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteNo(<%=n.getNoticeNo()%>);">D</a>
+		                        </th>
+		                        <td><%=n.getUserNo()%></td>
+		                        <td><%=n.getModifyDate()%></td>
+		                    </tr>
+	                    <%} %>
+	                <%} %>
+	                </tbody>
+	            </table>
+	    
+	            <br>
+	
+	        </div>
+	      
+	        <br>
+	         <br>
+	         <div align="center" class="paging-area">
+	        	<%if(currentPage != 1) {%>
+	            <button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%=currentPage-1%>';">&lt;</button>
+	            <%} %>
+	            <%for(int p=startPage; p<=endPage; p++) {%>
+	            	<%if(p != currentPage) { %>
+	            		<button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%= p%>';"><%=p %></button>
+	            	<%}else { %>
+	            		<button class="cp" disabled><%=p%></button>
+	            	<%} %>
+	            <%}  %>
+	            <%if(currentPage != maxPage) { %>
+	            <button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%=currentPage+1%>';">&gt;</button>
+	            <%} %>
+	        </div>
+	        
+	        <br>
+	        <br>
+      
+    </div>
+</div>
+	
+	<script>
+		function deleteNo(no){
+			var href = "<%=contextPath%>/delete.no?nno=" + no;
+			console.log(href);
+			$(".delete-no").text(no + "번 ");
+			$("#modalDelete-btn").prop("href", href);
+		}
+	</script>
+</body>
+<style>
+	
         /*--모달 영역 */
         .modal-content{ /*모달창 위치*/
-            margin:100px 200px;
+            margin:350px 20px;
         }
         .modal-btn{
             text-align:center;
@@ -121,122 +249,5 @@
             border: 1px solid black;
             font-size:40px;
         }
-
-    </style>
-</head>
-<body>
-
-	<%@ include file="../common/admin/adminTopNavView.jsp" %>
-	<%@ include file="../common/admin/adminSideBarView.jsp" %>
-
- <div class="outer">
-
-    <div class="path-area">
-        홈 > 공지사항 > <span class="current-menu">공지사항</span> 
-    </div>
-    
-    <br>
-    <div class="head-area">
-        <h2>공지사항</h2>
-    </div>
-    <br>
-    
-
-        <div id="notice-form">
-            <div id="btn-area">
-                <a href="<%=contextPath%>/adminDetail.no?title=등록&noticeNo=0" id="enroll-btn" class="btn btn-secondary btn-sm">등록</a>
-            </div>
-            
-            <!-- The Modal -->
-            <div class="modal fade" id="delete">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-            
-                        <!-- Modal Header -->
-                        <div align="right">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        
-                        <!-- Modal body -->
-                        <div class="modal-body" style="margin:auto">
-                            <p><span style="color:red"><span class="delete-no"></span>공지사항을 삭제</span>하시겠습니까?</p>
-                        </div>
-                        
-                        <div class="modal-btn">
-                            <a href="" class="btn btn-secondary btn-sm">취소</a>
-                            <a href="" class="btn btn-danger btn-sm" id="modalDelete-btn">삭제</a>
-                        </div>
-  
-                    </div>                  
-                </div>
-            </div>
-            
-            <table class="notice-list-form" border="1" width="100%">
-                <thead>
-                    <tr>
-                        <th width="50">번호</th>
-                        <th width="350">제목</th>
-                        <th width="50"></th>
-                        <th width="60">작성자</th>
-                        <th width="60">작성일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <%if(list.isEmpty()) {%>
-                	<tr>
-                		<td colspan="5">요청하신 페이지 결과가 없습니다.</td>
-                	</tr>
-                <%} else {%>
-                	<%for(Notice n : list) { %>
-	                    <tr>
-	                        <td><%=n.getNoticeNo()%></td>
-	                        <td><a href="<%=contextPath%>/adminDetail.no?title=조회&noticeNo=<%=n.getNoticeNo()%>" id="notice-title"><%=n.getNoticeTitle()%></a></td>
-	                        <th>
-	                        	<a href="<%=contextPath%>/adminDetail.no?title=수정&noticeNo=<%=n.getNoticeNo()%>" id="update-btn" class="btn btn-secondary btn-sm">U</a>
-	                        	<a href="" id="delete-btn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteNo(<%=n.getNoticeNo()%>);">D</a>
-	                        </th>
-	                        <td><%=n.getUserNo()%></td>
-	                        <td><%=n.getModifyDate()%></td>
-	                    </tr>
-                    <%} %>
-                <%} %>
-                </tbody>
-            </table>
-    
-            <br>
-
-        </div>
-      
-        <br>
-         <br>
-         <div align="center" class="paging-area">
-        	<%if(currentPage != 1) {%>
-            <button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%=currentPage-1%>';">&lt;</button>
-            <%} %>
-            <%for(int p=startPage; p<=endPage; p++) {%>
-            	<%if(p != currentPage) { %>
-            		<button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%= p%>';"><%=p %></button>
-            	<%}else { %>
-            		<button class="cp" disabled><%=p%></button>
-            	<%} %>
-            <%}  %>
-            <%if(currentPage != maxPage) { %>
-            <button onclick="location.href='<%=contextPath%>/adList.no?currentPage=<%=currentPage+1%>';">&gt;</button>
-            <%} %>
-        </div>
-        
-        <br>
-        <br>
-      
-    </div>
-	
-	<script>
-		function deleteNo(no){
-			var href = "<%=contextPath%>/delete.no?nno=" + no;
-			console.log(href);
-			$(".delete-no").text(no + "번 ");
-			$("#modalDelete-btn").prop("href", href);
-		}
-	</script>
-</body>
+</style>
 </html>
