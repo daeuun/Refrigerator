@@ -63,6 +63,7 @@
     .navigation-secondary_content{
         background: #fff;
         display: flex;
+        justify-content: center; 
     }
     
     .navigation-secondary_menu {
