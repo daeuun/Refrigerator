@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
     
+
+
+								<!-- @author seong 5/30 -->
+
     
-    							<!-- @author seong 5/30 -->
-    							
-    							
 <%@ 
 	page import = "com.refrigerator.member.model.vo.Member
 				, com.refrigerator.reply.model.vo.*
@@ -13,13 +14,10 @@
 	
 %>
 
-
 <% 	
 
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
 	ArrayList<AdmReply>list = (ArrayList<AdmReply>)request.getAttribute("list");
-	
-	String alertMsg = (String)session.getAttribute("alertMsg"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -40,17 +38,17 @@
 <!--메뉴바가 들어갈 영역 -->
 
 <!-- 검색된 회원이 조회될 영역 
-    
+ 
 
 -->
 
 
+
 <style>
-    .outer{
+    .total_outer{
         color: black;
         width: 1200px;
         margin: auto;
-        margin-top: 50px;
     }
 
 
@@ -93,24 +91,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-	<%@ include file="../common/admin/adminTopNavView.jsp" %>
-	<%@ include file = "../common/admin/adminSideBarView.jsp" %>
-	
-	
-		<script>
-	
-		// menubar.jsp로 가져갈 구문
-		var msg = "<%= alertMsg %>";
-			
-		if(msg != "null"){ 
-			alert(msg);
-			
-			<% session.removeAttribute("alertMsg");%>
-		}
-	
-	</script>
 
-	<div class="outer">
+	
+
+	<div class="total_outer">
+
+        <%@ include file="../common/admin/adminTopNavView.jsp" %>
+        
+		<div>
+			<%@ include file="../common/admin/adminSideBarView.jsp" %>
+		
 
         <div class="select-list"  align="right" style="width: 350px;">
             <a href="">홈</a> >
@@ -148,14 +138,14 @@
                     
                             <!-- Modal Header -->
                             <div class="modal-header">
-                            <h4 class="modal-title">요리후기 삭제</h4>
+                            <h4 class="modal-title">댓글 삭제</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         
                             <!-- Modal body -->
                             <div class="modal-body">
-					                            요리후기 삭제는 복구가 불가능합니다.   <br>
-					                            요리후기를 삭제하시겠습니까?
+					                            댓글 삭제는 복구가 불가능합니다.   <br>
+					                            댓글을 삭제하시겠습니까?
 					                            </div>
                             
                         
@@ -223,7 +213,10 @@
 
             </div>
 
-        </form>
+        
+       </form>
+        
+       </div>
         
     </div>
     
@@ -249,7 +242,7 @@
 			<%} %>
 			
 			
-        </div>
+        	</div>
         
     
     

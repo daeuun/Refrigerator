@@ -12,8 +12,8 @@
 <% 	
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
 	ArrayList<AdmReview>list = (ArrayList<AdmReview>)request.getAttribute("list");
-	String alertMsg = (String)session.getAttribute("alertMsg"); 
-	
+
+
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -35,14 +35,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
-    .outer{
+    .total_outer{
         color: black;
         width: 1200px;
-        margin: auto;
-        margin-top: 50px;
+     	margin:auto;
     }
-
-    .select-list>a{
+	
+	
+    .path-area>a{
         text-decoration: none;
         color: black;
     }
@@ -76,41 +76,28 @@
 </head>
 <body>
 
-<%@ include file="../common/admin/adminTopNavView.jsp" %>
-<%@ include file = "../common/admin/adminSideBarView.jsp" %>
-
-	<script>
-	
-		// menubar.jsp로 가져갈 구문
-		var msg = "<%= alertMsg %>";
-			
-		if(msg != "null"){ 
-			alert(msg);
-			
-			<% session.removeAttribute("alertMsg");%>
-		}
-	
-	</script>
 	
 
-<div class="outer">
+<div class="total_outer" style="margin:auto">
 
-        <div class="select-list"  align="right" style="width: 350px;" >
+	<%@ include file="../common/admin/adminTopNavView.jsp" %>
+	
+	<div>
+		
+			<%@ include file="../common/admin/adminSideBarView.jsp" %>
+		
+
+        <div class="path-area" >
             <a href="">홈</a> >
             <a href="">게시판 관리</a> >
             <a href="">요리 후기</a>
         </div>
+        
+        
+        
         <br>
+		
 
-        <div class="search-container" align="right"style="width:1000px">
-
-            <form action="" >
-                <span id="" >회원 아이디</span>
-                <input type="text" placeholder="아이디" name="">
-                <button type="submit" class="btn btn-sm">조회</button>
-            </form>
-
-        </div>
 
         <br><br>
 	
@@ -119,7 +106,18 @@
 
             <div class="btn" align="right" style="width: 440px">
 
+		   		<div class="search-container" align="right" style="width:900px">
+
+		            <form action="" >
+		                <span id="" >회원 아이디</span>
+		                <input type="text" placeholder="아이디" name="">
+		                <button type="submit" class="btn btn-sm">조회</button>
+		            </form>
+
+ 				  </div>
                 <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#review-Delete-Modal" style="margin-left: -160px;" >삭제</a>
+                
+                     
                 <br>
 
                   <!-- The Modal -->
@@ -202,13 +200,14 @@
 
             </div>
 
-        </form>
+        	</form>
         
-
+        </div>
+        
     </div>
-    
-    	<!-- 페이징바 -->
- 		<div class="paging-area" align="center">
+  
+    		<!-- 페이징바 -->
+ 			<div class="paging-area" align="center">
 		
 			<% if(currentPage != 1) { %>						
 		          <button onclick="location.href='<%=contextPath%>/reviewlist.admin?currentPage=<%=currentPage-1%>';">&lt;</button>
@@ -229,8 +228,7 @@
 			<%} %>
 			
 			
-	      </div>
-
+			</div>
 
 
 
