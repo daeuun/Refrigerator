@@ -118,7 +118,7 @@
 
                 <div class="profImg-area">
                     
-                    <img src="<%=contextPath%>/<%=m.getProfileImg()%>" id="profile-img" width="250" height="250">
+                    <img src="<%=m.getProfileImg()%>" id="profile-img" width="250" height="250">
 
                     <input type="file" id="img-load" name="file1" onchange="loadImg(this, 1)" required>
                 </div>

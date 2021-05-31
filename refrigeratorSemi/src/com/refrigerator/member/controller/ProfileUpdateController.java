@@ -42,9 +42,8 @@ public class ProfileUpdateController extends HttpServlet {
 			
 			int maxSize = 10*1024*1024;
 			
+			// 업로드 된 파일 저장
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/profile_upfiles/");
-			
-			System.out.println(savePath);
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
@@ -55,13 +54,11 @@ public class ProfileUpdateController extends HttpServlet {
 			
 			if(multiRequest.getOriginalFileName("file1") != null) {
 				
-				multiRequest.getOriginalFileName("file1");
-				profileImg = "resources/profile_upfiles_upfiles/" + multiRequest.getFilesystemName("file1");
-				
+				// contextPath + /경로 +  수정된 파일명 
+				profileImg = request.getContextPath() + "/resources/profile_upfiles/" + multiRequest.getFilesystemName("file1");
 				
 			}
 			
-			System.out.println(profileImg);
 			
 			Member m = new Member();
 			m.setUserNo(userNo);
