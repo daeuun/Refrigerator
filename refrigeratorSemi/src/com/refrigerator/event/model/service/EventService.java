@@ -1,0 +1,84 @@
+package com.refrigerator.event.model.service;
+
+import static com.refrigerator.common.JDBCTemplate.*;
+import static com.refrigerator.common.JDBCTemplate.getConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+
+import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.event.model.dao.EventDao;
+import com.refrigerator.event.model.vo.AdmEvent;
+
+public class EventService {
+
+	
+	/***
+	 * 전체 이벤트 갯수 조회
+	 * @author seong
+	 * @date 5/31
+	 * @return
+	 */
+	
+	public int selectEventListCount() {
+		
+		Connection conn = getConnection();
+		int listCount = new EventDao().selectEventListCount(conn);
+		
+		
+		close(conn);
+		
+		return listCount;
+		
+	}
+	
+	
+	/**
+	 * 전체 이벤트 목록 조회
+	 * @author seong
+	 * @date 5/31
+	 */
+	
+	public ArrayList<AdmEvent> adminSelectEventList(PageInfo pi){
+		
+		Connection conn = getConnection();
+
+		ArrayList<AdmEvent>list = new EventDao().adminSelectEventList(conn,pi);
+
+		close(conn);
+		
+		return list;
+		
+		
+		
+	}
+	
+	/**
+	 * 관리자단에서 이벤트 등록
+	 * @author seong
+	 * @date 5/31
+	 */
+	
+	public int adminInsertEvent(AdmEvent adEvent) {
+		
+		Connection conn = getConnection();
+		int result = new EventDao().adminInsertEvent(conn,adEvent);
+		
+		if(result>0) {
+			
+			commit(conn);
+			
+		} else {
+			
+			rollback(conn);
+			
+		}
+		
+		
+		return result;
+		
+	}
+	
+	
+}

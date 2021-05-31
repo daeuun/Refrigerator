@@ -106,7 +106,7 @@
             <div id="side-sub" class="collapse3">
                 <a href="<%=contextPath%>/reviewlist.admin?currentPage=1">요리 후기</a><br>
                 <a href="<%=contextPath%>/rlist.admin?currentPage=1">댓글</a><br>
-                <a href="">이벤트</a><br>
+                <a href="<%=contextPath%>/selectEvent.admin?currentPage=1">이벤트</a><br>
             </div>
         </div>
 
