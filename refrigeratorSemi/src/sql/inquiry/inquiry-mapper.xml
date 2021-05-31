@@ -111,7 +111,18 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-
+	<entry key="selectInquiry">
+		SELECT 
+               M.USER_ID
+             , INQRY_TITLE
+             , INQRY_CONTENT
+             , I.ENROLL_DATE 
+             , I.MODIFY_DATE 
+             , INQRY_ANSWER
+		  FROM INQUIRY I
+		  JOIN MEMBER M USING(USER_NO)
+		 WHERE INQRY_NO = ?
+	</entry>
 
 
 

@@ -1,6 +1,9 @@
 package com.refrigerator.inquiry.model.service;
 
-import static com.refrigerator.common.JDBCTemplate.*;
+import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.commit;
+import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,8 +11,6 @@ import java.util.ArrayList;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.inquiry.model.dao.InquiryDao;
 import com.refrigerator.inquiry.model.vo.Inquiry;
-import com.refrigerator.notice.model.dao.NoticeDao;
-import com.refrigerator.notice.model.vo.Notice;
 
 /**
  * @author Heerak 05.27
@@ -127,5 +128,15 @@ public class InquiryService {
 		return list;
 	}
 	
+	/**
+	 * 1:1문의 상세 조회
+	 * @author leeyeji
+	 */
+	public Inquiry selectNotice(int inqryNo) {
+		Connection conn = getConnection();
+		Inquiry i = new InquiryDao().selectInquiry(conn, inqryNo);
+		close(conn);
+		return i;
+	}
 	
 }

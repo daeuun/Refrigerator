@@ -51,19 +51,19 @@
         background: rgba(211, 211, 211, 0.5);
         color: rgb(0, 120, 51);
     }
-    .contact-list-area>thead>tr{
+    .inquiry-list-area>thead>tr{
         border-bottom: 2px solid rgb(0, 120, 51);
         border-top: 2px solid rgb(0, 120, 51);
         font-weight: bold;
         text-align: center;
         height: 50px;
     }
-    .contact-list-area>tbody>tr:hover{
+    .inquiry-list-area>tbody>tr:hover{
         color: rgb(0, 120, 51);
         font-weight: bold;
         cursor: pointer;
     }
-    .contact-list-area>tbody>tr{
+    .inquiry-list-area>tbody>tr{
         height: 45px;
         text-align: center;
         border-bottom: 1px solid darkgray;
@@ -101,7 +101,7 @@
         <!-- 게시판 틀-->
 
         <div class="contact-list">
-            <table class="contact-list-area" align="center">
+            <table class="inquiry-list-area" align="center">
 
                 <thead>
                     <tr id="headline">
@@ -129,6 +129,15 @@
                 </tbody>
             </table>
         </div>
+        <script>
+        	$(function(){
+        		$(".inquiry-list-area>tbody>tr").click(function(){
+        			var ino = $(this).children().eq(0).text();
+        			//console.log(nno);
+        			location.href = '<%=contextPath%>/detail.inq?ino=' + ino;
+        		})
+        	})
+        </script>
         <br>
 	    <!-- 페이징 -->
 	    <div align="center" class="paging-area">

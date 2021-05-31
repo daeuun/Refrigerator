@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
-import com.refrigerator.faq.model.vo.Faq;
 import com.refrigerator.inquiry.model.vo.Inquiry;
 
 /**
@@ -346,6 +345,39 @@ public class InquiryDao {
 		return list;
 	}
 	
-	
+	/**
+	 * 1:1문의 상세 조회
+	 * @author leeyeji
+	 */
+	public Inquiry selectInquiry(Connection conn, int inqryNo) {
+		// select => ResultSet 한 행
+		Inquiry i = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inqryNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				i = new Inquiry(rset.getString("user_id"),
+								rset.getString("inqry_title"),
+								rset.getString("inqry_content"),
+								rset.getDate("enroll_date"),
+								rset.getDate("modify_date"),
+								rset.getString("inqry_answer"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return i;
+	}
 	
 }

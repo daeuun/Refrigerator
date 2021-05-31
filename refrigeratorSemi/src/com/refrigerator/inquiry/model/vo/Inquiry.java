@@ -60,6 +60,17 @@ public class Inquiry {
 		this.modifyDate = modifyDate;
 	}
 
+	public Inquiry(String inqryWriter, String inqryTitle, String inqryContent, Date enrollDate, Date modifyDate,
+			String inqryAnswer) {
+		super();
+		this.inqryWriter = inqryWriter;
+		this.inqryTitle = inqryTitle;
+		this.inqryContent = inqryContent;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.inqryAnswer = inqryAnswer;
+	}
+
 	public int getInqryNo() {
 		return inqryNo;
 	}
