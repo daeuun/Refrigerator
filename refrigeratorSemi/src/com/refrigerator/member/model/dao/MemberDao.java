@@ -191,7 +191,7 @@ public class MemberDao {
 	 * @author leeyeji
 	 * 특정 회원 상세 조회
 	 */
-	public Member selectMember(Connection conn, String userNo) {
+	public Member selectMember(Connection conn, int userNo) {
 		// select => ResultSet 한 행
 		Member m = null;
 		PreparedStatement pstmt = null;
@@ -200,7 +200,7 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(userNo));
+			pstmt.setInt(1, userNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -221,6 +221,7 @@ public class MemberDao {
 		}
 		return m;
 	}
+	
 	/**
 	 * @author leeyeji
 	 * 회원 수정
@@ -243,6 +244,29 @@ public class MemberDao {
 			
 			result = pstmt.executeUpdate();
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 회원 삭제
+	 */
+	public int deleteMember(Connection conn, int userNo) {
+		// udpate => int
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

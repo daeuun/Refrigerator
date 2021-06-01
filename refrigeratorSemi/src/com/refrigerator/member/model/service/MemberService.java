@@ -81,7 +81,7 @@ public class MemberService {
 	 * @author leeyeji
 	 * 특정 회원 상세 조회
 	 */
-	public Member selectMember(String userNo) {
+	public Member selectMember(int userNo) {
 		Connection conn = getConnection();
 		Member m = new MemberDao().selectMember(conn, userNo);
 		close(conn);
@@ -95,6 +95,22 @@ public class MemberService {
 	public int updateMember(Member m) {
 		Connection conn = getConnection();
 		int result = new MemberDao().updateMember(conn, m);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 회원 삭제
+	 */
+	public int deleteMember(int userNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().deleteMember(conn, userNo);
 		if(result > 0) {
 			commit(conn);
 		}else{

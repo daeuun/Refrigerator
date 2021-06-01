@@ -102,17 +102,17 @@
     
                 <br><br>
     
-                 <form action="" method="GET">
+                 
     
                     <div class="btn" align="right" style="width: 350px;">
     
                         <div class="modi-delete" align="left" width="1000px">
                             <!-- <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal">회원수정</a> -->
-                            <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#member-delete-Modal">회원삭제</a>
+                            <!-- <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#member-delete-Modal">회원삭제</a> -->
                         </div>
     
                         <!-- 회원 수정 modal -->
-                        <form action="<%=contextPath %>/adUpdate.me" method="get">
+                        <form action="<%=contextPath %>/adUpdate.me" method="post">
 	                        <div class="modal" id="member-modify-Modal">
 	                            <div class="modal-dialog modal-dialog-centered ">
 	                                <div class="modal-content">
@@ -129,7 +129,7 @@
 	                                            <table>
 	                                                <tr>
 	                                                    <td>
-	                                                    	<input type="hidden" name="userNo" id="userNo-id">
+	                                                    	<input type="hidden" name="userNo" id="userNo-modify">
 	                                                        <div class="modal-event-title">닉네임
 	                                                        </div>
 	                                                    </td>
@@ -204,17 +204,18 @@
 	                         -->
                         <form action="<%=contextPath %>/adDelete.me" method="post">
 	                        <div class="modal" id="member-delete-Modal">
-	                        	<input type="hidden" name="userNo" value="">
+	                        	
 	                            <div class="modal-dialog modal-dialog-centered">
 	                                <div class="modal-content">
 	    
 	                                    <!-- Modal body -->
 	                                    <div class="modal-body">
-	                                        <Strong>홍길동</Strong> 회원을 삭제하시겠습니까?
+	                                        회원을 삭제하시겠습니까?
 	                                    </div>
 	    
 	                                    <!-- Modal footer -->
 	                                    <div class="modal-footer" align="center">
+	                                    	<input type="hidden" name="userNo" id="userNo-delete">
 	                                        <button type="button" class="btn btn-secondary btn-sm"
 	                                            data-dismiss="modal">취소</button>
 	                                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
@@ -265,7 +266,8 @@
 	                                    <%} %>
 	                                    <td><%=m.getStatus() %></td>
 	                                    <td>
-	                                    	<a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal" onclick="modifyEvent();">수정</a>
+	                                    	<a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal" onclick="modifyMember();">수정</a>
+	                                    	<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#member-delete-Modal" onclick="deleteMember();">삭제</a>
 	                                    </td>
 	                                </tr>
     							<%} %>
@@ -279,8 +281,12 @@
                    
 					<script>
 	                   		// 조회되는 한 행의 회원 번호 넘기기..
-	                   		function modifyEvent(){
-	                   			$("#userNo-id").val($(event.target).parent().siblings("input[type=hidden]").val());
+	                   		function modifyMember(){
+	                   			$("#userNo-modify").val($(event.target).parent().siblings("input[type=hidden]").val());
+	                   		}
+	                   		
+	                   		function deleteMember(){
+	                   			$("#userNo-delete").val($(event.target).parent().);
 	                   		}
 	                   		//$(".checked-memberList>tr").click(function(){
 	                   		//	var mno = $(this).children("input").text();
@@ -299,7 +305,7 @@
 	                   		
 					</script>
     
-                </form> 
+               
                	<br>
                	
 	            <!-- 페이징바 영역 -->

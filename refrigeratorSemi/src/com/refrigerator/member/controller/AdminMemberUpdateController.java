@@ -54,13 +54,13 @@ public class AdminMemberUpdateController extends HttpServlet {
 		
 		if(result>0) {
             
-            request.getSession().setAttribute("alertMsg", "이벤트 수정 성공! ");
+            request.getSession().setAttribute("alertMsg", "성공적으로 수정했습니다.");
             response.sendRedirect(request.getContextPath()+"/adList.me?currentPage=1");
             
          }else {
 			
-			//request.setAttribute("errorMsg", "회원 수정에 실패했습니다."); 아악
-			//request.getRequestDispatcher("views/common/user/errerPage.jsp").forward(request, response);
+			request.setAttribute("errorMsg", "회원 수정에 실패했습니다."); 
+			request.getRequestDispatcher("views/common/user/errerPage.jsp").forward(request, response);
 		}
 		
 	}
