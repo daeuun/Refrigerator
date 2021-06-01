@@ -35,7 +35,6 @@
         color: black;
         width: 1200px;
         margin: auto;
-        margin-top: 50px;
     }
 
     .select-list>a{
@@ -90,7 +89,7 @@
         </div>  
         
         
-        <div class="select-list"  align="right" style="width: 350px;" >
+        <div class="select-list"  align="right" style="width: 450px;" >
             <a href="">홈</a> >
             <a href="">게시판 관리</a> >
             <a href="">이벤트</a>
@@ -104,11 +103,10 @@
       
       
 
-            <div class="btn" align="right" style="width: 400px;">
+            <div class="btn" align="right" style="width: 300px;">
 
                 <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#event-enroll-Modal">등록</a>
-                <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#event-status-Modal">게시</a>
-                <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#event-delete-Modal">삭제</a>
+                
             </div>  
 
             <!--이벤트 목록 테이블 영역-->
@@ -116,13 +114,12 @@
 
                     <thead class="thead">
                         <tr align="center" >
-                            <th width="50">확인</th>
                             <th>분류</th> 
                             <th colspan="2" width="300">이벤트 제목</th>
                             <th width="150">이벤트 시작일</th>
                             <th width="150">이벤트 종료일</th>
-                            <th width="50">상태</th>    
-                            <th>이벤트 이미지 수정</th>
+                            <th width="50">상태</th>
+                            <th width="50" colspan="2">수정/삭제</th>  
                         </tr>
 
                     </thead>
@@ -138,26 +135,87 @@
                                 <% for(AdmEvent a : list) { %>
                             
                             
-                                    <tr align="center">
-                                        <td><input type="checkbox"></td>
+                                    <tr align="center" id="eventList">
+                                    
                                         <td><%=a.getEventCategory() %></td>
                                         <td colspan="2"><%=a.getEventTitle()%></td>
                                         <td><%=a.getStartDate() %></td>
                                         <td><%=a.getEndDate() %></td>
                                         <td><%=a.getStatus() %></td>
-                                        <td>
-                                            <a class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#event-modify-Modal">
-                                                수정하기</a>
-                                        </td>
-            
+                                        <input type="hidden" value=<%=a.getEventNo()%>>
+                                        <td><a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#event-modify-Modal" onclick="modifyEvent();">수정</a></td>
+                                   		<td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#event-delete-Modal" onclick="deleteEvent();">삭제</a></td>
                                     </tr>
 
                                 <%} %>
-					    <%} %>
-                 </tbody>
+
+					        <%} %>
+                     </tbody>
                     
+                    				
+				<!-- 재원님 참고자료 -->
+
 
             </table>
+            
+            		
+	        <script> 
+
+                    /*수정하기 버튼 클릭시 이벤트 번호 전달되는 스크립트*/
+                    function modifyEvent(){
+                        
+                        //var checked = $('input[type="checkbox"][name="testSE"]:checked');
+                        // console.log($(event.target).parent().siblings("input[type=hidden]").val());
+                        
+                        $("#eventNo-id").val($(event.target).parent().siblings("input[type=hidden]").val());
+                        
+
+                    }
+                    
+                    /*삭제하기 버튼 클릭시 이벤트 번호 전달되는 스크립트*/
+                    function deleteEvent(){
+                    
+                        $("#deleteEventNo").val($(event.target).parent().siblings("input[type=hidden]").val());
+
+                    }
+              
+            </script>
+            
+                   <!--이벤트 삭제 영역-->
+                    <form action="<%=contextPath%>/deleteEvent.admin" id="delete-form" >
+                    
+	                     <!-- The Modal -->
+	                        <div class="modal" id="event-delete-Modal">
+	                        <div class="modal-dialog modal-dialog-centered">
+	                        <div class="modal-content">
+	
+	                            <div class="modal-header">
+	                                <h4 class="modal-title"><b>이벤트 삭제</b></h4>
+	                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+	                            </div>
+	                    
+	                            <!-- Modal body -->
+	                            <input type="hidden" name="deleteEventNo" id="deleteEventNo">
+	                            <div class="modal-body">
+							                            삭제 후 복구가 불가능합니다. <br>
+							                            이벤트를 삭제하시겠습니까?
+	                            </div>
+	                    
+	                            <!-- Modal footer -->
+	                            <div class="modal-footer">
+	                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
+	                                <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+	                            </div>
+	                    
+	                        </div>
+	                        </div>
+	                        </div>
+                    
+					</form>
+            
+            
+            
       
                     <!--이벤트 등록 영역-->
                 	<form action="<%=contextPath%>/insertEvent.admin" method="post" id="enroll-form" enctype="multipart/form-data">
@@ -185,7 +243,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="text" name="eventTitle" placeholder="제목을 입력해주세요" required>
+                                                <input type="text" name="eventTitle" placeholder="제목을 입력해주세요" >
                                             </td>
                                         </tr>
 
@@ -194,7 +252,7 @@
                                                 <div>분류</div>
                                             </td>
                                             <td>
-                                                <select name="eventCategory" required>
+                                                <select name="eventCategory" >
                                                     <option value="이벤트">이벤트</option>
                                                     <option value="공모전">공모전</option>
                                                 </select>
@@ -203,18 +261,18 @@
                                         
                                         <tr>
                                             <td><div>이벤트 시작일</div></td>
-                                            <td><input type="date" name="startDate" required></td>
+                                            <td><input type="date" name="startDate"></td>
                                         </tr>
                                         
                                         <tr>
                                             <td> <div>이벤트 종료일</div></td>
-                                            <td><input type="date" name="endDate" required></td>
+                                            <td><input type="date" name="endDate"></td>
                                         </tr>
 
                                         <tr>
                                             <td><div>첨부파일</div></td>
                                             <td>
-                                                <input type="file" name="eventUpfile" required>
+                                                <input type="file" name="eventUpfile">
                                             </td> 
                                         </tr>
 
@@ -235,39 +293,12 @@
                         </div>
                     <form >
 
-                    <!--이벤트 삭제 영역-->
-                    
-                     <!-- The Modal -->
-                        <div class="modal" id="event-delete-Modal">
-                        <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <h4 class="modal-title"><b>이벤트 삭제</b></h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                    
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                            삭제 후 복구가 불가능합니다. <br>
-                            이벤트를 삭제하시겠습니까?
-                            </div>
-                    
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
-                                <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                            </div>
-                    
-                        </div>
-                        </div>
-                        </div>
-                    
-
 
 
                     <!--이벤트 수정 영역-->
-                    <form>
+                   <form action="<%=contextPath%>/updateEvent.admin" method="post" id="enroll-form" enctype="multipart/form-data">
+                   
+                   
                         <!-- The Modal -->
                         <div class="modal" id="event-modify-Modal" >
                         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -284,14 +315,15 @@
                                 <div class="modal-body-list">
                                     
                                     <table>
-
+											
                                         <tr>
                                             <td>
+                                            	<input type="hidden" name="eventNo" id="eventNo-id">
                                                 <div class="modal-event-title">이벤트 제목
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="text" name="" id="" placeholder="제목을 입력해주세요">
+                                                <input type="text" name="upDateEventTitle" id="" placeholder="제목을 입력해주세요">
                                             </td>
                                         </tr>
 
@@ -302,27 +334,41 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name="" id="" value="">
+                                                <select name="upDateEventCategory" >
                                                     <option value="이벤트">이벤트</option>
                                                     <option value="공모전">공모전</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         
+                                         <tr>
+                                            <td>
+                                                <div>
+                                                     게시여부
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select name="status" id="" value="">
+                                                    <option value="Y">Y</option>
+                                                    <option value="N">N</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        
                                         <tr>
                                             <td><div>이벤트 시작일</div></td>
-                                            <td><input type="date"></td>
+                                            <td><input type="date" name="UpdateStartDate"></td>
                                         </tr>
                                         
                                         <tr>
                                             <td> <div>이벤트 종료일</div></td>
-                                            <td><input type="date"></td>
+                                            <td><input type="date" name="UpdateEndDate"></td>
                                         </tr>
 
                                         <tr>
                                             <td><div>첨부파일</div></td>
                                             <td>
-                                                <input type="file">
+                                                <input type="file" name="UpdateEventUpfile">
                                             </td> 
                                         </tr>
 
@@ -341,43 +387,38 @@
                         </div>
                         </div>
                         </div>
+
                 </form>
 
+                <br>
+                <div class="paging-area" align="center">
 
+                    <% if(currentPage != 1) { %>
+                    <button onclick="location.href='<%=contextPath%>/selectEvent.admin?currentPage=<%=currentPage-1%>';">&lt;</button>
+                    <% } %>
+                    
+                    <% for(int p=startPage; p<=endPage;p++) {%>
                 
-            </div>
+                        <% if(p != currentPage) {%>
+                        <button onclick="location.href='<%=contextPath%>/selectEvent.admin?currentPage=<%=p%>';"><%=p%></button>
+                        <%} else { %>
+                        <button disabled><%= p %></button>
+                        <%} %>
+                    
+                    <%} %>
+                    
+                    <%if(currentPage != maxPage) {%>
+                    <button onclick="location.href='<%=contextPath%>/selectEvent.admin?currentPage=<%=currentPage+1%>';">&gt;</button>
+                    <%} %>
+                    
+                    
+                </div>
+            
+            
+                
+    </div>
             <br>
 
-            
-
-       
-
-        
-    </div>
-
-
-    <div class="paging-area" align="center">
-
-        <% if(currentPage != 1) { %>
-        <button onclick="location.href='<%=contextPath%>/selectEvent.admin?currentPage=<%=currentPage-1%>';">&lt;</button>
-        <% } %>
-        
-        <% for(int p=startPage; p<=endPage;p++) {%>
-    
-            <% if(p != currentPage) {%>
-            <button onclick="location.href='<%=contextPath%>/selectEvent.admin?currentPage=<%=p%>';"><%=p%></button>
-            <%} else { %>
-            <button disabled><%= p %></button>
-            <%} %>
-        
-        <%} %>
-        
-        <%if(currentPage != maxPage) {%>
-        <button onclick="location.href='<%=contextPath%>/selectEvent.admin?currentPage=<%=currentPage+1%>';">&gt;</button>
-        <%} %>
-        
-        
-    </div>
 
 
     

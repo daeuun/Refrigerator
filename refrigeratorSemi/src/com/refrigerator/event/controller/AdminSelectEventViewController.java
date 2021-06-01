@@ -13,6 +13,15 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.event.model.service.EventService;
 import com.refrigerator.event.model.vo.AdmEvent;
 
+
+/**
+ * 이벤트 전체 조회
+ * @author seong
+ * @date 6/1
+ */
+
+
+
 /**
  * Servlet implementation class SelectEventViewController
  */

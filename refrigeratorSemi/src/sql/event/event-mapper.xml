@@ -64,6 +64,38 @@ INSERT INTO EVENT
 </entry>
 
 
+<!-- 관리자단에서 이벤트 수정 -->
+<!--  @author seong 6/1 -->
+
+<entry key="adminUpdateEvent">
+
+	UPDATE EVENT
+	SET 
+	    EVEN_TITLE = ?
+	    ,EVEN_CATEGORY = ?
+	    ,START_DATE = ?
+	    ,END_DATE = ?
+	    ,ENROLL_DATE = SYSDATE
+	    ,STATUS = ?
+	    ,EVEN_IMG = ?
+	WHERE EVEN_NO = ?
+
+</entry>
+
+
+<!-- 관리자단에서 이벤트 삭제 -->
+<!--  @author seong 6/1 -->
+
+<entry key="adminDeleteEvents">
+
+	DELETE 
+		EVENT
+	WHERE 
+		EVEN_NO =?
+	
+</entry>
+
+
 
 </properties>
 

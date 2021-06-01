@@ -81,4 +81,52 @@ public class EventService {
 	}
 	
 	
+
+	/**
+	 * 관리자단에서 이벤트 수정
+	 * @author seong
+	 * @date 6/1
+	 */
+	
+	public int adminUpdateEvent(AdmEvent adEvent) {
+		
+		Connection conn = getConnection();
+		int result = new EventDao().adminUpdateEvent(conn,adEvent);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	
+	/**
+	 * 관리자단에서 이벤트 삭제
+	 * @author seong
+	 * @date 6/1 
+	 */
+	
+	public int adminDeleteEvent(int eventNo) {
+		
+		Connection conn = getConnection();
+		int result = new EventDao().adminDeleteEvent(conn,eventNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+		
+	}
+	
+	
+	
 }

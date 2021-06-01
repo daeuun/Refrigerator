@@ -161,5 +161,75 @@ public class EventDao {
 		
 	}
 	
+	/**
+	 * 관리자단에서 이벤트 수정
+	 * @author seong
+	 * @date 6/1
+	 */
+	
+	public int adminUpdateEvent(Connection conn, AdmEvent adEvent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminUpdateEvent");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, adEvent.getEventTitle());
+			pstmt.setString(2, adEvent.getEventCategory());
+			pstmt.setString(3, adEvent.getStartDate());
+			pstmt.setString(4, adEvent.getEndDate());
+			pstmt.setString(5, adEvent.getStatus());
+			pstmt.setString(6, adEvent.getEventImg());
+			pstmt.setInt(7, adEvent.getEventNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(adEvent);
+		return result;
+		
+	}
+	
+	
+	/**
+	 * 관리자단에서 이벤트 삭제
+	 * @author seong
+	 * @date 6/1 
+	 */
+	
+	public int adminDeleteEvent(Connection conn, int eventNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminDeleteEvents");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, eventNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
+	
+	
+	
+	
 
 }

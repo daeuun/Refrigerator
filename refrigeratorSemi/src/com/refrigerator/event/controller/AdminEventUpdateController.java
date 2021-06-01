@@ -1,9 +1,6 @@
 package com.refrigerator.event.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,23 +16,23 @@ import com.refrigerator.event.model.vo.AdmEvent;
 
 
 /**
- * 관리자단 이벤트 등록
+ * 관리자단에서 이벤트 수정
  * @author seong
  * @date 6/1
  */
 
 
 /**
- * Servlet implementation class InsertEventController
+ * Servlet implementation class AdminEventUpdateController
  */
-@WebServlet("/insertEvent.admin")
-public class AdminInsertEventController extends HttpServlet {
+@WebServlet("/updateEvent.admin")
+public class AdminEventUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInsertEventController() {
+    public AdminEventUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,51 +49,48 @@ public class AdminInsertEventController extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 10*1024*1024;
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/review_upfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/event_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request,savePath,maxSize,"UTF-8",new MyFileRenamePolicy());
 			
-
-			String eventTitle = multiRequest.getParameter("eventTitle");
-			String eventCategory = multiRequest.getParameter("eventCategory");
+			String eventTitle = multiRequest.getParameter("upDateEventTitle");
+			int eventNo = Integer.parseInt(multiRequest.getParameter("eventNo"));
+			String eventCategory = multiRequest.getParameter("upDateEventCategory");
 			
-			String startDate = multiRequest.getParameter("startDate");
+			String startDate = multiRequest.getParameter("UpdateStartDate");
 			startDate = startDate.replace("-", "/");
-
-			
-			String endDate = multiRequest.getParameter("endDate");
+			String endDate = multiRequest.getParameter("UpdateEndDate");
 			endDate = endDate.replace("-", "/");
+			String status = multiRequest.getParameter("status");
 			
-			String eventImg = multiRequest.getParameter("eventUpfile");
+			String eventImg = "";
 			
-		
+			if(multiRequest.getOriginalFileName("UpdateEventUpfile") != null) {
+				
+				// contextPath + /경로 +  수정된 파일명 
+				eventImg = request.getContextPath() + "/resources/event_upfiles/" + multiRequest.getFilesystemName("UpdateEventUpfile");
+				
+			}
+
 			AdmEvent adEvent = new AdmEvent();
+			adEvent.setEventNo(eventNo);
 			adEvent.setEventTitle(eventTitle);
 			adEvent.setEventCategory(eventCategory);
 			adEvent.setStartDate(startDate);
 			adEvent.setEndDate(endDate);
-			adEvent.setEventImg("resources/event_upfiles/" + eventImg);
+			adEvent.setEventImg(eventImg);
+			adEvent.setStatus(status);
 			
+			System.out.println(adEvent);
 			
-			int result = new EventService().adminInsertEvent(adEvent);
+			int result = new EventService().adminUpdateEvent(adEvent);
 			
 			if(result>0) {
 				
-				request.getSession().setAttribute("alertMsg", "이벤트 등록 성공! ");
+				request.getSession().setAttribute("alertMsg", "이벤트 수정 성공! ");
 				response.sendRedirect(request.getContextPath()+"/selectEvent.admin?currentPage=1");
 				
-			}else {
-				
-				// 에러 페이지가 들어갈 예정입니다.
-				
-				
-				
 			}
-			
-			
 		}
-		
-		
-		
 		
 	}
 
