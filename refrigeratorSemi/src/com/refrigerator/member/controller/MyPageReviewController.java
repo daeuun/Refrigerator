@@ -71,7 +71,7 @@ public class MyPageReviewController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("myPageNo", 7);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/member/MyPageReviewUpdate.jsp").forward(request, response);
+		request.getRequestDispatcher("views/member/myPageReviewUpdate.jsp").forward(request, response);
 	}
 
 	/**
