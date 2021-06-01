@@ -1,8 +1,15 @@
+<%@page import="com.refrigerator.category.model.vo.SubCategory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.refrigerator.category.model.vo.MainCategory,
+				 com.refrigerator.category.model.vo.SubCategory,
+				 java.util.ArrayList" %>
     
     <!--윤희락 05.26 작성-->
 <%
+	int userNo = (int)request.getAttribute("userNo");
+	ArrayList<MainCategory> mList = (ArrayList<MainCategory>)request.getAttribute("mList");
+	ArrayList<SubCategory> sList = (ArrayList<SubCategory>)request.getAttribute("sList");
 %>
     
 <!DOCTYPE html>
@@ -17,7 +24,8 @@
     <style>
         .outer{
             width:1000px;
-            margin: 20px 20px;
+            padding-top:8px;
+            margin:auto;
         }
         .outer>form>div{
             box-sizing: border-box;
@@ -161,9 +169,9 @@
             font-weight:550;
         }
 
-        #ingre-area, #add-area{
-            width:620px;
-            margin: 10px 60px;
+        .ingre-area, #add-area{
+            width: 620px;
+            margin:10px 60px;
         }
 
         #add-area{
@@ -239,10 +247,10 @@
 
         /*리모컨 버튼*/
         .up-btn{
-            width:50px;
+        	margin:auto;
+            width:2150px;
             height:50px;
-            position: fixed;
-            margin-left:1050px;
+            position:fixed;
         }
 
         .up-btn:hover{
@@ -253,12 +261,25 @@
         input[type=file]{
         	display:none;
         }
+        
+        .select-title, #hide-org{
+        	display:none;
+        }
     </style>
 </head>
 <body>
 
+<%@ include file="../common/user/menubar.jsp" %>
+
+
     <div class="outer">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/enroll.re" method="post" enctype="multipart/form-data">
+        <!-- input type="hidden" 입력폼 개수 넘기기-->
+        <input type="hidden" name="userNo" value="<%=userNo%>">
+        <input type="hidden" id="sbCount" name="sbCount">
+        <input type="hidden" id="ingCount" name="ingCount" value="1">
+        <input type="hidden" id="addCount" name="addCount">
+        <input type="hidden" id="orderCount" name="orderCount" value="1">
 
             <div class="enroll-form-title">
                 &nbsp;&nbsp;&nbsp;레시피 등록
@@ -352,10 +373,10 @@
                         <input type="file" id="file12" class="file" name="ingreImg" required onchange="loadImg(this, 12);">
                     </div>
                 </div>
-                
+                <!--2)  검색버튼 영역 -->
                 <div class="search-btn-menu-area">
                     
-                    <label for="">검색버튼</label>
+                    <label>검색버튼</label>
                     <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;<img class="lightImg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDQ3OS43OTcgNDc5Ljc5NyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8Zz4KCQk8cGF0aCBkPSJNMzgyLjc3NiwxMjYuMjM3QzM3NC40MSw2MC41MjQsMzIyLjQ0MSw4LjkxMSwyNTYuNjcyLDAuOTk3QzE3Ny42ODYtOC4yODEsMTA2LjEzNCw0OC4yMjgsOTYuODU1LDEyNy4yMTQgICAgYy0wLjY1Nyw1LjU5NC0wLjk4NSwxMS4yMjItMC45ODMsMTYuODU1Yy0wLjEzNiw0NC41MTMsMjAuNDM2LDg2LjU1OCw1NS42NjQsMTEzLjc2OGMxMC4xNTksNy41ODUsMTYuMiwxOS40NzQsMTYuMzM2LDMyLjE1MiAgICB2MTE4LjA4YzAuMDQ4LDEwLjI5OCw2LjY2LDE5LjQxNywxNi40MzIsMjIuNjY0YzMuODM0LDMwLjY4OSwzMS44MjEsNTIuNDYsNjIuNTEsNDguNjI1ICAgIGMyNS40MjQtMy4xNzYsNDUuNDQ5LTIzLjIwMiw0OC42MjYtNDguNjI1YzkuNzcyLTMuMjQ3LDE2LjM4NC0xMi4zNjYsMTYuNDMyLTIyLjY2NHYtMTE4LjA4ICAgIGMwLjEtMTIuNjA3LDYuMDQzLTI0LjQ1NCwxNi4wODgtMzIuMDcyQzM2OC4zMzgsMjI2Ljg4NywzODkuMjA3LDE3Ni43NTQsMzgyLjc3NiwxMjYuMjM3eiBNMjM5Ljg3Miw0NjQuMDY5ICAgIGMtMTkuMDAyLTAuMDIxLTM1LjM3NS0xMy4zODctMzkuMi0zMmg3OC40QzI3NS4yNDcsNDUwLjY4MiwyNTguODc0LDQ2NC4wNDgsMjM5Ljg3Miw0NjQuMDY5eiBNMjk1Ljg3MiwzMTIuMDY5aC01NiAgICBjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNTZ2OGgtNTZjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNTZ2OGgtNTZjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNTZ2OCAgICBoLTU2Yy00LjQxOCwwLTgsMy41ODItOCw4czMuNTgyLDgsOCw4aDU2djhjMCw0LjQxOC0zLjU4Miw4LTgsOGgtOTZjLTQuNDE4LDAtOC0zLjU4Mi04LTh2LTcuOTI4bDIzLjkyOCwwLjIzMmgwLjA3MiAgICBjNC40MTgsMC4wMiw4LjAxNi0zLjU0Niw4LjAzNi03Ljk2NHMtMy41NDYtOC4wMTYtNy45NjQtOC4wMzZsLTI0LjA3Mi0wLjIzMnYtOGwyMy45MjgsMC4yMzJoMC4wNzIgICAgYzQuNDE4LDAuMDIsOC4wMTYtMy41NDYsOC4wMzYtNy45NjRzLTMuNTQ2LTguMDE2LTcuOTY0LTguMDM2bC0yNC4wNzItMC4yMzJ2LThsMjMuOTI4LDAuMjMyaDAuMDcyICAgIGM0LjQxOCwwLjAyLDguMDE2LTMuNTQ2LDguMDM2LTcuOTY0cy0zLjU0Ni04LjAxNi03Ljk2NC04LjAzNmwtMjQuMDcyLTAuMjMydi04bDIzLjkyOCwwLjIzMmgwLjA3MiAgICBjNC40MTgsMC4wMiw4LjAxNi0zLjU0Niw4LjAzNi03Ljk2NHMtMy41NDYtOC4wMTYtNy45NjQtOC4wMzZsLTI0LjA3Mi0wLjIzMnYtMTYuMDcyaDExMlYzMTIuMDY5eiBNMzY2Ljk0LDE1OS4wODYgICAgYy00LjAzNCwzNC4xMTktMjEuNjE1LDY1LjE4NC00OC43ODgsODYuMjA3bDAuMDMyLTAuMDRjLTExLjE2Niw4LjU3Mi0xOC43NjQsMjAuOTc0LTIxLjMyOCwzNC44MTZIMTgyLjg3MiAgICBjLTIuNjExLTEzLjg4OC0xMC4yODItMjYuMzE0LTIxLjUyOC0zNC44NzJjLTU1Ljg1Mi00My40MjMtNjUuOTI3LTEyMy45LTIyLjUwNC0xNzkuNzUyYzQuNzU0LTYuMTE1LDEwLjA1My0xMS43ODYsMTUuODMyLTE2Ljk0NCAgICBjMjMuMzI1LTIwLjk3OCw1My42MTQtMzIuNTM3LDg0Ljk4NC0zMi40MzJjNS4wNzksMC4wMDMsMTAuMTU0LDAuMjk0LDE1LjIsMC44NzJDMzI1LjA1OSwyNS4yNDIsMzc1LjI0MSw4OC44ODIsMzY2Ljk0LDE1OS4wODZ6IiBmaWxsPSIjN2Y3ZjdmIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+Cgk8L2c+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPC9nPjwvc3ZnPg=="/>
                         <label class="guide">검색버튼은 최대 3개까지 생성 가능합니다.</label>
@@ -363,29 +384,17 @@
                     
                     <div id="serach-btn-input-area">
                         
-                        <select name="btnMainCat1">
-                            <option value="1">육류</option>
-                            <option value="2">채소류</option>
-                            <option value="3">해산물</option>
-                            <option value="4">달걀/유제품</option>
-                            <option value="5">가공식품류</option>
-                            <option value="6">쌀</option>
-                            <option value="7">밀가루</option>
-                            <option value="8">견과류</option>
-                            <option value="9">버섯류</option>
-                            <option value="10">김치류</option>
-                            <option value="11">과일류</option>
-                            <option value="12">기타</option>
+                        <select class="mc" name="btnMainCat0">
+                        	<% for(MainCategory mc : mList) {%>
+	                            <option value="<%=mc.getCategoryMainNo()%>"><%=mc.getCategoryName()%></option>
+                            <%} %>
                         </select>
                         
                         <!--mainCat 선택에 따라 subCat요소 반복문 넣기-->
-                        <select name="btnSubCat1">
-                            
-                            <option value="1">돼지고기</option>
-                            <option value="2">소고기</option>
-                            <option value="3">닭고기</option>
-                            <option value="4">햄/소세지</option>
-                            
+                        <select name="btnSubCat0">
+                        	<% for(SubCategory sc : sList) {%>
+	                            <option value="<%=sc.getCategorySubNo()%>"><%=sc.getIngredientName()%></option>
+                            <%} %>
                         </select>
                         
                         <span class="ct-close"><img width="30px" height="30px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjYxMi4wMDhweCIgaGVpZ2h0PSI2MTIuMDA4cHgiIHZpZXdCb3g9IjAgMCA2MTIuMDA4IDYxMi4wMDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYxMi4wMDggNjEyLjAwODsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9Il94MzlfXzQxXyI+DQoJCTxnPg0KCQkJPHBhdGggZD0iTTUzNS40NCw5NS42NjZIMTkyLjI2N2MtNS4zNTQtMC4zMjUtMTAuODA0LDEuMzM4LTE0LjkxNiw1LjQxMkw1LjUxNSwyOTEuMTU2Yy00LjAzNSwzLjk5Ny01Ljc1Niw5LjMzMi01LjQ4OCwxNC41NzINCgkJCQljLTAuMjY4LDUuMjM5LDEuNDU0LDEwLjU1Niw1LjQ4OCwxNC41NzFsMTcxLjgzNiwxOTAuMDc5YzMuNzQ4LDMuNzA5LDguNjI0LDUuNTQ1LDEzLjUyLDUuNjAzdjAuNDAxaDM0NC41Nw0KCQkJCWM0Mi4yOCwwLDc2LjU2Ny0zNC4yNDgsNzYuNTY3LTc2LjQ5VjE3Mi4xNzVDNjEyLjAwOCwxMjkuOTE0LDU3Ny43MjEsOTUuNjY2LDUzNS40NCw5NS42NjZ6IE00MzMuMTU0LDM0OC45MDYNCgkJCQljNy40NzcsNy40NzcsNy40NzcsMTkuNTgyLDAsMjcuMDM5Yy03LjQ3OCw3LjQ3OC0xOS42MDEsNy40NzgtMjcuMDc4LDBsLTQyLjgxNS00Mi43NzdsLTQzLjM3LDQzLjMzMg0KCQkJCWMtNy41MzQsNy41MTYtMTkuNzUzLDcuNTE2LTI3LjI4OCwwYy03LjUzNS03LjUzNC03LjUzNS0xOS43MzQsMC0yNy4yNDlsNDMuMzctNDMuMzMzbC00Mi44MTUtNDIuNzc3DQoJCQkJYy03LjQ3Ny03LjQ3Ny03LjQ3Ny0xOS41ODIsMC0yNy4wNGM3LjQ3Ny03LjQ3NywxOS42MDEtNy40NzcsMjcuMDc4LDBsNDIuODE1LDQyLjc3N2w0My45ODEtNDMuOTI1DQoJCQkJYzcuNTM0LTcuNTM0LDE5Ljc1NC03LjUzNCwyNy4yODgsMHM3LjUzNCwxOS43MzQsMCwyNy4yNWwtNDMuOTgxLDQzLjkyNUw0MzMuMTU0LDM0OC45MDZ6Ii8+DQoJCTwvZz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" /></span>
@@ -408,8 +417,6 @@
         <img class="up-btn" width="50" height="50" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUzMi4xNjMgNTMyLjE2MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8Zz4KCQk8cGF0aCBkPSJNNzAuNjI1LDMwMS42OTVsMTk1LjQ2LTEyNC44ODRsMTk1LjQ2MSwxMjQuODg0YzcuNjU2LDQuODkxLDE2LjIxMiw3LjIyOSwyNC42NjksNy4yMjkgICAgYzE1LjE0MiwwLDI5Ljk2NC03LjQ5MSwzOC43MjItMjEuMTk0YzEzLjY0Ny0yMS4zNjUsNy4zOTMtNDkuNzQzLTEzLjk2Ni02My4zOTFMMjkwLjc5OSw4My42NjUgICAgYy0xNS4wNzQtOS42MjYtMzQuMzUzLTkuNjI2LTQ5LjQyNiwwTDIxLjE5NCwyMjQuMzMzYy0yMS4zNTksMTMuNjQ3LTI3LjYyLDQyLjAzMS0xMy45NjYsNjMuMzkxICAgIEMyMC44ODIsMzA5LjA5NSw0OS4yNjcsMzE1LjMzMSw3MC42MjUsMzAxLjY5NXoiIGZpbGw9IiMwMDY2MzMiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD4KCQk8cGF0aCBkPSJNNzAuNjI1LDQ0OC40OWwxOTUuNDYtMTI0Ljg4NUw0NjEuNTQ3LDQ0OC40OWM3LjY1Niw0Ljg5LDE2LjIxMiw3LjIyOCwyNC42NjksNy4yMjhjMTUuMTQyLDAsMjkuOTY0LTcuNDkxLDM4LjcyMi0yMS4xOTMgICAgYzEzLjY0Ny0yMS4zNjUsNy4zOTMtNDkuNzQzLTEzLjk2Ni02My4zOTJsLTIyMC4xNzMtMTQwLjY4Yy0xNS4wNzQtOS42MjYtMzQuMzUzLTkuNjI2LTQ5LjQyNiwwTDIxLjE5NCwzNzEuMTI3ICAgIGMtMjEuMzU5LDEzLjY0Ny0yNy42Miw0Mi4wMzItMTMuOTY2LDYzLjM5MUMyMC44ODIsNDU1Ljg4OSw0OS4yNjcsNDYyLjEyNSw3MC42MjUsNDQ4LjQ5eiIgZmlsbD0iIzAwNjYzMyIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
         
         
-        
-        
         <!--3번째영역 필수재료 | 부가재료 -->
         <div class="enroll-form3">
             <div class="content-area2">
@@ -423,31 +430,53 @@
                     <span class="guide">재료가 남거나 부족하지 않도록 정확한 계량정보를 적어주세요</span>
                 </div>
                 
-                <div id="ingre-area">
+                <div id="hide-org" class="ingre-area">
                     
-                    <select name="ingMainCat1">
-                        <option value="1">육류</option>
-                        <option value="2">채소류</option>
-                        <option value="3">해산물</option>
-                        <option value="4">달걀/유제품</option>
-                        <option value="5">가공식품류</option>
-                        <option value="6">쌀</option>
-                        <option value="7">밀가루</option>
-                        <option value="8">견과류</option>
-                        <option value="9">버섯류</option>
-                        <option value="10">김치류</option>
-                        <option value="11">과일류</option>
-                        <option value="12">기타</option>
+                    <select class="mc" name="ingMainCat0">
+                    	<% for(MainCategory mc : mList) {%>
+	                            <option value="<%=mc.getCategoryMainNo()%>"><%=mc.getCategoryName()%></option>
+                            <%} %>
+                    </select>
+                    
+                    <!--mainCat 선택에 따라 subCat요소 반복문 넣기-->
+                    <select name="ingSubCat0">
+                       <% for(SubCategory sc : sList) {%>
+	                            <option value="<%=sc.getCategorySubNo()%>"><%=sc.getIngredientName()%></option>
+                            <%} %>
+                    </select>
+                    
+                    <input type="number" name="ingAmount0" class="amount" placeholder="예) 1~1000" min="0" max="1000">
+                    
+                    <select name="ingUnit0" required>
+                        <option>g</option>
+                        <option>Kg</option>
+                        <option>근</option>
+                        <option>개</option>
+                        <option>대</option>
+                        <option>컵</option>
+                        <option>ml</option>
+                        <option>L</option>
+                        <option>t</option>
+                        <option>T</option>
+                    </select>
+                    
+                    <span class="ct-close"><img width="30px" height="30px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjYxMi4wMDhweCIgaGVpZ2h0PSI2MTIuMDA4cHgiIHZpZXdCb3g9IjAgMCA2MTIuMDA4IDYxMi4wMDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYxMi4wMDggNjEyLjAwODsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9Il94MzlfXzQxXyI+DQoJCTxnPg0KCQkJPHBhdGggZD0iTTUzNS40NCw5NS42NjZIMTkyLjI2N2MtNS4zNTQtMC4zMjUtMTAuODA0LDEuMzM4LTE0LjkxNiw1LjQxMkw1LjUxNSwyOTEuMTU2Yy00LjAzNSwzLjk5Ny01Ljc1Niw5LjMzMi01LjQ4OCwxNC41NzINCgkJCQljLTAuMjY4LDUuMjM5LDEuNDU0LDEwLjU1Niw1LjQ4OCwxNC41NzFsMTcxLjgzNiwxOTAuMDc5YzMuNzQ4LDMuNzA5LDguNjI0LDUuNTQ1LDEzLjUyLDUuNjAzdjAuNDAxaDM0NC41Nw0KCQkJCWM0Mi4yOCwwLDc2LjU2Ny0zNC4yNDgsNzYuNTY3LTc2LjQ5VjE3Mi4xNzVDNjEyLjAwOCwxMjkuOTE0LDU3Ny43MjEsOTUuNjY2LDUzNS40NCw5NS42NjZ6IE00MzMuMTU0LDM0OC45MDYNCgkJCQljNy40NzcsNy40NzcsNy40NzcsMTkuNTgyLDAsMjcuMDM5Yy03LjQ3OCw3LjQ3OC0xOS42MDEsNy40NzgtMjcuMDc4LDBsLTQyLjgxNS00Mi43NzdsLTQzLjM3LDQzLjMzMg0KCQkJCWMtNy41MzQsNy41MTYtMTkuNzUzLDcuNTE2LTI3LjI4OCwwYy03LjUzNS03LjUzNC03LjUzNS0xOS43MzQsMC0yNy4yNDlsNDMuMzctNDMuMzMzbC00Mi44MTUtNDIuNzc3DQoJCQkJYy03LjQ3Ny03LjQ3Ny03LjQ3Ny0xOS41ODIsMC0yNy4wNGM3LjQ3Ny03LjQ3NywxOS42MDEtNy40NzcsMjcuMDc4LDBsNDIuODE1LDQyLjc3N2w0My45ODEtNDMuOTI1DQoJCQkJYzcuNTM0LTcuNTM0LDE5Ljc1NC03LjUzNCwyNy4yODgsMHM3LjUzNCwxOS43MzQsMCwyNy4yNWwtNDMuOTgxLDQzLjkyNUw0MzMuMTU0LDM0OC45MDZ6Ii8+DQoJCTwvZz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" /></span>
+                    
+                </div>
+                
+                <div class="ingre-area">
+                    
+                    <select class="mc" name="ingMainCat1">
+                    	<% for(MainCategory mc : mList) {%>
+	                            <option value="<%=mc.getCategoryMainNo()%>"><%=mc.getCategoryName()%></option>
+                            <%} %>
                     </select>
                     
                     <!--mainCat 선택에 따라 subCat요소 반복문 넣기-->
                     <select name="ingSubCat1">
-                        
-                        <option value="1">돼지고기</option>
-                        <option value="2">소고기</option>
-                        <option value="3">닭고기</option>
-                        <option value="4">햄/소세지</option>
-                        
+                       <% for(SubCategory sc : sList) {%>
+	                            <option value="<%=sc.getCategorySubNo()%>"><%=sc.getIngredientName()%></option>
+                            <%} %>
                     </select>
                     
                     <input type="number" name="ingAmount1" class="amount" placeholder="예) 1~1000" min="0" max="1000" required>
@@ -490,29 +519,17 @@
                 
                 <div id="add-area">
                     
-                    <select name="addMainCat1">
-                        <option value="1">육류</option>
-                        <option value="2">채소류</option>
-                        <option value="3">해산물</option>
-                        <option value="4">달걀/유제품</option>
-                        <option value="5">가공식품류</option>
-                        <option value="6">쌀</option>
-                        <option value="7">밀가루</option>
-                        <option value="8">견과류</option>
-                        <option value="9">버섯류</option>
-                        <option value="10">김치류</option>
-                        <option value="11">과일류</option>
-                        <option value="12">기타</option>
+                    <select class="mc" name="addMainCat1" placeholder="ddd">
+                      <% for(MainCategory mc : mList) {%>
+	                            <option value="<%=mc.getCategoryMainNo()%>"><%=mc.getCategoryName()%></option>
+                      <%} %>
                     </select>
                     
                     <!--mainCat 선택에 따라 subCat요소 반복문 넣기-->
                     <select name="addSubCat1">
-                        
-                        <option value="1">돼지고기</option>
-                        <option value="2">소고기</option>
-                        <option value="3">닭고기</option>
-                        <option value="4">햄/소세지</option>
-                        
+						<% for(SubCategory sc : sList) {%>
+	                         <option value="<%=sc.getCategorySubNo()%>"><%=sc.getIngredientName()%></option>
+                        <%} %>                        
                     </select>
                     
                     <input type="number" class="amount" class="addAmount1" placeholder="예) 1~1000" min="0" max="1000">
@@ -618,48 +635,78 @@
     <button type="submit" class="btn btn-success" id="enroll-btn">등록</button>
 </div>
 
+ 		<input type="hidden" name="sbCount">
+        <input type="hidden" name="ingCount">
+        <input type="hidden" name="addCount">
+        <input type="hidden" name="orderCount">
+
+
 </form>
 
     <!--모든 스크립트 영역-->
     <script>
-    /*2) 검색버튼기능 영역 [2~3 clone|remove] [1버튼 display:none <-> display:block]*/
+    
+	 	// 대분류 소분류 연계
+	 	/*
+	   	$(function(){
+			
+	   		$("select[class=cat]").click(function(){
+	   			
+	   			var $mainCat = $(this).val();
+	   			
+	   			$.ajax({
+	   				url:
+	   			})
+	   			
+	   			
+	   			console.log($(this).next().val());
+	   			
+	   			
+	   		})
+	   		
+	   	})
+	   	*/
+    
+    </script>
+    
+    
+    <script>
+    
+    /*2) 검색버튼기능 영역 [2~3 clone|remove] [1버튼 display:none <-> display:block] 개수전달 : sbCount*/ 
     $(function(){
-        var count = 0;
+        var sbCount = 0;
             
         $("#search-btn-clone").click(function(){
-            if(count < 3){
-                count++;
-                if(count == 1) {
-                $("#serach-btn-input-area").css("display", "block");
-            }
                 
-            if(1 < count && count < 4){
+            if(sbCount < 3){
+	            ++sbCount;
+	            $("input[name=sbCount]").val(sbCount);
                 var $clone = $("#serach-btn-input-area").clone(true);
-                    
-                $clone.children().eq(0).attr("name", "btnMainCat" + count);
-                $clone.children().eq(1).attr("name", "btnSubCat" + count);
+                
+        		$clone.css("display", "block");
+                $clone.children().eq(0).attr("name", "btnMainCat" + sbCount);
+                $clone.children().eq(1).attr("name", "btnSubCat" + sbCount);
                     
                 $clone.appendTo("#serach-btn-input-result");
-            }
             }
         })
         
         $("#serach-btn-input-area").children().eq(2).click(function(){
 
-            if(1 < count && count <= 3) {
+            if(sbCount <= 3) {
+	            sbCount--;
                 $(this).parent().remove();
-            }else{
-                $(this).parent().hide();
+            
+            	$("#sbCount").val(sbCount);
             }
-            count--;
         })
         
         $("#serach-btn-input-area").hover(function(){
-            if(count == 1) {
+            if(sbCount == 1) {
                 $(this).children().eq(2).show();
             }
         }, function(){
-            if(count == 1) {
+            if(sbCount == 1) {
                 $(this).children().eq(2).hide();
             }
         })
@@ -677,27 +724,33 @@
     /* 3_1) 필수재료 select요소 복제 [2~5 복제가능 ] [1 remove버튼 안보임]*/
         $(function(){
             $(".ct-close").hide();
-            var count = 1;
+            var ingCount = 1;
 
             $("#ingre-clone").click(function(){
-                if(count < 5){
-                    var $clone = $("#ingre-area").clone(true);
-                    count++;
+                if(ingCount < 5){
+                    var $clone = $("#hide-org").clone(true);
                     
-                    $clone.children().eq(0).attr("name", "ingMainCat" + count);
-                    $clone.children().eq(1).attr("name", "ingSubCat" + count);
-                    $clone.children().eq(2).attr("name", "ingAmount" + count);
-                    $clone.children().eq(3).attr("name", "ingUnit" + count);
+                    ingCount++;
+                    $("input[name=ingCount]").val(ingCount);
+                    
+                    $clone.css("display","block");
+                    $clone.children().eq(0).attr("name", "ingMainCat" + ingCount);
+                    $clone.children().eq(1).attr("name", "ingSubCat" + ingCount);
+                    $clone.children().eq(2).prop("required", true);
+                    $clone.children().eq(2).attr("name", "ingAmount" + ingCount);
+                    $clone.children().eq(3).attr("name", "ingUnit" + ingCount);
                     
                     $clone.appendTo("#ingre-result");
                     
                 }
             })
             
-            $("#ingre-area").children().eq(4).click(function(){
+            $("#hide-org").children().eq(4).click(function(){
                 
                 $(this).parent().remove();
-                count--;
+                
+                ingCount--;
+                $("input[name=ingCount]").val(ingCount);
                 
             })
             
@@ -712,48 +765,46 @@
         })
         
         
-        /*3_2) 부가재료 select요소 복제 0~5가능 x버튼[1=hide | 2~5 remove]*/
+        /*3_2) 부가재료 select요소 복제 0~5가능 x버튼[1=hide | 2~5 remove] !!버튼개수 addCount*/
         $(function(){
-            var count = 0;
+            var addCount = 0;
+            
             
             $("#add-clone").click(function(){
-                if(count < 5){
-                    count++;
-                    if(count == 1) {
-                        $("#add-area").css("display", "block");
-                        $("#add-area").find(".amount").prop("required", true);
-                    }
                     
-                    if(1 < count && count < 6){
+                    if(addCount < 5){
+	                	++addCount;
                         var $clone = $("#add-area").clone(true);
                         
-                        $clone.children().eq(0).attr("name", "addMainCat" + count);
-                        $clone.children().eq(1).attr("name", "addSubCat" + count);
-                        $clone.children().eq(2).attr("name", "addAmount" + count);
-                        $clone.children().eq(3).attr("name", "addUnit" + count);
-                        
+                        $clone.css("display", "block");
+                        $clone.children().eq(0).attr("name", "addMainCat" + addCount);
+                        $clone.children().eq(1).attr("name", "addSubCat" + addCount);
+                        $clone.children().eq(2).prop("required", true);
+                        $clone.children().eq(2).attr("name", "addAmount" + addCount);
+                        $clone.children().eq(3).attr("name", "addUnit" + addCount);
+                        $("input[name=addCount]").val(addCount);
                         $clone.appendTo("#add-result");
                     }
-                }
             })
             
             $("#add-area").children().eq(4).click(function(){
                 
-                if(1 < count && count <= 5) {
+                if(addCount <= 5) {
+	                addCount--;
                     $(this).parent().remove();
-                }else{
-                    $(this).parent().find(".amount").prop("required", false);
-                    $(this).parent().hide();
+	                $("input[name=addCount]").val(addCount);
                 }
-                count--;
+                
             })
             
+     
+            
             $("#add-area").hover(function(){
-                if(count == 1) {
+                if(addCount == 1) {
                     $(this).children().eq(4).show();
                 }
             }, function(){
-                if(count == 1) {
+                if(addCount == 1) {
                     $(this).children().eq(4).hide();
                 }
             })
@@ -781,6 +832,7 @@
             	
                 var $clone = $("#order-area").clone(false);
                 orderCount++;
+                $("input[name=orderCount]").val(orderCount);
                             
                 $clone.find("label[class=order-no]").text(orderCount);
                 $clone.find("input[name=order]").val(orderCount);
@@ -802,16 +854,10 @@
                     
         })
  
-        /*
-        $("span[class=order-ct-close]").click(function(){
-        	console.log("click");
-	        $(this).parents("#order-area").remove();                      
-	        orderCount--;                  
-        })
-        */
         $(document).on("click", "span[class=order-ct-close]", function(){
 	        $(this).parents("#order-area").remove();                      
-	        orderCount--;     
+	        orderCount--;
+	        $("input[name=orderCount]").val(orderCount);
         })
         
 
@@ -844,7 +890,6 @@
             return false;
         })
 
-
     })
     
     /*7) file 미리보기 기능*/
@@ -864,44 +909,6 @@
         	$("#file1").click();
         })
         
-        /*
-        $("#orderImg2").click(function(){
-        	$("#file2").click();
-        })
-        	
-        	$("#orderImg3").click(function(){
-        		$("#file3").click();
-        	})
-        	
-        	$("#orderImg4").click(function(){
-        		$("#file4").click();
-        	})
-        	
-        	$("#orderImg5").click(function(){
-        		$("#file5").click();
-        	})
-        	
-        	$("#orderImg6").click(function(){
-        		$("#file6").click();
-        	})
-        	
-        	$("#orderImg7").click(function(){
-        		$("#file7").click();
-        	})
-        	
-        	$("#orderImg8").click(function(){
-        		$("#file8").click();
-        	})
-        	
-        	$("#orderImg9").click(function(){
-        		$("#file9").click();
-        	})
-        	
-        	$("#orderImg10").click(function(){
-        		$("#file10").click();
-        	})
-    	*/
-    	
     	
     })
     	
@@ -954,8 +961,39 @@
 		    }
 		    	
     	}
+    
+    
     </script>
-        
+    <script>
+    	// sub카테고리 ajax 조회
+    	$(function(){
+	    	$(document).on("change", "select[class=mc]", function(){
+	    		var $xx = $(this);
+	    		var option = "";
+	    		
+	    		$.ajax({
+	    			url:"jqAjaxSbCatList.rcp",
+	    			data:{"mcNo":$(this).val()},
+	    			success:function(subCat){
+	    				console.log(subCat.length);
+	    				
+	    				for(var i=0; i<subCat.length; i++) {
+		    				option += "<option value='" + subCat[i].categorySubNo + "'>" + subCat[i].ingredientName + "</option>";    
+	    				}
+	    				
+						$xx.next().html(option);
+	    				
+	    			}
+	    		})
+	    	})
+    	})
+    	
+    	$(function(){
+    		$("")
+    	})
+    </script>    
     </div>
+    
+    
 </body>
 </html>

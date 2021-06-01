@@ -38,6 +38,17 @@ public class SubCategoryService {
 				
 		return result;		
 	}
+	
+	/**
+	 * Main카테고리 번호 받아서 해당 sub카테고리list 조회요청처리
+	 * @author HeeRak
+	 */
+	public ArrayList<SubCategory> selectSubListByMainCategory(int mcNo) {
+		Connection conn = getConnection();
+		ArrayList<SubCategory> list = new SubCategoryDao().selectSubListByMainCategory(conn, mcNo);
+		close(conn);
+		return list;
+	}
 			
 	
 }

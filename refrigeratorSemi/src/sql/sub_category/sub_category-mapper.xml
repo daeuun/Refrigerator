@@ -27,4 +27,16 @@
 		 )
 	</entry>
 	
+	<!-- Main카테고리 번호 받아 해당 Sub카테고리 list조회 -->
+	<!-- @author HeeRak -->
+	<entry key="selectSubListByMainCategory">
+		SELECT 
+		       CATEGORY_SNO
+		     , INGREDIENT_NAME
+		  FROM SUB_CAT
+		 WHERE CATEGORY_NO = ?
+		 ORDER
+		    BY CATEGORY_SNO  
+	</entry>
+	
 </properties>

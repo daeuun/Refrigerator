@@ -77,6 +77,38 @@ public class SubCategoryDao {
 		
 		return result;
 		
+	}
+	
+	/**
+	 * Main카테고리 번호 받아서 해당 sub카테고리 list DB조회요청처리
+	 * @author HeeRak
+	 */
+	public ArrayList<SubCategory> selectSubListByMainCategory(Connection conn, int mcNo) {
+		// select => rset 여러행 조회
+		ArrayList<SubCategory> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSubListByMainCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mcNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new SubCategory(rset.getInt("category_sno"),
+										 rset.getString("ingredient_name")
+										 ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}	
 		
 	

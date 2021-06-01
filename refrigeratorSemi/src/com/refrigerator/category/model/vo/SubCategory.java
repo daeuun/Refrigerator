@@ -10,6 +10,12 @@ public class SubCategory {
 
 	public SubCategory() {}
 	
+	public SubCategory(int categorySubNo, String ingredientName) {
+		super();
+		this.categorySubNo = categorySubNo;
+		this.ingredientName = ingredientName;
+	}
+
 	public SubCategory(int categorySubNo, int categoryMainNo, String ingredientName) {
 		super();
 		this.categorySubNo = categorySubNo;

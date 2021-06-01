@@ -25,7 +25,7 @@ public class MainCategoryDao {
 		//prop.loadFromXML(new FileInputStream( 읽어들이고자하는 물리적인 경로));
 		// 동기화 되어있는 경로를 제시해야한다. (드라이브에서의 물리적인 경로를 알아올수있다것이다.) .getPath메소드는 필수 ! 
 		try {
-			prop.loadFromXML(new FileInputStream( MainCategoryDao.class.getResource("/sql/main_category/main_category-mapper.xml").getPath()));
+			prop.loadFromXML(new FileInputStream(MainCategoryDao.class.getResource("/sql/main_category/main_category-mapper.xml").getPath()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
