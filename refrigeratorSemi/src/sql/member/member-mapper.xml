@@ -123,7 +123,16 @@
 		 WHERE USER_NO = ?
 	</entry>
 	
-	
+	<!-- @author leeyeji -->
+	<!-- 회원 삭제 -->
+	<entry key="deleteMember">
+		UPDATE
+			   MEMBER
+		   SET STATUS = 'N'
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
+
 	<!-- Hee Rak-->
 	<!-- 회원 한명 프로필 조회 -->
 	<entry key="selectProfile">

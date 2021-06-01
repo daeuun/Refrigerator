@@ -175,9 +175,9 @@
 	                                                        <div>회원등급</div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <select name="memberLevel" id="">
-	                                                            <option value="1">일반 쉐프</option>
-	                                                            <option value="2">프리미엄 쉐프</option>
+	                                                        <select name="grade" id="memberLevel">
+	                                                            <option value="2">일반 쉐프</option>
+	                                                            <option value="1">프리미엄 쉐프</option>
 	                                                        </select>
 	                                                    </td>
 	                                                </tr>
@@ -205,6 +205,7 @@
                         <form action="<%=contextPath %>/adDelete.me" method="post">
 	                        <div class="modal" id="member-delete-Modal">
 	                        	
+	                                    <input type="hidden" name="userNo" id="userNo-delete">
 	                            <div class="modal-dialog modal-dialog-centered">
 	                                <div class="modal-content">
 	    
@@ -215,7 +216,6 @@
 	    
 	                                    <!-- Modal footer -->
 	                                    <div class="modal-footer" align="center">
-	                                    	<input type="hidden" name="userNo" id="userNo-delete">
 	                                        <button type="button" class="btn btn-secondary btn-sm"
 	                                            data-dismiss="modal">취소</button>
 	                                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
@@ -286,22 +286,8 @@
 	                   		}
 	                   		
 	                   		function deleteMember(){
-	                   			$("#userNo-delete").val($(event.target).parent().);
+	                   			$("#userNo-delete").val($(event.target).parent().siblings("input[type=hidden]").val());
 	                   		}
-	                   		//$(".checked-memberList>tr").click(function(){
-	                   		//	var mno = $(this).children("input").text();
-	                   		
-	                   		//})
-	                   		/*
-	                   		function test(){
-	                   			var checked = $("input[name='userCheck']:checked");
-	                   			
-	                   			if(ckecked.length != 0){ //td - tr - td
-	                   				var userNo = checked.parant().children("input").eq(0).val();
-	                   				console.log(userNo);
-	                   			}
-	                   		}
-	                   		*/
 	                   		
 					</script>
     

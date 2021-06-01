@@ -39,7 +39,7 @@ public class AdminMemberUpdateController extends HttpServlet {
 		String userPwd = request.getParameter("password");
 		String phone = request.getParameter("phone");
 		String gender = request.getParameter("gender");
-		String grade = request.getParameter("memberLevel");
+		String grade = request.getParameter("grade");
 		
 		Member m = new Member();
 		m.setUserNo(userNo);
@@ -49,6 +49,7 @@ public class AdminMemberUpdateController extends HttpServlet {
 		m.setPhone(phone);
 		m.setGender(gender);
 		m.setGrade(grade);
+		
 		
 		int result = new MemberService().updateMember(m);
 		

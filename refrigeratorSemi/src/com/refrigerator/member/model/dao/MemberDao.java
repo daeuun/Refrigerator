@@ -249,6 +249,7 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}
+		System.out.print(result);
 		return result;
 	}
 	

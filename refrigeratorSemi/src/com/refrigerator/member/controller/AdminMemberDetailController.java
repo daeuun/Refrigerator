@@ -31,7 +31,7 @@ public class AdminMemberDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userNo = request.getParameter("userNo");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		Member spcMem = new MemberService().selectMember(userNo);		
 		
 		request.setAttribute("spcMem", spcMem);
