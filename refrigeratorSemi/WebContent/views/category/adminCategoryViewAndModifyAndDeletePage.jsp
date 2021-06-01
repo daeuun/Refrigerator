@@ -472,7 +472,8 @@
                    if(mainCheck.length != 0){
                          var mainCatNo = mainCheck.parent().next().children().text();
                          var mainCatName = mainCheck.parent().next().next().children().text();
-                                                  
+                                       
+                         $("test1").val(mainCatNo);
                          $("#delmainCatName").text(mainCatName);
                    }
                 };
@@ -489,16 +490,23 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>					
 						
+						<!-- 메소드는 편하신거 쓰셔도 될거같아요 ~  넘겨야될 메인카테고리번호 input의  id는 일단 test1으로 부여했습니다 바꾸시면되요~  
+							값은 넣어두웠습니다. 
+						-->
 						<!-- Modal body -->
-						<div class="modal-body" style="color: red;">
-							선택하신 "<span id="delmainCatName"></span>" <br>대분류 카테고리를 삭제하시겠습니까?
-						</div>
+						<form action="" method="">
+							<input type="hiiden" name="" id="test1" value="">
 						
-						<!-- Modal footer -->
-						<div class="modal-footer" style="justify-content: space-around; border-top: none;">
-							<button type="button" class="btn btn-light btn-bg" data-dismiss="modal" style="background-color: #BEBEBE; color: white;">취소</button>
-							<button type="button" class="btn btn-danger btn-bg" data-dismiss="modal" onclick="">삭제</button>
-						</div>
+ㅍ							<div class="modal-body" style="color: red;">
+								선택하신 "<span id="delmainCatName"></span>" <br>대분류 카테고리를 삭제하시겠습니까?
+							</div>
+							
+							<!-- Modal footer -->
+							<div class="modal-footer" style="justify-content: space-around; border-top: none;">
+								<button type="button" class="btn btn-light btn-bg" data-dismiss="modal" style="background-color: #BEBEBE; color: white;">취소</button>
+								<button type="submit" class="btn btn-danger btn-bg" data-dismiss="modal">삭제</button>
+							</div>
+						</form>
 					
 					</div>
 				</div>
@@ -519,6 +527,8 @@
                    if(subCheck.length != 0){
                        var subCatNo = subCheck.parent().next().children().text();
                        var subCatName = subCheck.parent().next().next().children().text();
+                       
+                       $("test2").val(subCatNo);
                        $("#delsubCatName").text(subCatName);
                    };
 	            }
@@ -530,21 +540,29 @@
 				
 						<!-- Modal Header -->
 						<div class="modal-header">
+						
 							<h5 class="modal-title">소분류 카테고리</h5>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 						
-						<!-- Modal body -->
-						<div class="modal-body" style="color: red;">
-                        		선택하신 "<span id="delsubCatName"></span>" <br>소분류 카테고리를 삭제하시겠습니까?
-						</div>
+						<!-- 메소드는 편하신거 쓰셔도 될거같아요 ~  넘겨야될 메인카테고리번호 input의  id는 일단 test2으로 부여했습니다 바꾸시면되요~  
+							값은 넣어두웠습니다. 
+						-->
 						
-						<!-- Modal footer -->
-						<div class="modal-footer" style="justify-content: space-around; border-top: none;">
-							<button type="button" class="btn btn-light btn-bg" data-dismiss="modal" style="background-color: #BEBEBE; color: white;">취소</button>
-							<button type="button" class="btn btn-danger btn-bg" data-dismiss="modal" onclick="">삭제</button>
-						</div>
-					
+						<!-- Modal body -->
+						<form action="" method="">
+							<input type="hiiden" name="" id="test2" value="">
+						
+							<div class="modal-body" style="color: red;">
+	                        		선택하신 "<span id="delsubCatName"></span>" <br>소분류 카테고리를 삭제하시겠습니까?
+							</div>
+							
+							<!-- Modal footer -->
+							<div class="modal-footer" style="justify-content: space-around; border-top: none;">
+								<button type="button" class="btn btn-light btn-bg" data-dismiss="modal" style="background-color: #BEBEBE; color: white;">취소</button>
+								<button type="submit" class="btn btn-danger btn-bg" data-dismiss="modal">삭제</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
