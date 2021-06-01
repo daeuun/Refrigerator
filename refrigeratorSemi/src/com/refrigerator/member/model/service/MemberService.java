@@ -18,6 +18,7 @@ public class MemberService {
 	
 	
 	/** 회원가입폼
+	 * @author daeun
 	 * @param m 회원가입 폼에 작성한 사용자가 입력한 값들을 담아놓은 Member객체
 	 * @return 처리된 행수
 	 */
@@ -40,6 +41,7 @@ public class MemberService {
 	
 	
 	/** 로그인 요청
+	 * @author daeun
 	 * @param userId 사용자가 입력한 아이디값
 	 * @param userPwd 사용자가 입력한 비밀번호값
 	 * @return 
@@ -104,6 +106,18 @@ public class MemberService {
 		return result;
 	}
 	
-	
+	/** 아이디 찾기
+	 * @author daeun
+	 * @return
+	 */
+	public Member findId(String userName, String phone, String email) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().findId(conn, userName, phone, email);
+		
+		System.out.println(m);
+		close (conn);
+		return m;
+	}
 
 }

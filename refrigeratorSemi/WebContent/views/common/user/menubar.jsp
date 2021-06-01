@@ -182,7 +182,7 @@
                         	<% if(loginUser == null){ %>
                         	
                         		<a href="<%= contextPath %>/loginView.me" class="navigation-login-area_item_login">로그인</a>
-                            	<a href="" class="navigation-login-area_item">회원가입</a>
+                            	<a href="<%= contextPath %>/insert.me" class="navigation-login-area_item">회원가입</a>
                             	
                             <!-- 로그인 후 => 프로필사진 + 닉네임 -->
                             <% }else { %>

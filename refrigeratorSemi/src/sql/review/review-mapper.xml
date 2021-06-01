@@ -51,5 +51,44 @@ WHERE RNUM BETWEEN ? AND ?
 
 </entry>
 
+<!-- 로그인한 사용자의 요리후기&별점 글count -->
+<!-- @author HeeRak -->
+
+<entry key="selectUserReviewListCount">
+	SELECT COUNT(*)
+	  FROM REVIEW
+	 WHERE USER_NO = ?
+</entry>
+
+<!--로그인한 사용자의 요리후기&별점 글list-->
+<!-- @author Heerak-->
+<entry key="selectUserReviewList">
+SELECT *
+  FROM (
+        SELECT ROWNUM RNUM, A.*
+          FROM (
+                SELECT REVIEW_NO
+                     , RECIPE_NO
+                     , REVIEW_CONTENT
+                     , STAR
+                     , IMG_NAME
+                     , MODIFY_DATE
+                 FROM REVIEW
+                WHERE USER_NO = ?
+                ORDER
+                   BY MODIFY_DATE DESC
+               )A
+       )
+ WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<!--로그인한 사용자가 체크한 요리후기&별점 글삭제-->
+<!-- @author Heerak-->
+<entry key="deleteReviewUser">
+	DELETE 
+	  FROM REVIEW
+	 WHERE REVIEW_NO = ?
+</entry>
+
 
 </properties>

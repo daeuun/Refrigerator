@@ -23,6 +23,17 @@ public class Review {
 	 public Review() {}
 
 	 
+	public Review(int reviewNo, int recipeNo, String reviewContent, double star, String reviewImg, Date modifyDate) {
+		super();
+		this.reviewNo = reviewNo;
+		this.recipeNo = recipeNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.reviewImg = reviewImg;
+		this.modifyDate = modifyDate;
+	}
+
+
 	public Review(int reviewNo, String reviewWriter, int recipeNo, String reviewContent, double star, String reviewImg,
 			Date enrollDate, Date modifyDate) {
 		super();

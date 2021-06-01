@@ -2,14 +2,19 @@ package com.refrigerator.review.model.service;
 
 import static com.refrigerator.common.JDBCTemplate.close;
 import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.commit;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.recipe.model.vo.Review;
 import com.refrigerator.review.model.dao.ReviewDao;
 import com.refrigerator.review.model.vo.AdmReview;
+
+import oracle.jdbc.OracleConnection.CommitOption;
 
 public class ReviewService {
 
@@ -71,6 +76,49 @@ public class ReviewService {
 		return result;
 		
 		
+	}
+
+
+	/**
+	 * 사용자가 작성한 요리후기&별점 글 count
+	 * @author HeeRak
+	 */
+	public int selectUserReviewListCount(int userNo) {
+		Connection conn = getConnection();
+		int listCount = new ReviewDao().selectUserReviewListCount(conn, userNo);
+		close(conn);
+		return listCount;
+	}
+
+
+
+	/**
+	 * 사용자가 작성한 요리후기&별점 글 list
+	 * @author HeeRak
+	 */
+	public ArrayList<Review> selectUserReviewList(int userNo, PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Review> list = new ReviewDao().selectUserReviewList(conn, userNo, pi);
+		close(conn);
+		return list;
+	}
+
+
+
+	/**
+	 * 사용자가 선택한 요리후기&별점 글 delete
+	 * @author HeeRak
+	 */
+	public int deleteReviewUser(ArrayList<Integer> deleteList) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().deleteReviewUser(conn, deleteList);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 	
 	

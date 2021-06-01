@@ -2,7 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	
-	
+	<!-- @author daeun 
+		  회원가입 -->
 	<entry key="insertMember">
 		INSERT 
 		  INTO MEMBER
@@ -27,7 +28,8 @@
 		  )
 	</entry>
 	
-	<!-- 로그인 요청 -->
+	<!-- @author daeun
+	           로그인 요청 -->
 	<entry key="loginMember">
 		SELECT 
 		       USER_NO
@@ -111,6 +113,20 @@
 		     , MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
-
+	
+	
+	<!-- @author daeun
+	           아이디 찾기 -->
+	<entry key="findId">
+		SELECT USER_ID
+		     , USER_NAME
+		     , EMAIL
+		     , PHONE
+		     , ENROLL_DATE
+	 	  FROM MEMBER
+		 WHERE USER_NAME = ?
+		   AND PHONE = ?
+		   AND EMAIL = ?
+	</entry>
 
 </properties>

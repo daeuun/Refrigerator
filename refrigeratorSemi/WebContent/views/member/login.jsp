@@ -138,8 +138,8 @@
                 <button type="submit" class="btn_login">로그인</button>
     
                 <div class="find_login">
-                    <a href="" class="find_link">아이디 찾기</a>
-                    <a href="" class="find_link">비밀번호 재설정</a>
+                    <a href="<%= contextPath %>/findId.me" class="find_link">아이디 찾기</a>
+                    <a href="<%= contextPath %>/findPwd.me" class="find_link">비밀번호 재설정</a>
                     <a href="" class="find_link">회원가입</a>
                 </div>
     

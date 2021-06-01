@@ -66,7 +66,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
     <div class="outer">
         <div id="floatMenu">
             <div id="profile-float" align="center">
-                <div id="pro-img"><img src="../../resources/img/logo.png" width="60px"></div>
+                <div id="pro-img"><img src="../../../resources/image/user.png" width="60px"></div>
                 <div><b>마법의 소라고동</b></div>
                 <div style="font-size: 12px;">먹기위해 삽니다</div>
                 <button class="btn btn-sm">팔로잉</button>
@@ -88,13 +88,13 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             <div id="btn-float">
                 <div id="btn-img">
                     <a href="" data-toggle="popover" title="좋아요" data-content="이 레시피를 좋아합니다." data-placement="bottom">
-                        <img src="../../resources/img/like.png" width="25px">
+                        <img src="../../../resources/img/like.png" width="25px">
                     </a>
                     <a href="" >
-                        <img src="../../resources/img/share.png" width="25px">
+                        <img src="../../../resources/img/share.png" width="25px">
                     </a>
                     <a href="" data-toggle="popover" title="찜하기" data-content="이 레시피 찜했습니다." data-placement="bottom">
-                        <img src="../../resources/img/clipboard.png" width="25px" style="margin: right 0px;">
+                        <img src="../../../resources/img/clipboard.png" width="25px" style="margin: right 0px;">
                     </a>
                 </div>
                 <div id="goTop">
