@@ -68,7 +68,7 @@
                 회원 관리
             </button>
             <div id="side-sub" class="collapse1">
-                <a href="">회원 목록</a><br>
+                <a href="<%=contextPath%>/adList.me?currentPage=1">회원 목록</a><br>
                 <a href="">신고 내역</a>
             </div>
         </div>
