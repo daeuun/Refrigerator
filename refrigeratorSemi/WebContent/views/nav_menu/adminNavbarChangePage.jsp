@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.ArrayList , com.refrigerator.nav_menu.model.vo.NavMenu"%>    
+
+
+<%
+	ArrayList<NavMenu> navList = (ArrayList<NavMenu>)request.getAttribute("navlist");	
+	NavMenu homeMenu = navList.get(0);
+	NavMenu categoryMenu = navList.get(1);
+	NavMenu eventMenu = navList.get(2);
+	NavMenu recipeMenu = navList.get(3);
+	NavMenu csMenu = navList.get(4);
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,6 +110,13 @@
         font-weight: bold;
     }
 
+	#top-div>div:nth-child(1){order:<%= homeMenu.getMenuOrder() %>}
+	#top-div>div:nth-child(2){order:<%= categoryMenu.getMenuOrder() %>}
+	#top-div>div:nth-child(3){order:<%= eventMenu.getMenuOrder() %>}
+	#top-div>div:nth-child(4){order:<%= recipeMenu.getMenuOrder() %>}
+	#top-div>div:nth-child(5){order:<%= csMenu.getMenuOrder() %>}
+
+
     .circle-box{
         width: 30px;
         height: 30px;
@@ -133,9 +153,9 @@
     }
 
     .big-circle-box{
-        width: 55px;
+        width: 70px;
         height: 55px;
-        border-radius: 50%;
+        border-radius: 55px;
         background-color: #FB1C1B;
         color: white;
         font-weight: bold;
@@ -154,10 +174,13 @@
         padding: 10px;
     }
 
-    .inner-bottom-box select{
+    .inner-bottom-box input{
         width: 130px;
         height: 40px;
         margin-top: 20px;
+        text-align:center;
+        font-weight:bolder;
+		padding-left: 15px;
     }
 
     .btn-area{
@@ -205,11 +228,11 @@
                     <div id="present-list-box">
                         <div class="small-white-box">현재 <br> 네비게이션 <br> 순서</div>
                         <div id="top-div">
-                                    <div>홈<div class="circle-box">1</div></div>
-                                    <div>카테고리<div class="circle-box">2</div></div>
-                                    <div>이벤트<div class="circle-box">3</div></div>
-                                    <div>레시피<div class="circle-box">4</div></div>
-                                    <div>고객센터<div class="circle-box">5</div></div>
+                             <div>홈<div class="circle-box"><%= homeMenu.getMenuOrder() %></div></div>
+                             <div>카테고리<div class="circle-box"><%= categoryMenu.getMenuOrder() %></div></div>
+                             <div>이벤트<div class="circle-box"><%= eventMenu.getMenuOrder() %></div></div>
+                             <div>레시피<div class="circle-box"><%= recipeMenu.getMenuOrder() %></div></div>
+                             <div>고객센터<div class="circle-box"><%= csMenu.getMenuOrder() %></div></div>
                         </div>
                     </div>
 
@@ -218,63 +241,30 @@
                     <div id="buttom-div">
                         <div class="inner-top-box">
                             <div>
-                                <div class="big-circle-box">메뉴1</div>
+                                <div class="big-circle-box">홈</div>
                             </div>
                             <div>
-                                <div class="big-circle-box">메뉴2</div>
+                                <div class="big-circle-box">카테고리</div>
                             </div>
                             <div>
-                                <div class="big-circle-box">메뉴3</div>
+                                <div class="big-circle-box">이벤트</div>
                             </div>
                             <div>
-                                <div class="big-circle-box">메뉴4</div>
+                                <div class="big-circle-box">레시피</div>
                             </div>
                             <div>
-                                <div class="big-circle-box">메뉴5</div>
+                                <div class="big-circle-box">고객센터</div>
                             </div>
                         </div>
+                        
 
-                        <form action="" method="POST">
+                        <form action="modifyNav.nav" method="POST">
                             <div class="inner-bottom-box">
-                                <select name="categort-select" id="">
-                                    <option value="">홈</option>
-                                    <option value="">카테고리</option>
-                                    <option value="">이벤트</option>
-                                    <option value="">레시피</option>
-                                    <option value="">고객센터</option>
-                                </select>
-                                
-                                <select name="categort-select" id="">
-                                    <option value="">홈</option>
-                                    <option value="">카테고리</option>
-                                    <option value="">이벤트</option>
-                                    <option value="">레시피</option>
-                                    <option value="">고객센터</option>
-                                </select>
-
-                                <select name="categort-select" id="">
-                                    <option value="">홈</option>
-                                    <option value="">카테고리</option>
-                                    <option value="">이벤트</option>
-                                    <option value="">레시피</option>
-                                    <option value="">고객센터</option>
-                                </select>
-
-                                <select name="categort-select" id="">
-                                    <option value="">홈</option>
-                                    <option value="">카테고리</option>
-                                    <option value="">이벤트</option>
-                                    <option value="">레시피</option>
-                                    <option value="">고객센터</option>
-                                </select>
-
-                                <select name="categort-select" id="">
-                                    <option value="">홈</option>
-                                    <option value="">카테고리</option>
-                                    <option value="">이벤트</option>
-                                    <option value="">레시피</option>
-                                    <option value="">고객센터</option>
-                                </select>
+     							<input type="number" name="home" placeholder="순서입력" min="1" max="5" required>
+     							<input type="number" name="category" placeholder="순서입력" min="1" max="5" required>
+     							<input type="number" name="event" placeholder="순서입력" min="1" max="5" required>
+     							<input type="number" name="recipe" placeholder="순서입력" min="1" max="5" required>
+     							<input type="number" name="cs" placeholder="순서입력" min="1" max="5" required>
                             </div>
 
                             <div class="btn-area">
