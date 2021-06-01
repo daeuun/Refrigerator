@@ -117,10 +117,10 @@
                     <a class="nav-link" href="12myReplyPageWithModal.html">내 댓글 관리<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">프로필 수정<i class="fas fa-chevron-right"></i></a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/updateForm.pro">프로필 수정<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">후기&별점 관리<i class="fas fa-chevron-right"></i></a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/review.me?currentPage=1">후기&별점 관리<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">팔로잉 관리<i class="fas fa-chevron-right"></i></a>
