@@ -108,6 +108,21 @@
 		   AND STATUS = 'Y'
 	</entry>
 	
+	<!-- @author leeyeji -->
+	<!-- 회원 수정 -->
+	<entry key="updateMember">
+		UPDATE MEMBER 
+		   SET 
+		       USER_PWD = ?
+		     , GRADE = ?
+		     , GENDER = ?
+		     , EMAIL = ?
+		     , PHONE = ?
+		     , NICKNAME = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
+	
 	
 	<!-- Hee Rak-->
 	<!-- 회원 한명 프로필 조회 -->

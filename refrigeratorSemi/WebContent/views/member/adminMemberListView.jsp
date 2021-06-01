@@ -6,7 +6,7 @@
 <%
 	//String contextPath = request.getContextPath();
 	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
-	Member spcMem = (Member)request.getAttribute("spcMem");
+	//Member spcMem = (Member)request.getAttribute("spcMem");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -40,7 +40,7 @@
         margin-left: 150px;
         display: block;
     }*/
-    .select-list{margin-left: 50px;}
+    .select-list{margin-left: 130px;}
     .select-list>a{
         text-decoration: none;
         color: black;
@@ -107,12 +107,12 @@
                     <div class="btn" align="right" style="width: 350px;">
     
                         <div class="modi-delete" align="left" width="1000px">
-                            <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal" onclick="">회원수정</a>
+                            <!-- <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal">회원수정</a> -->
                             <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#member-delete-Modal">회원삭제</a>
                         </div>
     
                         <!-- 회원 수정 modal -->
-                        <form action="/refrigerator/adUpdate.me" method="get">
+                        <form action="<%=contextPath %>/adUpdate.me" method="get">
 	                        <div class="modal" id="member-modify-Modal">
 	                            <div class="modal-dialog modal-dialog-centered ">
 	                                <div class="modal-content">
@@ -129,11 +129,12 @@
 	                                            <table>
 	                                                <tr>
 	                                                    <td>
+	                                                    	<input type="hidden" name="userNo" id="userNo-id">
 	                                                        <div class="modal-event-title">닉네임
 	                                                        </div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="text" name="mem-nickname" id="" value="<%=spcMem.getNickname()%>">
+	                                                        <input type="text" name="nickname" id="">
 	                                                    </td>
 	                                                </tr>
 	                                                <tr>
@@ -141,7 +142,7 @@
 	                                                        <div>이메일</div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="email" name="mem-email" id="">
+	                                                        <input type="email" name="email" id="">
 	                                                    </td>
 	                                                </tr>
 	    
@@ -149,14 +150,14 @@
 	                                                    <td>
 	                                                        <div>비밀번호</div>
 	                                                    </td>
-	                                                    <td><input type="text"></td>
+	                                                    <td><input type="text" name="password"></td>
 	                                                </tr>
 	    
 	                                                <tr>
 	                                                    <td>
 	                                                        <div>전화번호</div>
 	                                                    </td>
-	                                                    <td><input type="text"></td>
+	                                                    <td><input type="text" name="phone"></td>
 	                                                </tr>
 	    
 	                                                <tr>
@@ -164,9 +165,9 @@
 	                                                        <div>성별</div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="radio"> 선택안함
-	                                                        <input type="radio"> 남
-	                                                        <input type="radio"> 여
+	                                                        <input type="radio" name="gender" value="N"> 선택안함
+	                                                        <input type="radio" name="gender" value="M"> 남
+	                                                        <input type="radio" name="gender" value="F"> 여
 	                                                    </td>
 	                                                </tr>
 	                                                <tr>
@@ -175,8 +176,8 @@
 	                                                    </td>
 	                                                    <td>
 	                                                        <select name="memberLevel" id="">
-	                                                            <option value="">일반 쉐프</option>
-	                                                            <option value="">프리미엄 쉐프</option>
+	                                                            <option value="1">일반 쉐프</option>
+	                                                            <option value="2">프리미엄 쉐프</option>
 	                                                        </select>
 	                                                    </td>
 	                                                </tr>
@@ -201,7 +202,7 @@
 	                        <!-- 
 	                        	form 수정!!!!!!!!
 	                         -->
-                        <form action="/refrigerator/adDelete.me" method="post">
+                        <form action="<%=contextPath %>/adDelete.me" method="post">
 	                        <div class="modal" id="member-delete-Modal">
 	                        	<input type="hidden" name="userNo" value="">
 	                            <div class="modal-dialog modal-dialog-centered">
@@ -237,11 +238,12 @@
                                     <th width="50"></th>
                                     <th width="50">번호</th>
                                     <th colspan="2" width="120">아아디</th>
-                                    <th width="100">이름</th>
+                                    <th width="70">이름</th>
                                     <th width="150">전화번호</th>
                                     <th width="250">이메일</th>
-                                    <th width="150">회원등급</th>
-                                    <th width="100">회원상태</th>
+                                    <th width="120">회원등급</th>
+                                    <th width="70">회원상태</th>
+                                   	<th width="100">회원수정</th>
                                 </tr>
     
                             </thead>
@@ -249,9 +251,9 @@
                             <tbody class="checked-memberList">
                             	<%for(Member m : pageList) {%>
 	                                <tr align="center">
-	                            		<input type="hidden" name="userNo" value="<%= m.getUserNo() %>">
-	                                    <td><input type="checkbox" name="userCheck" value="checked"></td>
+	                                    <td><input type="checkbox" name="userCheck"></td>
 	                                    <td><%= m.getUserNo()%></td>
+	                            		<input type="hidden" value="<%= m.getUserNo() %>">
 	                                    <td colspan="2"><%= m.getUserId() %></td>
 	                                    <td><%= m.getUserName() %></td>
 	                                    <td><%= m.getPhone() %></td>
@@ -262,6 +264,9 @@
 	                                    	<td>일반쉐프</td>
 	                                    <%} %>
 	                                    <td><%=m.getStatus() %></td>
+	                                    <td>
+	                                    	<a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal" onclick="modifyEvent();">수정</a>
+	                                    </td>
 	                                </tr>
     							<%} %>
     
@@ -272,23 +277,27 @@
                     </div>
                     <!--mem list-->
                    
-                   <script>
+					<script>
 	                   		// 조회되는 한 행의 회원 번호 넘기기..
-	                   		
+	                   		function modifyEvent(){
+	                   			$("#userNo-id").val($(event.target).parent().siblings("input[type=hidden]").val());
+	                   		}
 	                   		//$(".checked-memberList>tr").click(function(){
 	                   		//	var mno = $(this).children("input").text();
 	                   		
 	                   		//})
+	                   		/*
 	                   		function test(){
 	                   			var checked = $("input[name='userCheck']:checked");
 	                   			
 	                   			if(ckecked.length != 0){ //td - tr - td
 	                   				var userNo = checked.parant().children("input").eq(0).val();
 	                   				console.log(userNo);
-	                   				location.href = '<%=contextPath%>adDetail.me?mno' + mno;
 	                   			}
 	                   		}
-						</script>
+	                   		*/
+	                   		
+					</script>
     
                 </form> 
                	<br>

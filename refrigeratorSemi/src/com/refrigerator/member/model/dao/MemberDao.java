@@ -221,7 +221,35 @@ public class MemberDao {
 		}
 		return m;
 	}
-	
+	/**
+	 * @author leeyeji
+	 * 회원 수정
+	 */
+	public int updateMember(Connection conn, Member m) {
+		// update => int 결과
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getUserPwd());
+			pstmt.setInt(2, Integer.parseInt(m.getGrade()));
+			pstmt.setString(3, m.getGender());
+			pstmt.setString(4, m.getEmail());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setString(6, m.getNickname());
+			pstmt.setInt(7, m.getUserNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	/**
 	 * @author HeeRak
