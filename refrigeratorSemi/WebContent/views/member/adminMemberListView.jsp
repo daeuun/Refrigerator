@@ -4,6 +4,7 @@
 				 , com.refrigerator.common.model.vo.PageInfo" %>
 <!-- @author leeyeji -->
 <%
+	//String contextPath = request.getContextPath();
 	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -24,21 +25,20 @@
 <style>
     .outer{
         width: 1200px;
-        height: 900px;
         margin: auto;
     }
     .admin-container{
         width: 100%;
         display: block;
         float: right;
-    }
+    }/*
     .mem-content{
         width: 1050px;
         height: 900px;
         margin-top: 15px;
         margin-left: 150px;
         display: block;
-    }
+    }*/
     .select-list{margin-left: 50px;}
     .select-list>a{
         text-decoration: none;
@@ -75,23 +75,14 @@
 </head>
 <body>
 
-	<div class="outer">
-    	<!-- Top Nav -->
-        <div class="header" width="">
-            <%@ include file="../common/admin/adminTopNavView.jsp" %>
-        </div>
         
-		<!-- Container -->
-        <div class="admin-container">
+	<div class="total-outer">
+		<%@ include file="../common/admin/adminTopNavView.jsp" %>
 			
-			<!-- side Nav -->
-            <div class="side">
-                <%@ include file="../common/admin/adminSideBarView.jsp" %>
-            </div>
-			
-			<!-- 여기에 넣어주시면 됩니다. -->
             <div class="mem-content">
-    
+            
+            <%@ include file="../common/admin/adminSideBarView.jsp" %>
+			    
                 <div class="select-list" align="left" style="width: 300px;">
                     <a href="">회원 관리</a> >
                     <a href="">회원 목록</a>
@@ -110,7 +101,7 @@
     
                 <br><br>
     
-                <form action="" method="GET">
+                 <form action="" method="GET">
     
                     <div class="btn" align="right" style="width: 350px;">
     
@@ -119,112 +110,121 @@
                             <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#member-delete-Modal">회원삭제</a>
                         </div>
     
-                        <!-- The Modal -->
-                        <div class="modal" id="member-modify-Modal">
-                            <div class="modal-dialog modal-dialog-centered ">
-                                <div class="modal-content">
-    
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <div class="modal-body-list">
-    
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <div class="modal-event-title">닉네임
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="mem-nickname" id="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div>이메일</div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="email" name="mem-email" id="">
-                                                    </td>
-                                                </tr>
-    
-                                                <tr>
-                                                    <td>
-                                                        <div>비밀번호</div>
-                                                    </td>
-                                                    <td><input type="password"></td>
-                                                </tr>
-    
-                                                <tr>
-                                                    <td>
-                                                        <div>전화번호</div>
-                                                    </td>
-                                                    <td><input type="text"></td>
-                                                </tr>
-    
-                                                <tr>
-                                                    <td>
-                                                        <div>성별</div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio"> 선택안함
-                                                        <input type="radio"> 남
-                                                        <input type="radio"> 여
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div>회원등급</div>
-                                                    </td>
-                                                    <td>
-                                                        <select name="memberLevel" id="">
-                                                            <option value="">일반 쉐프</option>
-                                                            <option value="">프리미엄 쉐프</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-    
-                                    </div>
-    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success">수정</button>
-                                    </div>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-                        <!-- The Modal -->
-                        <div class="modal" id="member-delete-Modal">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <Strong>홍길동</Strong> 회원을 삭제하시겠습니까?
-                                    </div>
-    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer" align="center">
-                                        <button type="button" class="btn btn-secondary btn-sm"
-                                            data-dismiss="modal">취소</button>
-                                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                                    </div>
-    
-                                </div>
-                            </div>
-                        </div>
-    
+                        <!-- 회원 수정 modal -->
+                        <form action="/refrigerator/adUpdate.me" method="get">
+	                        <div class="modal" id="member-modify-Modal">
+	                            <div class="modal-dialog modal-dialog-centered ">
+	                                <div class="modal-content">
+	    
+	                                    <!-- Modal Header -->
+	                                    <div class="modal-header">
+	                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                                    </div>
+	    
+	                                    <!-- Modal body -->
+	                                    <div class="modal-body">
+	                                        <div class="modal-body-list">
+	    
+	                                            <table>
+	                                                <tr>
+	                                                    <td>
+	                                                        <div class="modal-event-title">닉네임
+	                                                        </div>
+	                                                    </td>
+	                                                    <td>
+	                                                        <input type="text" name="mem-nickname" id="">
+	                                                    </td>
+	                                                </tr>
+	                                                <tr>
+	                                                    <td>
+	                                                        <div>이메일</div>
+	                                                    </td>
+	                                                    <td>
+	                                                        <input type="email" name="mem-email" id="">
+	                                                    </td>
+	                                                </tr>
+	    
+	                                                <tr>
+	                                                    <td>
+	                                                        <div>비밀번호</div>
+	                                                    </td>
+	                                                    <td><input type="text"></td>
+	                                                </tr>
+	    
+	                                                <tr>
+	                                                    <td>
+	                                                        <div>전화번호</div>
+	                                                    </td>
+	                                                    <td><input type="text"></td>
+	                                                </tr>
+	    
+	                                                <tr>
+	                                                    <td>
+	                                                        <div>성별</div>
+	                                                    </td>
+	                                                    <td>
+	                                                        <input type="radio"> 선택안함
+	                                                        <input type="radio"> 남
+	                                                        <input type="radio"> 여
+	                                                    </td>
+	                                                </tr>
+	                                                <tr>
+	                                                    <td>
+	                                                        <div>회원등급</div>
+	                                                    </td>
+	                                                    <td>
+	                                                        <select name="memberLevel" id="">
+	                                                            <option value="">일반 쉐프</option>
+	                                                            <option value="">프리미엄 쉐프</option>
+	                                                        </select>
+	                                                    </td>
+	                                                </tr>
+	                                            </table>
+	                                        </div>
+	    
+	                                    </div>
+	    
+	                                    <!-- Modal footer -->
+	                                    <div class="modal-footer">
+	                                        <button type="submit" class="btn btn-success">수정</button>
+	                                    </div>
+	    
+	                                </div>
+	                            </div>
+	                        </div>
+    					</form>
+    					
+                        <!-- 회원 삭제 modal -->
+	                        <!-- 
+	                        	form 수정!!!!!!!!
+	                         -->
+                        <form action="/refrigerator/adDelete.me" method="post">
+	                        <div class="modal" id="member-delete-Modal">
+	                        	<input type="hidden" name="userNo" value="">
+	                            <div class="modal-dialog modal-dialog-centered">
+	                                <div class="modal-content">
+	    
+	                                    <!-- Modal body -->
+	                                    <div class="modal-body">
+	                                        <Strong>홍길동</Strong> 회원을 삭제하시겠습니까?
+	                                    </div>
+	    
+	                                    <!-- Modal footer -->
+	                                    <div class="modal-footer" align="center">
+	                                        <button type="button" class="btn btn-secondary btn-sm"
+	                                            data-dismiss="modal">취소</button>
+	                                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+	                                    </div>
+	    
+	                                </div>
+	                            </div>
+	                        </div>
+						</form>
+						
                     </div>
                     <br>
     
+    				<!-- 회원 목록 영역 -->
                     <div class="member-list" width="900px">
     
                         <table border="1" align="center">
@@ -267,40 +267,39 @@
     
                     </div>
                     <!--mem list-->
+                   
     
-                </form>
-    
+                </form> 
+               	<br>
+               	
+	            <!-- 페이징바 영역 -->
+	            <div align="center" class="paging-area">
+	        
+					<% if(currentPage != 1) { %>
+		            <button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage-1%>';"> &lt; </button>
+					<% } %>
+					
+		            <% for(int p=startPage; p<=endPage; p++) {%>
+		            	
+		            	<% if(p != currentPage){ %>
+			            	<button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=p%>';"><%= p %></button>
+			            <% }else{ %>
+			            	<button disabled><%= p %></button>
+		            	<%} %>
+		            	
+		            <% } %>
+		
+					<% if(currentPage != maxPage) { %>
+		            <button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage+1%>'"> &gt; </button>
+					<% } %>
+				
+	       		</div>
     
             </div>
             <!--mem content-->
             
-            <!-- 페이징바 영역 -->
-            <div align="center" class="paging-area">
-        
-				<% if(currentPage != 1) { %>
-	            <button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage-1%>';"> &lt; </button>
-				<% } %>
-				
-	            <% for(int p=startPage; p<=endPage; p++) {%>
-	            	
-	            	<% if(p != currentPage){ %>
-		            	<button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=p%>';"><%= p %></button>
-		            <% }else{ %>
-		            	<button disabled><%= p %></button>
-	            	<%} %>
-	            	
-	            <% } %>
-	
-				<% if(currentPage != maxPage) { %>
-	            <button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage+1%>'"> &gt; </button>
-				<% } %>
-			
-       		</div>
-            
-        </div>
-        <!--container-->
     </div>
-    <!--outer-->
+    <!--total-outer-->
 
 </body>
 </html>
