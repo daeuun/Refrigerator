@@ -495,9 +495,9 @@
 						-->
 						<!-- Modal body -->
 						<form action="" method="">
-							<input type="hiiden" name="" id="test1" value="">
+							<input type="hidden" name="" id="test1" value="">
 						
-ㅍ							<div class="modal-body" style="color: red;">
+							<div class="modal-body" style="color: red;">
 								선택하신 "<span id="delmainCatName"></span>" <br>대분류 카테고리를 삭제하시겠습니까?
 							</div>
 							
@@ -551,7 +551,7 @@
 						
 						<!-- Modal body -->
 						<form action="" method="">
-							<input type="hiiden" name="" id="test2" value="">
+							<input type="hidden" name="" id="test2" value="">
 						
 							<div class="modal-body" style="color: red;">
 	                        		선택하신 "<span id="delsubCatName"></span>" <br>소분류 카테고리를 삭제하시겠습니까?
