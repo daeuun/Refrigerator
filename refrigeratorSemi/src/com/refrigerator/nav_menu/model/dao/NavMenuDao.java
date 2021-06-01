@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import com.refrigerator.nav_menu.model.vo.NavMenu;
@@ -58,13 +60,30 @@ public class NavMenuDao {
 		return list;
 	}
 //--------------------------------------------------------------------------------	
-
-	
-	
-	
-	
-	
-	
-	
-	
+	public int updateNavMenu(Connection conn, int[] navOrder) {
+		// update문 => 처리된 행수
+		int result = 1;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateNavMenu");
+								
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, navOrder[0]);
+			pstmt.setInt(2, navOrder[1]);
+			pstmt.setInt(3, navOrder[2]);
+			pstmt.setInt(4, navOrder[3]);
+			pstmt.setInt(5, navOrder[4]);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result=0;
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+//-------------------------------------------------------------------------------------
 }

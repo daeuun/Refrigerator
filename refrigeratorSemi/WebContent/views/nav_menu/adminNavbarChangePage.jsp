@@ -11,6 +11,9 @@
 	NavMenu eventMenu = navList.get(2);
 	NavMenu recipeMenu = navList.get(3);
 	NavMenu csMenu = navList.get(4);
+	
+	String confirmMsg = (String)session.getAttribute("confirmMsg"); 
+
 %>    
     
 <!DOCTYPE html>
@@ -33,11 +36,10 @@
 <!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
 <!-- --------------------------------------------------------------------------------------------------- -->
 <style>
+    #for-height{height: 620px;} 
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
-    #horizontal-bar{width: 100%; height: 50px; box-sizing: border-box; background-color: palegoldenrod;}
-    #vertical-bar{width: 150px; height: 690px; background-color: rgb(0,153,102); float: left;}
-    .outer{border: 3px solid blue; width: 1000px; float: right; margin-right: 25px;}
+    .outer{ width: 1000px; float: right; margin-right: 25px;}
 /* ----------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------이용약관 관리 list페이지 CSS시작------------------------------------ */
     .top-box a{
@@ -180,8 +182,9 @@
         margin-top: 20px;
         text-align:center;
         font-weight:bolder;
-		padding-left: 15px;
     }
+    
+    .caution{color:red; font-weight:bold; text-align:center; width:890px;}
 
     .btn-area{
         width: 800px;
@@ -210,12 +213,23 @@
     </style>
 </head>
 <body>
+    <script>
+	 	var msg = "<%= confirmMsg %>"; 
+	 	
+	 	if(msg != "null"){
+	 		if(confirm(msg)){
+				location.href = "<%= request.getContextPath() %>";		
+	 		}	 		
+			<% session.removeAttribute("confirmMsg"); %>
+	 	}
+	 </script>
+
+    <%@ include file="../common/admin/adminTopNavView.jsp" %>
     <div class="wrap">
-        <div id="horizontal-bar"></div>
+	<%@ include file="../common/admin/adminSideBarView.jsp" %>
         <div id="content">
-            <div id="vertical-bar"></div>            
 <!-------------------------------------------------------------------------------------------------------------->            
-            <div class="outer">
+            <div class="outer" style="float:right">
                 <div class="top-box">
                     <a href="">홈</a> >
                     <a href="">싸이트관리</a> >
@@ -238,6 +252,9 @@
 
                     <!-- 아래 영역 -->
                     <div class="sub-title">Navigation 목록 변경역역</div>
+                    <div class="caution">
+                    	※ 순서 입력란에는 ! 꼭 중복되지 않는 순서를 입력해주세요! 
+                    </div>
                     <div id="buttom-div">
                         <div class="inner-top-box">
                             <div>
@@ -255,21 +272,91 @@
                             <div>
                                 <div class="big-circle-box">고객센터</div>
                             </div>
-                        </div>
+                        </div>                    
                         
-
                         <form action="modifyNav.nav" method="POST">
                             <div class="inner-bottom-box">
-     							<input type="number" name="home" placeholder="순서입력" min="1" max="5" required>
-     							<input type="number" name="category" placeholder="순서입력" min="1" max="5" required>
-     							<input type="number" name="event" placeholder="순서입력" min="1" max="5" required>
-     							<input type="number" name="recipe" placeholder="순서입력" min="1" max="5" required>
-     							<input type="number" name="cs" placeholder="순서입력" min="1" max="5" required>
+     							<input type="text" name="home" placeholder="순서입력" required maxlength="1" pattern="1|2|3|4|5{1}" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');">
+     							<input type="text" name="category" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="event" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="recipe" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="cs" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                             </div>
+							
+							<script>
+								$(function(){
+									// 그래 만들어보자 error나서 뻑나면 안되니까 
+									// 와.... 몇시간을 썻냐.. 그래도 원하는데로 만들었다!!!! 오류나기전에 무조건 검사해줄것이다! 
+									var homeInp = $("input[name='home']");
+									var categoryInp = $("input[name='category']");
+									var eventInp = $("input[name='event']");
+									var recipeInp = $("input[name='recipe']");
+									var csInp = $("input[name='cs']");
+									
+									//얘로 구워삶아먹어야한당
+									var regExp = "0|1|2|3|4|5";
+									
+									//첫 인풋
+									homeInp.focusout(function(){
+										if(homeInp.val() != ""){
+											regExp = regExp.replace("|" + homeInp.val(),""); 										
+											homeInp.attr('readonly' , true);
+											categoryInp.attr('readonly' , false);										
+											categoryInp.attr('pattern', regExp);							
+											console.log(homeInp.val());
+										}
+									});
+									
+									//2번째 인풋
+									categoryInp.focusout(function(){										
+										if(homeInp.val() == categoryInp.val()){
+											categoryInp.val("");	
+											categoryInp.attr("placeholder", "다시입력");
+										}
 
+										if(categoryInp.val() != ""){	
+											regExp = regExp.replace("|" + categoryInp.val(),""); 
+											categoryInp.attr('readonly' , true);
+											eventInp.attr('readonly' , false);										
+											eventInp.attr('pattern', regExp);									
+										}										
+									});
+
+									//세번쨰 인풋
+									eventInp.focusout(function(){		
+										if(homeInp.val() == eventInp.val() || categoryInp.val() == eventInp.val()){
+											eventInp.val("");	
+											 eventInp.attr("placeholder", "다시입력");
+										}
+										
+										if(eventInp.val() != ""){										
+											regExp = regExp.replace("|" + eventInp.val(),""); 
+											eventInp.attr('readonly' , true);
+											recipeInp.attr('readonly' , false);										
+											recipeInp.attr('pattern', regExp);									
+										}
+									});
+								
+									//네번째 인풋 
+									recipeInp.focusout(function(){
+										if(homeInp.val()  == recipeInp.val()|| categoryInp.val() == recipeInp.val() || eventInp.val() == recipeInp.val()){
+											recipeInp.val("");	
+										}
+
+										if(recipeInp.val() != ""){
+											regExp = regExp.replace("|" + recipeInp.val(),""); 										
+											recipeInp.attr('readonly' , true);
+											csInp.attr('readonly' , false);										
+											csInp.attr('pattern', regExp);									
+										}
+									});
+									
+								})
+							</script>
+							
                             <div class="btn-area">
                                 <button type="submit">수정하기</button>
-                                <button type="reset">초기화</button>
+                                <button type="button" onclick="window.location.reload()">초기화</button>
                             </div>
                         </form>
 

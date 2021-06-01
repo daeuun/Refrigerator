@@ -1,7 +1,9 @@
 package com.refrigerator.nav_menu.model.service;
 
 import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.commit;
 import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -18,4 +20,20 @@ public class NavMenuService {
 		close(conn);
 		return list; 
 	}
+//----------------------------------------------------------------------------	
+	public int updateNavMenu(int[] navOrder) {
+		Connection conn = getConnection();
+		int result = new NavMenuDao().updateNavMenu(conn, navOrder);
+
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+				
+		return result;		
+	}
+//---------------------------------------------------------------------------	
 }
