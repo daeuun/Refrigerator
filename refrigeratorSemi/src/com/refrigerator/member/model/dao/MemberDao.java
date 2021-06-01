@@ -1,7 +1,6 @@
 package com.refrigerator.member.model.dao;
 
-import static com.refrigerator.common.JDBCTemplate.close;
-import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -185,9 +184,42 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 특정 회원 상세 조회
+	 */
+	public Member selectMember(Connection conn, String userNo) {
+		// select => ResultSet 한 행
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMember");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(userNo));
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getString("user_pwd"),
+							   rset.getString("user_name"),
+							   rset.getString("grade"),
+							   rset.getString("gender"),
+							   rset.getString("email"),
+							   rset.getString("phone"),
+							   rset.getString("nickname"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
 	}
 	
 

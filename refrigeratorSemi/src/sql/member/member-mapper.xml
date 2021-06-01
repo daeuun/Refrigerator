@@ -57,8 +57,8 @@
 		   AND STATUS = 'Y'
 	</entry>
 	
-	<!-- @author leeyeji
-		 페이징 총 페이지 수 -->
+	<!-- @author leeyeji -->
+	<!-- 페이징 총 페이지 수 -->
 	<entry key="selectListCount">
 		SELECT
 		       COUNT(*) COUNT
@@ -67,8 +67,8 @@
 		   AND USER_TYPE = 'N'	
 	</entry>
 	
-	<!-- @author leeyeji
-		 페이징 전체 목록 -->
+	<!-- @author leeyeji-->
+	<!-- 페이징 전체 목록 -->
 	<entry key="selectList">
 		SELECT *
 		  FROM (
@@ -91,6 +91,23 @@
 		        )
 		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 특정 회원 상세 조회 -->
+	<entry key="selectMember">
+		SELECT
+		       USER_PWD
+		     , USER_NAME
+		     , GRADE
+		     , GENDER
+		     , EMAIL
+		     , PHONE
+		     , NICKNAME
+		  FROM MEMBER
+		 WHERE USER_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
 	
 	<!-- Hee Rak-->
 	<!-- 회원 한명 프로필 조회 -->

@@ -76,6 +76,17 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 특정 회원 상세 조회
+	 */
+	public Member selectMember(String userNo) {
+		Connection conn = getConnection();
+		Member m = new MemberDao().selectMember(conn, userNo);
+		close(conn);
+		return m;
+	}
 
 
 	/**

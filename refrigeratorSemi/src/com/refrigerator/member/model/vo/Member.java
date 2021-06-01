@@ -85,6 +85,18 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+	public Member(String userPwd, String userName, String grade, String gender, String email, String phone,
+			String nickname) {
+		super();
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.grade = grade;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.nickname = nickname;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}

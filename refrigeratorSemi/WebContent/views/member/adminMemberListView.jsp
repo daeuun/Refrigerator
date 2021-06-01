@@ -6,6 +6,7 @@
 <%
 	//String contextPath = request.getContextPath();
 	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
+	Member spcMem = (Member)request.getAttribute("spcMem");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -23,7 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
-    .outer{
+    .total-outer{
         width: 1200px;
         margin: auto;
     }
@@ -106,7 +107,7 @@
                     <div class="btn" align="right" style="width: 350px;">
     
                         <div class="modi-delete" align="left" width="1000px">
-                            <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal">회원수정</a>
+                            <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#member-modify-Modal" onclick="">회원수정</a>
                             <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#member-delete-Modal">회원삭제</a>
                         </div>
     
@@ -132,7 +133,7 @@
 	                                                        </div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="text" name="mem-nickname" id="">
+	                                                        <input type="text" name="mem-nickname" id="" value="<%=spcMem.getNickname()%>">
 	                                                    </td>
 	                                                </tr>
 	                                                <tr>
@@ -194,6 +195,8 @@
 	                        </div>
     					</form>
     					
+						
+    					
                         <!-- 회원 삭제 modal -->
 	                        <!-- 
 	                        	form 수정!!!!!!!!
@@ -246,7 +249,8 @@
                             <tbody class="checked-memberList">
                             	<%for(Member m : pageList) {%>
 	                                <tr align="center">
-	                                    <td><input type="checkbox"></td>
+	                            		<input type="hidden" name="userNo" value="<%= m.getUserNo() %>">
+	                                    <td><input type="checkbox" name="userCheck" value="checked"></td>
 	                                    <td><%= m.getUserNo()%></td>
 	                                    <td colspan="2"><%= m.getUserId() %></td>
 	                                    <td><%= m.getUserName() %></td>
@@ -268,6 +272,23 @@
                     </div>
                     <!--mem list-->
                    
+                   <script>
+	                   		// 조회되는 한 행의 회원 번호 넘기기..
+	                   		
+	                   		//$(".checked-memberList>tr").click(function(){
+	                   		//	var mno = $(this).children("input").text();
+	                   		
+	                   		//})
+	                   		function test(){
+	                   			var checked = $("input[name='userCheck']:checked");
+	                   			
+	                   			if(ckecked.length != 0){ //td - tr - td
+	                   				var userNo = checked.parant().children("input").eq(0).val();
+	                   				console.log(userNo);
+	                   				location.href = '<%=contextPath%>adDetail.me?mno' + mno;
+	                   			}
+	                   		}
+						</script>
     
                 </form> 
                	<br>
