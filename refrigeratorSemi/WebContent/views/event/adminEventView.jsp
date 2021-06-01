@@ -181,6 +181,103 @@
               
             </script>
             
+            
+              <!--이벤트 수정 영역-->
+                   <form action="<%=contextPath%>/updateEvent.admin" method="post" id="enroll-form" enctype="multipart/form-data">
+                   
+                   
+                        <!-- The Modal -->
+                        <div class="modal" id="event-modify-Modal" >
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content" style="background-color: rgb(224, 224, 224);" align="center">
+                    
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                            <h4 class="modal-title"><b>이벤트 수정</b></h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="modal-body-list">
+                                    
+                                    <table>
+											
+                                        <tr>
+                                            <td>
+                                            	<input type="hidden" name="eventNo" id="eventNo-id">
+                                                <div class="modal-event-title">이벤트 제목
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="upDateEventTitle" placeholder="제목을 입력해주세요">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    분류
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select name="upDateEventCategory" >
+                                                    <option value="이벤트">이벤트</option>
+                                                    <option value="공모전">공모전</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        
+                                         <tr>
+                                            <td>
+                                                <div>
+                                                     게시여부
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select name="status" id="" value="">
+                                                    <option value="Y">Y</option>
+                                                    <option value="N">N</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><div>이벤트 시작일</div></td>
+                                            <td><input type="date" name="UpdateStartDate"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td> <div>이벤트 종료일</div></td>
+                                            <td><input type="date" name="UpdateEndDate"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><div>첨부파일</div></td>
+                                            <td>
+                                                <input type="file" name="UpdateEventUpfile">
+                                            </td> 
+                                        </tr>
+
+                                    </table>
+
+
+                                </div>
+        
+                            </div>
+                    
+                            <!-- Modal footer -->
+                            <div class="modal-footer" align="center">
+                            <button type="submit" class="btn btn-success">수정</button>
+                            </div>
+                                                                
+                        </div>
+                        </div>
+                        </div>
+
+                </form>
+            
+            
                    <!--이벤트 삭제 영역-->
                     <form action="<%=contextPath%>/deleteEvent.admin" id="delete-form" >
                     
@@ -295,100 +392,7 @@
 
 
 
-                    <!--이벤트 수정 영역-->
-                   <form action="<%=contextPath%>/updateEvent.admin" method="post" id="enroll-form" enctype="multipart/form-data">
-                   
-                   
-                        <!-- The Modal -->
-                        <div class="modal" id="event-modify-Modal" >
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content" style="background-color: rgb(224, 224, 224);" align="center">
-                    
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                            <h4 class="modal-title"><b>이벤트 수정</b></h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <div class="modal-body-list">
-                                    
-                                    <table>
-											
-                                        <tr>
-                                            <td>
-                                            	<input type="hidden" name="eventNo" id="eventNo-id">
-                                                <div class="modal-event-title">이벤트 제목
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="text" name="upDateEventTitle" id="" placeholder="제목을 입력해주세요">
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    분류
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <select name="upDateEventCategory" >
-                                                    <option value="이벤트">이벤트</option>
-                                                    <option value="공모전">공모전</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        
-                                         <tr>
-                                            <td>
-                                                <div>
-                                                     게시여부
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <select name="status" id="" value="">
-                                                    <option value="Y">Y</option>
-                                                    <option value="N">N</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><div>이벤트 시작일</div></td>
-                                            <td><input type="date" name="UpdateStartDate"></td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td> <div>이벤트 종료일</div></td>
-                                            <td><input type="date" name="UpdateEndDate"></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><div>첨부파일</div></td>
-                                            <td>
-                                                <input type="file" name="UpdateEventUpfile">
-                                            </td> 
-                                        </tr>
-
-                                    </table>
-
-
-                                </div>
-        
-                            </div>
-                    
-                            <!-- Modal footer -->
-                            <div class="modal-footer" align="center">
-                            <button type="submit" class="btn btn-success">수정</button>
-                            </div>
-                                                                
-                        </div>
-                        </div>
-                        </div>
-
-                </form>
+                  
 
                 <br>
                 <div class="paging-area" align="center">
