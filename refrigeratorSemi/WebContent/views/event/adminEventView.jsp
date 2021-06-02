@@ -167,9 +167,30 @@
                         //var checked = $('input[type="checkbox"][name="testSE"]:checked');
                         // console.log($(event.target).parent().siblings("input[type=hidden]").val());
                         
-                        $("#eventNo-id").val($(event.target).parent().siblings("input[type=hidden]").val());
+                      	 var eventNo = $(event.target).parent().siblings("input[type=hidden]").val();
                         
+                        $("#eventNo-id").val(eventNo);
+                   	 
+                    	<%for(AdmEvent adm : list){%>
+                    	
+                    	
+                    	  	if(eventNo == <%=adm.getEventNo()%>){
+                    	  		
+                    		$("#upDateEventTitle").val("<%=adm.getEventTitle()%>");
+                    		$("#upDateEventCategory").val("<%=adm.getEventCategory()%>");
+                    		$("#status").val("<%=adm.getStatus()%>");
+								
+                    		var startDate = "<%=adm.getStartDate()%>";
+                    	
+                    		$("#UpdateStartDate").val("<%=adm.getStartDate()%>");
+                    		$("#UpdateEndDate").val("<%=adm.getEndDate()%>");
 
+                    		
+                    	    }
+                    	  	
+                    	<%}%>
+                        
+                        
                     }
                     
                     /*삭제하기 버튼 클릭시 이벤트 번호 전달되는 스크립트*/
@@ -210,7 +231,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="text" name="upDateEventTitle" placeholder="제목을 입력해주세요">
+                                                <input type="text" id="upDateEventTitle"  name="upDateEventTitle" placeholder="제목을 입력해주세요">
                                             </td>
                                         </tr>
 
@@ -221,7 +242,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name="upDateEventCategory" >
+                                                <select id="upDateEventCategory" name="upDateEventCategory" >
                                                     <option value="이벤트">이벤트</option>
                                                     <option value="공모전">공모전</option>
                                                 </select>
@@ -235,7 +256,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name="status" id="" value="">
+                                                <select id="status"  name="status" >
                                                     <option value="Y">Y</option>
                                                     <option value="N">N</option>
                                                 </select>
@@ -244,18 +265,18 @@
                                         
                                         <tr>
                                             <td><div>이벤트 시작일</div></td>
-                                            <td><input type="date" name="UpdateStartDate"></td>
+                                            <td><input type="date" id="UpdateStartDate" name="UpdateStartDate"></td>
                                         </tr>
                                         
                                         <tr>
                                             <td> <div>이벤트 종료일</div></td>
-                                            <td><input type="date" name="UpdateEndDate"></td>
+                                            <td><input type="date" id="UpdateEndDate" name="UpdateEndDate"></td>
                                         </tr>
 
                                         <tr>
                                             <td><div>첨부파일</div></td>
                                             <td>
-                                                <input type="file" name="UpdateEventUpfile">
+                                                <input type="file"  id="UpdateEventUpfile" name="UpdateEventUpfile">
                                             </td> 
                                         </tr>
 
@@ -315,7 +336,7 @@
             
       
                     <!--이벤트 등록 영역-->
-                	<form action="<%=contextPath%>/insertEvent.admin" method="post" id="enroll-form" enctype="multipart/form-data">
+                	
                   	    <!-- The Modal -->
                         <div class="modal" id="event-enroll-Modal" >
                         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -327,7 +348,7 @@
                             <h4 class="modal-title"><b>이벤트 등록</b></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            
+                            <form action="<%=contextPath%>/insertEvent.admin" method="post" id="enroll-form" enctype="multipart/form-data">
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <div class="modal-body-list">
@@ -340,7 +361,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="text" name="eventTitle" placeholder="제목을 입력해주세요" >
+                                                <input type="text" name="eventTitle" placeholder="제목을 입력해주세요" required>
                                             </td>
                                         </tr>
 
@@ -349,7 +370,7 @@
                                                 <div>분류</div>
                                             </td>
                                             <td>
-                                                <select name="eventCategory" >
+                                                <select name="eventCategory" required >
                                                     <option value="이벤트">이벤트</option>
                                                     <option value="공모전">공모전</option>
                                                 </select>
@@ -358,18 +379,18 @@
                                         
                                         <tr>
                                             <td><div>이벤트 시작일</div></td>
-                                            <td><input type="date" name="startDate"></td>
+                                            <td><input type="date" name="startDate" required></td>
                                         </tr>
                                         
                                         <tr>
                                             <td> <div>이벤트 종료일</div></td>
-                                            <td><input type="date" name="endDate"></td>
+                                            <td><input type="date" name="endDate" required></td>
                                         </tr>
 
                                         <tr>
                                             <td><div>첨부파일</div></td>
                                             <td>
-                                                <input type="file" name="eventUpfile">
+                                                <input type="file" name="eventUpfile" required>
                                             </td> 
                                         </tr>
 
@@ -384,11 +405,11 @@
                             <div class="modal-footer">
                             <button type="submit" class="btn btn-success">등록</button>
                             </div>
-                    
+                    	 <form >
                         </div>
                         </div>
                         </div>
-                    <form >
+                   
 
 
 
