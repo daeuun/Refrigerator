@@ -78,6 +78,7 @@
 
         
 	<div class="total-outer">
+	
 		<%@ include file="../common/admin/adminTopNavView.jsp" %>
 			
             <div class="mem-content">
