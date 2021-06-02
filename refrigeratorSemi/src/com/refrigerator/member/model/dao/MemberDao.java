@@ -175,6 +175,7 @@ public class MemberDao {
 								    rset.getString("gender"),
 								    rset.getString("email"),
 								    rset.getString("phone"),
+								    rset.getString("nickname"),
 								    rset.getString("status")));
 			}
 			

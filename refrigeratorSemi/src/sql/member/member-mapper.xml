@@ -82,6 +82,7 @@
 		                     , GENDER
 		                     , EMAIL
 		                     , PHONE
+		                     , NICKNAME
 		                     , STATUS
 		                  FROM MEMBER
 		                 WHERE USER_TYPE = 'N'

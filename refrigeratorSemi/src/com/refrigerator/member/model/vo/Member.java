@@ -64,7 +64,7 @@ public class Member {
 	}
 	
 	public Member(int userNo, String userId, String userName, String grade, String gender, String email, String phone,
-			String status) {
+			String nickname, String status) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -73,6 +73,7 @@ public class Member {
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
+		this.nickname = nickname;
 		this.status = status;
 	}
 	

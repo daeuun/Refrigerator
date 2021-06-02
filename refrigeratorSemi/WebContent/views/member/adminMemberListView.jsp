@@ -236,9 +236,8 @@
     
                             <thead class="thead">
                                 <tr align="center">
-                                    <th width="50"></th>
-                                    <th width="50">번호</th>
-                                    <th colspan="2" width="120">아아디</th>
+                                    <th width="120">아아디</th>
+                                    <th width="100">닉네임</th>
                                     <th width="70">이름</th>
                                     <th width="150">전화번호</th>
                                     <th width="250">이메일</th>
@@ -252,10 +251,9 @@
                             <tbody class="checked-memberList">
                             	<%for(Member m : pageList) {%>
 	                                <tr align="center">
-	                                    <td><input type="checkbox" name="userCheck"></td>
-	                                    <td><%= m.getUserNo()%></td>
 	                            		<input type="hidden" value="<%= m.getUserNo() %>">
-	                                    <td colspan="2"><%= m.getUserId() %></td>
+	                                    <td><%= m.getUserId() %></td>
+	                                    <td><%= m.getNickname()%></td>
 	                                    <td><%= m.getUserName() %></td>
 	                                    <td><%= m.getPhone() %></td>
 	                                    <td><%= m.getEmail() %></td>
