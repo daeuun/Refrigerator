@@ -25,6 +25,7 @@
                              , REPORT_DATE
                              , REPORT_TYPE
 		                  FROM REPORT 
+                          JOIN MEMBER M USING (USER_NO)
 		                 ORDER
 		                    BY REPORT_DATE DESC
 		                ) R

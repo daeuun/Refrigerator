@@ -80,7 +80,7 @@ public class ReportDao {
 			
 			while(rset.next()) {
 				list.add(new Report(rset.getInt("report_no"),
-									rset.getInt("user_no"),
+									rset.getString("user_id"),
 									rset.getInt("ref_no"),
 									rset.getString("report_content"),
 									rset.getDate("report_date"),
