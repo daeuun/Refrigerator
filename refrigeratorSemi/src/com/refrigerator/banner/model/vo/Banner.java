@@ -33,6 +33,33 @@ public class Banner {
 		this.page = page;
 	}
 
+	public Banner(int bannerNo, String bannerName, String companyName, String bannerCategory, String bannerStatus,
+			String startDate, String endDate, String bannerImg, String page) {
+		super();
+		this.bannerNo = bannerNo;
+		this.bannerName = bannerName;
+		this.companyName = companyName;
+		this.bannerCategory = bannerCategory;
+		this.bannerStatus = bannerStatus;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.bannerImg = bannerImg;
+		this.page = page;
+	}
+
+	public Banner(String bannerName, String companyName, String bannerCategory, String bannerStatus, String startDate,
+			String endDate, String bannerImg, String page) {
+		super();
+		this.bannerName = bannerName;
+		this.companyName = companyName;
+		this.bannerCategory = bannerCategory;
+		this.bannerStatus = bannerStatus;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.bannerImg = bannerImg;
+		this.page = page;
+	}
+
 	public int getBannerNo() {
 		return bannerNo;
 	}

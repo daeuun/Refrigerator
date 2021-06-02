@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.tos.model.vo.Tos;
 
 public class BannerDao {
 	// 실행되는 sql문을 실행할 xml파일을 등록을 해주자! 
@@ -108,5 +109,118 @@ public class BannerDao {
 				
 		return list;
 	}
+//-----------------------------------------------------------------------------------------
+	public int insertBanner(Connection conn,Banner ba) {
+		// insert문 => 처리된 행수 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertBanner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ba.getBannerName()); // 배너명
+			pstmt.setString(2, ba.getCompanyName()); // 담당업체명
+			pstmt.setString(3, ba.getBannerCategory()); // 뷴류
+			pstmt.setString(4, ba.getBannerStatus()); // 상태 게시중인지 아닌지
+			pstmt.setString(5, ba.getStartDate()); // 시작일
+			pstmt.setString(6, ba.getEndDate()); // 종료일
+			pstmt.setString(7, ba.getBannerImg()); // 배너이미지
+			pstmt.setString(8, ba.getPage()); // 사용될영역 div
+						
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+//--------------------------------------------------------------------------------------------	
+	public int deleteBanner(Connection conn,int bannerNo) {
+		// insert문 => 처리된 행수 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteBanner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bannerNo);
+						
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+//---------------------------------------------------------------------------------------------
+	public Banner selectBanner(Connection conn,int bannerNo){
+		//select문 => resultSet (한행)
+		Banner selectedBanner = new Banner();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBanner");
 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bannerNo);// 해당 카테고리번호
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				selectedBanner = new Banner(rset.getString("banner_name"),
+											rset.getString("company_name"),	
+											rset.getString("banner_category"),
+											rset.getString("banner_status"),
+											rset.getString("start_date"),	
+											rset.getString("end_date"),
+											rset.getString("banner_img"),
+											rset.getString("page"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return selectedBanner;
+	}
+//------------------------------------------------------------------------------------------	
+	public int updateBanner(Connection conn,Banner ba) {
+		// insert문 => 처리된 행수 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateBanner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ba.getBannerName()); // 배너명
+			pstmt.setString(2, ba.getCompanyName()); // 담당업체명
+			pstmt.setString(3, ba.getBannerCategory()); // 뷴류
+			pstmt.setString(4, ba.getBannerStatus()); // 상태 게시중인지 아닌지
+			pstmt.setString(5, ba.getStartDate()); // 시작일
+			pstmt.setString(6, ba.getEndDate()); // 종료일
+			pstmt.setString(7, ba.getBannerImg()); // 배너이미지
+			pstmt.setString(8, ba.getPage()); // 사용될영역 div
+			pstmt.setInt(9, ba.getBannerNo());
+						
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+//-----------------------------------------------------------------------------------------
 }

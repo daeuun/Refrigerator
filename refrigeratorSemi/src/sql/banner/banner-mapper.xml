@@ -32,5 +32,68 @@
 		WHERE RNUM BETWEEN ? AND ?	
 	</entry>
 
+	<entry key="insertBanner">
+		INSERT 
+		  INTO BANNER
+		  (
+		    BANNER_NO
+		  , BANNER_NAME
+		  , COMPANY_NAME
+		  , BANNER_CATEGORY
+		  , BANNER_STATUS
+		  , START_DATE
+		  , END_DATE
+		  , BANNER_IMG
+		  , PAGE
+		  )
+		  VALUES
+		  (
+		    SEQ_BNNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )	
+	</entry>
 
+	<entry key="deleteBanner">
+		DELETE 
+		  FROM BANNER
+		 WHERE BANNER_NO = ?
+	</entry>
+	
+	<entry key="selectBanner">
+       SELECT 
+              BANNER_NAME
+            , COMPANY_NAME
+            , BANNER_CATEGORY
+            , BANNER_STATUS
+            , START_DATE
+            , END_DATE
+            , BANNER_IMG
+            , PAGE
+        FROM BANNER  
+	   WHERE BANNER_NO = ?	
+	</entry>
+	
+	<entry key="updateBanner">
+		UPDATE 
+		       BANNER
+		   SET BANNER_NAME = ?
+		     , COMPANY_NAME = ? 
+		     , BANNER_CATEGORY = ?
+		     , BANNER_STATUS = ? 
+		     , MODIFY_DATE = SYSDATE
+		     , START_DATE = ?
+		     , END_DATE = ?
+		     , BANNER_IMG =?
+		     , PAGE =?
+		 WHERE BANNER_NO = ?
+	</entry>
+	
+	
 </properties>

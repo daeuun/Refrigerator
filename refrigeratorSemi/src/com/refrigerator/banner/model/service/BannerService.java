@@ -1,7 +1,9 @@
 package com.refrigerator.banner.model.service;
 
 import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.commit;
 import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import com.refrigerator.banner.model.dao.BannerDao;
 import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.tos.model.dao.TosDao;
 
 
 public class BannerService {
@@ -33,5 +36,60 @@ public class BannerService {
 	}
 
 //------------------------------------------------------------------------------------------------
+	public int insertBanner(Banner ba) {
+		Connection conn = getConnection();
+		
+		int result = new BannerDao().insertBanner(conn, ba);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+				
+		return result;		
+	}
+//-------------------------------------------------------------------------------------------------	
+	public int deleteBanner(int bannerNo) {
+		Connection conn = getConnection();
+		
+		int result = new BannerDao().deleteBanner(conn, bannerNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+				
+		return result;		
+	}
+//------------------------------------------------------------------------------------------------
+	//한행 조회랑 삭제에서 활용
+	public Banner selectBanner(int bannerNo) {
+		Connection conn = getConnection();
+		Banner selectedBanner = new BannerDao().selectBanner(conn, bannerNo);
+		close(conn);
+		return selectedBanner;	
 
+	}
+//------------------------------------------------------------------------------------------------	
+	public int updateBanner(Banner ba) {
+		Connection conn = getConnection();
+		
+		int result = new BannerDao().updateBanner(conn, ba);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+				
+		return result;		
+	}
 }

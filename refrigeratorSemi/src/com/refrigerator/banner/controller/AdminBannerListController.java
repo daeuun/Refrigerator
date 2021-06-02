@@ -81,11 +81,36 @@ public class AdminBannerListController extends HttpServlet {
 		// ★ 이제 핵심이다 위에서 페이징 처리는 모두 끝냈다 이제 실질적으로 banner 리스트들을 가져오자! 
 		// 2. 현재 요청한 페이지 (currentPage)에 보여질 게시글 리스트 조회해오기
 		ArrayList<Banner> list = new BannerService().selectList(pi); 
+		// 데이터 값이 몇개 담겨있을지 모른다 단 max값은 6개이다! 
+		
+		// ArrayList를 복사할것인데 얘는 딱히 다시 이를 가지고 DB단을 돌아가서 수정해버리고 이런게 없기에!!! 
+		// 얕은 복사를 해줘도된다! 
+		// 아래는 변수 세팅 
+		ArrayList<Banner> list1 = new ArrayList();
+		ArrayList<Banner> list2 = new ArrayList();
+		
+		if(list.size()<4) {
+			// 3개 이하로 잡히면 그떄는 전체 리스트에 접근해줘도 된다. 
+			list1= list;			
+		}else {
+			// 혹여나 데이터의 갯수가 음 .. 4개가 넘고 이게 4개일지 5개일지 6개일지 모를떄는 !! 
+			// 일단은 3개가 넘는 다는 소리이다. 이렇게 되면 최소 4개 까지는 있다는 것이다. 
+			// 그럼 끝인덱스만을 알아오면 되는데 음 .. 
+			// E e = list.get(list.size() - 1);
+			for(int i=0; i<3; i++){
+				list1.add(list.get(i));
+			}
+			for(int i=3; i<list.size(); i++) {
+				list2.add(list.get(i));
+			}
+		}
+		
 		// banner 셈플데이터 기준으로 현재 6개의 행만이 담겨있을것이다. 
 		
 		// 이제 구한 pi 정보와 list정보를 request의 속성에 담아서 뿌려줄 페이지로 넘기면서 호출해주면된다!!
 		request.setAttribute("pi", pi);// 페이징바 만들때 쓰라고 넘겨주는것
-		request.setAttribute("list", list);
+		request.setAttribute("list1", list1);
+		request.setAttribute("list2", list2);
 		
 		request.getRequestDispatcher("views/banner/adminBannerViewAndModifyAndDeletePage.jsp").forward(request, response);
 		// adminTosPage.jsp 페이지 가서 작업해주자 !!
