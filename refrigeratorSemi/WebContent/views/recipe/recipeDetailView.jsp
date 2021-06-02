@@ -3,11 +3,10 @@
 
 <%@ page import =" java.util.ArrayList, com.refrigerator.recipe.model.vo.Review" %>
 <%
-	//menubar.jsp로 가져갈 구문
-	String contextPath = request.getContextPath(); 
+
 	String alertMsg = (String)session.getAttribute("alertMsg"); 
-	
 	ArrayList<Review>list = (ArrayList<Review>)request.getAttribute("list");
+	
 %>
 
 
@@ -22,9 +21,9 @@
 
 <style>
 
-    .outer{
+    .total-outer{
         margin:auto;
-        margin-top:20px;
+        margin-top:50px;
         width: 1200px;
 
     }
@@ -299,35 +298,22 @@
 </head>
 <body>
 	
+	<%@ include file="../common/user/menubar.jsp" %>
 
-	<%@ include file="../common/user/recipeSideBar.jsp" %>
-	
-	
-	<script>
-	
-		// menubar.jsp로 가져갈 구문
-		var msg = "<%= alertMsg %>";
-			
-		if(msg != "null"){ 
-			alert(msg);
-			
-			<% session.removeAttribute("alertMsg");%>
-		}
-	
-	</script>
-	
-	
-    <!--전체 감싸는 div-->
-    <div class="outer">
+
+	  <!--전체 감싸는 div-->
+    <div class="total-outer">
+    
+		<%@ include file="../common/user/recipeSideBar.jsp" %>
 
         
         <div align="center">
             <div class="bannner">
-                <img src="../../resources/images/recipe-main-img.jpg" id="main-img">
+                <img src="<%=contextPath%>/resources/image/recipe-main-img.jpg" id="main-img">
                 <span class="text" align="right" style="width: 580px;">
-                    <span> <img src="../../../resources/images/icon-star.png" alt="">130</span>
-                    <span><img src="../../resources/images/icon-bookmark.png" alt="">200</span>
-                    <span></spn><img src="../../resources/images/icon-view.png" alt="">253</span>
+                    <span><img src="<%=contextPath%>/resources/image/icon-star.png" alt="">4.5</span>
+                    <span><img src="<%=contextPath%>/resources/image/icon-bookmark.png" alt="">200</span>
+                    <span></spn><img src="<%=contextPath%>/resources/image/icon-view.png" alt="">253</span>
                 </span>
             </div>
         </div>
@@ -343,12 +329,12 @@
         </div>
         <br>
         <div class="recipe-sub-info">
-            <img src="../../resources/images/icon-servings.png">
+            <img src="<%=contextPath%>/resources/image/icon-servings.png">
             <div> 
                 <span class="recipe-sub-info-servings"><b>2</b></span>명이서 먹을 수 있어요 
             </div>
 
-            <img src="../../resources/images/icon-cooking-time.png">
+            <img src="<%=contextPath%>/resources/image/icon-cooking-time.png">
             <div>
                 <span class="recipe-sub-info-cooking-time"><b>10</b></span>분정도 걸려요 
             </div>
@@ -435,12 +421,12 @@
 
         
             <br><br>
-            <!--재료 계산기 클릭시 모달창 출력되기-->
+            <!--재료 계산기 클릭시 모달창 출력-->
             <div class="igre-calculator">
                 <div align="right" style="width: 900px">
                     <b>2</b>인 기준 | 
                     <a data-toggle="tooltip" title=" 재료 계산해드릴게요 !">
-                        <img src="../../resources/images/icon-cal.png" class="icon"  data-toggle="modal" data-target="#calculatorModal" >
+                        <img src="<%=contextPath%>/resources/image/icon-cal.png" class="icon"  data-toggle="modal" data-target="#calculatorModal" >
                     </a>
                     <script>
                         $(document).ready(function(){
@@ -483,15 +469,15 @@
                             
                             <!--모달창 클릭시 재료의 내용 변경-->
                             <!--ajax이용해서 값 변경하기-->
-                            <!--
+                          
                             <script>
-
-                                function calculator(){
-                                    console.log($("#select-servings").children("option:selected").val());
-                                };
+	                            
+	                            function calculator(){
+	                                console.log($("#select-servings").children("option:selected").val());
+	                            };
 
                             </script>
-                            -->
+                  
 
 
                         </div>
@@ -518,19 +504,21 @@
                 <div class="select-view">
 
                     <div class="select-view-img">
-                        <img src=""  class="icon"><br>
-                        <a href="" >사진 크게보기</a> 
+                        
+                        <a href="" class="selectView"><img src="<%=contextPath%>/resources/image/icon-select-photo.png"  class="icon"><br>사진 크게보기</a> 
                     </div>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                     <div class="select-view-text" >
                         
-                    <img src="" class="icon"><br>
-                    <a href="">텍스트 크게보기</a>
+                   
+                    <a href="" class="selectView"><img src="<%=contextPath%>/resources/image/icon-grid.png" class="icon" ><br>텍스트 크게보기</a>
 
 
                     </div>
+  
+                </div>
                     
 
                     
@@ -647,35 +635,12 @@
                     
                     	<tbody id="review-detail-list">
                     	
-                    	
+                    	<!-- ajax로 받아온 리뷰 데이터가 데이터가 출력되는 곳 -->
                     	
                     	
                     	</tbody>
-                       
-                       <!-- 
-                        <tr>
-                            <td rowspan="3">
-                                
-                                <div class="box" style="background: #BDBDBD;">
-                                    <img class="profile" src="" >
-                                </div>
-
-                            </td>
-                            <td><b>아자아자파이팅</b></td>
-                            <td>2021-05-05 오후 04:46</td>
-                            <td rowspan="3" >
-                                <img src="" class="review-detail-img" id="review-modal-btn">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"> 간단하게 해먹기 좋은 것 같아요</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">★★★★★</td>
-                        </tr>
-                        
-                        
-                        
+                     
+                        <!--  
                        		 혹시몰라서 백업
                                                   		
                           			for(var i in list){
@@ -721,7 +686,7 @@
 
                 <!--<button id="review-modal-btn">모달창</button>-->
 
-                <div class="reveiw-img-modal">
+                <div class="reveiw-img-modal" >
 		                <div class="reveiw-img-modal-content" 
 		                    title="클릭하면 창이 닫힙니다."  >
 						                여기에 모달창 내용을 적어줍니다.<br>
@@ -767,7 +732,7 @@
                                     <td rowspan="2">
                                         <!--프로필 사진이 들어오는 영역-->
                                         <div class="box" style="background: #BDBDBD;">
-                                            <img class="profile" src="">
+                                            <img class="profile" src="<%=contextPath%>/resources/image/icon-user-profile.png">
                                         </div>
                                     </td>
                                 </tr>
@@ -811,10 +776,7 @@
                     </div>
 
                     <script>
-                    
-  
-                    
-                  
+
                     
                    /*요리 후기 조회*/ 
                     function selectReviewList(){
@@ -851,7 +813,7 @@
                                                "<td>"+"<b>"+ list[i].reviewWriter+"</b>"+"</td>" +
                                                "<td>"+ list[i].enrollDate+"</td>" +
                                                "<td rowspan='3' >" + 
-                                                   "<img src=" +list[i].reviewImg + "class='review-detail-img' id='review-modal-btn'>" +
+                                                   "<img src='" + "<%=contextPath%>" +"/"+list[i].reviewImg +"'"+"class='review-detail-img' id='review-modal-btn'>" +
                                                "</td>" + 
                                            "</tr>" + 
                                            "<tr>" +
@@ -970,17 +932,12 @@
 
                     </script>
 
-                
-
                 </div>
-
 
             </div>
 
-
             <br><br>
 
-            
 
     </div>
 
