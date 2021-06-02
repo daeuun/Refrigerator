@@ -113,6 +113,7 @@ public class RecipeService {
 	 * 관리자페이지 - 배너 레시피 조회
 	 * @author daeun
 	 */
+	/*
 	public Recipe selectRecipe(int recipeNo) {
 		Connection conn = getConnection();
 		Recipe rc = new RecipeDao().selectRecipe(conn, recipeNo);
@@ -120,7 +121,7 @@ public class RecipeService {
 		return rc;
 		
 		
-	}
+	}*/
 	
 	
 
