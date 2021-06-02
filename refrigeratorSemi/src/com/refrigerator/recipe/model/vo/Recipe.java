@@ -7,7 +7,7 @@ public class Recipe {
 	
 	private int recipeNo;
 	private int userNo;
-	private int recipeTitle;
+	private String recipeTitle;
 	private String recipeIntro;
 	private int severalServings; 
 	private int cookingTime;
@@ -22,7 +22,7 @@ public class Recipe {
 	
 	public Recipe() {}
 	
-	public Recipe(int userNo, int recipeTitle, String recipeIntro, int severalServings, int cookingTime, String mainImg,
+	public Recipe(int userNo, String recipeTitle, String recipeIntro, int severalServings, int cookingTime, String mainImg,
 			String ingreImg) {
 		super();
 		this.userNo = userNo;
@@ -34,7 +34,7 @@ public class Recipe {
 		this.ingreImg = ingreImg;
 	}
 
-	public Recipe(int recipeNo, int userNo, int recipeTitle, String recipeIntro, int severalServings, int cookingTime,
+	public Recipe(int recipeNo, int userNo, String recipeTitle, String recipeIntro, int severalServings, int cookingTime,
 			int avrgStarPoint, int count, int likeCount, int scrapCount, String recipeEnrollDate, String status,
 			String mainImg, String ingreImg) {
 		super();
@@ -70,11 +70,11 @@ public class Recipe {
 		this.userNo = userNo;
 	}
 
-	public int getRecipeTitle() {
+	public String getRecipeTitle() {
 		return recipeTitle;
 	}
 
-	public void setRecipeTitle(int recipeTitle) {
+	public void setRecipeTitle(String recipeTitle) {
 		this.recipeTitle = recipeTitle;
 	}
 
