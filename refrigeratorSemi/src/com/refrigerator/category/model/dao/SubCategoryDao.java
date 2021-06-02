@@ -112,5 +112,42 @@ public class SubCategoryDao {
 	}	
 		
 	
+
+	/**
+	 * 관리자단에서 카테고리 소분류 수정
+	 * @author seong
+	 * @date 6/2
+	 * 
+	 */
+	
+	public int updateSubCategory(Connection conn, SubCategory sub) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateSubCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sub.getIngredientName());
+			pstmt.setInt(2, sub.getCategoryMainNo());
+			pstmt.setInt(3, sub.getCategorySubNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		
+		return result;
+		
+	}
+	
+	
 	
 }

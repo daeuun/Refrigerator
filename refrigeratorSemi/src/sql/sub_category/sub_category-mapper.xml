@@ -39,4 +39,19 @@
 		    BY CATEGORY_SNO  
 	</entry>
 	
+	
+		
+	<!-- 관리자단에서 카테고리 소분류 수정 -->
+	<!-- @author seong 6/2 -->
+
+	<entry key="updateSubCategory">
+	
+	UPDATE SUB_CAT
+	SET INGREDIENT_NAME = ?
+	WHERE CATEGORY_NO = ?
+	AND CATEGORY_SNO = ? 
+	
+	</entry>
+	
+	
 </properties>

@@ -26,6 +26,18 @@
 
 
 
+	<!-- 관리자단에서 카테고리 대분류 수정 -->
+	<!-- @author seong 6/2 -->
+	<entry key="updateMainCategory">
+	
+	   UPDATE MAIN_CAT
+	   SET CATEGORY_NAME = ?
+	   WHERE CATEGORY_MNO = ?
+	
+	</entry>
+
+
+
 
 
 

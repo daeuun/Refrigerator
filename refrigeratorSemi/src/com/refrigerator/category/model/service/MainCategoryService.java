@@ -38,5 +38,30 @@ public class MainCategoryService {
 		return result;		
 	}
 	
+	/**
+	 * 관리자단에서 카테고리 대분류 수정
+	 * @author seong
+	 * @date 6/2
+	 */
+	
+	public int updateMainCategory(int MainCatNo, String MainCatName) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MainCategoryDao().updateMainCategory(conn,MainCatNo,MainCatName);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		 close(conn);
+		 
+		 return result;
+		
+	}
+	
+	
 	
 }

@@ -80,4 +80,39 @@ public class MainCategoryDao {
 	}
 	
 	
+	/**
+	 * 관리자단에서 카테고리 대분류 수정
+	 * @author seong
+	 * @date 6/2
+	 */
+	
+	public int updateMainCategory(Connection conn, int MainCatNo, String MainCatName) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMainCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,MainCatName );
+			pstmt.setInt(2, MainCatNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(conn);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
+	
 }

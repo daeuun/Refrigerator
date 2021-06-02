@@ -592,12 +592,12 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
                             
 						</div>
-                        <form action="" method="GET">
+                         <form action="<%=contextPath%>/mainCatModify.cat" method="POST">
                             <!-- Modal body -->
                             <div class="modal-body" > 
-                            	<input type="hidden" name="" id="modifyMainCatNo" value="">
+                            	<input type="hidden" name="modifyMainCatNo" id="modifyMainCatNo" >
                                 <span>카테고리명 : </span>
-                                <input type="text" name="" id="modifyMainCatName" value=""> 
+                                <input type="text" name="modifyMainCatName" id="modifyMainCatName"> 
                             </div>
                             <!-- Modal footer -->
                             <div class="modal-footer">
@@ -645,18 +645,18 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
                             
 						</div>
-                        <form action="" method="GET">
+                        <form action="<%=contextPath%>/subCatModify.cat" method="POST">
                             <!-- Modal body -->
                             <span id="selectMainCatSpan" >대분류 선택 :</span>
-                            <select name="" id="selectMainCat">
+                            <select name="selectMainCat" id="selectMainCat">
 				                <% for(MainCategory m : mainList){ %>
 	                            	<option value="<%= m.getCategoryMainNo() %>"><%= m.getCategoryName() %></option>							
 								<%} %>
                             </select>
                             <div class="modal-body" >
-                            	<input type="hidden" name="" id="modifySubCatNo" value="" > 
+                            	<input type="hidden" name="modifySubCatNo" id="modifySubCatNo"> 
                                 <span>카테고리명 : </span>
-                                <input type="text" name="" id="modifySubCatName" value=""> 
+                                <input type="text" name="modifySubCatName" id="modifySubCatName"> 
                             </div>
                          
                             <!-- Modal footer -->

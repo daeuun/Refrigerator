@@ -49,6 +49,32 @@ public class SubCategoryService {
 		close(conn);
 		return list;
 	}
+	
+		
+	/**
+	* 관리자단에서 카테고리 소분류 수정
+	* @author seong
+	* @date 6/2
+	* 
+	*/
+	
+	public int updateSubCategory(SubCategory sub) {
+	
+	Connection conn = getConnection();
+	int result = new SubCategoryDao().updateSubCategory(conn,sub);
+	
+	if(result>0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+	
+	close(conn);
+	
+	return result;
+
+}
+
 			
 	
 }
