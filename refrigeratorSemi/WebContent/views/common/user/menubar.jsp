@@ -189,7 +189,7 @@
                             <% }else { %>
                             	<a href="" class="navigation-login-area_item">프사</a>
                             	<a href="<%=contextPath%>/updateForm.pro" class="navigation-login-area_item"><%= loginUser.getUserId() %></a>
-	                            <a href="" class="navigation-login-area_item" id="write">글쓰기</a>
+	                            <a href="<%=contextPath%>/enroll.rcp" class="navigation-login-area_item" id="write">글쓰기</a>
                             
                             <% }%>
                         </div>

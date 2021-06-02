@@ -11,6 +11,13 @@ public class IngreSearch {
 	private int categorySno;
 	
 	public IngreSearch(){}
+	
+	public IngreSearch(int ingredientSearch, int categorySno) {
+		super();
+		this.ingredientSearch = ingredientSearch;
+		this.categorySno = categorySno;
+	}
+
 
 	public IngreSearch(int ingredientSearch, int recipeNo, int categorySno) {
 		super();
