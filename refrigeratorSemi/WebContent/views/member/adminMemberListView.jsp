@@ -5,7 +5,7 @@
 <!-- @author leeyeji -->
 <%
 	//String contextPath = request.getContextPath();
-	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("pageList");
 	Member spcMem = (Member)request.getAttribute("spcMem");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -130,12 +130,12 @@
 	                                            <table>
 	                                                <tr>
 	                                                    <td>
-	                                                    	<input type="hidden" name="userNo" id="userNo-modify">
+	                                                    	<input type="hidden" name="userNo" id="userNo-id">
 	                                                        <div class="modal-event-title">닉네임
 	                                                        </div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="text" name="nickname" id="user-nick">
+	                                                        <input type="text" name="exstnNickname" id="exstnNickname">
 	                                                    </td>
 	                                                </tr>
 	                                                <tr>
@@ -143,7 +143,7 @@
 	                                                        <div>이메일</div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="email" name="email" id="user-email">
+	                                                        <input type="email" name="exstnEmail" id="exstnEmail">
 	                                                    </td>
 	                                                </tr>
 	    
@@ -151,14 +151,14 @@
 	                                                    <td>
 	                                                        <div>비밀번호</div>
 	                                                    </td>
-	                                                    <td><input type="text" name="password" id="user-pwd"></td>
+	                                                    <td><input type="text" name="exstnPwd" id="exstnPwd"></td>
 	                                                </tr>
 	    
 	                                                <tr>
 	                                                    <td>
 	                                                        <div>전화번호</div>
 	                                                    </td>
-	                                                    <td><input type="text" name="phone" id="user-phone"></td>
+	                                                    <td><input type="text" name="exstnPhone" id="exstnPhone"></td>
 	                                                </tr>
 	    
 	                                                <tr>
@@ -250,7 +250,7 @@
                             </thead>
     
                             <tbody class="checked-memberList">
-                            	<%for(Member m : pageList) {%>
+                            	<%for(Member m : list) {%>
 	                                <tr align="center">
 	                            		<input type="hidden" value="<%= m.getUserNo() %>">
 	                                    <td><%= m.getUserId() %></td>
@@ -281,9 +281,24 @@
 					<script>
 	                   		// 조회되는 한 행의 회원 번호 넘기기..
 	                   		function modifyMember(){
-	                   			$("#userNo-modify").val($(event.target).parent().siblings("input[type=hidden]").val());
 	                   			
+	                   			//$("#userNo-modify").val($(event.target).parent().siblings("input[type=hidden]").val());
 	                   			
+	                   			var userNo = $(event.target).parent().siblings("input[type=hidden]").val();
+	                            
+	                            $("#userNo-id").val(userNo);
+	                            
+	                            <% for(Member m : list) {%>
+	                            	
+	                            	if(userNo == <%= m.getUserNo()%>){}
+	                            		
+	                            		$("#exstnNickname").val("<%=m.getNickname()%>");
+	                            		$("#exstnEmail").val("<%=m.getEmail()%>");
+	                            		$("#exstnPwd").val("<%=m.getUserPwd()%>");
+	                            		$("#exstnPhone").val("<%=m.getPhone()%>");
+	                            		
+	                            	}
+	                            <% }%>
 	                   			
 	                   		}
 	                   		
