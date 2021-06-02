@@ -19,6 +19,7 @@
 		          FROM (
 				        SELECT
 				               REPORT_NO
+				             , USER_NO
 		                     , USER_ID
                              , REF_NO
                              , REPORT_CONTENT
@@ -32,5 +33,17 @@
 		        )
 		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 회원 탈퇴 처리 -->
+	<entry key="deleteMember">
+		UPDATE
+			   MEMBER
+		   SET STATUS = 'N'
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
+	
+	
 
 </properties>

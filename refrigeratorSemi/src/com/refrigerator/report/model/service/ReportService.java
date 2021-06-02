@@ -1,7 +1,9 @@
 package com.refrigerator.report.model.service;
 
 import static com.refrigerator.common.JDBCTemplate.close;
+import static com.refrigerator.common.JDBCTemplate.commit;
 import static com.refrigerator.common.JDBCTemplate.getConnection;
+import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -34,4 +36,23 @@ public class ReportService {
 		close(conn);
 		return list;
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 회원 탈퇴 처리
+	 */
+	public int deleteMember(int userNo) {
+		Connection conn = getConnection();
+		int result = new ReportDao().deleteMember(conn, userNo);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+	
 }

@@ -97,7 +97,7 @@
 	        <br><br>
 	
 			<!-- 회원 탈퇴 처리 모달 -->
-	        <form action="" method="GET">
+	        <form action="<%=contextPath%>/adDelete.repo" method="GET">
 	
 	            <div class="btn" align="right" style="width: 270px;">
 	
@@ -112,6 +112,7 @@
 	                
 	                		<!-- Modal Header -->
 	                        <div class="modal-header">
+	                        	<input type="hidden" name="userNo" id="userNo-delete">
 	                        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 	                        </div>
 	                		
@@ -143,8 +144,8 @@
 	                            <th colspan="2" width="250">신고시간</th>
 	                            <th width="350">신고내용</th>
 	                            <th width="130">아이디</th>
-	                            <th width="130">신고유형</th> 
-	                           	<th width="50"></th>   
+	                            <th width="100">신고유형</th> 
+	                           	<th width="50"></th>
 	                        </tr>
 	
 	                    </thead>
@@ -152,6 +153,7 @@
 	                    <tbody class="checked-reportList">
 	                    	<%for(Report r : pageList) {%>
 		                        <tr align="center">
+		                        	<input type="hidden" value="<%= r.getUserNo() %>">
 		                            <td><%=r.getReportNo() %></td>
 		                            <td colspan="2"><%=r.getReportDate() %></td>
 		                            <td><%=r.getReportContent() %></td>
@@ -161,7 +163,7 @@
 			                        <%}else{ %>
 			                        	<td>레시피</td>
 			                        <%} %>
-		                            <td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#report-delete-Modal">관리</a></td>
+		                            <td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#report-delete-Modal"  onclick="deleteMember();">관리</a></td>
 		                        </tr>
 							<%} %>
 	
@@ -172,6 +174,14 @@
 	            </div>
 	
 	        </form>
+			
+			<script>
+					
+				function deleteMember(){
+					$("#userNo-delete").val($(event.target).parent().siblings("input[type=hidden]").val());
+				}
+	                   		
+			</script>
 	        
 	        <br>
 	        <!-- 페이징바 영역 -->
@@ -196,6 +206,7 @@
 			<% } %>
 					
 			</div>
+			
 		
 		</div>
 		<!-- content -->

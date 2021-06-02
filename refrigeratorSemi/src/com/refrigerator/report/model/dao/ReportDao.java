@@ -80,6 +80,7 @@ public class ReportDao {
 			
 			while(rset.next()) {
 				list.add(new Report(rset.getInt("report_no"),
+									rset.getInt("user_no"),
 									rset.getString("user_id"),
 									rset.getInt("ref_no"),
 									rset.getString("report_content"),
@@ -94,6 +95,30 @@ public class ReportDao {
 		}
 		return list;		
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 회원 탈퇴 처리
+	 */
+	public int deleteMember(Connection conn, int userNo) {
+		// update => 처리된 행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 	
