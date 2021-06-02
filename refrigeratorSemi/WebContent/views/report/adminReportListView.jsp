@@ -29,7 +29,6 @@
         color: black;
         width: 1200px;
         margin: auto;
-        margin-top: 50px;
     }
     .select-list>a{
         text-decoration: none;
@@ -79,7 +78,7 @@
     
     	<%@ include file="../common/admin/adminSideBarView.jsp" %>
 
-	        <div class="select-list"  align="right" style="width: 210px;" >
+	        <div class="select-list"  align="right" style="width: 300px;" >
 	            <a href="">회원 관리</a> >
 	            <a href="">신고</a>
 	        </div>
@@ -97,12 +96,13 @@
 	
 	        <br><br>
 	
+			<!-- 회원 탈퇴 처리 모달 -->
 	        <form action="" method="GET">
 	
 	            <div class="btn" align="right" style="width: 270px;">
 	
 	                <div class="delete-area" align="left" width="1000px">
-	                    <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#report-delete-Modal">신고삭제</a>
+	                    <!-- <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#report-delete-Modal">관리</a> -->
 	                </div>
 	
 	                     <!-- The Modal -->
@@ -110,15 +110,20 @@
 	                    <div class="modal-dialog modal-dialog-centered">
 	                    <div class="modal-content">
 	                
+	                		<!-- Modal Header -->
+	                        <div class="modal-header">
+	                        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	                        </div>
+	                		
 	                        <!-- Modal body -->
 	                        <div class="modal-body">
-	                        <Strong>신고내역</Strong>을 삭제하시겠습니까?
+	                        	<Strong id="userId">user10</Strong> 회원을 <b style="color:rgb(0, 120, 51);">탈퇴 처리</b> 하시겠습니까?
 	                        </div>
 	                
 	                        <!-- Modal footer -->
 	                        <div class="modal-footer"align="center">
 	                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
-	                            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+	                            <button type="submit" class="btn btn-danger btn-sm">확인</button>
 	                        </div>
 	                
 	                    </div>
@@ -133,28 +138,32 @@
 	                <table border="1" align="center">
 	
 	                    <thead class="thead">
-	                        <tr align="center" >
-	                            <th width="50"></th>
+	                        <tr align="center">
 	                            <th width="50">번호</th> 
-	                            <th colspan="2" width="200">신고시간</th>
-	                            <th width="400">신고내용</th>
-	                            <th width="150">아이디</th>
-	                            <th width="150">신고자</th>    
+	                            <th colspan="2" width="250">신고시간</th>
+	                            <th width="350">신고내용</th>
+	                            <th width="130">아이디</th>
+	                            <th width="130">신고유형</th> 
+	                           	<th width="50"></th>   
 	                        </tr>
 	
 	                    </thead>
 	                
 	                    <tbody class="checked-reportList">
-	                        <tr align="center">
-	                            <td><input type="checkbox"></td>
-	                            <td>1</td>
-	                            <td colspan="2">21-05-11 12:04:11</td>
-	                            <td>광고성 게시물</td>
-	                            <td>user01</td>
-	                            <td>honghong</td>
-	
-	                        </tr>
-	
+	                    	<%for(Report r : pageList) {%>
+		                        <tr align="center">
+		                            <td><%=r.getReportNo() %></td>
+		                            <td colspan="2"><%=r.getReportDate() %></td>
+		                            <td><%=r.getReportContent() %></td>
+		                            <td><%=r.getUserNo() %></td>
+		                            <%if(r.getReportType() == 1) {%>
+			                            <td>댓글</td>
+			                        <%}else{ %>
+			                        	<td>레시피</td>
+			                        <%{ %>
+		                            <td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#report-delete-Modal">관리</a></td>
+		                        </tr>
+							<%} %>
 	
 	                    </tbody>
 	
@@ -169,13 +178,13 @@
 			<div align="center" class="paging-area">
 		        
 			<% if(currentPage != 1) { %>
-				<button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage-1%>';"> &lt; </button>
+				<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=currentPage-1%>';"> &lt; </button>
 			<% } %>
 						
 				<% for(int p=startPage; p<=endPage; p++) {%>
 			            	
 					<% if(p != currentPage){ %>
-						<button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=p%>';"><%= p %></button>
+						<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=p%>';"><%= p %></button>
 					<% }else{ %>
 						<button disabled><%= p %></button>
 					<%} %>
@@ -183,7 +192,7 @@
 				<% } %>
 			
 			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%= contextPath%>/adList.me?currentPage=<%=currentPage+1%>'"> &gt; </button>
+				<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=currentPage+1%>'"> &gt; </button>
 			<% } %>
 					
 			</div>

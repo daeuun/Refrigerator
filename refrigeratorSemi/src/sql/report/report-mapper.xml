@@ -4,7 +4,7 @@
 
 	<!-- @author leeyeji -->
 	<!-- 페이징 - 총 페이지 수 -->
-	<entry key="seleceListCount">
+	<entry key="selectListCount">
 		SELECT
 		       COUNT(*) COUNT
 		  FROM REPORT
@@ -13,7 +13,23 @@
 	<!-- @author leeyeji -->
 	<!-- 신고 전체 목록 조회 -->
 	<entry key="selectList">
-		
+		SELECT *
+		  FROM (
+			    SELECT ROWNUM RNUM, R.*
+		          FROM (
+				        SELECT
+				               REPORT_NO
+		                     , USER_ID
+                             , REF_NO
+                             , REPORT_CONTENT
+                             , REPORT_DATE
+                             , REPORT_TYPE
+		                  FROM REPORT 
+		                 ORDER
+		                    BY REPORT_DATE DESC
+		                ) R
+		        )
+		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
 </properties>

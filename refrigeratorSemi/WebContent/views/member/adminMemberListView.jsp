@@ -6,7 +6,7 @@
 <%
 	//String contextPath = request.getContextPath();
 	ArrayList<Member> pageList = (ArrayList<Member>)request.getAttribute("pageList");
-	//Member spcMem = (Member)request.getAttribute("spcMem");
+	Member spcMem = (Member)request.getAttribute("spcMem");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -135,7 +135,7 @@
 	                                                        </div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="text" name="nickname" id="">
+	                                                        <input type="text" name="nickname" id="user-nick">
 	                                                    </td>
 	                                                </tr>
 	                                                <tr>
@@ -143,7 +143,7 @@
 	                                                        <div>이메일</div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <input type="email" name="email" id="">
+	                                                        <input type="email" name="email" id="user-email">
 	                                                    </td>
 	                                                </tr>
 	    
@@ -151,14 +151,14 @@
 	                                                    <td>
 	                                                        <div>비밀번호</div>
 	                                                    </td>
-	                                                    <td><input type="text" name="password"></td>
+	                                                    <td><input type="text" name="password" id="user-pwd"></td>
 	                                                </tr>
 	    
 	                                                <tr>
 	                                                    <td>
 	                                                        <div>전화번호</div>
 	                                                    </td>
-	                                                    <td><input type="text" name="phone"></td>
+	                                                    <td><input type="text" name="phone" id="user-phone"></td>
 	                                                </tr>
 	    
 	                                                <tr>
@@ -282,6 +282,9 @@
 	                   		// 조회되는 한 행의 회원 번호 넘기기..
 	                   		function modifyMember(){
 	                   			$("#userNo-modify").val($(event.target).parent().siblings("input[type=hidden]").val());
+	                   			
+	                   			
+	                   			
 	                   		}
 	                   		
 	                   		function deleteMember(){

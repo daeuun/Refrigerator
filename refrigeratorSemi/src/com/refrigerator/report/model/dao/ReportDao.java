@@ -67,6 +67,32 @@ public class ReportDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Report(rset.getInt("report_no"),
+									rset.getInt("user_no"),
+									rset.getInt("ref_no"),
+									rset.getString("report_content"),
+									rset.getDate("report_date"),
+									rset.getInt("report_type")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;		
 	}
 	
 	
