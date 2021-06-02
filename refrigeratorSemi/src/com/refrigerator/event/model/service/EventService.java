@@ -75,7 +75,7 @@ public class EventService {
 			
 		}
 		
-		
+		 close(conn);
 		return result;
 		
 	}
@@ -99,7 +99,7 @@ public class EventService {
 			rollback(conn);
 			
 		}
-		
+		 close(conn);
 		return result;
 		
 	}
@@ -121,7 +121,7 @@ public class EventService {
 		}else {
 			rollback(conn);
 		}
-		
+		 close(conn);
 		return result;
 		
 		

@@ -16,6 +16,16 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.recipe.model.vo.Review;
 import com.refrigerator.review.model.vo.AdmReview;
 
+
+
+/**
+ * 
+ * @author heeRak seong
+ *
+ */
+
+
+
 public class ReviewDao {
 
 	

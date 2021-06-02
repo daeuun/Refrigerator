@@ -78,6 +78,8 @@ public class ReplyService {
 				
 			}
 			
+			 close(conn);
+			 
 			return result;
 			
 		}

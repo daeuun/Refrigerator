@@ -16,6 +16,14 @@ import com.refrigerator.review.model.vo.AdmReview;
 
 import oracle.jdbc.OracleConnection.CommitOption;
 
+
+/**
+ * 
+ * @author heeRak seong
+ *
+ */
+
+
 public class ReviewService {
 
 	
