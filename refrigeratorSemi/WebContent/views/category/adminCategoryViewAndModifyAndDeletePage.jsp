@@ -612,29 +612,36 @@
 <!------------------------------소분류 수정모달 영역임  -------------------------------------------------------------------->
 			<!-- The Modal -->
 			<script>
-                function subModifyExamination(){
-                   var subCheck = $('input[type="checkbox"][name="categorySubNo"]:checked');
+               
+			function subModifyExamination(){
+                var subCheck = $('input[type="checkbox"][name="categorySubNo"]:checked');
 
-                   if(subCheck.length == 0){
-                      alert("수정하고자하는 대분류 카테고리를 선택하고 눌러주세요");
-                      return false;
-                   }else{
-                         $("#minor-modify-modal").modal();                         
-                   };
-                   
-                   if(subCheck.length != 0){
-                         var subCatNo = subCheck.parent().next().children().text();
-                         var subCatName = subCheck.parent().next().next().children().text();
-                         
-                         $("#modifySubCatNo").val(subCatNo);
-                         $("#modifySubCatName").val(subCatName);
-                   }
-
-                   		 // 다른방법이나 자바스크립트로 해당 행이 가지는 대분류 카테고리 부분을 select요소의 option에 checked 속성 부여해주는것
-                   		 // 진행해주시면될거같아요 혹시몰라서 자바스크립트로 해결하신다라고 하시면 쓰시라구 아래에 변수에 해당행의 대분류카테고리번호는 넣어두웠습니다.
- 		                 // var mainCatNo = subCheck.parent().parent().children().eq(0).val();
+                if(subCheck.length == 0){
+                   alert("수정하고자하는 대분류 카테고리를 선택하고 눌러주세요");
+                   return false;
+                }else{
+                      $("#minor-modify-modal").modal();                         
                 };
+                
+                
+                if(subCheck.length != 0){
+                	
+                      var subCatNo = subCheck.parent().next().children().text();
+                      var subCatName = subCheck.parent().next().next().children().text();
+                      var mainCatNo = subCheck.parent().parent().children().eq(0).val();
+                      
+                      $("#modifySubCatNo").val(subCatNo);
+                      $("#modifySubCatName").val(subCatName);
+                   	  $("#selectMainCat").val(mainCatNo);
+                     
+
+                }
+                
+            };
              </script>   
+             
+             
+             
 			<div class="modal fade" id="minor-modify-modal">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
@@ -714,7 +721,7 @@
 							<h2 class="modal-title">소분류 카테고리 등록하기</h2>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
-                        <form action="subCatEnroll.cat" method="POST">
+                        <form action="subCatEnroll.cat" method="POST">	
                             <span id="enrollrefMainCatSpan" >대분류 선택 </span>
                             <select name="refMainCatNo" id="enrollrefMainCat">
 				                <% for(MainCategory m : mainList){ %>
