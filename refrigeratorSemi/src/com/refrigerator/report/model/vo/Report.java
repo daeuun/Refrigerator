@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Report {
 	
 	private int reportNo;
-	private int userNo;
+	private String userNo;
 	private int refNo;
 	private String reportContent;
 	private Date reportDate;
@@ -13,7 +13,7 @@ public class Report {
 	
 	public Report() {}
 
-	public Report(int reportNo, int userNo, int refNo, String reportContent, Date reportDate, int reportType) {
+	public Report(int reportNo, String userNo, int refNo, String reportContent, Date reportDate, int reportType) {
 		super();
 		this.reportNo = reportNo;
 		this.userNo = userNo;
@@ -31,11 +31,11 @@ public class Report {
 		this.reportNo = reportNo;
 	}
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
@@ -76,7 +76,5 @@ public class Report {
 		return "Report [reportNo=" + reportNo + ", userNo=" + userNo + ", refNo=" + refNo + ", reportContent="
 				+ reportContent + ", reportDate=" + reportDate + ", reportType=" + reportType + "]";
 	}
-	
-	
 
 }
