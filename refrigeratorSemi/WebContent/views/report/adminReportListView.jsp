@@ -155,7 +155,7 @@
 		                            <td><%=r.getReportNo() %></td>
 		                            <td colspan="2"><%=r.getReportDate() %></td>
 		                            <td><%=r.getReportContent() %></td>
-		                            <td><%=r.getUserNo() %></td>
+		                            <td><%=r.getUserId() %></td>
 		                            <%if(r.getReportType() == 1) {%>
 			                            <td>댓글</td>
 			                        <%}else{ %>

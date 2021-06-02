@@ -5,7 +5,8 @@ import java.sql.Date;
 public class Report {
 	
 	private int reportNo;
-	private String userNo;
+	private int userNo;
+	private String userId;
 	private int refNo;
 	private String reportContent;
 	private Date reportDate;
@@ -13,10 +14,22 @@ public class Report {
 	
 	public Report() {}
 
-	public Report(int reportNo, String userNo, int refNo, String reportContent, Date reportDate, int reportType) {
+	public Report(int reportNo, int userNo, String userId, int refNo, String reportContent, Date reportDate,
+			int reportType) {
 		super();
 		this.reportNo = reportNo;
 		this.userNo = userNo;
+		this.userId = userId;
+		this.refNo = refNo;
+		this.reportContent = reportContent;
+		this.reportDate = reportDate;
+		this.reportType = reportType;
+	}
+
+	public Report(int reportNo, String userId, int refNo, String reportContent, Date reportDate, int reportType) {
+		super();
+		this.reportNo = reportNo;
+		this.userId = userId;
 		this.refNo = refNo;
 		this.reportContent = reportContent;
 		this.reportDate = reportDate;
@@ -31,12 +44,20 @@ public class Report {
 		this.reportNo = reportNo;
 	}
 
-	public String getUserNo() {
+	public int getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(String userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public int getRefNo() {
@@ -73,8 +94,13 @@ public class Report {
 
 	@Override
 	public String toString() {
-		return "Report [reportNo=" + reportNo + ", userNo=" + userNo + ", refNo=" + refNo + ", reportContent="
-				+ reportContent + ", reportDate=" + reportDate + ", reportType=" + reportType + "]";
+		return "Report [reportNo=" + reportNo + ", userNo=" + userNo + ", userId=" + userId + ", refNo=" + refNo
+				+ ", reportContent=" + reportContent + ", reportDate=" + reportDate + ", reportType=" + reportType
+				+ "]";
 	}
+
+	
+
+	
 
 }
