@@ -8,9 +8,13 @@ import static com.refrigerator.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.refrigerator.ingre.model.vo.Ingre;
+import com.refrigerator.ingre_search.model.vo.IngreSearch;
 import com.refrigerator.recipe.model.dao.RecipeDao;
+import com.refrigerator.recipe.model.vo.Recipe;
 import com.refrigerator.recipe.model.vo.Reply;
 import com.refrigerator.recipe.model.vo.Review;
+import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
 
 public class RecipeService {
 
@@ -108,7 +112,7 @@ public class RecipeService {
 		return result;
 		
 	}
-	
+
 	/**
 	 * 관리자페이지 - 배너 레시피 조회
 	 * @author daeun
@@ -123,6 +127,21 @@ public class RecipeService {
 		
 	}*/
 	
+	/**
+	 * 레시피등록페이지 - insert요청처리
+	 * @author HeeRak
+	 */
+	public int insertRecipe(Recipe inRecipe, ArrayList<IngreSearch> sbList, ArrayList<Ingre> ingList, ArrayList<Ingre> addList, ArrayList<RecipeOrder> ordList) {
+		Connection conn = getConnection();
+		int result = new RecipeDao().insertRecipe(conn, inRecipe, sbList, ingList, addList, ordList);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 
 	

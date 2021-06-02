@@ -11,8 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.refrigerator.ingre.model.vo.Ingre;
+import com.refrigerator.ingre_search.model.vo.IngreSearch;
+import com.refrigerator.recipe.model.vo.Recipe;
 import com.refrigerator.recipe.model.vo.Reply;
 import com.refrigerator.recipe.model.vo.Review;
+import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
 
 
 public class RecipeDao{
@@ -194,6 +198,7 @@ public class RecipeDao{
 	 * 관리자페이지 - 배너 레시피 조회
 	 * @author daeun
 	 */
+	/* 기능 확인을 위해 잠시 주석처리 했습니다.
 	public Recipe selectRecipe(Connection conn, int recipeNo) {
 		Recipe rc = null;
 		PreparedStatement pstmt = null;
@@ -222,6 +227,104 @@ public class RecipeDao{
 		}
 		
 		return rc;
+	}
+	*/
+
+
+
+	/**
+	 * 레시피등록페이지 - insert DB요청처리
+	 * @author HeeRak
+	 * @param ordList 
+	 * @param addList 
+	 * @param ingList 
+	 * @param sbList 
+	 */
+	public int insertRecipe(Connection conn, Recipe r, ArrayList<IngreSearch> sbList, ArrayList<Ingre> ingList, ArrayList<Ingre> addList, ArrayList<RecipeOrder> ordList) {
+		int result = 0;
+		int result2 = 1;
+		PreparedStatement pstmt = null;
+		String sql1 = prop.getProperty("insertRecipe");
+		String sql2 = prop.getProperty("insertIngreSearch");
+		String sql3 = prop.getProperty("insertIngreList");
+		String sql4 = prop.getProperty("insertRecipeOrderList");
+		String sql5 = prop.getProperty("insertNoImgRecipeOrderList");
+		
+		try {
+			// 1) 레시피 insert
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1,r.getUserNo());
+			pstmt.setString(2, r.getRecipeTitle());
+			pstmt.setString(3, r.getRecipeIntro());
+			pstmt.setInt(4, r.getSeveralServings());
+			pstmt.setInt(5, r.getCookingTime());
+			pstmt.setString(6, r.getMainImg());
+			pstmt.setString(7, r.getIngreImg());
+			
+			result = pstmt.executeUpdate();
+			
+			// 2) ingreSearch 정보 insert
+			pstmt = conn.prepareStatement(sql2);
+			
+			for(int i=0; i<sbList.size(); i++) {
+				pstmt.setInt(1, sbList.get(i).getIngredientSearch());
+				pstmt.setInt(2, sbList.get(i).getCategorySno());
+				
+				result2 = result2 * pstmt.executeUpdate();
+			}
+			
+			// 3) ingre 정보 insert
+			pstmt = conn.prepareStatement(sql3);
+			
+			for(int i=0; i<ingList.size(); i++) {
+				pstmt.setInt(1, ingList.get(i).getCategorySno());
+				pstmt.setInt(2, ingList.get(i).getIngreAmount());
+				pstmt.setString(3, ingList.get(i).getIngreUnit());
+				pstmt.setString(4, ingList.get(i).getIngreCategory());
+				
+				result2 = result2 * pstmt.executeUpdate();
+			}
+			
+			for(int i=0; i<addList.size(); i++) {
+				pstmt.setInt(1, addList.get(i).getCategorySno());
+				pstmt.setInt(2, addList.get(i).getIngreAmount());
+				pstmt.setString(3, addList.get(i).getIngreUnit());
+				pstmt.setString(4, addList.get(i).getIngreCategory());
+				
+				result2 = result2 * pstmt.executeUpdate();
+			}
+			
+			// 4) recipeorder 정보 insert
+			for(int i=0; i<ordList.size(); i++) {
+				
+				if(ordList.get(i).getRecipeImg()!= null) {// 이미지 있는 경우
+					
+					pstmt = conn.prepareStatement(sql4);
+					pstmt.setInt(1, ordList.get(i).getRecipeOrder());
+					pstmt.setString(2, ordList.get(i).getRecipeExpln());
+					pstmt.setString(3, ordList.get(i).getRecipeImg());
+					
+					result2 = result2 * pstmt.executeUpdate();
+					
+				}else {// 이미지 없는경우
+					
+					pstmt = conn.prepareStatement(sql5);
+					pstmt.setInt(1, ordList.get(i).getRecipeOrder());
+					pstmt.setString(2, ordList.get(i).getRecipeExpln());
+					
+					result2 = result2 * pstmt.executeUpdate();
+				}
+				
+			}
+			
+			result = result * result2;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

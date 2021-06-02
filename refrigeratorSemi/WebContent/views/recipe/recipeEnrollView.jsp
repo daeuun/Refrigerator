@@ -224,6 +224,10 @@
             height:150px;
         }
         
+        .order-img:hover{
+        	cursor:pointer;
+        }
+        
         .order-area{
             width:860px;
         }
@@ -273,12 +277,12 @@
 
 
     <div class="outer">
-        <form action="/enroll.re" method="post" enctype="multipart/form-data">
+        <form action="<%=contextPath%>/insert.rcp" method="post" enctype="multipart/form-data">
         <!-- input type="hidden" 입력폼 개수 넘기기-->
         <input type="hidden" name="userNo" value="<%=userNo%>">
-        <input type="hidden" id="sbCount" name="sbCount">
+        <input type="hidden" id="sbCount" name="sbCount" value="0">
         <input type="hidden" id="ingCount" name="ingCount" value="1">
-        <input type="hidden" id="addCount" name="addCount">
+        <input type="hidden" id="addCount" name="addCount" value="0">
         <input type="hidden" id="orderCount" name="orderCount" value="1">
 
             <div class="enroll-form-title">
@@ -295,7 +299,7 @@
                             
                             <tr>
                                 <th width="180"><label for=""><span class="vital">*</span> 레시피 제목</label></th>
-                                <td colspan="2"><input type="text" style="width:400px; height:50px;" placeholder="예) 소고기 미역국끓이기" required></td>
+                                <td colspan="2"><input type="text" name="title" style="width:400px; height:50px;" placeholder="예) 소고기 미역국끓이기" required></td>
                             </tr>
                             
                             <tr>
@@ -341,7 +345,7 @@
                     <div class="form1-area2" >
                         <div class="thumbnail-area" border="1"><img width="200" height="200" id="thumbnail-img"></div>
                         <div align="center"><span>*</span><button type="button" id="insertMainImg" class="btn btn-secondary btn-sm">대표이미지 등록</button></div>
-                        <div><input type="file" id="file11" class="file" name="mainImg" required onchange="loadImg(this, 11);"></div>
+                        <div><input type="file" id="file11" class="file" name="file11" required onchange="loadImg(this, 11);"></div>
                     </div>
                     
                 </div>
@@ -370,7 +374,7 @@
                         
                     <div align="center">
                         <button type="button" id="insert-ingre-img" class="btn btn-secondary btn-sm">재료이미지 등록</button>
-                        <input type="file" id="file12" class="file" name="ingreImg" required onchange="loadImg(this, 12);">
+                        <input type="file" id="file12" class="file" name="file12" required onchange="loadImg(this, 12);">
                     </div>
                 </div>
                 <!--2)  검색버튼 영역 -->
@@ -532,7 +536,7 @@
                         <%} %>                        
                     </select>
                     
-                    <input type="number" class="amount" class="addAmount1" placeholder="예) 1~1000" min="0" max="1000">
+                    <input type="number" name="addAmount1" class="amount" class="addAmount1" placeholder="예) 1~1000" min="0" max="1000">
                     
                     <select name="addUnit1" required>
                         <option>g</option>
@@ -635,41 +639,10 @@
     <button type="submit" class="btn btn-success" id="enroll-btn">등록</button>
 </div>
 
- 		<input type="hidden" name="sbCount">
-        <input type="hidden" name="ingCount">
-        <input type="hidden" name="addCount">
-        <input type="hidden" name="orderCount">
-
 
 </form>
 
     <!--모든 스크립트 영역-->
-    <script>
-    
-	 	// 대분류 소분류 연계
-	 	/*
-	   	$(function(){
-			
-	   		$("select[class=cat]").click(function(){
-	   			
-	   			var $mainCat = $(this).val();
-	   			
-	   			$.ajax({
-	   				url:
-	   			})
-	   			
-	   			
-	   			console.log($(this).next().val());
-	   			
-	   			
-	   		})
-	   		
-	   	})
-	   	*/
-    
-    </script>
-    
-    
     <script>
     
     /*2) 검색버튼기능 영역 [2~3 clone|remove] [1버튼 display:none <-> display:block] 개수전달 : sbCount*/ 
@@ -836,21 +809,19 @@
                             
                 $clone.find("label[class=order-no]").text(orderCount);
                 $clone.find("input[name=order]").val(orderCount);
+                $clone.find("textarea[class=order-textarea]").val(null);
                 $clone.find("textarea[class=order-textarea]").prop("name", "expln" + orderCount).trigger("change");
                 $clone.find("textarea[class=order-textarea]").prop('required', true).trigger("change");
                 $clone.find("img[id^=orderImg]").prop("id", "orderImg" + orderCount).trigger("change");
-                
                 $clone.find("img[class=order-img]").attr("src", null);
-                
-                
                             
                 $clone.appendTo("#order-result");
-                
-                $("#orderImg"+orderCount).click(function(){
-                	$("#file"+orderCount).click();
-                })
                             
             }
+            
+            $("#orderImg"+orderCount).click(function(){
+                $("#file"+orderCount).click();
+            })
                     
         })
  
@@ -915,7 +886,6 @@
     /*loadImg 이미지파일 미리보기 기능*/
     	function loadImg(inputFile, num){
     	
-    		console.log(num);
 		    if(inputFile.files.length == 1){    //선택한 파일이 존재하는 경우
 		    	
 		        var reader = new FileReader();
@@ -988,9 +958,6 @@
 	    	})
     	})
     	
-    	$(function(){
-    		$("")
-    	})
     </script>    
     </div>
     

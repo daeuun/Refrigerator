@@ -101,5 +101,122 @@
 		 WHERE RECIPE_NO = ?
 		   AND R.STATUS = 'Y'
 	</entry>
+	
+	<!-- @author HeeRak -->
+	<!-- 레시피등록페이지 - 레시피 정보등록 -->
+	<entry key="insertRecipe">
+		INSERT
+		  INTO RECIPE
+		     (
+		       RECIPE_NO
+		     , USER_NO
+		     , RECIPE_TITLE
+		     , RECIPE_INTRO
+		     , SEVERAL_SERVINGS
+		     , COOKING_TIME
+			 , AVRG_STAR_POINT
+			 , RECIPE_ENROLL_DATE
+			 , MAIN_IMG
+			 , INGRE_IMG
+		     )
+		VALUES
+			 (
+			   SEQ_RNO.NEXTVAL
+			 , ?
+			 , ?
+			 , ?
+			 , ?
+			 , ?
+			 , 0
+			 , SYSDATE
+			 , ?
+			 , ?
+			 )
+		  
+	</entry>
+	
+	<!-- @author HeeRak -->
+	<!-- INGRE_SEARCH [INSERT] -->
+	<entry key="insertIngreSearch">
+		INSERT
+		  INTO INGRE_SEARCH
+		     (
+		       INGREDIENT_SEARCH
+		     , RECIPE_NO
+		     , CATEGORY_SNO
+		     )
+		VALUES
+			 (
+			   ?
+			 , SEQ_RNO.CURRVAL
+			 , ?
+			 )
+	</entry>
+	
+	<!-- @author HeeRak -->
+	<!-- INGRE [INSERT] -->
+	<entry key="insertIngreList">
+		INSERT
+		  INTO INGRE
+		  	 (
+		  	   INGRE_NO
+		  	 , RECIPE_NO
+		  	 , CATEGORY_SNO
+		  	 , INGRE_AMOUNT
+		  	 , INGRE_UNIT
+		  	 , INGRE_CATEGORY
+		  	 )
+		 VALUES
+		 	 (
+		 	   SEQ_INO.NEXTVAL
+		 	 , SEQ_RNO.CURRVAL
+		 	 , ?
+		 	 , ?
+		 	 , ?
+		 	 , ?
+		 	 )
+	</entry>
+	
+	<!-- @author HeeRak -->
+	<!-- 요리순서 insert[이미지o]  -->
+	<entry key="insertRecipeOrderList">
+		INSERT
+		  INTO RECIPE_ORDER
+		     (
+		       RECIPE_ORDER_NO
+		     , RECIPE_NO
+		     , RECIPE_ORDER
+		     , RECIPE_EXPLN
+		     , RECIPE_IMG
+		     )
+		VALUES
+			 (
+			   SEQ_RONO.NEXTVAL
+			 , SEQ_RNO.CURRVAL
+			 , ?
+			 , ?
+			 , ?
+			 )
+	</entry>
+	
+	<!-- @author HeeRak -->
+	<!-- 요리순서 insert[이미지x]  -->
+	<entry key="insertNoImgRecipeOrderList">
+		INSERT
+		  INTO RECIPE_ORDER
+		     (
+		       RECIPE_ORDER_NO
+		     , RECIPE_NO
+		     , RECIPE_ORDER
+		     , RECIPE_EXPLN
+		     )
+		VALUES
+			 (
+			   SEQ_RONO.NEXTVAL
+			 , SEQ_RNO.CURRVAL
+			 , ?
+			 , ?
+			 )
+	</entry>
 
 </properties>
