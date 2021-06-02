@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="com.refrigerator.common.model.vo.PageInfo, java.util.ArrayList , com.refrigerator.banner.model.vo.Banner"%>    
+<%-- paging 처리와 값을 뽑아올 공간 --%>    
+    
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Banner> list = (ArrayList<Banner>)request.getAttribute("list");
+	// 페이징바를 만들기위해서 필요한것들을!! 바로 가져다 쓸수있게 변수에 기록을해주자!!! 
+	// list에 지금은 배너번호, 배너이름, 회사이름, 배너분류, 배너상태, 등록일, 수정일, 시작일, 종료일, 배너이미지(경로 + 수정명), div분류용page컬럼 모두 들어가 있는 상태이다. 
+	
+	// 아래는 현재 페이지에서 필요한 페이징 변수들이다. 
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();	
+%>            
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,25 +26,16 @@
 <!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
 
 <title>관리자 배너 페이지</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 <!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
 <!-- --------------------------------------------------------------------------------------------------- -->
 <style>
+    #for-height{height: 920px;} 
     div{box-sizing: border-box;}
-        .wrap{margin: auto; width: 1200px; height: 750px;}
-        #horizontal-bar{width: 100%; height: 50px; box-sizing: border-box; background-color: palegoldenrod;}
-        #vertical-bar{width: 150px; height: 920px; background-color: rgb(0,153,102); float: left;}
-        .outer{border: 3px solid blue; width: 1000px; height: 920px; float: right; margin-right: 25px;}
+    .wrap{margin: auto; width: 1200px; height: 750px;}
+    .outer{width: 1000px; height: 920px; margin-right: 25px;}
 
-        .paging-bar{
+    .paging-bar{
 		text-align: center;
     }
 
@@ -130,6 +139,31 @@
         height: 7px;
         padding: 2px;
     }
+    
+/* ------------------------------------------------------------------------------------------------------------ */
+/* --------------------------------------------페이징 영역 시작 -------------------------------------------- */    
+   
+    .paging-area{
+    	text-align: center;
+    }
+
+	.paging-area button{
+		width:40px;
+		height:40px;
+        margin: 5px;	
+		margin-top: 30px ;
+		justify-content: center;
+		border-radius: 5px;
+    	background-color: rgb(244,244,244);
+		color: rgb(127,127,127);
+    	font-size:16px;
+    	font-weight: bold;		
+	}    
+    
+    #dis-btn{
+    	background-color: rgb(52,152,219);
+    	color:white;
+    }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* --------------------------------------------공통 모달 css영역 시작 -------------------------------------------- */    
     .modal-header{
@@ -146,7 +180,7 @@
         margin-top: 150px;
         background-color: rgb(250,250,250);
     }
-
+    
     .modal-header, .modal-body{
         padding-left: 45px;
     }
@@ -283,11 +317,11 @@
 </head>
 <body>
     <div class="wrap">
-        <div id="horizontal-bar"></div>
+    <%@ include file="../common/admin/adminTopNavView.jsp" %>
         <div id="content">
-            <div id="vertical-bar"></div>            
+       	<%@ include file="../common/admin/adminSideBarView.jsp" %>
 <!-------------------------------------------------------------------------------------------------------------->            
-            <div class="outer">
+            <div class="outer" style="float:right;">
                 <div class="top-box">
                     <a href="">홈</a> >
                     <a href="">싸이트관리</a> >
@@ -299,153 +333,105 @@
                     <br clear="both">
                     <table class="outer-table">
                         <tr>
-                            <td>
-                                <div class="card-box" data-toggle="modal" data-target="#banner-modify-Modal">
-                                    <div class="tumbnail-box" >
-                                        <img src="../../resources/images/sampleFood.jpg" alt="">
-                                        <div class="title-box">이벤트 1번</div>
-                                        <table class="inner-table">
-                                            <tr>
-                                                <th><i class="fas fa-clipboard-list fa-lg"></i></th>
-                                                <th>분류</th>
-                                                <td>메인배너</td>
-                                                <th><i class="far fa-check-circle fa-lg"></i></th>
-                                                <th>상태</th>
-                                                <td>게시중</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-alt fa-lg"></i></th>
-                                                <th>시작일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-check fa-lg"></i></th>
-                                                <th>종료일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="fas fa-city"></i></th>
-                                                <th>담당업체</th>
-                                                <td colspan="4">냉장고에 뭐있지?</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="card-box" data-toggle="modal" data-target="#banner-modify-Modal">
-                                    <div class="tumbnail-box">
-                                        <img src="../../resources/images/sampleFood.jpg" alt="">
-                                        <div class="title-box">이벤트 1번</div>
-                                        <table class="inner-table">
-                                            <tr>
-                                                <th><i class="fas fa-clipboard-list fa-lg"></i></th>
-                                                <th>분류</th>
-                                                <td>메인배너</td>
-                                                <th><i class="far fa-check-circle fa-lg"></i></th>
-                                                <th>상태</th>
-                                                <td>게시중</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-alt fa-lg"></i></th>
-                                                <th>시작일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-check fa-lg"></i></th>
-                                                <th>종료일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="fas fa-city"></i></th>
-                                                <th>담당업체</th>
-                                                <td colspan="4">냉장고에 뭐있지?</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="card-box" data-toggle="modal" data-target="#banner-modify-Modal">
-                                    <div class="tumbnail-box">
-                                        <img src="../../resources/images/sampleFood.jpg" alt="">
-                                        <div class="title-box">이벤트 1번</div>
-                                        <table class="inner-table">
-                                            <tr>
-                                                <th><i class="fas fa-clipboard-list fa-lg"></i></th>
-                                                <th>분류</th>
-                                                <td>메인배너</td>
-                                                <th><i class="far fa-check-circle fa-lg"></i></th>
-                                                <th>상태</th>
-                                                <td>게시중</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-alt fa-lg"></i></th>
-                                                <th>시작일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-check fa-lg"></i></th>
-                                                <th>종료일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="fas fa-city"></i></th>
-                                                <th>담당업체</th>
-                                                <td colspan="4">냉장고에 뭐있지?</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </td>
+							<%for(int i=0; i<3 ; i++){%>                        
+	                            <td>
+	                                <div class="card-box" data-toggle="modal" data-target="#banner-modify-Modal">
+	                                    <div class="tumbnail-box" >
+	                                        <img src="<%= list.get(i).getBannerImg() %>">
+	                                        <div class="title-box"><%= list.get(i).getBannerName() %></div>
+	                                        <table class="inner-table">
+	                                            <tr>
+	                                                <th><i class="fas fa-clipboard-list fa-lg"></i></th>
+	                                                <th>분류</th>
+	                                                <td><%= list.get(i).getBannerCategory() %></td>
+	                                                <th><i class="far fa-check-circle fa-lg"></i></th>
+	                                                <th>상태</th>
+	                                                <td><%= (list.get(i).getBannerStatus().equals("Y"))? "게시중" : "보류중" %></td>
+	                                            </tr>
+	                                            <tr>
+	                                                <th><i class="far fa-calendar-alt fa-lg"></i></th>
+	                                                <th>시작일</th>
+	                                                <td colspan="4"><%= (list.get(i).getStartDate() == null)? "미정" : list.get(i).getStartDate()%></td>
+	                                            </tr>
+	                                            <tr>
+	                                                <th><i class="far fa-calendar-check fa-lg"></i></th>
+	                                                <th>종료일</th>
+	                                                <td colspan="4"><%= (list.get(i).getEndDate() == null)? "미정" : list.get(i).getEndDate()%></td>
+	                                            </tr>
+	                                            <tr>
+	                                                <th><i class="fas fa-city"></i></th>
+	                                                <th>담당업체</th>
+	                                                <td colspan="4"><%= list.get(i).getCompanyName() %></td>
+	                                            </tr>
+	                                        </table>
+	                                    </div>
+	                                </div>
+	                            </td>
+                    		<%} %>                        
                         </tr>
                         <tr>
-                            <td>
-                                <div class="card-box" data-toggle="modal" data-target="#banner-modify-Modal">
-                                    <div class="tumbnail-box">
-                                        <img src="../../resources/images/sampleFood.jpg" alt="">
-                                        <div class="title-box">이벤트 1번</div>
-                                        <table class="inner-table">
-                                            <tr>
-                                                <th><i class="fas fa-clipboard-list fa-lg"></i></th>
-                                                <th>분류</th>
-                                                <td>메인배너</td>
-                                                <th><i class="far fa-check-circle fa-lg"></i></th>
-                                                <th>상태</th>
-                                                <td>게시중</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-alt fa-lg"></i></th>
-                                                <th>시작일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="far fa-calendar-check fa-lg"></i></th>
-                                                <th>종료일</th>
-                                                <td colspan="4">2021-06-10</td>
-                                            </tr>
-                                            <tr>
-                                                <th><i class="fas fa-city"></i></th>
-                                                <th>담당업체</th>
-                                                <td colspan="4">냉장고에 뭐있지?</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </td>
+                			<%for(int i=3; i<5 ; i++){%>                        
+	                            <td>
+	                                <div class="card-box" data-toggle="modal" data-target="#banner-modify-Modal">
+	                                    <div class="tumbnail-box" >
+	                                        <img src="<%= list.get(i).getBannerImg() %>">
+	                                        <div class="title-box"><%= list.get(i).getBannerName() %></div>
+	                                        <table class="inner-table">
+	                                            <tr>
+	                                                <th><i class="fas fa-clipboard-list fa-lg"></i></th>
+	                                                <th>분류</th>
+	                                                <td><%= list.get(i).getBannerCategory() %></td>
+	                                                <th><i class="far fa-check-circle fa-lg"></i></th>
+	                                                <th>상태</th>
+	                                                <td><%= (list.get(i).getBannerStatus().equals("Y"))? "게시중" : "보류중" %></td>
+	                                            </tr>
+	                                            <tr>
+	                                                <th><i class="far fa-calendar-alt fa-lg"></i></th>
+	                                                <th>시작일</th>
+	                                                <td colspan="4"><%= (list.get(i).getStartDate() == null)? "미정" : list.get(i).getStartDate()%></td>
+	                                            </tr>
+	                                            <tr>
+	                                                <th><i class="far fa-calendar-check fa-lg"></i></th>
+	                                                <th>종료일</th>
+	                                                <td colspan="4"><%= (list.get(i).getEndDate() == null)? "미정" : list.get(i).getEndDate()%></td>
+	                                            </tr>
+	                                            <tr>
+	                                                <th><i class="fas fa-city"></i></th>
+	                                                <th>담당업체</th>
+	                                                <td colspan="4"><%= list.get(i).getCompanyName() %></td>
+	                                            </tr>
+	                                        </table>
+	                                    </div>
+	                                </div>
+	                            </td>
+                    		<%} %>                               
                         </tr>
                     </table>
                 </div>
 
 <!------------------------------------- 페이징바 영역 -------------------------------------------------------->
-                <div class="paging-bar">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item "><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-                    </ul>
-                </div>
+		        <div align="center" class="paging-area">
+		
+					<!-- 현재 보고있는 페이지가 1일 떄 버튼 안보이게 하려면 아래와같이 -->
+					<% if(currentPage != 1){ %>
+		            	<button onclick="location.href='<%= request.getContextPath() %>/adlist.ba?currentPage=<%= currentPage-1 %>';">&lt;</button>
+		            <%} %>
+		            
+		            <% for(int p=startPage; p<=endPage; p++){ %>
+		            	<% if(p != currentPage) {%>	
+		            		<button onclick="location.href='<%= request.getContextPath()%>/adlist.ba?currentPage=<%= p %>';"><%= p %></button>
+		            	<%}else{ %>
+		         	    	<button id="dis-btn" disabled><%= p %></button>
+		    	    	    <!-- 현제 페이지수는 다시 클릭이 불가능하게 만들어주자! -->
+		            	<%}%>
+		            <%}%>
+			
+					<!-- 현재 보고있는 페이지가 마지막페이지일 떄 버튼 안보이게 하려면 아래와같이 -->
+					<% if(currentPage != maxPage){ %>                        
+		            	<button onclick="location.href='<%= request.getContextPath() %>/adlist.ba?currentPage=<%= currentPage+1 %>';">&gt;</button>
+		            <%} %>
+		        </div>
+
 
             </div>
 <!------------------------------------------------------------------------------------------------------------->  
@@ -453,7 +439,7 @@
             <!-- The Modal -->
             <div class="modal fade" id="banner-enroll-Modal">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width:600px" >
 
                         <!-- Modal Header -->
                         <div class="modal-header">
@@ -555,7 +541,7 @@
             <!-- The Modal -->
             <div class="modal fade" id="banner-modify-Modal">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width:600px">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
@@ -651,7 +637,8 @@
                     </div>
                 </div>
             </div>
-<!----------------------------------------- 수정 모달 영역임 -------------- ------------------------------------->
+           
+<!----------------------------------------- 수정 모달 영역임 --------------------------------------------------->
         </div>
     </div>
 </body>

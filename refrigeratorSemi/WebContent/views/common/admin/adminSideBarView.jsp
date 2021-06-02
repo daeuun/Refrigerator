@@ -94,7 +94,7 @@
                 <a href="<%= request.getContextPath()%>/list.tos?currentPage=1">이용약관</a><br>
                 <a href="<%= request.getContextPath()%>/list.cat">카테고리</a><br>
                 <a href="<%= request.getContextPath()%>/menuList.nav">네비게이션바</a><br>
-                <a href="">배너</a>
+                <a href="<%= request.getContextPath()%>/adlist.ba?currentPage=1">배너</a>
             </div>
         </div>
 

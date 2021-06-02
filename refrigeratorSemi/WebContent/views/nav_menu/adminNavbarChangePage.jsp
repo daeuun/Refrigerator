@@ -24,19 +24,11 @@
 <!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
 
 <title>네비게이션바 관리 페이지</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 <!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
 <!-- --------------------------------------------------------------------------------------------------- -->
 <style>
-    #for-height{height: 620px;} 
+    #for-height{height: 720px;} 
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
     .outer{ width: 1000px; float: right; margin-right: 25px;}
@@ -285,6 +277,13 @@
 							
 							<script>
 								$(function(){
+									// ★ 유효성 검사만 총 3단계를 거친다.
+									// 1단계 db단에서 한번거치고
+									// 2단계 스크립트활용  regularExpression 정규표현식으로 한번 
+									// 3단계 스크립트활용  조건문으로 막아버리기 
+									// ※ 단!!!! 2, 3단계를 완벽하게 통합시킬수가없다. (더 간결하게 짤수있었던것이지만)
+									// 현재로서는 이게 최선이다. 
+									
 									// 그래 만들어보자 error나서 뻑나면 안되니까 
 									// 와.... 몇시간을 썻냐.. 그래도 원하는데로 만들었다!!!! 오류나기전에 무조건 검사해줄것이다! 
 									var homeInp = $("input[name='home']");
