@@ -160,7 +160,7 @@
 			                            <td>댓글</td>
 			                        <%}else{ %>
 			                        	<td>레시피</td>
-			                        <%{ %>
+			                        <%} %>
 		                            <td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#report-delete-Modal">관리</a></td>
 		                        </tr>
 							<%} %>
