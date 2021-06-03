@@ -43,13 +43,13 @@
         <table id="userSideNav-area" align="left" border="1px">
 
             <tr>
-                <th><a href="">공지사항</a></th>
+                <th><a href="<%=request.getContextPath()%>/list.no?currentPage=1">공지사항</a></th>
             </tr>
             <tr>
-                <th><a href="">FAQ</a></th>
+                <th><a href="<%=request.getContextPath()%>/list.faq?currentPage=1">FAQ</a></th>
             </tr>
             <tr>
-                <th><a href="">1:1문의</a></th>
+                <th><a href="<%=request.getContextPath()%>/list.inq?currentPage=1">1:1문의</a></th>
             </tr>
 
         </table>

@@ -28,7 +28,6 @@
     .outer {
         /*width: 1200px;*/
         margin: auto;
-        margin-top: 50px;
     }
     .thumb-list-sec {
         width: 1000px;
