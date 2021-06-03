@@ -97,6 +97,15 @@ public class Member {
 		this.phone = phone;
 		this.nickname = nickname;
 	}
+	
+	public Member(int userNo, String userName, String gender, String email, String phone) {
+		super();
+		this.userNo = userNo;
+		this.userName = userName;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+	}
 
 	public int getUserNo() {
 		return userNo;

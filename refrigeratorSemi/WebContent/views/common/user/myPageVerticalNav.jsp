@@ -102,7 +102,7 @@
             <span>마이페이지</span>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="servlet호출" >회원정보수정<i class="fas fa-chevron-right"></i></a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/myInfo.me" >회원정보수정<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="08myResentRecipePage.html">최근본레시피<i class="fas fa-chevron-right"></i></a>

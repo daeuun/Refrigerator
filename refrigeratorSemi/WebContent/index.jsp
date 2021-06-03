@@ -4,7 +4,7 @@
 <%
 
 	String contextPath = request.getContextPath();
-
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
     
 <!DOCTYPE html>
@@ -14,6 +14,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<script>
+	 	var msg = "<%= alertMsg %>"; 
+	 	if(msg != "null"){
+		 	alert(msg);	 
+			<% session.removeAttribute("alertMsg"); %>
+	 	}
+	</script>
 
 	<h1>안녕하세요 테스트입니다.</h1>
 	
@@ -45,8 +52,12 @@
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/main">메인</a></div>
 	
+<<<<<<< Updated upstream
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/recipeView.main?currentPage=1">조회수 많은 레시피 목록 더보기버튼</a></div>
+=======
+
+>>>>>>> Stashed changes
 	
 	
 </body>

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.refrigerator.member.model.vo.Member"%>
+<%
+	String alertMsg = (String)session.getAttribute("alertMsg");
+%>
+<!-- 이미 header에 loginUser 값이 담겨있다 !  -->     
 <!DOCTYPE html>
 <html>
 <head>
@@ -159,57 +163,94 @@
 
 </head>
 <body>
-	<%@ include file="../common/user/tempJWHeader.jsp" %>
-	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
-    
+	<%@ include file="../common/user/menubar.jsp" %>
+	 <script>
+	 	function changePwd(){
+	 		var form = document.createElement('form');
+	 		var objs;
+	 		objs = document.createElement('input'); 
+	 		objs.setAttribute('type', 'text'); 
+	 		objs.setAttribute('name', 'userId'); 
+	 		objs.setAttribute('value', '<%= loginUser.getUserId() %>'); 
+	 		form.appendChild(objs);
+	 		form.setAttribute('method', 'post');
+	 		form.setAttribute('action', 'pwdUpdateView.me'); 
+	 		document.body.appendChild(form);
+	 		form.submit();
+	 		console.log("tset");
+	 	}
+	</script>
+	<%@ include file="../common/user/myPageVerticalNav.jsp" %>    
         <div class="outer">
             <p>회원정보수정</p> 
             <div class="division-line"></div>
-            <form action="~~~~.do" method="post" id="member-modify-form"> 
+            <form action="updateInfo.me" method="post" id="member-modify-form"> 
                 <table id="member-modify-table" >
                     <tbody>
+                    	<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
                         <tr>
                             <td width="190"><p>성함</p></td>
-                            <td colspan="2"><input type="text" name="userName" value="에구구"></td>
+                            <td colspan="2"><input type="text" name="userName" value="<%= loginUser.getUserName() %>"></td>
                         </tr>
                         <tr>
                             <td><p>아이디</p></td>
-                            <td colspan="2">user01</td><%--조회해온 아이디 넣기--%>
+                            <td colspan="2"><%= loginUser.getUserId() %></td><%--조회해온 아이디 넣기--%>
                         </tr>
                         <tr>
                             <td><p>비밀번호</p></td>
-                            <td colspan="2"><button type="button" class="btn btn-secondary btn-sm">비밀번호 수정하기</button></td>
+                            <td colspan="2"><button type="button" class="btn btn-secondary btn-sm" onclick="changePwd();">비밀번호 수정하기</button></td>
                         </tr>
                         <tr>
+                           	<%
+                           		// 얘는 넘겨줄 필요가없다 보여주기만 하는것이다 ! date형식이 아니다보니 format도 먹지않는다 내가 노가다 뛰자! 
+                           		String birthday = loginUser.getBirthday().substring(0, 4) + "년 " + loginUser.getBirthday().substring(4, 6) + "월 " + loginUser.getBirthday().substring(6, 8) + "일";
+                        	%>
+                        
                             <td><p>생년월일</p></td>
-                            <td colspan="2">2021년 06월 10일</td><%--조회해온 생년월일 넣기--%>
+                            <td colspan="2"><%= birthday %></td><%--조회해온 생년월일 넣기--%>
                         </tr>
                         <tr>
                             <td><p>성별</p></td>
                             <td colspan="2">
+                            	<script>
+                            		$(function(){
+	                            		$("input[value='<%= loginUser.getGender() %>']").attr("checked", true); 
+                            		})                            		
+                            	</script>
                                 <label><input type="radio" value="F" name="gender"> 여자 &nbsp;</label>
                                 <label><input type="radio" value="M" name="gender"> 남자 &nbsp;</label> 
-                                <label><input type="radio" value="N" name="gender" checked> 선택안함</label>
+                                <label><input type="radio" value="N" name="gender"> 선택안함</label>
                             </td>
                         </tr>
                         <tr>
                             <td><p>이메일 주소</p></td>
-                            <td colspan="2"><input type="email" name="birthday" value="이메일 자리임"></td><%--조회해온 이메일 넣기--%>
+                            <td colspan="2"><input type="email" name="email" value="<%= loginUser.getEmail() %>"></td><%--조회해온 이메일 넣기--%>
                         </tr>
                         <tr>
+                        	<%
+								String phoneNo = loginUser.getPhone().substring(0, 3) + "-" + loginUser.getPhone().substring(3, 7) + "-" + loginUser.getPhone().substring(7, 11);                        		
+                        	%>
                             <td><p>휴대전화</p></td>
-                            <td colspan="2"><input type="text" name="phone" value="전화번호 자리임" ></td><%--조회해온 전화번호 넣기--%>
+                            <td colspan="2">
+                            	<script>
+                            	</script>
+                            	<input type="text" id="tlno" name="phone" value="<%= phoneNo %>" maxlength="13" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" title="000-0000-0000형식으로 입력해주세요" placeholder="xxx-xxxx-xxxx">
+                           		<span style="font-size:12px; color:red;"> * 전화번호는 "-"을 꼭 넣어서 입력해주세요.</span>
+                           	</td><%--조회해온 전화번호 넣기--%>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr align="center">
                             <td></td>
+                            <!-- 넘겨줄 값은 회원번호, 이름, 성별, 이메릴주소, 전화번호 3가지이다. ! 단 !! 전화번호는 서블릿 단에서 수정해줘야한다. -->
                             <td><button type="submit">정보수정</button></td>
                             <td width="150"><button type="button" data-toggle="modal" data-target="#memDelete-modal">탈퇴</button></td>
                         </tr>
                     </tfoot>
                 </table>
             </form>
+
+            
 <!----------------------------------------(희락님) 회원탈퇴 모달 영역 시작-------------------------------------------------------------------->
             <div class="modal fade" id="memDelete-modal">
                 <div class="modal-dialog">
@@ -245,7 +286,7 @@
 
         </div>
     </div><%-- 여기가 사실상 vertical-nav랑 .outer랑 묶은 div닫는 태그이다.  --%>
-	
+
 	<%@ include file="../common/user/footer.jsp" %>
 
 </body>

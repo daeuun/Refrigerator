@@ -162,4 +162,37 @@ public class MemberService {
 		return m;
 	}
 
+	
+	/**
+	 * @author Jaewon
+	 * 회원 정보 변경
+	 */
+	public int updateMemberInfo(Member memInfo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updateMemberInfo(conn, memInfo);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}	
+	
+	/**
+	 * @author Jaewon
+	 * 회원 정보 변경
+	 */
+	public int updatePWD(String userId, String userPwd, String newPwd) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updatePWD(conn, userId, userPwd, newPwd);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}	
+
 }

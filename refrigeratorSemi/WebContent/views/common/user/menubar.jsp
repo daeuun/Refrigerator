@@ -129,8 +129,6 @@
 </style>
 </head>
 <body>
-        
-        
     
         <br clear="both">
         <br>
@@ -188,7 +186,7 @@
                             <!-- 로그인 후 => 프로필사진 + 닉네임 -->
                             <% }else { %>
                             	<a href="" class="navigation-login-area_item">프사</a>
-                            	<a href="<%=contextPath%>/updateForm.pro" class="navigation-login-area_item"><%= loginUser.getUserId() %></a>
+                            	<a href="<%=contextPath%>/myInfo.me" class="navigation-login-area_item"><%= loginUser.getUserId() %></a>
 	                            <a href="<%=contextPath%>/enroll.rcp" class="navigation-login-area_item" id="write">글쓰기</a>
                             
                             <% }%>

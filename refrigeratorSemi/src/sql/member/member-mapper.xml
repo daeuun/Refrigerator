@@ -170,5 +170,23 @@
 		   AND PHONE = ?
 		   AND EMAIL = ?
 	</entry>
+	
+	<!-- Jaewon-->
+	<!-- 회원 정보 변경-->
+	<entry key="updateMemberInfo">
+		UPDATE MEMBER
+		   SET USER_NAME = ?
+		     , GENDER = ?
+		     , EMAIL = ?
+		     , PHONE = ?
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="updatePWD">
+		UPDATE MEMBER
+		   SET USER_PWD = ?
+		 WHERE USER_ID = ?
+		   AND USER_PWD = ? 
+	</entry>
 
 </properties>

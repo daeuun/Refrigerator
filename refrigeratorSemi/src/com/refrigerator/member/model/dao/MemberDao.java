@@ -376,6 +376,55 @@ public class MemberDao {
 		
 	}
 
+	/**
+	 * @Author Jaewon
+	 *  회원 정보 변경
+	 */
+	public int updateMemberInfo(Connection conn, Member memInfo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMemberInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memInfo.getUserName());
+			pstmt.setString(2, memInfo.getGender());
+			pstmt.setString(3, memInfo.getEmail());
+			pstmt.setString(4, memInfo.getPhone());
+			pstmt.setInt(5, memInfo.getUserNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * @Author Jaewon
+	 *  회원 비밀번호 변경
+	 */
+	public int updatePWD(Connection conn, String userId, String userPwd, String newPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePWD");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, userPwd);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	String userId = request.getParameter("userId");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,15 +92,72 @@
 
     <div class="outer">   
         <!-- action 에 서블릿 호출 ~ -->
-        <form action="~~~~.do" method="post" id="pswModifyForm">
+        <form action="pwdUpdate.me" method="post" id="pswModifyForm">
             <h3>비밀번호 변경</h3>
-            <input type="text" name="userPwd" placeholder="현재 비밀번호" required><br>
+            <input type="hidden" name="userId" value="<%= userId %>">
+            <input type="password" name="userPwd" placeholder="현재 비밀번호" required><br>
             <!-- 이 아래의 span이 AJAX가 적용될 예정이다. -->
-            <span>8자 이상 입력해주세요.</span><br>
-            <input type="text" name="newUserPwd" placeholder="새 비밀번호" required><br>
-            <input type="text" placeholder="새 비밀 번호를 확인합니다" required><br>
+            <span>※ 영문자(대/소), 숫자, 특수문자를 포함하여 8자 이상 입력.</span><br>
+            <input type="password" id="newPwd" name="newPwd" placeholder="새 비밀번호" required><br>
+            <input type="password" id="newPWdCheck" placeholder="새 비밀 번호를 확인합니다" disabled required><br>
+            <div id="checkPwdBox" style="display:none;">test</div>
+            <script>         
+			//새로운 비밀 번호 유효성 검사
+			$(function(){
+				$("input[name='userPwd']").focus();
+			});
+			
+            $("#newPwd").focusout(function(){
+                var newPwd = $("#newPwd").val();
+                var pwdLength = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{4,16}$/;
+
+                if(pwdLength.test(newPwd)){
+					$("#checkPwdBox").html("※ 유요한 비밀번호입니다!");
+					$("#checkPwdBox").css("color","green");
+					$("#checkPwdBox").css("display", "");
+					$("#checkPwdBox").css("text-align", "left");
+					$("#newPWdCheck").prop("disabled" , false)
+                }else{
+					$("#checkPwdBox").html("※ 영문자, 숫자, 특수문자를 사용하여 8~16자로 설정해주세요");
+					$("#checkPwdBox").css("color","red");
+					$("#checkPwdBox").css("display", "");
+					$("#checkPwdBox").css("text-align", "left");
+					$("#checkPwdBox").focus();
+                }
+            });
+
+			//새로운 비밀 번호 검사 한번더 ajax를 통해 유효성 검사            
+            $("#newPWdCheck").focusout(function(){
+				$.ajax({
+					url : "AjaxPWDCheck.me",
+					data : {
+						newPwd:$("#newPwd").val(),
+						newPwdCheck:$("#newPWdCheck").val()
+					},
+					type:"post",
+					success:function(result){
+						if(result == "true"){
+						// 가입버튼 해제 
+							$("#submitBtn").prop("disabled", false);
+						// 일치여부에 따라서 알려주기
+							$("#checkPwdBox").html("※ 비밀번호 일치");
+							$("#checkPwdBox").css("color","green");
+							$("#checkPwdBox").css("display", "");
+							$("#checkPwdBox").css("text-align", "left");
+						}else{
+							$("#checkPwdBox").html("※ 비밀번호가 일치하지 않습니다 다시 입력해주세요");
+							$("#checkPwdBox").css("color","red");
+							$("#checkPwdBox").css("display", "");							
+							$("#checkPwdBox").css("text-align", "left");
+						};
+					},error:function(){
+						console.log("Ajax 통신 실패");
+					}
+				});
+            });
+            </script>
             <br>
-            <button type="submit">확인</button><br>
+            <button type="submit" id="submitBtn" disabled>확인</button><br>
             <button type="button" onclick="history.back()">취소</button>
         </form>
     </div>
