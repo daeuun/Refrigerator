@@ -254,6 +254,32 @@
 		  WHERE RNUM BETWEEN ? AND ?
 	</entry>	
 	
+		
+	<!-- @author daeun -->
+	<!-- 메인(오늘의 레시피) - 조회수 내림차순 레시피 조회 -->
+	<entry key="selectMainSortViewList">
+		SELECT *
+		FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT
+		                       RECIPE_NO
+		                     , RECIPE_TITLE
+		                     , USER_ID
+		                     , COUNT
+		                     , RECIPE_ENROLL_DATE
+		                     , MAIN_IMG
+		                  FROM RECIPE R
+		                  JOIN MEMBER USING (USER_NO)
+		                 WHERE R.STATUS = 'N'
+		                 ORDER
+		                    BY COUNT DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+  <![CDATA[AND ROWNUM <= 10]]>
+	</entry>
+	
 	
 	
 

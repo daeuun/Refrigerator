@@ -167,6 +167,17 @@ public class RecipeService {
 		return list;
 	}
 	
+	/** 메인 레시피 조회수별 리스트
+	 * @author daeun
+	 */
+	public ArrayList<Recipe> selectMainSortViewList(PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectMainSortViewList(conn, pi);
+		System.out.println(list);
+		close(conn);
+		return list;
+	}
+	
 
 	
 }

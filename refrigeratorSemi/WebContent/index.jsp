@@ -45,6 +45,8 @@
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/main">메인</a></div>
 	
+	<!-- @author daeun -->
+	<div><a href="<%=contextPath%>/recipeView.main?currentPage=1">조회수 많은 레시피 목록 더보기버튼</a></div>
 	
 	
 </body>

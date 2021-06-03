@@ -9,6 +9,7 @@ public class Recipe {
 	private int userNo;
 	private String recipeWriter; // recipeWriter 성은 추가 
 	private String recipeTitle;
+	private String userId; // 다은 추가
 	private String recipeIntro;
 	private int severalServings; 
 	private int cookingTime;
@@ -69,6 +70,19 @@ public class Recipe {
 		this.recipeEnrollDate = recipeEnrollDate;
 		this.mainImg = mainImg;
 	}
+	
+	/** 메인페이지 - 조회수 내림차순 레시피 조회용
+	 * @author daeun 
+	 */
+	public Recipe(int recipeNo, String recipeTitle, String userId, int count, String recipeEnrollDate, String mainImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeTitle = recipeTitle;
+		this.userId = userId;
+		this.count = count;
+		this.recipeEnrollDate = recipeEnrollDate;
+		this.mainImg = mainImg;
+	}
 
 	public int getRecipeNo() {
 		return recipeNo;
@@ -92,6 +106,14 @@ public class Recipe {
 
 	public void setRecipeTitle(String recipeTitle) {
 		this.recipeTitle = recipeTitle;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getRecipeIntro() {

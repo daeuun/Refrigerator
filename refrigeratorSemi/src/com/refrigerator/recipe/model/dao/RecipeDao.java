@@ -398,5 +398,49 @@ public class RecipeDao{
 		return list;
 	}
 	
+	/** 메인 레시피 조회수별 리스트
+	 * @author daeun
+	 */
+	public ArrayList<Recipe> selectMainSortViewList(Connection conn, PageInfo pi){
+		// select => Rset
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMainSortViewList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			// 페이징 (레시피 갯수에 따라 끝페이지, 마지막페이지 구하기)
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery(); 
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+									rset.getString("recipe_title"),
+									rset.getString("user_id"),
+									rset.getInt("count"),
+									rset.getString("recipe_enroll_date"),
+									rset.getString("main_img")));
+			}
+			
+			System.out.println(list);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
 	
 }
