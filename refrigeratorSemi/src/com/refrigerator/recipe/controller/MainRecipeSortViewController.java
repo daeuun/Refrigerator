@@ -50,10 +50,10 @@ public class MainRecipeSortViewController extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				
 		// *3. pageLimit : 하단에 보여질 페이징바의 페이지 최대 개수(페이지 목록들 몇 개 단위)
-		pageLimit = 10;
+		pageLimit = 5;
 				
 		// *4. boardLimit : 한 페이지 내에 보여질 게시글 최대 개수
-		boardLimit = 10;
+		boardLimit = 12;
 				
 		// *5. maxPage : 제일 마지막 페이지 수 (총 페이지 수)
 				
@@ -84,7 +84,7 @@ public class MainRecipeSortViewController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 				
-		request.getRequestDispatcher("views/recipe/test.jsp").forward(request, response);
+		request.getRequestDispatcher("views/recipe/MainTest.jsp").forward(request, response);
 		
 	}
 

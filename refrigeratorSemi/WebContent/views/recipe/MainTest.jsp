@@ -139,7 +139,7 @@
         
                             <p style="margin-top: 5px;">
                                 <b><%= rc.getRecipeTitle()%></b><br>
-                                <span style="font-size:14px"><%= rc.getUserId()%></span> <br>
+                                <span style="font-size:14px"><%= rc.getRecipeWriter()%></span> <br>
                                 <span style="font-size:14px">별점 : 3.5(5.0) &nbsp;|&nbsp; 조회수 : <%= rc.getCount()%></span> 
                             </p>
         
