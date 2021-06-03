@@ -7,6 +7,7 @@ public class Recipe {
 	
 	private int recipeNo;
 	private int userNo;
+	private String recipeWriter; // recipeWriter 성은 추가 
 	private String recipeTitle;
 	private String recipeIntro;
 	private int severalServings; 
@@ -34,12 +35,13 @@ public class Recipe {
 		this.ingreImg = ingreImg;
 	}
 
-	public Recipe(int recipeNo, int userNo, String recipeTitle, String recipeIntro, int severalServings, int cookingTime,
-			double avrgStarPoint, int count, int likeCount, int scrapCount, String recipeEnrollDate, String status,
-			String mainImg, String ingreImg) {
+	public Recipe(int recipeNo, int userNo, String recipeWriter, String recipeTitle, String recipeIntro,
+			int severalServings, int cookingTime, double avrgStarPoint, int count, int likeCount, int scrapCount,
+			String recipeEnrollDate, String status, String mainImg, String ingreImg) {
 		super();
 		this.recipeNo = recipeNo;
 		this.userNo = userNo;
+		this.recipeWriter = recipeWriter;
 		this.recipeTitle = recipeTitle;
 		this.recipeIntro = recipeIntro;
 		this.severalServings = severalServings;
@@ -52,6 +54,20 @@ public class Recipe {
 		this.status = status;
 		this.mainImg = mainImg;
 		this.ingreImg = ingreImg;
+	}
+
+	public Recipe(int recipeNo, int userNo, String recipeWriter, String recipeTitle, String recipeIntro,
+			double avrgStarPoint, int count, String recipeEnrollDate, String mainImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.userNo = userNo;
+		this.recipeWriter = recipeWriter;
+		this.recipeTitle = recipeTitle;
+		this.recipeIntro = recipeIntro;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.recipeEnrollDate = recipeEnrollDate;
+		this.mainImg = mainImg;
 	}
 
 	public int getRecipeNo() {
@@ -166,14 +182,23 @@ public class Recipe {
 		this.ingreImg = ingreImg;
 	}
 
+	public String getRecipeWriter() {
+		return recipeWriter;
+	}
+
+	public void setRecipeWriter(String recipeWriter) {
+		this.recipeWriter = recipeWriter;
+	}
+
 	@Override
 	public String toString() {
-		return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeTitle=" + recipeTitle + ", recipeIntro="
-				+ recipeIntro + ", severalServings=" + severalServings + ", cookingTime=" + cookingTime
-				+ ", avrgStarPoint=" + avrgStarPoint + ", count=" + count + ", likeCount=" + likeCount + ", scrapCount="
-				+ scrapCount + ", recipeEnrollDate=" + recipeEnrollDate + ", status=" + status + ", mainImg=" + mainImg
-				+ ", ingreImg=" + ingreImg + "]";
+		return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeWriter=" + recipeWriter
+				+ ", recipeTitle=" + recipeTitle + ", recipeIntro=" + recipeIntro + ", severalServings="
+				+ severalServings + ", cookingTime=" + cookingTime + ", avrgStarPoint=" + avrgStarPoint + ", count="
+				+ count + ", likeCount=" + likeCount + ", scrapCount=" + scrapCount + ", recipeEnrollDate="
+				+ recipeEnrollDate + ", status=" + status + ", mainImg=" + mainImg + ", ingreImg=" + ingreImg + "]";
 	}
+	
 	
 
 }

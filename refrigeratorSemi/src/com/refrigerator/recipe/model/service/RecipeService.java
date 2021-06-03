@@ -8,6 +8,7 @@ import static com.refrigerator.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.ingre.model.vo.Ingre;
 import com.refrigerator.ingre_search.model.vo.IngreSearch;
 import com.refrigerator.recipe.model.dao.RecipeDao;
@@ -145,11 +146,22 @@ public class RecipeService {
 	
 	/**
 	 * @author leeyeji
+	 * 페이징 - 총 페이지 수
+	 */
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new RecipeDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+	}
+	
+	/**
+	 * @author leeyeji
 	 * 레시피 전체 목록 조회
 	 */
-	public ArrayList<Recipe> selectRecipeList(){
+	public ArrayList<Recipe> selectRecipeList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn);
+		ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn, pi);
 		
 		close(conn);
 		return list;

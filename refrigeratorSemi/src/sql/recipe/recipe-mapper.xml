@@ -218,5 +218,43 @@
 			 , ?
 			 )
 	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 페이징 - 총 페이지 수 -->
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM RECIPE
+         WHERE STATUS = 'N'
+	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 신고 전체 목록 조회 -->
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+			    SELECT ROWNUM RNUM, A.*
+		          FROM (
+				        SELECT
+				               RECIPE_NO
+				             , USER_NO
+		                     , USER_ID
+                             , RECIPE_TITLE
+                             , RECIPE_INTRO
+                             , AVRG_STAR_POINT
+                             , COUNT
+                             , RECIPE_ENROLL_DATE
+                             , MAIN_IMG
+		                  FROM RECIPE R
+                          JOIN MEMBER M USING (USER_NO)
+		                 ORDER
+		                    BY RECIPE_ENROLL_DATE DESC
+		                ) A
+		        )
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>	
+	
+	
+	
 
 </properties>
