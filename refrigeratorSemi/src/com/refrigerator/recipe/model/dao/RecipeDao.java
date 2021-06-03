@@ -327,6 +327,13 @@ public class RecipeDao{
 		return result;
 	}
 	
+	/**
+	 * @author leeyeji
+	 * 레시피 전체 목록 조회
+	 */
+	public ArrayList<Recipe> selectRecipeList(Connection conn){
+		
+	}
 	
 	
 }
