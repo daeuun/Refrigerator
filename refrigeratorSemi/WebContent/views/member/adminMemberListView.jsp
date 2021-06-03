@@ -130,7 +130,7 @@
 	                                            <table>
 	                                                <tr>
 	                                                    <td>
-	                                                    	<input type="hidden" name="userNo" id="userNo-id">
+	                                                    	<input type="hidden" name="userNo" id="userNo-modify">
 	                                                        <div class="modal-event-title">닉네임
 	                                                        </div>
 	                                                    </td>
@@ -176,7 +176,7 @@
 	                                                        <div>회원등급</div>
 	                                                    </td>
 	                                                    <td>
-	                                                        <select name="grade" id="memberLevel">
+	                                                        <select name="grade" id="grade">
 	                                                            <option value="2">일반 쉐프</option>
 	                                                            <option value="1">프리미엄 쉐프</option>
 	                                                        </select>
@@ -285,17 +285,18 @@
 	                   			//$("#userNo-modify").val($(event.target).parent().siblings("input[type=hidden]").val());
 	                   			
 	                   			var userNo = $(event.target).parent().siblings("input[type=hidden]").val();
-	                            
-	                            $("#userNo-id").val(userNo);
+	                            console.log(userNo);
+	                            $("#userNo-modify").val(userNo);
 	                            
 	                            <% for(Member m : list) {%>
 	                            	
-	                            	if(userNo == <%= m.getUserNo()%>){}
+	                            	if(userNo == <%= m.getUserNo()%>){
 	                            		
 	                            		$("#exstnNickname").val("<%=m.getNickname()%>");
 	                            		$("#exstnEmail").val("<%=m.getEmail()%>");
 	                            		$("#exstnPwd").val("<%=m.getUserPwd()%>");
 	                            		$("#exstnPhone").val("<%=m.getPhone()%>");
+	                            		$("#grade").val("<%=m.getGrade()%>");
 	                            		
 	                            	}
 	                            <% }%>
