@@ -11,7 +11,7 @@ public class Recipe {
 	private String recipeIntro;
 	private int severalServings; 
 	private int cookingTime;
-	private int avrgStarPoint; 
+	private double avrgStarPoint; 
 	private int count;
 	private int likeCount;
 	private int scrapCount;
@@ -35,7 +35,7 @@ public class Recipe {
 	}
 
 	public Recipe(int recipeNo, int userNo, String recipeTitle, String recipeIntro, int severalServings, int cookingTime,
-			int avrgStarPoint, int count, int likeCount, int scrapCount, String recipeEnrollDate, String status,
+			double avrgStarPoint, int count, int likeCount, int scrapCount, String recipeEnrollDate, String status,
 			String mainImg, String ingreImg) {
 		super();
 		this.recipeNo = recipeNo;
@@ -102,11 +102,11 @@ public class Recipe {
 		this.cookingTime = cookingTime;
 	}
 
-	public int getAvrgStarPoint() {
+	public double getAvrgStarPoint() {
 		return avrgStarPoint;
 	}
 
-	public void setAvrgStarPoint(int avrgStarPoint) {
+	public void setAvrgStarPoint(double avrgStarPoint) {
 		this.avrgStarPoint = avrgStarPoint;
 	}
 
