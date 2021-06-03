@@ -40,7 +40,7 @@
         margin-left: 150px;
         display: block;
     }*/
-    .select-list{margin-left: 130px;}
+    .select-list{margin-left: 180px;}
     .select-list>a{
         text-decoration: none;
         color: black;

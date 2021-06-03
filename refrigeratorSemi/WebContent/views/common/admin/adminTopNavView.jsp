@@ -89,7 +89,7 @@
 	<div class="top-nav">
 
         <div class="logo" a> 
-            <img src="../../resources/img/logo.png" width="" align="left">
+            <img src="../../resources/image/logo_pic.png" width="" align="left">
         </div>
 
         <div class="home-btn">
