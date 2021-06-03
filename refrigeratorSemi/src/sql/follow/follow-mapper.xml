@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	<!-- @author HeeRak -->
+	<!-- 로그인한 유저 번호로 팔로우관계list select -->
+	<entry key="selectFaqList">
+		SELECT FOLLOW_NO
+			 , FOLLOW_USER_NO
+			 , FOLLOWING_USER_NO
+			 , MODIFY_DATE
+		  FROM FOLLOW
+		 WHERE FOLLOW_USER_NO = ?
+	</entry>
+
+</properties>
