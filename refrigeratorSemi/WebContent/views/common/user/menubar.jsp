@@ -18,13 +18,12 @@
 <style>
     .navigation-first-warp{
         height: 80px;
-        
     }
+    /*검색창*/
     .navigation-search{
         height: 45px;
         background-color: #009764;
         margin: 10px 0;
-        
     }
     .navigation-search_content{
         position: relative;
@@ -53,8 +52,8 @@
         width: 30px;
         height: 30px;
         margin-right: -100px;
-
     }
+    
     #login-form, #user-info{float:right}
     #user-info a{
         text-decoration: none;
@@ -65,6 +64,7 @@
         background: #fff;
         display: flex;
         justify-content: center; 
+        height: 50px;
     }
     
     .navigation-secondary_menu {
@@ -78,17 +78,18 @@
         font-size: 15px;
         margin: 8px 10px;
         font-weight: 700;
-        padding: 6px 20px 4px;
+        padding: 6px 20px;
         color: #424242;
     }
+    
     
     .navigation-first_logo, .navigation-search{
         text-align: center;
     }
     .navigation-login-area{
-        display: inline-block;
-        text-align: right;
-        flex: 0 320px;
+        display: flex;
+        text-align: center;
+        flex: 0 420px;
     }
     
     .navigation-login-area_item{
@@ -118,7 +119,7 @@
         color: #fff;
         border: none;
         height: 36px;
-        margin: 8px px;
+        margin: 8pxpx;
         padding: 8px 10px 9px 10px;
     }
     #write:hover{
@@ -126,13 +127,74 @@
         color: #fff;
         background-color: rgb(106, 189, 161);
     }
+
+    /*로그인후*/
+    .login-area{
+        margin-left: 40px;
+        height: 100%;
+        
+    }
+    .login-area a{
+        text-decoration: none;
+        color: #424242;
+    }
+    .login-area ul li{
+        display: block;
+        width: 90px;
+        height: 30px;
+        line-height: 53px;
+        margin: 0;
+    }
+    .login-area>ul>li>a{
+        display:block;
+        height: 20px;
+    }
+    .login-area>ul>li>img{
+        display:block;
+        height: 20px;
+    }
+    ul li {
+        float: left;
+        list-style-type:none;
+        padding-left: 0;
+    }
+    /*프로필사진 드롭박스*/
+    .login-area>ul>li>ul{
+        position: relative;
+        z-index : 5;
+        font-size: 14px;
+        list-style-type:none;
+        text-decoration: none;
+        padding: 0;
+        display: none;
+        width: 150px;
+    }
+    .login-area>ul>li a:hover+ul{
+        display: block;
+    }
+    .login-area>ul>li>a:hover+ul{display: block;}
+
+    .login-area>ul>li>ul:hover{display:block;}
+    
+    #profileImg-outer{
+        background-color: #fff;
+        border-radius: 4px;
+        width: 120px;
+        height: 115px;
+        padding: 0 0 0 10px;
+        border: 1px solid #009764;
+    }
+    #profileImg-outer>li>a:hover{
+        color: #009764;
+        cursor: pointer;
+    }
+
+        
+    
+
 </style>
 </head>
 <body>
-    
-        <br clear="both">
-        <br>
-
     <header clsss="navigation-bar">
 
             <!-- 로고 + 검색바-->
@@ -142,7 +204,8 @@
 
                     <!--중앙로고-->
                     <div class="navigation-first_logo">
-                        <a href="navigation-first_logo_icon">로고아이콘</a>
+                        <a href=""">로고아이콘
+                        </a>
                     </div>
 
                     <!--중앙검색바-->
@@ -168,14 +231,14 @@
                         <a class="navigation-secondary_menu_item">홈</a>
                         <a class="navigation-secondary_menu_item">카테고리</a>
                         <a class="navigation-secondary_menu_item">이벤트</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/recipeList.recipe?currentPage=1">레시피</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.no?currentPage=1">고객센터</a>
+                        <a class="navigation-secondary_menu_item">레시피</a>
+                        <a class="navigation-secondary_menu_item">고객센터</a>
                     </nav>
 
                     <!--로그인-->
                     <div class="navigation-login-area">
                         
-                        <div id="login-form" method="post">
+                        <div class="login-area" id="login-form" method="post">
                         
                         	<!--로그인 전 => 로그인버튼 -->
                         	<% if(loginUser == null){ %>
@@ -185,10 +248,18 @@
                             	
                             <!-- 로그인 후 => 프로필사진 + 닉네임 -->
                             <% }else { %>
-                            	<a href="" class="navigation-login-area_item">프사</a>
-                            	<a href="<%=contextPath%>/myInfo.me" class="navigation-login-area_item"><%= loginUser.getUserId() %></a>
-	                            <a href="<%=contextPath%>/enroll.rcp" class="navigation-login-area_item" id="write">글쓰기</a>
-                            
+                                <ul id="login-area_profile"> 
+                                    <li id="lihover"><a href="">프사</a>
+                                        <ul id="profileImg-outer">
+                                            <li><a href="">최근본레시피</a></li>
+                                            <li><a href="<%=contextPath%>/updateForm.pro"">마이페이지</a></li>
+                                            <li><a href="<%=contextPath%>/logout.member">로그아웃</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="<%=contextPath%>/updateForm.pro" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
+                                    <li><a href="" class="navigation-login-area_item" id="write">글쓰기</a></li>
+                                </ul>
+                            	
                             <% }%>
                         </div>
 

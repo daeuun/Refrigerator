@@ -41,23 +41,8 @@
 	<div><a href="<%=contextPath%>/list.faq?currentPage=1">FAQ 페이지</a></div>
 	
 	<!-- @author daeun -->
-	<div><a href="<%=contextPath%>/menubar">메뉴바</a></div>
-	
-	<!-- @author daeun -->
-	<div><a href="<%=contextPath%>/findId.me">아이디찾기</a></div>
-	
-	<!-- @author daeun -->
-	<div><a href="<%=contextPath%>/findPwd.me">비밀번호재설정</a></div>
-	
-	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/main">메인</a></div>
-	
-<<<<<<< Updated upstream
-	<!-- @author daeun -->
-	<div><a href="<%=contextPath%>/recipeView.main?currentPage=1">조회수 많은 레시피 목록 더보기버튼</a></div>
-=======
 
->>>>>>> Stashed changes
 	
 	
 </body>
