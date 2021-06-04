@@ -71,12 +71,7 @@ public class RecipeDetailController extends HttpServlet {
 			
 		};
 		
-		
-		// 요리 순서 조회하기
-		
-		
-		
-		request.getRequestDispatcher("views/recipe/recipeDetailView.jsp").forward(request, response);
+	
 		
 		
 	}
