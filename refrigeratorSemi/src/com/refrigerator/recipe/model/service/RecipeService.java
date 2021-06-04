@@ -216,6 +216,29 @@ public class RecipeService {
 
 		
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 레시피 최신순 조회
+	 */
+	public ArrayList<Recipe> selectLatestRecipeList(PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectLatestRecipeList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 레시피 별점순 조회
+	 */
+	public ArrayList<Recipe> selectStarRecipeList(PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectStarRecipeList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
 
 	
 }

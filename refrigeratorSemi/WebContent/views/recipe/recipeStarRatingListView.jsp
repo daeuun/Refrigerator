@@ -106,7 +106,12 @@
             <div class="search-content">
 
                 <div class="search-info">
-                    
+                    <p>"<span id="search-title">별점순 레시피</span>"에 대한 검색결과</p>
+                    <p>
+                        총 
+                        <span id="search-num">1000</span>
+                        개의 맛있는 레시피가 있습니다.
+                    </p>
                 </div>
 
                 <div class="search-btn" align="right">
@@ -145,13 +150,13 @@
         <div align="center" class="paging-area">
 		        
 			<% if(currentPage != 1) { %>
-				<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=currentPage-1%>';"> &lt; </button>
+				<button onclick="location.href='<%= contextPath%>/starRtng.recipe?currentPage=<%=currentPage-1%>';"> &lt; </button>
 			<% } %>
 						
 				<% for(int p=startPage; p<=endPage; p++) {%>
 			            	
 					<% if(p != currentPage){ %>
-						<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=p%>';"><%= p %></button>
+						<button onclick="location.href='<%= contextPath%>/starRtng.recipe?currentPage=<%=p%>';"><%= p %></button>
 					<% }else{ %>
 						<button disabled><%= p %></button>
 					<%} %>
@@ -159,7 +164,7 @@
 				<% } %>
 			
 			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=currentPage+1%>'"> &gt; </button>
+				<button onclick="location.href='<%= contextPath%>/starRtng.recipe?currentPage=<%=currentPage+1%>'"> &gt; </button>
 			<% } %>
 					
 		</div>

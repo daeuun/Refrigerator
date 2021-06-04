@@ -109,7 +109,17 @@ public class Recipe {
 		this.ingreImg = ingreImg;
 	}
 	
-	
+	public Recipe(int recipeNo, String recipeWriter, String recipeTitle, double avrgStarPoint, int count,
+			String recipeEnrollDate, String mainImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeWriter = recipeWriter;
+		this.recipeTitle = recipeTitle;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.recipeEnrollDate = recipeEnrollDate;
+		this.mainImg = mainImg;
+	}
 	
 
 	public int getRecipeNo() {

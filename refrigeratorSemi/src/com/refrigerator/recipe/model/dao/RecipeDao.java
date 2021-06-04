@@ -550,7 +550,85 @@ public class RecipeDao{
 		
 	}
 	
+	/**
+	 * @author leeyeji
+	 * 레시피 최근순 조회
+	 */
+	public ArrayList<Recipe> selectLatestRecipeList(Connection conn, PageInfo pi) {
+		// select => Result 여러행
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLatestRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+								    rset.getString("nickname"),
+								    rset.getString("recipe_title"),
+								    rset.getDouble("avrg_star_point"),
+								    rset.getInt("count"),
+								    rset.getString("recipe_enroll_date"),
+								    rset.getString("main_img")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
+	/**
+	 * @author leeyeji
+	 * 레시피 별점순 조회
+	 */
+	public ArrayList<Recipe> selectStarRecipeList(Connection conn, PageInfo pi){
+		// select => ResultSet 여러행
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectStarRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+								    rset.getString("nickname"),
+								    rset.getString("recipe_title"),
+								    rset.getDouble("avrg_star_point"),
+								    rset.getInt("count"),
+								    rset.getString("recipe_enroll_date"),
+								    rset.getString("main_img")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	
 	

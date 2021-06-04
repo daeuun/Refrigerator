@@ -229,7 +229,7 @@
 	</entry>
 	
 	<!-- @author leeyeji -->
-	<!-- 신고 전체 목록 조회 -->
+	<!-- 레피시 전체 목록 조회 -->
 	<entry key="selectList">
 		SELECT *
 		  FROM (
@@ -318,6 +318,56 @@
 	
 	</entry>
 	
+	
+	<!-- @author leeyeji -->
+	<!-- 레시피 최신순 조회 -->
+	<entry key="selectLatestRecipeList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT
+		                       RECIPE_NO
+		                     , NICKNAME
+		                     , RECIPE_TITLE
+		                     , AVRG_STAR_POINT
+		                     , COUNT
+		                     , RECIPE_ENROLL_DATE
+		                     , MAIN_IMG
+		                  FROM RECIPE R
+		                  JOIN MEMBER USING (USER_NO)
+		                 WHERE R.STATUS = 'N'
+		                 ORDER
+		                    BY R.RECIPE_ENROLL_DATE DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 레시피 별점순 조회 -->
+	<entry key="selectStarRecipeList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT
+		                       RECIPE_NO
+		                     , NICKNAME
+		                     , RECIPE_TITLE
+		                     , AVRG_STAR_POINT
+		                     , COUNT
+		                     , RECIPE_ENROLL_DATE
+		                     , MAIN_IMG
+		                  FROM RECIPE R
+		                  JOIN MEMBER USING (USER_NO)
+		                 WHERE R.STATUS = 'N'
+		                 ORDER
+		                    BY R.AVRG_STAR_POINT DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 
 </properties>

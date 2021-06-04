@@ -6,7 +6,7 @@
 				 com.refrigerator.member.model.vo.Member"%>
    
 <%
-	String contextPath = request.getContextPath();
+	//String contextPath = request.getContextPath();
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
 	
@@ -30,13 +30,13 @@
 </head>
 <style>
     .outer {
-        width: 1200px;
+        /*width: 1200px;*/
         margin: auto;
-        margin-top: 50px;
     }
     .thumb-list-sec {
         width: 1000px;
         margin: auto;
+        margin-top: 20px
     }
     .search-content {
         width: 950px;
@@ -99,6 +99,8 @@
 <body>
 
     <div class="outer">
+    
+    <%@include file="../common/user/menubar.jsp" %>
 
         <section class="thumb-list-sec">
 
@@ -114,9 +116,9 @@
                 </div>
 
                 <div class="search-btn" align="right">
-                   <a href="" class="btn enroll-btn">최근순</a>
-                   <a href="" class="btn star-btn">별점순</a>
-                   <a href="" class="btn count-btn">조회순</a>
+                   <a href="<%=contextPath %>/latestList.recipe?currentPage=1" class="btn enroll-btn">최신순</a>
+                   <a href="<%=contextPath %>/starRtng.recipe?currentPage=1" class="btn star-btn">별점순</a>
+                   <a href="<%=contextPath %>/recipeView.main?currentPage=1" class="btn count-btn">조회순</a>
                 </div>
 
             </div>
