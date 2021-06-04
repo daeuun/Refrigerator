@@ -72,6 +72,7 @@
 		   AND USER_NO = ?	
 	</entry>
 
+	<!-- Jaewon 마이페이지 내 댓글 조회용 -->
 	<entry key="selectMyReplyList">
 		SELECT * 
 		   FROM (
@@ -93,6 +94,24 @@
 		                 ) A
 		        )
 			WHERE RNUM BETWEEN ? AND ?	
+	</entry>
+
+	<!-- Jaewon 마이페이지 내 댓글 수정-->
+	<entry key="updateMyReply">
+		UPDATE 
+		       REPLY
+		   SET REPLY_CONTENT = ?
+		     , MODIFY_DATE = SYSDATE 
+		 WHERE REPLY_NO = ?
+	</entry>
+	
+	<!-- Jaewon 마이페이지 내 댓글 삭데-->
+	<entry key="deleteMyReply">
+		UPDATE 
+		       REPLY
+		   SET DELETE_STATUS = 'Y'
+		     , MODIFY_DATE = SYSDATE 
+		 WHERE REPLY_NO = ?
 	</entry>
 
 </properties>

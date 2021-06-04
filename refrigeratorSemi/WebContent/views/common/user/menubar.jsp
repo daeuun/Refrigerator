@@ -3,7 +3,7 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
-
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
 
 <!DOCTYPE html>
@@ -15,6 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 <style>
     .navigation-first-warp{
@@ -253,11 +254,11 @@
                                     <li id="lihover"><a href="">프사</a>
                                         <ul id="profileImg-outer">
                                             <li><a href="">최근본레시피</a></li>
-                                            <li><a href="<%=contextPath%>/updateForm.pro"">마이페이지</a></li>
+                                            <li><a href="<%=contextPath%>/updateForm.pro">마이페이지</a></li>
                                             <li><a href="<%=contextPath%>/logout.member">로그아웃</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="<%=contextPath%>/updateForm.pro" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
+                                    <li><a href="<%=contextPath%>/myInfo.me" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
                                     <li><a href="" class="navigation-login-area_item" id="write">글쓰기</a></li>
                                 </ul>
                             	
@@ -268,7 +269,14 @@
 
                 </div>
             </div>
-            
+                <!-- Jaewon.s -->
+				<script>
+				 	var msg = "<%= alertMsg %>"; 
+				 	if(msg != "null"){
+					 	alert(msg);	 
+						<% session.removeAttribute("alertMsg"); %>
+				 	}
+				</script>
         </div>
         
     </header>

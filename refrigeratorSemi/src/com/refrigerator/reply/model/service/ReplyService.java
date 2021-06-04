@@ -107,4 +107,34 @@ public class ReplyService {
 		return list;
 	}
 	
+	/** 내 댓글 수정 메소드
+	 * @author Jaewon 
+	 */
+	public int updateMyReply(int replyNo, String replyContent) {
+		Connection conn = getConnection();
+		int result = new ReplyDao().updateMyReply(conn, replyNo, replyContent);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		 close(conn);
+		return result;		
+	}
+
+	/** 내 댓글 삭제 메소드
+	 * @author Jaewon 
+	 */
+	public int deleteMyReply(int replyNo) {
+		Connection conn = getConnection();
+		int result = new ReplyDao().deleteMyReply(conn, replyNo);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		 close(conn);
+		return result;		
+	}
+
 }

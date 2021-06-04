@@ -229,7 +229,61 @@ import com.refrigerator.reply.model.vo.Reply;
 				
 		return list;
 	}
+	//------------------------------------------------------------------
+	/** 마이페이지 내 댓글 수정 메소드
+	 * @author Jaewon
+	 */
+	public int updateMyReply(Connection conn, int replyNo, String replyContent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMyReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, replyContent);
+			pstmt.setInt(2, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
+//------------------------------------------------------------------
+	/** 마이페이지 내 댓글 삭제 메소드
+	 * @author Jaewon
+	 */
+	public int deleteMyReply(Connection conn, int replyNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMyReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 }
