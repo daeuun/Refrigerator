@@ -7,11 +7,13 @@
 				
 <%
 
-	String alertMsg = (String)request.getAttribute("alertMsg");
 	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 	ArrayList<RecipeOrder>list2 = (ArrayList<RecipeOrder>)request.getAttribute("list2");
 	
 	Recipe rc = (Recipe)request.getAttribute("rc");
+	
+	/*menubar.jsp로 가져갈 구문*/
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 	
 %>
 
@@ -303,6 +305,15 @@
 
 </head>
 <body>
+	
+	<!--menubar.jsp로 가져갈 구문-->
+	<script>
+	 	var msg = "<%= alertMsg %>"; 
+	 	if(msg != "null"){
+		 	alert(msg);	 
+			<% session.removeAttribute("alertMsg"); %>
+	 	};
+	</script>
 	
 	<%@ include file="../common/user/menubar.jsp" %>
 
@@ -818,6 +829,7 @@
                        		,data : {
                         			content : $("#usr").val()
                         			,recipeNo : <%=rc.getRecipeNo()%>
+                       				,userNo : <%=loginUser.getUserNo()%>
                         			}
                        		,type : "post"
                        		,success : function(result){
