@@ -25,7 +25,7 @@
 	<h1>안녕하세요 테스트입니다.</h1>
 	
 	<!-- @author seong 후에 레시피 조회 페이지와 연동할 예정 -->
-	<div><a href="<%=contextPath%>/list.recipe">레시피 상세 페이지</a></div>
+	<div><a href="<%=contextPath%>/detail.recipe">레시피 상세 페이지</a></div>
 	
 	<!-- Author : seong 5/29 -->
 	<div><a href="<%=contextPath%>/rlist.admin?currentPage=1">관리자 댓글 관리 페이지</a></div>
