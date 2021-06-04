@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.ingre.model.vo.Ingre;
+import com.refrigerator.ingre.model.vo.SubIngre;
 import com.refrigerator.ingre_search.model.vo.IngreSearch;
 import com.refrigerator.recipe.model.vo.Recipe;
 import com.refrigerator.recipe.model.vo.Reply;
@@ -629,6 +630,134 @@ public class RecipeDao{
 		}
 		return list;
 	}
+
+	
+	/**
+	 * 레시피 상세조회 클릭시 해당 레시피에 조회수 증가
+	 * @author seong
+	 * @date 6/4
+	 */
+	
+	public int increaseCount(Connection conn, int recipeNo) {
+		// update문 => 처리된 행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 레시피 상세보기 페이지 [필수 재료 조회]
+	 * @author seong
+	 * @date 6/4
+	 */
+	
+	public ArrayList<Ingre>selectMainIngreList(Connection conn, int recipeNo){
+		
+		ArrayList<Ingre> ingre = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMainIngreList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				ingre.add(new Ingre(
+						
+						rset.getInt("INGRE_NO")
+						,rset.getInt("RECIPE_NO")
+						,rset.getString("INGREDIENT_NAME")
+						,rset.getInt("INGRE_AMOUNT")
+						,rset.getString("INGRE_UNIT")
+						
+						));
+				
+				
+				
+			}
+					
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		return ingre;
+		
+	}
+	
+	/**
+	 * 레시피 상세보기 페이지 [부가 재료 조회]
+	 * @author seong
+	 * @date 6/4
+	 */
+	
+	public ArrayList<SubIngre>selectSubIngreList(Connection conn,int recipeNo){
+		
+		ArrayList<SubIngre> subIngre = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSubIngreList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				subIngre.add(new SubIngre(
+						
+						rset.getInt("INGRE_NO")
+						,rset.getInt("RECIPE_NO")
+						,rset.getString("INGREDIENT_NAME")
+						,rset.getInt("INGRE_AMOUNT")
+						,rset.getString("INGRE_UNIT")
+						
+						
+						));
+			
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+
+		return subIngre;
+		
+	}
+	
 	
 	/**
 	 * @author leeyeji
@@ -643,7 +772,6 @@ public class RecipeDao{
 		
 		
 	}
-	
 	
 	
 	

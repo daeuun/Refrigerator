@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.ingre.model.vo.Ingre;
+import com.refrigerator.ingre.model.vo.SubIngre;
 import com.refrigerator.ingre_search.model.vo.IngreSearch;
 import com.refrigerator.recipe.model.dao.RecipeDao;
 import com.refrigerator.recipe.model.vo.Recipe;
@@ -249,5 +250,61 @@ public class RecipeService {
 		close(conn);
 		return list;
 	}
+	
+	/**
+	 * 레시피 상세조회 클릭시 해당 레시피에 조회수 증가
+	 * @author seong
+	 * @date 6/4
+	 */
+	
+	public int increaseCount(int recipeNo) {
+		
+		Connection conn = getConnection();
+		int result = new RecipeDao().increaseCount(conn, recipeNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	/**
+	 * 레시피 상세보기 페이지 [필수 재료 조회]
+	 * @author seong
+	 * @date 6/4
+	 */
+	
+	public ArrayList<Ingre>selectMainIngreList(int recipeNo){
+		
+		Connection conn = getConnection();
+		ArrayList<Ingre>ingre = new RecipeDao().selectMainIngreList(conn, recipeNo);
+		
+		close(conn);
+		
+		return ingre;
+		
+	}
+	
+	/**
+	 * 레시피 상세보기 페이지 [부가 재료 조회]
+	 * @author seong
+	 * @date 6/4
+	 */
+	
+	public ArrayList<SubIngre>selectSubIngreList(int recipeNo){
+		
+		Connection conn = getConnection();
+		ArrayList <SubIngre> subIngre = new RecipeDao().selectSubIngreList(conn,recipeNo);
+		
+		
+		close(conn);
+		return subIngre;
+		
+	}
+	
+	
 	
 }

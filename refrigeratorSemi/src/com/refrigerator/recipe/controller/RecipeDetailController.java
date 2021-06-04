@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.refrigerator.ingre.model.vo.Ingre;
+import com.refrigerator.ingre.model.vo.SubIngre;
 import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
 import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
@@ -40,24 +42,32 @@ public class RecipeDetailController extends HttpServlet {
 		//Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		// 레시피 번호 
-		// 레시피 카테고리에서 레시피 번호 받아오기
-		//Recipe recipe = (Recipe)request.getAttribute("recipe");
-		//int recipeNo = recipe.getRecipeNo();
+		int recipeNo = Integer.parseInt(request.getParameter("rno"));
 		
-		// 일단 명시적으로 62번 레시피를 조회했다고 기술했습니다.
-		int recipeNo = 62;
-		
+		//조회수 증가
+		int result = new RecipeService().increaseCount(recipeNo);
+
 		// 레시피 메인 정보 조회!
 		Recipe rc = new RecipeService().selectRecipeDetailList(recipeNo);
-
-
+		
+		//필수 재료 조회
+		ArrayList <Ingre> ingre = new RecipeService().selectMainIngreList(recipeNo);
+		
+		
+		//부가 재료 조회 
+		ArrayList<SubIngre> subIngre = new RecipeService().selectSubIngreList(recipeNo);
+		
+		
 		if(rc != null ) { // 레시피 정보가 있을 때 
 			
 			ArrayList<RecipeOrder> list = new RecipeService().selectRecipeOrder(recipeNo);
+			
+			request.setAttribute("ingre", ingre);
+			request.setAttribute("subIngre", subIngre);
 			request.setAttribute("list2", list);
 			request.setAttribute("rc", rc);
+			request.setAttribute("recipeNo", recipeNo);
 			request.getRequestDispatcher("views/recipe/recipeDetailView.jsp").forward(request, response);
-			
 			
 		/*윗부분 작업중*/
 

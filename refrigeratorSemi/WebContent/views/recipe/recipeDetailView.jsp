@@ -3,18 +3,21 @@
 
 <%@ page import =" java.util.ArrayList, com.refrigerator.recipe.model.vo.Review
 				,com.refrigerator.category.model.vo.*
-				,com.refrigerator.reicpe_order.model.vo.*" %>
+				,com.refrigerator.reicpe_order.model.vo.*
+				,com.refrigerator.ingre.model.vo.*" %>
 				
 <%
 
 	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 	ArrayList<RecipeOrder>list2 = (ArrayList<RecipeOrder>)request.getAttribute("list2");
+	ArrayList <Ingre> ingre = (ArrayList<Ingre>)request.getAttribute("ingre");
+	ArrayList <SubIngre> subIngre = (ArrayList<SubIngre>)request.getAttribute("subIngre");
 	
+	int recipeNo = (int)request.getAttribute("recipeNo");
 	Recipe rc = (Recipe)request.getAttribute("rc");
 	
 	/*menubar.jsp로 가져갈 구문*/
 	String alertMsg = (String)session.getAttribute("alertMsg"); 
-	
 %>
 
 
@@ -384,33 +387,20 @@
                 	준비해주세요
 
                 <table class="ingredients-detail">
-
-
-                    <tr>
-                        <th>필수재료1</th>
-                        <td id="la0">100</td>
-                        <td>g</td>
- 
-                    </tr>
-                    <hr width="100px">
-                    <tr>
-                        <th>필수재료2</th>
-                        <td id="la1">100</td>
-                        <td>g</td>
-                        
-                    </tr>          
-                          
-                    <tr>
-                        <th>필수재료3</th>
-                        <td id="la2">1</td>
-                        <td>개</td>
-                    </tr>
-                    <tr>
-                        <th>필수재료4</th>
-                        <td id="la3">2</td>
-                        <td>T</td>
-                    </tr>
-                             
+				
+					 <hr width="100px">
+					
+						<!-- 필수 재료 출력되는 구문 -->
+						<% for(Ingre in : ingre) { %>
+		
+		                    <tr>
+		                        <th><%=in.getIngreName()%></th>
+		                        <td id="la0"><%=in.getIngreAmount() %></td>
+		                        <td><%=in.getIngreUnit() %></td>
+		 
+		                    </tr>
+		                    
+	                   <%} %>          
                 </table>
             
             </div>
@@ -420,17 +410,17 @@
                 	있으면 좋아요
                 <hr width="100px">
                 <table align="center">
-
-                    <tr>
-                        <th>부가재료1</th>
-                        <td id="la10">2</td>
-                        <td>장</td>
-                    </tr>
-                    <tr>
-                        <th>부가재료2</th>
-                        <td id="la11">50</td>
-                        <td>g</td>
-                    </tr>
+                
+						<!-- 부가재료 출력되는 구문 -->
+						<%for(SubIngre si : subIngre) { %>
+		                  
+		                    <tr>
+		                        <th><%=si.getSubIngreName()%></th>
+		                        <td id="la10"><%=si.getSubIngreAmount() %></td>
+		                        <td><%=si.getSubIngreUnit() %></td>
+		                    </tr>
+		                    
+						<%} %>
 
                 </table>
 
@@ -631,14 +621,17 @@
                 <div class="recipe-review-header">
                     <!--요리 후기 추가 및 삭제시 숫자 증감-->
                     <div><h5>요리 후기 <b>2</b></h5></div>
+                    
                     <!--로그인한 회원만 보여지는 버튼 ! -->
-                    <div class="recipe-review-body" >
-                    	<form action="<%=contextPath%>/enrollForm.review">
-	                    	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
-	                    	<input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
-	                    	<button type="submit"  id="review-enroll-btn" class="btn btn-sm"> 작성하기	</button>
-                        </form>
-                    </div>
+                    <% if( loginUser != null){ %>
+	                    <div class="recipe-review-body" >
+	                    	<form action="<%=contextPath%>/enrollForm.review">
+		                    	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+		                    	<input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
+		                    	<button type="submit"  id="review-enroll-btn" class="btn btn-sm"> 작성하기	</button>
+	                        </form>
+	                    </div>
+                    <% } %>
                 </div>
 
                 <hr>

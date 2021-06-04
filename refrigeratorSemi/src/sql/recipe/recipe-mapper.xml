@@ -369,24 +369,53 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<!-- @author leeyeji -->
-	<!-- 특정 유저 레시피 목록 조회 -->
-	<entry key="selectUserRecipeList">
-		SELECT 
-		       RECIPE_NO
-		     , RECIPE_TITLE
-		     , AVRG_STAR_POINT
-		     , COUNT
-		  FROM RECIPE
-		 WHERE USER_NO = (
-		                   SELECT
-		                           USER_NO
-		                      FROM RECIPE
-		                     WHERE RECIPE_NO = ?
-		                 )
+		
+	<!--  레시피 상세조회 클릭시 해당 레시피에 조회수 증가 -->
+	<!-- @author seong 6/4-->
+	
+	<entry key="increaseCount">
+		UPDATE
+		       RECIPE
+		   SET COUNT = COUNT+1
+		 WHERE RECIPE_NO = ?
 		   AND STATUS = 'N'
 	</entry>
+		
+		
+		
+	<!-- @author seong -->
+	<!-- 레시피 상세보기 페이지 [필수 재료 조회] -->
+	<entry key="selectMainIngreList">
 	
+		SELECT 
+			INGRE_NO
+		    ,RECIPE_NO
+		    ,INGREDIENT_NAME
+		    ,INGRE_AMOUNT
+		    ,INGRE_UNIT
+	FROM INGRE 
+	JOIN SUB_CAT USING(CATEGORY_SNO)
+	WHERE RECIPE_NO = ?
+	AND INGRE_CATEGORY ='필수'
+	
+	</entry>
+	
+	<!-- @author seong -->
+	<!-- 레시피 상세보기 페이지 [부가 재료 조회] -->
+	<entry key="selectSubIngreList">
+	
+		SELECT 
+			INGRE_NO
+		    ,RECIPE_NO
+		    ,INGREDIENT_NAME
+		    ,INGRE_AMOUNT
+		    ,INGRE_UNIT
+	FROM INGRE 
+	JOIN SUB_CAT USING(CATEGORY_SNO)
+	WHERE RECIPE_NO = ?
+	AND INGRE_CATEGORY ='부가'
+	
+	</entry>
 	
 	
 	

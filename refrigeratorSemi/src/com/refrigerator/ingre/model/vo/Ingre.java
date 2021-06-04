@@ -8,6 +8,7 @@ public class Ingre {
 	private int IngreNo;
 	private int recipeNo;
 	private int categorySno;
+	private String ingreName; // 성은 추가
 	private int ingreAmount;
 	private String ingreUnit;
 	private String ingreCategory;
@@ -30,6 +31,30 @@ public class Ingre {
 		this.ingreAmount = ingreAmount;
 		this.ingreUnit = ingreUnit;
 		this.ingreCategory = ingreCategory;
+	}
+	
+	/**
+	 * 레시피 상세보기 페이지 [재료 조회]
+	 *@author seong
+	 *@date 6/3 
+	 */
+
+	public Ingre(int ingreNo, int recipeNo, String ingreName, int ingreAmount, String ingreUnit) {
+		super();
+		IngreNo = ingreNo;
+		this.recipeNo = recipeNo;
+		this.ingreName = ingreName;
+		this.ingreAmount = ingreAmount;
+		this.ingreUnit = ingreUnit;
+	}
+	
+
+	public String getIngreName() {
+		return ingreName;
+	}
+
+	public void setIngreName(String ingreName) {
+		this.ingreName = ingreName;
 	}
 
 	public int getIngreNo() {
@@ -82,10 +107,13 @@ public class Ingre {
 
 	@Override
 	public String toString() {
-		return "Ingre [IngreNo=" + IngreNo + ", recipeNo=" + recipeNo + ", categorySno=" + categorySno
-				+ ", ingreAmount=" + ingreAmount + ", ingreUnit=" + ingreUnit + ", ingreCategory=" + ingreCategory
-				+ "]";
+		return "Ingre [IngreNo=" + IngreNo + ", recipeNo=" + recipeNo + ", categorySno=" + categorySno + ", ingreName="
+				+ ingreName + ", ingreAmount=" + ingreAmount + ", ingreUnit=" + ingreUnit + ", ingreCategory="
+				+ ingreCategory + "]";
 	}
+
+	
+	
 	
 	
 }

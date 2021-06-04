@@ -69,7 +69,7 @@ public class ReviewInsertController extends HttpServlet {
 			if(result>0) {
 				
 				request.getSession().setAttribute("alertMsg", "요리후기 작성 성공 ! ");
-				response.sendRedirect(request.getContextPath()+"/detail.recipe");
+				response.sendRedirect(request.getContextPath()+"/detail.recipe?rno=" + recipeNo);
 				
 			}else {
 				

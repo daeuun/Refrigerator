@@ -14,9 +14,10 @@ import com.refrigerator.recipe.model.vo.Recipe;
 
 /**
  * @author seong
- * @date 0528
+ * @date 6/3 업데이트
  * Servlet implementation class RecipeReviewEnrollForm
  */
+
 @WebServlet("/enrollForm.review")
 public class RecipeReviewEnrollForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;

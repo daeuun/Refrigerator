@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Reply {
 	private int replyNo;
 	private int userNo;
+	private String replyWriter;
 	private int recipeNo;
 	private String replyContent;
 	private Date enrollDate;
@@ -12,6 +13,8 @@ public class Reply {
 	private String deleteStatus;
 	private String reportStatus;
 	private String recipeTitle;
+	
+	
 
 	public Reply() {}
 
@@ -36,6 +39,25 @@ public class Reply {
 		this.replyContent = replyContent;
 		this.modifyDate = modifyDate;
 		this.recipeTitle = recipeTitle;
+	}
+	
+	public Reply(int replyNo, String replyWriter, Date enrollDate,String replyContent) {
+		super();
+		this.replyNo = replyNo;
+		this.replyWriter = replyWriter;
+		this.enrollDate = enrollDate;
+		this.replyContent = replyContent;
+	}
+	
+	
+	
+	
+	public String getReplyWriter() {
+		return replyWriter;
+	}
+
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
 	}
 
 	public int getReplyNo() {
@@ -112,10 +134,12 @@ public class Reply {
 
 	@Override
 	public String toString() {
-		return "Reply [replyNo=" + replyNo + ", userNo=" + userNo + ", recipeNo=" + recipeNo + ", replyContent="
-				+ replyContent + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", deleteStatus="
-				+ deleteStatus + ", reportStatus=" + reportStatus + ", recipeTitle=" + recipeTitle + "]";
+		return "Reply [replyNo=" + replyNo + ", userNo=" + userNo + ", replyWriter=" + replyWriter + ", recipeNo="
+				+ recipeNo + ", replyContent=" + replyContent + ", enrollDate=" + enrollDate + ", modifyDate="
+				+ modifyDate + ", deleteStatus=" + deleteStatus + ", reportStatus=" + reportStatus + ", recipeTitle="
+				+ recipeTitle + "]";
 	}
+
 	
 	
 
