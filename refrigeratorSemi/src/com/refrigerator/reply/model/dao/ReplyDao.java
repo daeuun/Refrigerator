@@ -226,7 +226,6 @@ import com.refrigerator.reply.model.vo.Reply;
 			close(rset);
 			close(pstmt);
 		}
-				
 		return list;
 	}
 	//------------------------------------------------------------------

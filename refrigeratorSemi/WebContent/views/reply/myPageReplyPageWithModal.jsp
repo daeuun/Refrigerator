@@ -134,6 +134,13 @@
 		margin-top: 20px ;
 		justify-content: center;
 	}
+	
+	#reply_cnt{
+		display:inline-block;
+		float:right;
+		margin-right: 15px;
+	}
+	
 /*-------------------------페이징바 영역 ----------------------------------------------------------------------*/
     .paging-area{
    		text-align: center;
@@ -301,8 +308,8 @@
 									</div>
 								</td>
 								<td><%= loginUser.getUserId() %></td>
-								<td><button type="button" data-toggle="modal" data-target="#reply-modify-modal"><i class="fas fa-edit"></i></button></td>
-								<td><button type="button" data-toggle="modal" data-target="#reply-del-modal"><i class="fas fa-trash-alt"></i></button></td>
+								<td><button onclick="modifyReply(this);" type="button" data-toggle="modal" data-target="#reply-modify-modal"><i class="fas fa-edit"></i></button></td>
+								<td><button onclick="deleteReply(this);" type="button" data-toggle="modal" data-target="#reply-del-modal"><i class="fas fa-trash-alt"></i></button></td>
 							</tr>
 						<%}%>
 					<% } %>					
@@ -319,7 +326,12 @@
 					
 					$("#passedTtile").text("레시피 : " + passRecipeTitle);
 					$("#passedMReplyNo").val(passReplyNo);
-					$("#passedConente").text(passReplyContent);
+					$("#passedContent").text(passReplyContent);
+					
+		             $(function(){
+		                 $('#reply_cnt').html("("+$("#passedContent").val().length+" / 30)");
+		             })
+
 				}
 				
 				function deleteReply(standard){
@@ -377,13 +389,26 @@
 							<div class="modal-body" > 
 								<input type="hidden" id="passedMReplyNo" name="replyNo">
 								<span>댓글내용</span>
-								<textarea name="replyContent" id="passedConente" cols="60" rows="8" style="resize: none;"></textarea> 
+								<textarea name="replyContent" id="passedContent" cols="60" rows="4" style="resize: none;" placeholder="30자 이내만 작성가능합니다."></textarea> 							
+								※ 최대 30자까지 입력가능합니다.<div id="reply_cnt">(0 / 30)</div>							
 							</div>
 							<!-- Modal footer -->
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 								<button type="submit" class="btn btn-secondary">등록</button>
 							</div>
+							<script type="text/javascript">
+				             $(document).ready(function() {
+				                 $('#passedContent').on('keyup', function() {
+				                     $('#reply_cnt').html("("+$(this).val().length+" / 30)");
+				              
+				                     if($(this).val().length > 30) {
+				                         $(this).val($(this).val().substring(0, 30));
+				                         $('#reply_cnt').html("(30 / 30)");
+				                     }
+				                 });
+				             });
+				            </script>
 						</form>
 					</div>
 				</div>
@@ -417,6 +442,7 @@
 					</div>
 				</div>
 			</div>
+
         	<!-- Jaewon.s -->
 			<script>
 			 	var msg = "<%= alertMsg %>"; 

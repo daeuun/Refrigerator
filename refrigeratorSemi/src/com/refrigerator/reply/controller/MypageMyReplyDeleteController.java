@@ -30,9 +30,7 @@ public class MypageMyReplyDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//post로 넘어왔지만 인코딩 세팅은 필요없다.
-		System.out.println("testDelete");
 		int replyNo = Integer.parseInt(request.getParameter("replyNo")); 
-		System.out.println(replyNo);
 				
 		int result = new ReplyService().deleteMyReply(replyNo);
 		
