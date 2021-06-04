@@ -105,15 +105,19 @@
                     <a class="nav-link" href="<%=request.getContextPath()%>/myInfo.me" >회원정보수정<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                	<!-- servlet만들러 가자~  -->
-                    <a class="nav-link" href="<%=request.getContextPath()%>">최근본레시피<i class="fas fa-chevron-right"></i></a>
+				<script>
+					function moveToRecent(){
+						var rcpNo = sessionStorage.getItem("recentRecipeNo");
+						location.href="<%=request.getContextPath()%>/myRecent.rcp?rcpNo=" +rcpNo; 						
+					}
+				</script>
+                    <a class="nav-link" id="passRecent" onclick="moveToRecent();">최근본레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
-                <li class="nav-item">
-                   	<!-- servlet만들러 가자~  -->             
-                    <a class="nav-link" href="<%=request.getContextPath()%>">찜한레시피<i class="fas fa-chevron-right"></i></a>
+                <li class="nav-item">            
+                    <a class="nav-link" href="<%=request.getContextPath()%>/myScrap.scr">찜한레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
-                <li class="nav-item">
-                   	<!-- servlet만들러 가자~  -->             
+                <li class="nav-item">       	
+                    <!-- servlet만들러 가자~  -->     
                     <a class="nav-link" href="<%=request.getContextPath()%>">내가 쓴 레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">        

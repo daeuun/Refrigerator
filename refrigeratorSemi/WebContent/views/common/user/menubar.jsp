@@ -278,6 +278,29 @@
             </div>
             
         </div>
+        <!-- Jaewon 예지님 최근본레시피 뽑아가시기 편하게 만든 스크립트  -->
+       	<script>
+		// 쿠키에 저장된 값을 뽑아오는 메소드
+		function getCookie(cookie_name) {
+			  var x, y;
+			  var val = document.cookie.split(';');
+	
+			  for (var i = 0; i < val.length; i++) {
+			    x = val[i].substr(0, val[i].indexOf('='));
+			    y = val[i].substr(val[i].indexOf('=') + 1);
+			    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+			    if (x == cookie_name) {
+			      return unescape(y); // unescape로 디코딩 후 값 리턴
+			    }
+			  }
+		}
+		
+		$(function(){
+			var recentRecipe = getCookie("recentRecipeNo");
+			sessionStorage.setItem("recentRecipeNo", getCookie("recentRecipeNo"));
+		})
+		</script>
+        
         
     </header>
 

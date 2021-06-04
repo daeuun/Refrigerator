@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList , com.refrigerator.recent_recipe.model.vo.RecentRecipe"%>    
+    
+<%
+	ArrayList<RecentRecipe> list = (ArrayList<RecentRecipe>)request.getAttribute("recentList");
+	System.out.println(list);
+	//하아... 이제 담겼다.. 이거 가지고 뿌려주기만 하면 되는데 scrap쪽꺼 따오자 .
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,6 +127,7 @@
 
 </head>
 <body>
+
 	<%@ include file="../common/user/tempJWHeader.jsp" %>
 	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
 		<!-- 마이페이지 작업영역  시작-->
@@ -291,6 +299,7 @@
 			</table>
 		</div>
 		<!-- 마이페이지 작업영역  끝-->
+		
 	</div>
 	<%@ include file="../common/user/footer.jsp" %>
 
