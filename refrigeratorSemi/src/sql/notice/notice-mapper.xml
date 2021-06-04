@@ -7,22 +7,23 @@
 	<entry key="selectList">
 		SELECT *
 		  FROM (
-		        SELECT ROWNUM RNUM, N.*
+		        SELECT ROWNUM RNUM, A.*
 		          FROM (
 		                SELECT
 		                       NOTICE_NO
 		                     , NOTICE_TITLE
-                             , USER_NO
-                             , ENROLL_DATE
-                             , MODIFY_DATE
+                             , USER_ID
+                             , N.ENROLL_DATE
+                             , N.MODIFY_DATE
                              , COUNT
-		                  FROM NOTICE
+		                  FROM NOTICE N
+                          JOIN MEMBER M USING(USER_NO)
 		                 WHERE DELETE_STATUS = 'N'
 		                 ORDER
 		                    BY NOTICE_NO DESC
-		                ) N
+		                ) A
 		        )
-		 WHERE RNUM BETWEEN ? AND ?                           
+		 WHERE RNUM BETWEEN ? AND ?                        
 	</entry>
 	
 	<!-- @author yeji -->

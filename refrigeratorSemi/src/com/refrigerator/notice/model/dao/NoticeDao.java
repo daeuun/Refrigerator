@@ -53,7 +53,7 @@ public class NoticeDao {
 			while(rset.next()) {
 				list.add(new Notice(rset.getInt("notice_no"),
 									rset.getString("notice_title"),
-									rset.getString("user_no"),
+									rset.getString("user_id"),
 									rset.getDate("enroll_date"),
 									rset.getDate("modify_date"),
 									rset.getInt("count")));
