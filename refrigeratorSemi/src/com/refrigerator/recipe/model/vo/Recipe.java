@@ -88,8 +88,6 @@ public class Recipe {
 	 * @author seong
 	 * @date 6/3
 	 */
-	
-	
 
 	public Recipe(int recipeNo, String recipeWriter, String recipeTitle, String recipeIntro, int severalServings,
 			int cookingTime, double avrgStarPoint, int count, int scrapCount, String recipeEnrollDate, String mainImg,

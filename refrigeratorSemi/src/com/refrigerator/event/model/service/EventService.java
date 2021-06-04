@@ -128,5 +128,46 @@ public class EventService {
 	}
 	
 	
+	/**
+	 * 사용자단에서 진행중인 이벤트 조회
+	 * @author seong
+	 * @date 6/3
+	 */
+	
+	public ArrayList<AdmEvent> userSelectEventList(PageInfo pi){
+		
+		Connection conn = getConnection();
+
+		ArrayList<AdmEvent>list = new EventDao().userSelectEventList(conn,pi);
+
+		close(conn);
+		
+		return list;
+		
+		
+		
+	}	
+	
+	/**
+	 * 사용자단에서 종료된 이벤트 조회
+	 * @author seong
+	 * @date 6/3
+	 */
+	
+	public ArrayList<AdmEvent> userSelectEndEventList(PageInfo pi){
+		
+		Connection conn = getConnection();
+
+		ArrayList<AdmEvent>list = new EventDao().userSelectEndEventList(conn,pi);
+
+		close(conn);
+		
+		return list;
+		
+		
+		
+	}	
+	
+	
 	
 }

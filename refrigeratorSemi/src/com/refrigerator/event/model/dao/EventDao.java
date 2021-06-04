@@ -228,7 +228,120 @@ public class EventDao {
 		
 	}
 	
+	/**
+	 * 사용자단에서 진행중인 이벤트 조회
+	 * @author seong
+	 * @date 6/3
+	 */
 	
+	public ArrayList<AdmEvent> userSelectEventList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdmEvent> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("userSelectEventList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new AdmEvent(
+						
+						rset.getInt("EVEN_NO")
+						,rset.getString("EVEN_TITLE")
+						,rset.getString("EVEN_CATEGORY")
+						,rset.getString("START_DATE")
+						,rset.getString("END_DATE")
+						,rset.getDate("ENROLL_DATE")
+						,rset.getString("STATUS")
+						,rset.getString("EVEN_IMG")
+						));
+				
+				
+				
+			}
+				
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+		
+		
+	}
+	
+	/**
+	 * 사용자단에서 종료된 이벤트 조회
+	 * @author seong
+	 * @date 6/3
+	 */
+	
+	public ArrayList<AdmEvent> userSelectEndEventList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdmEvent> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("userSelectEndEventList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new AdmEvent(
+						
+						rset.getInt("EVEN_NO")
+						,rset.getString("EVEN_TITLE")
+						,rset.getString("EVEN_CATEGORY")
+						,rset.getString("START_DATE")
+						,rset.getString("END_DATE")
+						,rset.getDate("ENROLL_DATE")
+						,rset.getString("STATUS")
+						,rset.getString("EVEN_IMG")
+						));
+				
+				
+				
+			}
+				
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+		
+		
+	}
+
 	
 	
 

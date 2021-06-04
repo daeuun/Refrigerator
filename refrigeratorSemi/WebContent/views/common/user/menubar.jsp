@@ -231,7 +231,7 @@
                     <nav class="navigation-secondary_menu">
                         <a class="navigation-secondary_menu_item">홈</a>
                         <a class="navigation-secondary_menu_item">카테고리</a>
-                        <a class="navigation-secondary_menu_item">이벤트</a>
+                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.event?currentPage=1">이벤트</a>
                         <a class="navigation-secondary_menu_item" href="<%=contextPath%>/recipeList.recipe?currentPage=1">레시피</a>
                         <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.no?currentPage=1">고객센터</a>
                     </nav>

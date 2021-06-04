@@ -95,6 +95,51 @@ INSERT INTO EVENT
 	
 </entry>
 
+<!-- 사용자단에서 진행중인 이벤트 조회 -->
+<entry key="userSelectEventList">
+
+SELECT *
+		  FROM (
+			    SELECT ROWNUM RNUM, A.*
+		          FROM (
+				        SELECT EVEN_NO
+                             , EVEN_TITLE
+                             , EVEN_CATEGORY
+                             , START_DATE
+                             , END_DATE
+                             , ENROLL_DATE
+                             , STATUS
+                             , EVEN_IMG
+                        FROM EVENT
+                        ORDER BY START_DATE ASC
+		                ) A
+		        )
+WHERE RNUM BETWEEN ? AND ?
+AND STATUS = 'Y'
+
+</entry>
+
+<!-- 사용자단에서 종료된 이벤트 조회 -->
+<entry key="userSelectEndEventList">
+	SELECT *
+			  FROM (
+				    SELECT ROWNUM RNUM, A.*
+			          FROM (
+					        SELECT EVEN_NO
+	                             , EVEN_TITLE
+	                             , EVEN_CATEGORY
+	                             , START_DATE
+	                             , END_DATE
+	                             , ENROLL_DATE
+	                             , STATUS
+	                             , EVEN_IMG
+	                        FROM EVENT
+	                        ORDER BY START_DATE ASC
+			                ) A
+			        )
+	WHERE RNUM BETWEEN ? AND ?
+	AND STATUS = 'N'
+</entry>
 
 
 </properties>
