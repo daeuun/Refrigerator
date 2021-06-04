@@ -239,6 +239,15 @@ public class RecipeService {
 		return list;
 	}
 	
-
+	/**
+	 * @author leeyeji
+	 * 특정 유저 레시피 목록 조회
+	 */
+	public ArrayList<Recipe> selectUserRecipeList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectUserRecipeList(conn, pi);
+		close(conn);
+		return list;
+	}
 	
 }

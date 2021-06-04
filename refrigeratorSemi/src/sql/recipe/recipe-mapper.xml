@@ -369,5 +369,26 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<!-- @author leeyeji -->
+	<!-- 특정 유저 레시피 목록 조회 -->
+	<entry key="selectUserRecipeList">
+		SELECT 
+		       RECIPE_NO
+		     , RECIPE_TITLE
+		     , AVRG_STAR_POINT
+		     , COUNT
+		  FROM RECIPE
+		 WHERE USER_NO = (
+		                   SELECT
+		                           USER_NO
+		                      FROM RECIPE
+		                     WHERE RECIPE_NO = ?
+		                 )
+		   AND STATUS = 'N'
+	</entry>
+	
+	
+	
+	
 
 </properties>

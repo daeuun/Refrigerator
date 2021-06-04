@@ -630,6 +630,20 @@ public class RecipeDao{
 		return list;
 	}
 	
+	/**
+	 * @author leeyeji
+	 * 특정 유저 레시피 목록 조회
+	 */
+	public ArrayList<Recipe> selectUserRecipeList(Connection conn, PageInfo pi){
+		// select => ResultSet 여러행
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectUserRecipeList");
+		
+		
+	}
+	
 	
 	
 	
