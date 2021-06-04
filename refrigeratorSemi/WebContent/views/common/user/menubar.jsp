@@ -265,7 +265,7 @@
                                             <li><a href="<%=contextPath%>/logout.member">로그아웃</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="<%=contextPath%>/updateForm.pro" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
+                                    <li><a href="<%=contextPath%>/myInfo.me" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
                                     <li><a href="" class="navigation-login-area_item" id="write">글쓰기</a></li>
                                 </ul>
                             	
