@@ -145,13 +145,13 @@
         <div align="center" class="paging-area">
 		        
 			<% if(currentPage != 1) { %>
-				<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=currentPage-1%>';"> &lt; </button>
+				<button onclick="location.href='<%= contextPath%>/recipeList.recipe?currentPage=<%=currentPage-1%>';"> &lt; </button>
 			<% } %>
 						
 				<% for(int p=startPage; p<=endPage; p++) {%>
 			            	
 					<% if(p != currentPage){ %>
-						<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=p%>';"><%= p %></button>
+						<button onclick="location.href='<%= contextPath%>/recipeList.recipe?currentPage=<%=p%>';"><%= p %></button>
 					<% }else{ %>
 						<button disabled><%= p %></button>
 					<%} %>
@@ -159,7 +159,7 @@
 				<% } %>
 			
 			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%= contextPath%>/adList.repo?currentPage=<%=currentPage+1%>'"> &gt; </button>
+				<button onclick="location.href='<%= contextPath%>/recipeList.recipe?currentPage=<%=currentPage+1%>'"> &gt; </button>
 			<% } %>
 					
 		</div>
