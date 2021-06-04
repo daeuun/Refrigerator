@@ -1,10 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.refrigerator.common.model.vo.PageInfo,
+				 com.refrigerator.follow.model.vo.FollowStats,
+				 java.util.ArrayList" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<FollowStats> list = (ArrayList<FollowStats>)request.getAttribute("list");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지_팔로우관리</title>
 <style>
         div, img{box-sizing: border-box;}
         .user-img{
@@ -14,7 +27,7 @@
         /*공통*/
         .outer{
             width:750px;
-            margin:20px 20px;
+            margin:20px 120px 0px 20px;
         }
         label{
             margin-bottom:0px;
@@ -26,6 +39,7 @@
         }
         /*팔로우 조회 박스 상단 css*/
         .menu-title{
+        	width:100%;
             border-bottom: 5px solid rgb(0, 102, 51);
         }
 
@@ -66,11 +80,18 @@
             margin-bottom:10px;
             border-radius:60px;
         }
+        
+        .user-img>img{
+        	width:100%;
+        	height:100%;
+        	border-radius:60px;
+        }
+        
         .nickname-area{
             font-size: 14px;
         }
 
-        .ufBtn-area>button{
+        .ufBtn-area>form>button{
             width:80px;
             height:26px;
             font-size:12px;
@@ -79,7 +100,7 @@
             border:none;
             border-radius:3px;
         }
-        .ufBtn-area>button:hover{
+        .ufBtn-area>form>button:hover{
             opacity: 0.92;
         }
 
@@ -91,18 +112,32 @@
             font-size:85%;
         }
 
-        .recipeImg-area>img{
+        .right-content img{
             border: 1px solid wheat;
             width:110px;
-            height:120px;
+            height:110px;
             margin-right:10px;
         }
+        
+        .loadImg-area{
+        	border:1px solid wheat;
+            width:110px;
+            height:110px;
+            margin-right:10px;
+            float:left;
+        }
 
+		button{
+			border:none;
+		}
 
 </style>
 </head>
 <body>
-
+<%@ include file="../common/user/menubar.jsp" %>
+<%@ include file="../common/user/myPageVerticalNav.jsp" %>
+	
+	
     
 	<div class="outer">
 
@@ -113,127 +148,124 @@
     <br><br>
     
     <div class="menu-title">
-        <label>팔로우 중</label><span> 4</span>
+        <label>팔로우 중</label><span> <%=pi.getListCount()%></span>
     </div>
 
     <div class="follow-content">
         <!-- 한 행 단위-->
+        <%if(list.isEmpty()) {%>
         <div class="following-box">
+        
+        	<h2>팔로잉 한 유저가 없습니다.</h2>
+        	
+        </div>
+        
+        <%}else{ %>
+        <%for(int i=0; i<list.size(); i++) {%>
+        <div class="following-box">
+            <input type="hidden" class="followUserNo<%=i+1%>" value="<%=list.get(i).getFollowingUserNo()%>">
 
             <div class="left-content">
 
                 <div class="user-img">
-                    <img src="">
+                    <img src="<%=list.get(i).getProfileImg()%>">
                 </div>
                 
                 <div class="nickname-area" align="center">
-                    nickname
+                    <%=list.get(i).getNickname()%>
                 </div>
                 
                 <div class="ufBtn-area" align="center">
-                    <button>- 언팔로우</button>
+                	<form action="<%=contextPath%>/delete.fol">
+                		<input type="hidden" name="followUserNo" value="<%=loginUser.getUserNo() %>"> 
+                		<input type="hidden" name="followingUserNo" value="<%=list.get(i).getFollowingUserNo()%>">
+	                    <button type="submit">- 언팔로우</button>
+                	</form>
                 </div>
 
             </div>
 
-            <div class="right-content">
+            <div class="right-content<%=i%>">
 
                 <div class="stats-area">
-                    <b>레시피</b>&nbsp;<span>1204</span>&nbsp;&nbsp;&nbsp;<b>찜하기</b>&nbsp;<span>3021</span>&nbsp;&nbsp;&nbsp;
-                    <b>팔로워</b><span>1492</span>&nbsp;&nbsp;&nbsp;<b>평균별점</b>&nbsp;<span>4.32</span>
+                    <b>레시피</b>&nbsp;<span id="recipeCount"></span>&nbsp;&nbsp;&nbsp;<b>찜하기</b>&nbsp;<span><%=list.get(i).getScrapCount()%></span>&nbsp;&nbsp;&nbsp;
+                    <b>팔로워</b><span><%=list.get(i).getFolCount()%></span>&nbsp;&nbsp;&nbsp;<b>평균별점</b>&nbsp;<span id="count"></span>
                 </div>
 
-                <div class="recipeImg-area">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
+                <div class="recipeImg-area<%=i%>">
+                	<div class="loadImg-area"><img src="" class="recipeImg0"></div>
+                	<div class="loadImg-area"><img src="" class="recipeImg1"></div>
+                	<div class="loadImg-area"><img src="" class="recipeImg2"></div>
+                	<div class="loadImg-area"><img src="" class="recipeImg3"></div>
                 </div>
             </div>    
         </div>
-
-        <div class="following-box">
-
-            <div class="left-content">
-
-                <div class="user-img">
-                    <img src="">
-                </div>
-                
-                <div class="nickname-area" align="center">
-                    nickname
-                </div>
-                
-                <div class="ufBtn-area" align="center">
-                    <button>- 언팔로우</button>
-                </div>
-
-            </div>
-
-            <div class="right-content">
-
-                <div class="stats-area">
-                    <b>레시피</b>&nbsp;<span>1204</span>&nbsp;&nbsp;&nbsp;<b>찜하기</b>&nbsp;<span>3021</span>&nbsp;&nbsp;&nbsp;
-                    <b>팔로워</b><span>1492</span>&nbsp;&nbsp;&nbsp;<b>평균별점</b>&nbsp;<span>4.32</span>
-                </div>
-
-                <div class="recipeImg-area">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                </div>
-            </div>    
-        </div>
-        <div class="following-box">
-
-            <div class="left-content">
-
-                <div class="user-img">
-                    <img src="">
-                </div>
-                
-                <div class="nickname-area" align="center">
-                    nickname
-                </div>
-                
-                <div class="ufBtn-area" align="center">
-                    <button>- 언팔로우</button>
-                </div>
-
-            </div>
-
-            <div class="right-content">
-
-                <div class="stats-area">
-                    <b>레시피</b>&nbsp;<span>1204</span>&nbsp;&nbsp;&nbsp;<b>찜하기</b>&nbsp;<span>3021</span>&nbsp;&nbsp;&nbsp;
-                    <b>팔로워</b><span>1492</span>&nbsp;&nbsp;&nbsp;<b>평균별점</b>&nbsp;<span>4.32</span>
-                </div>
-
-                <div class="recipeImg-area">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                    <img src="" class="recipeImg">
-                </div>
-            </div>    
-        </div>
+        
+        <%} %>
+        <%} %>
+		<script>
+			// 마이페이지_팔로우 관리 페이지 로드 시 데이터 가져오는 반복문
+			$(function(){
+				for(var i=1; i<=<%=list.size()%>; i++){
+					var $followUserNo = $(".followUserNo" + i);// 히든으로 input hidden user번호 가져오기와서 ajax
+					loadImg($followUserNo);
+					loadStats($followUserNo);
+				}
+			})
+			
+			// 팔로우한 대표이미지 4장 가져오기 (최신순) 주의 ! => ajax는 반복문 안에 기술하면 반복되지 않으므로 function으로 정의하고 해당 function 반복문 안에 기술할것!
+			function loadImg(uNo){
+				$.ajax({
+					url:"jqAjaxFollowLoadImg.fol",
+					data:{followingUserNo:uNo.val()},
+					success:function(img){
+						for(var k=0; k<img.length; k++){
+							uNo.siblings("div[class^=right-content]").find(".recipeImg" + k).attr("src",img[k]);
+						}
+					}
+				})
+			}
+			
+			// 레시피 총 작성수 + 평균별점 데이터 
+			function loadStats(uNo){
+				$.ajax({
+					url:"jqAjaxFollowLoadStats.fol",
+					data:{followingUserNo:uNo.val()},
+					success:function(stats){
+							
+						uNo.siblings("div[class^=right-content]").find("#recipeCount").html(stats.userRecipeCount);
+						uNo.siblings("div[class^=right-content]").find("#count").html(stats.userAvgStar);
+							
+					}
+				})
+			}
+			
+			
+		
+		</script>
+       
 
     </div>
     
     
 
     <br>
-    <div align="center">
-        <button>&lt;</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>&gt;</button>
-    </div>
     
+      <div align="center" class="paging-area">
+        	<%if(currentPage != 1) {%>
+            <button onclick="location.href='<%=contextPath%>/deleteForm.fol?currentPage=<%=currentPage-1%>';">&lt;</button>
+            <%} %>
+            <%for(int p=startPage; p<=endPage; p++) {%>
+            	<%if(p != currentPage) { %>
+            		<button onclick="location.href='<%=contextPath%>/deleteForm.fol?currentPage=<%= p%>';"><%=p %></button>
+            	<%}else { %>
+            		<button class="cp" disabled><%=p%></button>
+            	<%} %>
+            <%}  %>
+            <%if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/deleteForm.fol?currentPage=<%=currentPage+1%>';">&gt;</button>
+            <%} %>
+        </div>
     <br>
 
 </body>

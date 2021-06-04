@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.follow.model.service.FollowService;
-import com.refrigerator.follow.model.vo.Follow;
-import com.refrigerator.member.model.service.MemberService;
+import com.refrigerator.follow.model.vo.FollowStats;
 import com.refrigerator.member.model.vo.Member;
 
 /**
- * 마이페이지 
+ * 마이페이지 - 팔로잉 관리
  * Servlet implementation class MyPageFollowController
  */
 @WebServlet("/deleteForm.fol")
@@ -38,15 +38,36 @@ public class MyPageFollowController extends HttpServlet {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		int userNo = loginUser.getUserNo();
+		// 페이징 처리
+		int listCount ;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
 		
-		ArrayList<Follow> folList = new FollowService().selectFollowList(userNo);
+		int maxPage;
+		int startPage;
+		int endPage;
 		
-		ArrayList<Member> mList = new MemberService().selectMemberCount(folList);
+		listCount = new FollowService().selectFollowListCount(userNo);
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		pageLimit = 5;
+		boardLimit = 3;
 		
+		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
 		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
 		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		ArrayList<FollowStats> list = new FollowService().selectFollowStatsList(pi, userNo); 
+		
+		request.setAttribute("pi", pi);
 		request.setAttribute("myPageNo", 8);
-		request.setAttribute("", folList);
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/member/myPageFollowDeleteView.jsp").forward(request, response);
 		

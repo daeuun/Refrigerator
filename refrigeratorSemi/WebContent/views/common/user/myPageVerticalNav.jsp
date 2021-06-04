@@ -126,7 +126,7 @@
                     <a class="nav-link" href="<%=request.getContextPath()%>/review.me?currentPage=1">후기&별점 관리<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">팔로잉 관리<i class="fas fa-chevron-right"></i></a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/deleteForm.fol?currentPage=1">팔로잉 관리<i class="fas fa-chevron-right"></i></a>
                 </li>
             </ul>
         </nav>        
