@@ -7,7 +7,7 @@
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Reply> list = (ArrayList<Reply>)request.getAttribute("replyList");
-	
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 	// 아래는 현재 페이지에서 필요한 페이징 변수들이다. 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -417,6 +417,14 @@
 					</div>
 				</div>
 			</div>
+        	<!-- Jaewon.s -->
+			<script>
+			 	var msg = "<%= alertMsg %>"; 
+			 	if(msg != "null"){
+				 	alert(msg);	 
+					<% session.removeAttribute("alertMsg"); %>
+			 	}
+			</script>
 <!------------------------------ 삭제모달 영역 끝  -------------------------------------------------------------------------------------------------------------->
 		</div>
 		<!-- 마이페이지 작업영역  끝-->

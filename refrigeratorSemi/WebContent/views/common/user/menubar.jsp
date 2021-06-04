@@ -3,7 +3,6 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
 
 <!DOCTYPE html>
@@ -269,14 +268,6 @@
 
                 </div>
             </div>
-                <!-- Jaewon.s -->
-				<script>
-				 	var msg = "<%= alertMsg %>"; 
-				 	if(msg != "null"){
-					 	alert(msg);	 
-						<% session.removeAttribute("alertMsg"); %>
-				 	}
-				</script>
         </div>
         
     </header>
