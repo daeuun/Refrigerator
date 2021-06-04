@@ -178,6 +178,46 @@ public class RecipeService {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * 레시피 상세 페이지 조회
+	 * @author seong
+	 * @date 6/3
+	 */
+	
+	public Recipe selectRecipeDetailList(int recipeNo){
+		
+		Connection conn = getConnection();
+		
+		Recipe rc = new RecipeDao().selectRecipeDetailList(conn,recipeNo);
+		
+		close(conn);
+		
+		return rc;
+		
+		
+		
+	}
+	
+	/**
+	 * 레시피 상세 페이지에서 요리 순서 조회하기
+	 * @author seong
+	 * @date 6/3
+	 * @return
+	 */
+	
+	public ArrayList<RecipeOrder>selectRecipeOrder(int recipeNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<RecipeOrder> list = new RecipeDao().selectRecipeOrder(conn, recipeNo);
+		
+		close(conn);
+		
+		return list;
+
+		
+	}
 
 	
 }

@@ -22,9 +22,7 @@ import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
 
 public class RecipeDao{
 
-	/** 
-	 * @author  daeun / seong 
-	 */
+
 	
 	
 	private Properties prop = new Properties();
@@ -441,6 +439,120 @@ public class RecipeDao{
 		return list;
 		
 	}
+	
+
+	/**
+	 * 
+	 * 레시피 상세 페이지 조회
+	 * @author seong
+	 * @date 6/3
+	 */
+	
+	public Recipe selectRecipeDetailList(Connection conn, int recipeNo){
+		
+		Recipe rc = new Recipe();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRecipeDetailList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			// 한행만 조회되기 때문에 if문으로 처리
+			if(rset.next()) {
+				
+				rc = new Recipe(
+						
+						rset.getInt("RECIPE_NO")
+						,rset.getString("USER_ID")
+						,rset.getString("RECIPE_TITLE")
+						,rset.getString("RECIPE_INTRO")
+						,rset.getInt("SEVERAL_SERVINGS")
+						,rset.getInt("COOKING_TIME")
+						,rset.getDouble("AVRG_STAR_POINT")
+						,rset.getInt("COUNT")
+						,rset.getInt("SCRAP_COUNT")
+						,rset.getString("RECIPE_ENROLL_DATE")
+						,rset.getString("MAIN_IMG")
+						,rset.getString("INGRE_IMG")
+						
+						);
+				
+			}
+					
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return rc;
+
+		
+	}
+	
+	/**
+	 * 레시피 상세 페이지에서 요리 순서 조회하기
+	 * @author seong
+	 * @date 6/3
+	 * @return
+	 */
+	
+	public ArrayList<RecipeOrder>selectRecipeOrder(Connection conn, int recipeNo){
+		
+		
+		// 여러행 조회
+		
+		ArrayList <RecipeOrder> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRecipeOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			// 조회되는 값들이 여러행이기 때문에
+			while(rset.next()) {
+				
+				list.add(new RecipeOrder(
+						
+						rset.getInt("RECIPE_ORDER")
+						,rset.getString("RECIPE_EXPLN")
+						,rset.getString("RECIPE_IMG")
+						
+						
+						));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 }

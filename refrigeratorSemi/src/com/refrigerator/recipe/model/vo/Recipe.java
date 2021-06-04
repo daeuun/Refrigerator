@@ -82,6 +82,35 @@ public class Recipe {
 		this.recipeEnrollDate = recipeEnrollDate;
 		this.mainImg = mainImg;
 	}
+	
+	/***
+	 * 레시피 상세페이지 조회
+	 * @author seong
+	 * @date 6/3
+	 */
+	
+	
+
+	public Recipe(int recipeNo, String recipeWriter, String recipeTitle, String recipeIntro, int severalServings,
+			int cookingTime, double avrgStarPoint, int count, int scrapCount, String recipeEnrollDate, String mainImg,
+			String ingreImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeWriter = recipeWriter;
+		this.recipeTitle = recipeTitle;
+		this.recipeIntro = recipeIntro;
+		this.severalServings = severalServings;
+		this.cookingTime = cookingTime;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.scrapCount = scrapCount;
+		this.recipeEnrollDate = recipeEnrollDate;
+		this.mainImg = mainImg;
+		this.ingreImg = ingreImg;
+	}
+	
+	
+	
 
 	public int getRecipeNo() {
 		return recipeNo;
