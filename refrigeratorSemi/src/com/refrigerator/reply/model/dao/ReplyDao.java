@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.reply.model.vo.AdmReply;
+import com.refrigerator.reply.model.vo.Reply;
 
 	
 	/**
@@ -160,6 +161,73 @@ import com.refrigerator.reply.model.vo.AdmReply;
 		
 		return result;
 		
+	}
+	/** 마이페이지 댓글 페이징 처리용 메소드
+	 * @author Jaewon
+	 */
+	public int selectMyReplyListCount(Connection conn, int userNo) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyReplyListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;		
+	}
+	//---------------------------------------------------------------
+	/** 마이페이지 내 댓글 리스트들 가져오는 메소드
+	 * @author Jaewon
+	 */
+	public ArrayList<Reply> selectMyReplyList(Connection conn, PageInfo pi, int userNo) {
+		ArrayList<Reply>list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyReplyList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Reply(rset.getInt("reply_no")
+						         , rset.getInt("recipe_no")	
+						         , rset.getString("reply_content")
+								 , rset.getDate("modify_date")
+								 , rset.getString("recipe_title")));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+				
+		return list;
 	}
 	
 	

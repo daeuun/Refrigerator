@@ -105,16 +105,19 @@
                     <a class="nav-link" href="<%=request.getContextPath()%>/myInfo.me" >회원정보수정<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="08myResentRecipePage.html">최근본레시피<i class="fas fa-chevron-right"></i></a>
+                	<!-- servlet만들러 가자~  -->
+                    <a class="nav-link" href="<%=request.getContextPath()%>">최근본레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="09myScrapRecipePage.html">찜한레시피<i class="fas fa-chevron-right"></i></a>
+                   	<!-- servlet만들러 가자~  -->             
+                    <a class="nav-link" href="<%=request.getContextPath()%>">찜한레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="10myRecipePage.html">내가 쓴 레시피<i class="fas fa-chevron-right"></i></a>
+                   	<!-- servlet만들러 가자~  -->             
+                    <a class="nav-link" href="<%=request.getContextPath()%>">내가 쓴 레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="12myReplyPageWithModal.html">내 댓글 관리<i class="fas fa-chevron-right"></i></a>
+                <li class="nav-item">        
+                    <a class="nav-link" href="<%=request.getContextPath()%>/mylist.rpl?currentPage=1">내 댓글 관리<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/updateForm.pro">프로필 수정<i class="fas fa-chevron-right"></i></a>

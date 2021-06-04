@@ -8,9 +8,11 @@ import static com.refrigerator.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.refrigerator.banner.model.dao.BannerDao;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.reply.model.dao.ReplyDao;
 import com.refrigerator.reply.model.vo.AdmReply;
+import com.refrigerator.reply.model.vo.Reply;
 
 public class ReplyService {
 
@@ -84,6 +86,25 @@ public class ReplyService {
 			
 		}
 		
-	
+	/** 마이페이지 댓글 페이징 처리용 메소드
+	 * @author Jaewon
+	 */
+	public int selectMyReplyListCount(int userNo) {
+		Connection conn = getConnection();
+		int listCount = new ReplyDao().selectMyReplyListCount(conn, userNo);
+		// 트랜젝션 처리할 필요없음 총개시글 조회만 해오는것이니! 
+		close(conn);
+		return listCount; 
+	}
+
+	/** 내 댓글 조회해오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<Reply> selectMyReplyList(PageInfo pi, int userNo) {
+		Connection conn = getConnection();
+		ArrayList<Reply> list = new ReplyDao().selectMyReplyList(conn, pi, userNo);
+		close(conn);
+		return list;
+	}
 	
 }

@@ -62,11 +62,38 @@
 
 </entry>
 
+	
+	<!-- Jaewon 마이페이지 내 댓글 관리 페이징처리용 -->
+	<entry key="selectMyReplyListCount">
+		SELECT 
+		       COUNT(*) COUNT
+ 	 	  FROM REPLY
+		 WHERE DELETE_STATUS = 'N'
+		   AND USER_NO = ?	
+	</entry>
 
-
-
-
-
+	<entry key="selectMyReplyList">
+		SELECT * 
+		   FROM (
+		         SELECT ROWNUM RNUM, A.*  
+		           FROM (
+		                 SELECT 
+		                        R.REPLY_NO
+		                      , R.RECIPE_NO
+		                      , RC.RECIPE_TITLE
+		                      , R.REPLY_CONTENT
+		                      , R.MODIFY_DATE
+		                  FROM REPLY R 
+	                      JOIN RECIPE RC 
+                            ON RC.RECIPE_NO = R.RECIPE_NO
+		                 WHERE R.USER_NO = ? 
+		                   AND DELETE_STATUS = 'N'
+		                 ORDER
+		                    BY R.MODIFY_DATE DESC
+		                 ) A
+		        )
+			WHERE RNUM BETWEEN ? AND ?	
+	</entry>
 
 </properties>
 
