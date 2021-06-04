@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.refrigerator.member.model.vo.Member"%>
+    pageEncoding="UTF-8"%>
+<%@ page import="com.refrigerator.common.model.vo.PageInfo, 
+				 java.util.ArrayList, 
+				 com.refrigerator.recipe.model.vo.Recipe,
+				 com.refrigerator.member.model.vo.Member"%>
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+	
+	
 %>
 
 <!DOCTYPE html>
@@ -14,11 +21,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 <style>
     .navigation-first-warp{
-        height: 80px;
+        height: 105px;
+        margin: 0;
     }
     /*검색창*/
     .navigation-search{
@@ -203,20 +210,21 @@
 
                 <div class="navigation-first_content">
 
-                    <!--중앙로고-->
+                    <!--중앙 메인로고-->
                     <div class="navigation-first_logo">
-                        <a href=""">로고아이콘
+                        <a href=""><img style="width: 100px; height: 50px;" src="<%=contextPath%>/resources/css/mainIcon.png">
                         </a>
                     </div>
 
-                    <!--중앙검색바-->
+                    <!--중앙 검색창 form -->
+                    <form action="<%=contextPath %>/search.main?currentPage=1" method="post">
                     <div class="navigation-search">
                         <div class="navigation-search_content">
-                            <input type="text" placeholder="알고 싶은 레시피나 가진 재료로 검색해보세요!">
-                            <button type="button"><img src="../../../resources/image/searchicon.png">검색버튼</button>
+                            <input type="text" name="searchWord" value="${param.searchWord}" placeholder="알고 싶은 레시피나 가진 재료로 검색해보세요!">
+                            <button class="btn-search" type="submit"><img style="width: 20px; height: 20px;" src="<%=contextPath%>/resources/css/searchicon.png"></button>
                         </div>
-                        
                     </div>
+                    </form>
 
                 </div>
 
@@ -231,9 +239,9 @@
                     <nav class="navigation-secondary_menu">
                         <a class="navigation-secondary_menu_item">홈</a>
                         <a class="navigation-secondary_menu_item">카테고리</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.event?currentPage=1">이벤트</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/recipeList.recipe?currentPage=1">레시피</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.no?currentPage=1">고객센터</a>
+                        <a class="navigation-secondary_menu_item">이벤트</a>
+                        <a class="navigation-secondary_menu_item">레시피</a>
+                        <a class="navigation-secondary_menu_item">고객센터</a>
                     </nav>
 
                     <!--로그인-->
@@ -253,11 +261,11 @@
                                     <li id="lihover"><a href="">프사</a>
                                         <ul id="profileImg-outer">
                                             <li><a href="">최근본레시피</a></li>
-                                            <li><a href="<%=contextPath%>/updateForm.pro">마이페이지</a></li>
+                                            <li><a href="<%=contextPath%>/updateForm.pro"">마이페이지</a></li>
                                             <li><a href="<%=contextPath%>/logout.member">로그아웃</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="<%=contextPath%>/myInfo.me" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
+                                    <li><a href="<%=contextPath%>/updateForm.pro" class="navigation-login-area_item"><%= loginUser.getUserId() %></a></li>
                                     <li><a href="" class="navigation-login-area_item" id="write">글쓰기</a></li>
                                 </ul>
                             	
@@ -268,6 +276,7 @@
 
                 </div>
             </div>
+            
         </div>
         
     </header>
