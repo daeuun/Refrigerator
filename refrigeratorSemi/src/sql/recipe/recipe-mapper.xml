@@ -265,7 +265,7 @@
 		                SELECT
 		                       RECIPE_NO
 		                     , RECIPE_TITLE
-		                     , USER_ID
+		                     , NICKNAME
 		                     , COUNT
 		                     , RECIPE_ENROLL_DATE
 		                     , MAIN_IMG

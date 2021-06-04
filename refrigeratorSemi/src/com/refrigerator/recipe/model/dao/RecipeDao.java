@@ -421,7 +421,7 @@ public class RecipeDao{
 			while(rset.next()) {
 				list.add(new Recipe(rset.getInt("recipe_no"),
 									rset.getString("recipe_title"),
-									rset.getString("user_id"),
+									rset.getString("nickname"),
 									rset.getInt("count"),
 									rset.getString("recipe_enroll_date"),
 									rset.getString("main_img")));
