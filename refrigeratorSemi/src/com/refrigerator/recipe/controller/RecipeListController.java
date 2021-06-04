@@ -17,13 +17,13 @@ import com.refrigerator.recipe.model.vo.Recipe;
  * Servlet implementation class recipeListController
  */
 @WebServlet("/recipeList.recipe")
-public class recipeListController extends HttpServlet {
+public class RecipeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public recipeListController() {
+    public RecipeListController() {
         super();
         // TODO Auto-generated constructor stub
     }

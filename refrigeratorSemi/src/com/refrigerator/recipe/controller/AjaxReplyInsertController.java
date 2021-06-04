@@ -39,8 +39,6 @@ public class AjaxReplyInsertController extends HttpServlet {
 		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		// userNo은 session에 loginUser가 담겨있지 않아 명시적으로 작성하였습니다. 
-		
 		Reply r = new Reply();
 		r.setReplyWriter(String.valueOf(userNo));
 		r.setRecipeNo(recipeNo);
