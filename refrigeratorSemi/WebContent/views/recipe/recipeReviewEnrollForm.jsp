@@ -1,7 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import =" java.util.ArrayList, com.refrigerator.recipe.model.vo.Review
+				,com.refrigerator.category.model.vo.*
+				,com.refrigerator.reicpe_order.model.vo.*
+				, com.refrigerator.recipe.model.vo.*" %>
+				
+<%
 
+	String alertMsg = (String)request.getAttribute("alertMsg");
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+	ArrayList<RecipeOrder>list2 = (ArrayList<RecipeOrder>)request.getAttribute("list2");
+	
+	Recipe rc = (Recipe)request.getAttribute("rc");
+	
+	int userNo = (int)request.getAttribute("userNo");
+	int recipeNo = (int)request.getAttribute("recipeNo");
+
+%>
 																						<!-- @author seong -->
 																						<!-- @date 0528 -->
 <!DOCTYPE html>
@@ -84,6 +100,10 @@
 		<div class="total-outer">
     		
 		    	<form action="<%=contextPath%>/insertReview.recipe" method="post" id="enroll-form" enctype="multipart/form-data">
+		        
+        		<input type="hidden" name="userNo" value="<%=userNo%>">
+				<input type="hidden" name="recipeNo" value="<%=recipeNo%>">
+		        
 		        <div class="outer">
 		            <button type="button" class="close" data-dismiss="modal">&times;</button>
 		            <br><br> <br>
@@ -211,12 +231,9 @@
 					                    완성된 요리를 자랑해주세요
 		                </p>
 						<br>
+
 		                
-		                <!--명시적으로 7번 회원이  4번 레시피에 작성했다는 가정하에  기술했습니다.-->
-		                
-						<input type="hidden" name="userNo" value="7">
-						
-						<input type="hidden" name="recipeNo" value="4">
+
 		                <div class="input-type">
 		                    <input type="file" class="form-control-file border" name="reviewUpfile" required>
 		                </div>

@@ -100,9 +100,7 @@ public class RecipeService {
 		Connection conn = getConnection();
 		
 		int result = new RecipeDao().insertReview(conn,rv);
-		
-		System.out.println(rv);
-		
+				
 		if(result>0) {
 			commit(conn);
 		} else {

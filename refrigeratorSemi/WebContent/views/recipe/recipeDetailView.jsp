@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.refrigerator.recipe.model.vo.*"%>
 
-<%@ page import =" java.util.ArrayList, com.refrigerator.recipe.model.vo.Review" %>
+<%@ page import =" java.util.ArrayList, com.refrigerator.recipe.model.vo.Review
+				,com.refrigerator.category.model.vo.*
+				,com.refrigerator.reicpe_order.model.vo.*" %>
+				
 <%
 
-	String alertMsg = (String)session.getAttribute("alertMsg"); 
-	ArrayList<Review>list = (ArrayList<Review>)request.getAttribute("list");
+	String alertMsg = (String)request.getAttribute("alertMsg");
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+	ArrayList<RecipeOrder>list2 = (ArrayList<RecipeOrder>)request.getAttribute("list2");
+	
+	Recipe rc = (Recipe)request.getAttribute("rc");
 	
 %>
 
@@ -311,9 +317,9 @@
             <div class="bannner">
                 <img src="<%=contextPath%>/resources/image/recipe-main-img.jpg" id="main-img">
                 <span class="text" align="right" style="width: 580px;">
-                    <span><img src="<%=contextPath%>/resources/image/icon-star.png" alt="">4.5</span>
-                    <span><img src="<%=contextPath%>/resources/image/icon-bookmark.png" alt="">200</span>
-                    <span></spn><img src="<%=contextPath%>/resources/image/icon-view.png" alt="">253</span>
+                    <span><img src="<%=contextPath%>/resources/image/icon-star.png" alt=""><%=rc.getAvrgStarPoint()%></span>
+                    <span><img src="<%=contextPath%>/resources/image/icon-bookmark.png" alt=""><%=rc.getScrapCount() %></span>
+                    <span></spn><img src="<%=contextPath%>/resources/image/icon-view.png" alt=""><%=rc.getCount() %></span>
                 </span>
             </div>
         </div>
@@ -323,20 +329,20 @@
         <br><br>
 
         <div class="recipe-main-info">
-            <div><h3>요리제목</h3></div>
+            <div><h3><%=rc.getRecipeTitle()%></h3></div>
             <br>
-            <div>요리설명 </div>
+            <div><%=rc.getRecipeIntro() %></div>
         </div>
         <br>
         <div class="recipe-sub-info">
             <img src="<%=contextPath%>/resources/image/icon-servings.png">
             <div> 
-                <span class="recipe-sub-info-servings"><b>2</b></span>명이서 먹을 수 있어요 
+                <span class="recipe-sub-info-servings"><b><%=rc.getSeveralServings() %></b></span>명이서 먹을 수 있어요 
             </div>
 
             <img src="<%=contextPath%>/resources/image/icon-cooking-time.png">
             <div>
-                <span class="recipe-sub-info-cooking-time"><b>10</b></span>분정도 걸려요 
+                <span class="recipe-sub-info-cooking-time"><b><%=rc.getCookingTime() %></b></span>분정도 걸려요 
             </div>
         </div>
 
@@ -424,7 +430,7 @@
             <!--재료 계산기 클릭시 모달창 출력-->
             <div class="igre-calculator">
                 <div align="right" style="width: 900px">
-                    <b>2</b>인 기준 | 
+                    <b><%=rc.getSeveralServings() %></b>인 기준 | 
                     <a data-toggle="tooltip" title=" 재료 계산해드릴게요 !">
                         <img src="<%=contextPath%>/resources/image/icon-cal.png" class="icon"  data-toggle="modal" data-target="#calculatorModal" >
                     </a>
@@ -465,7 +471,7 @@
                             
                             </select>
 
-                            <button type="submit" class="btn btn-success btn-sm" >확인</button>
+                            <button type="submit" class="btn btn-success btn-sm" onclick="calculator();" >확인</button>
                             
                             <!--모달창 클릭시 재료의 내용 변경-->
                             <!--ajax이용해서 값 변경하기-->
@@ -538,29 +544,30 @@
 
                    <div class="slider">
                         <div class="slide" style="background-image: url(./1.jpg);">
-                            <img src="" class="cooking-order-img">
+                            <img src="<%=rc.getIngreImg() %>" class="cooking-order-img">
                             <br><br>
                             <p>재료 이미지입니다</p>
                         </div>
-                        <div class="slide" style="background-image: url(./2.jpg);">
-                            <img src="" class="cooking-order-img">
-                            <br><br>
-                            <div class="cooking-order-text">
+                        
+                            <!-- 반복문으로  -->
+                        	<% for(RecipeOrder ro : list2) {%>
+			                        
+		                        <div class="slide" >
+		                        
+		                       
+		                            <img src="<%=ro.getRecipeImg()%>" class="cooking-order-img">
+		                            <br><br>
+		                            <div class="cooking-order-text">
+		
+		                                <p><%=ro.getRecipeExpln()%></p>
+		                                
+		                            </div>
+		
+		                        </div>
 
-                                <p>1)요리 순서 1</p>
-                                
-                            </div>
-
-                        </div>
-                        <div class="slide" style="background-image: url(./3.jpg);">
-                            <img src="" class="cooking-order-img">
-                            <br><br>                         
-                            <div class="cooking-order-text">
-
-                                <p>2) 요리 순서 2</p>
-                                
-                            </div>
-                    </div>
+                   		<% }  %>
+                   		
+                   		
                     <a class="prev" onclick="button_click(-1)">&#10094</a>
                     <a class="next" onclick="button_click(1)">&#10095</a>
                   </div>
@@ -615,72 +622,34 @@
                     <div><h5>요리 후기 <b>2</b></h5></div>
                     <!--로그인한 회원만 보여지는 버튼 ! -->
                     <div class="recipe-review-body" >
-                        <a href="<%=contextPath %>/enrollForm.review" style="text-decoration: none; color: rgb(0, 153, 102);" id="review-enroll-btn">
-                            
-                         		  작성하기
-                        
-                        </a>
+                    	<form action="<%=contextPath%>/enrollForm.review">
+	                    	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+	                    	<input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
+	                    	<button type="submit"  id="review-enroll-btn" class="btn btn-sm"> 작성하기	</button>
+                        </form>
                     </div>
                 </div>
 
                 <hr>
                 <br>
                 
+                
                 <div id="review-detail"  align="center">
                     
                     <table style="width: 500px;">
                     
-                    <div id="image_container"> <!-- 이미지 마크업 생성 공간 --> </div>
+                    	<div id="image_container"> <!-- 이미지 마크업 생성 공간 --> </div>
 
                     
                     	<tbody id="review-detail-list">
                     	
                     	<!-- ajax로 받아온 리뷰 데이터가 데이터가 출력되는 곳 -->
                     	
-                    	
                     	</tbody>
                      
-                        <!--  
-                       		 혹시몰라서 백업
-                                                  		
-                          			for(var i in list){
-                      				
-                      				result += 
-                      					"<br>" + 
-                      				
-                                       "<tr>" + 
-                                           "<td rowspan='3'>" +
-                                               
-                                               "<div class='box' style='background: #BDBDBD;''>" + 
-                                                   "<img class='profile' src=''>" + 
-                                               "</div>" +
-
-                                           "</td>" + 
-                                           "<td>"+"<b>"+ list[i].reviewWriter+"</b>"+"</td>" +
-                                           "<td>"+ list[i].enrollDate+"</td>" +
-                                           "<td rowspan='3' >" + 
-                                               "<img =src" + + "class='review-detail-img' id='review-modal-btn'>" +
-                                           "</td>" + 
-                                       "</tr>" + 
-                                       "<tr>" +
-                                           "<td colspan='2'>" +  list[i].reviewContent + "</td>" + 
-                                       "</tr>" + 
-                                       "<tr>" + 
-                                           "<td colspan='2'>" + list[i].star + "</td>" + 
-                                       "</tr>"
-										+ "<br>" 
-
-									
-                      			}
-                      			
-                        
-                        
-						 -->
-						
 						
                     </table>
 
-     
                 </div>
 
 
@@ -740,7 +709,7 @@
                                     <td style="width: 80%;">
                                         <div class="form-group">
                                         <label for="usr"></label>
-                                        <input type="text" class="form-control" id="usr" placeholder="소중한 레시피에 쉐프님의 멋진 댓글을 남겨주세요 :) "  style="height: 30px;">
+                                        <input type="text" class="form-control" id="usr" placeholder="소중한 레시피에 쉐프님의 멋진 댓글을 남겨주세요 :) "  style="height: 30px;" name="<%=loginUser.getUserId()%>">
                                         </div>
                                     </td>
                                     <td><button class="btn btn-sm btn-success" onclick="insertReply();">등록</button></td>
@@ -757,11 +726,9 @@
                 <!--댓글 조회하는 전체 영역-->
 
                 <div id="reply-list-area">
-                    
                     <!--댓글 한개의 div 영역 -->
                     <div class="reply-detail" align="center" id="reply-content-area">
                         <table style="width: 500px;">
-
                             <tbody>
 					             <tr>
                                     <td rowspan="3" style="width: 30px;">
@@ -769,13 +736,13 @@
                                             <img class="profile" src="">
                                         </div>
                                     </td>
-
-
+								</tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <script>
+				 </div>
+				 
+             <script>
 
                     
                    /*요리 후기 조회*/ 
@@ -785,16 +752,13 @@
                 	   $.ajax({
                 		   
                 		   url: "list.review"
-                           	,data : {recipeNo : 4}
+                           	,data : {recipeNo : <%=rc.getRecipeNo()%>}
                 	   		,enctype:'multipart/form-data'
 
-                          		,success : function(list){
+                          	,success : function(list){
                           			
-                          			console.log(list);
                           			var result = "";
-                          			
                           		
-                          			
                           			for(var i in list){
                           				
                           				
@@ -829,9 +793,6 @@
                           			
                           			
                           			$("#review-detail tbody").html(result);
-                       
-                          			
-									
                           			
                           		},error : function(){
                           			
@@ -856,12 +817,10 @@
                        		url : "rinsert.recipe"
                        		,data : {
                         			content : $("#usr").val()
-                        			,recipeNo : 4
+                        			,recipeNo : <%=rc.getRecipeNo()%>
                         			}
                        		,type : "post"
                        		,success : function(result){
-                       		
-                       				console.log(result);
                        		
 	                        		if(result>0){
 	                        			selectReplyList();
@@ -874,11 +833,7 @@
                        			
                        		}, complete : function(){
                        			
-                       			
-                       			
-                       			
                        		}
-                        	
                         	
                         	})
                         }
@@ -889,8 +844,8 @@
                         	$.ajax({
                         		
                         	 	url : "rlist.recipe",
-                        	 	/*레시피 숫자는 레시피 조회에서 숫자 받아오기, 지금은 명시적으로 4번 레시피로 하였음*/
-                            	data : {recipeNo: "4"},
+                        	 	/*레시피 숫자는 레시피 조회에서 숫자 받아오기*/
+                            	data : {recipeNo: "<%=rc.getRecipeNo()%>"},
                             	success : function(list){
                             		
                             		var result = "";
@@ -912,15 +867,12 @@
 		                               		"</tr>" +
 		                                "<br>"
 		                                    
-	                            				
-                            			
                             		} 
 	
 									$("#reply-content-area tbody").html(result);	
                             			
-                            		
                             	}, error : function(){
-                            		console.log("댓글 조회 실패")
+                            		
                             	},complete:function(){
                             		console.log("화이팅:)")
                             	}
@@ -930,9 +882,9 @@
                        
                         }
 
-                    </script>
+               </script>
 
-                </div>
+              
 
             </div>
 

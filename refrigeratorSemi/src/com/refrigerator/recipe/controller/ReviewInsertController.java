@@ -20,6 +20,7 @@ import com.refrigerator.recipe.model.vo.Review;
  * @date 0528
  * Servlet implementation class ReviewInsertController
  */
+
 @WebServlet("/insertReview.recipe")
 public class ReviewInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -68,7 +69,7 @@ public class ReviewInsertController extends HttpServlet {
 			if(result>0) {
 				
 				request.getSession().setAttribute("alertMsg", "요리후기 작성 성공 ! ");
-				response.sendRedirect(request.getContextPath()+"/list.recipe");
+				response.sendRedirect(request.getContextPath()+"/detail.recipe");
 				
 			}else {
 				

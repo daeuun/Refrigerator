@@ -51,7 +51,6 @@ public class RecipeDetailController extends HttpServlet {
 		Recipe rc = new RecipeService().selectRecipeDetailList(recipeNo);
 
 
-		
 		if(rc != null ) { // 레시피 정보가 있을 때 
 			
 			ArrayList<RecipeOrder> list = new RecipeService().selectRecipeOrder(recipeNo);
