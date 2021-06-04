@@ -331,7 +331,7 @@ public class InquiryDao {
 					
 			while(rset.next()) {
 				list.add(new Inquiry(rset.getInt("inqry_no"),
-									 rset.getString("user_no"),
+									 rset.getString("user_id"),
 									 rset.getString("inqry_title"),
 									 rset.getDate("enroll_date"),
 									 rset.getDate("modify_date")));

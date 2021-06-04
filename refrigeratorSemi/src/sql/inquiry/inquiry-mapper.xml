@@ -99,11 +99,12 @@
 		          FROM (
 		                SELECT
 		                       INQRY_NO
-		                     , USER_NO
+		                     , M.USER_ID
                              , INQRY_TITLE
-                             , ENROLL_DATE
-                             , MODIFY_DATE
-		                  FROM INQUIRY
+                             , Q.ENROLL_DATE
+                             , Q.MODIFY_DATE
+		                  FROM INQUIRY Q
+                          JOIN MEMBER M USING(USER_NO)
 		                 ORDER
 		                    BY MODIFY_DATE DESC
 		                ) I

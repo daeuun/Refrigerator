@@ -42,16 +42,17 @@ public class InquiryInsertController extends HttpServlet {
 		i.setInqryWriter(userNo);
 		i.setInqryTitle(inqryTitle);
 		i.setInqryContent(inqryContent);
-		
+		System.out.print(i);
 		int result = new InquiryService().insertInquiry(i);
 		
 		if(result > 0) {
 			
+			request.getSession().setAttribute("alertMsg", "1:1문의가 등록되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.inq?currentPage=1");
 			
 		}else {
 			request.setAttribute("errorMsg", "게시글 작성 실패에 실패했습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);
 			
 		}
 		
