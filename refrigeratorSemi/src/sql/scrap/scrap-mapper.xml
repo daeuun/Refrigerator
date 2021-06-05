@@ -23,4 +23,28 @@
 		 WHERE RECIPE_NO = ?
 		   AND USER_NO = ?
 	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 유저 레시피 스크랩 -->
+	<entry key="insertScrap">
+		INSERT
+		  INTO SCRAP
+		     (
+		       RECIPE_NO
+		     , USER_NO
+		     )
+		VALUES 
+		     (
+		       ?
+		     , (
+		         SELECT 
+		               USER_NO
+		          FROM MEMBER
+		         WHERE USER_ID = ?
+		       )
+		     )
+	</entry>
+	
+	
+	
 </properties>

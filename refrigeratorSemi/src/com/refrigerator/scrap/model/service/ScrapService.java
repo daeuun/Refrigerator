@@ -32,4 +32,24 @@ public class ScrapService {
 		close(conn);
 		return result;		
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 유저 레시피 스크랩 insert
+	 */
+	public int insertScrap(int recipeNo, String userId) {
+		Connection conn = getConnection();
+		int result = new ScrapDao().insertScrap(conn, recipeNo, userId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;	
+	}
+	
+	
+	
+	
 }

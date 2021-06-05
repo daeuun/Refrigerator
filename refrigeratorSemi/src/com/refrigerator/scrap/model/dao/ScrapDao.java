@@ -90,4 +90,33 @@ public class ScrapDao {
 		
 		return result;
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 유저 레시피 스크랩 insert
+	 */
+	public int insertScrap(Connection conn, int recipeNo, String userId) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertScrap");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
 }
