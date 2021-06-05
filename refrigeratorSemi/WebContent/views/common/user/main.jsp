@@ -1019,6 +1019,7 @@
 
 
 
+				<%@ include file="footer.jsp" %>
             </section>
         </div>
     </div>

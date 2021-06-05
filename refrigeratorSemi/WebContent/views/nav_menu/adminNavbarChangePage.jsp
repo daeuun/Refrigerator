@@ -269,10 +269,10 @@
                         <form action="modifyNav.nav" method="POST">
                             <div class="inner-bottom-box">
      							<input type="text" name="home" placeholder="순서입력" required maxlength="1" pattern="1|2|3|4|5{1}" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');">
-     							<input type="text" name="category" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
-     							<input type="text" name="event" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
-     							<input type="text" name="recipe" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
-     							<input type="text" name="cs" placeholder="순서입력" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="category" placeholder="순서입력" maxlength="1" pattern="1|2|3|4|5{1}" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="event" placeholder="순서입력" maxlength="1" pattern="1|2|3|4|5{1}" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="recipe" placeholder="순서입력" maxlength="1" pattern="1|2|3|4|5{1}" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+     							<input type="text" name="cs" placeholder="순서입력" maxlength="1" pattern="1|2|3|4|5{1}" title="1~5값만 입력하세요 중복된숫자는 들어올수없습니다." required oninput="this.value = this.value.replace(/[^1-5.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                             </div>
 							
 							<script>

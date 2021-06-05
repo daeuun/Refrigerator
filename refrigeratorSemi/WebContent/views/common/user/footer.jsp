@@ -27,7 +27,7 @@
         <div>
             <a href="<%= request.getContextPath() %>/tos.tos?page=service">이용약관</a> |
             <a href="<%= request.getContextPath() %>/tos.tos?page=personal">개인정보취급방침</a> |
-            <a href="<%= request.getContextPath() %>/">문의하기</a>   
+            <a href="<%= request.getContextPath() %>/enrollForm.inq">문의하기</a>   
         </div>
         <p>Copyright 2021 What's in my refrigerator All rights reserved</p>
     </footer>

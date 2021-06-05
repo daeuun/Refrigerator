@@ -280,7 +280,7 @@
 							<tr>
 								<input type="hidden" value="<%= r.getReplyNo() %>">
 								<td><%= r.getModifyDate() %></td>
-								<td  class="list-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= r.getReplyNo() %>">
+								<td  class="list-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= r.getRecipeNo() %>">
 									<div>
 										<p><%= r.getRecipeTitle() %></p>
 										<pre><%= r.getReplyContent() %></pre>

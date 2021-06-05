@@ -3,9 +3,9 @@
 <%@ page import="java.util.ArrayList , com.refrigerator.recent_recipe.model.vo.RecentRecipe"%>    
     
 <%
-	ArrayList<RecentRecipe> list = (ArrayList<RecentRecipe>)request.getAttribute("recentList");
-	System.out.println(list);
-	//하아... 이제 담겼다.. 이거 가지고 뿌려주기만 하면 되는데 scrap쪽꺼 따오자 .
+	ArrayList<RecentRecipe> firstRow = (ArrayList<RecentRecipe>)request.getAttribute("firstRow");
+	ArrayList<RecentRecipe> secondRow = (ArrayList<RecentRecipe>)request.getAttribute("secondRow");
+		
 %>
 <!DOCTYPE html>
 <html>
@@ -13,8 +13,10 @@
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
 <!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
-
+<!-- 최근본 레시피는 맥시멈 6개 정도만 남기는것으로 진행  -->
 <title>마이페이지 최근본레시피</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
 <style>
 	.outer{
 		width: 850px;
@@ -128,173 +130,115 @@
 </head>
 <body>
 
-	<%@ include file="../common/user/tempJWHeader.jsp" %>
+	<%@ include file="../common/user/menubar.jsp" %>
 	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
 		<!-- 마이페이지 작업영역  시작-->
 		<div class="outer">
 			<p>최근본레시피</p> 
             <div class="division-line"></div>
 			<table id="mypage-thumbnail-table">
-				<!-- tr요소부터 반복문으로 돌려야한다. 2중 중첩문이다. -->
 				<tr>
-					<td>
-						<div class="thumbnail-box" onclick="">
-							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
-							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
-							<span>프로필명 01</span>
-							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
-							<div class="star-box">
-								<!-- 여기도 반복문 돌려야한다! 조건문과 같이 -->
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star-half-alt fa-lg"></i>
-								<i class="far fa-star fa-lg"></i>
-							</div>
-							<div class="bottom-box-parent">
-								<div class="bottom-box">
-									<i class="far fa-clock"></i>
-									<span>60분</span>
+					<% if(firstRow.isEmpty()){%>
+						<td style="width:100%; padding:100px; text-align:center; font-size: 30px; font-weight:bold; color:tomato;"> 
+							최근 본 레시피가 없습니다 ! <br> 냉장고에 뭐있지?에는 좋은 레시피가 많아요! <br>레시피를 봐주세요^^ 
+						</td>				
+					<% }else{ %>					
+						<% for(RecentRecipe rr : firstRow){ %>
+							<td>
+								<div class="thumbnail-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= rr.getRecipeNo() %>">
+									<img src="<%= request.getContextPath() %>/<%= rr.getMainImg() %>"> <br>
+									<img src="<%= request.getContextPath() %>/<%= rr.getProfileImg() %>"><br>
+									<span><%= rr.getNickName() %></span>
+									<p><%= rr.getRecipeTitle() %></p>
+									<div class="star-box">
+										<% 	Double avgStar = Math.round(rr.getAvgStar()*10)/10.0;
+										if(avgStar < 0.3){ %>
+											<i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>									
+										<%}else if(avgStar < 0.8){%>
+											<i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>									
+										<%}else if(avgStar < 1.3){%>
+											<i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i> 							
+										<%}else if(avgStar < 1.8){%>
+											<i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>								
+										<%}else if(avgStar < 2.3){%>
+										    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+										<%}else if(avgStar < 2.8){%>
+										    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+										<%}else if(avgStar < 3.3){%>
+										    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+										<%}else if(avgStar < 3.8){%>
+										    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i>
+										<%}else if(avgStar < 4.3){%>
+										    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+										<%}else if(avgStar < 4.8){%>
+										    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i>
+										<%}else{%>
+											<i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i> 
+										<%} %>	
+									</div>
+									<div class="bottom-box-parent">
+										<div class="bottom-box">
+											<i class="far fa-clock"></i>
+											<span><%= rr.getCookingTime() %></span>
+										</div>
+										<div class="bottom-box">
+											<i class="fas fa-thumbs-up"></i>
+											<span><%= rr.getLikeCount() %></span>
+										</div>
+									</div>
 								</div>
-								<div class="bottom-box">
-									<i class="fas fa-thumbs-up"></i>
-									<span>10</span>
-								</div>
-							</div>
-						</div>
-					</td>
-					<td>
-						<div class="thumbnail-box" onclick="">
-							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
-							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
-							<span>프로필명 01</span>
-							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
-							<div class="star-box">
-								<!-- 여기도 반복문 돌려야한다! 조건문과 같이 -->
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star-half-alt fa-lg"></i>
-								<i class="far fa-star fa-lg"></i>
-							</div>
-							<div class="bottom-box-parent">
-								<div class="bottom-box">
-									<i class="far fa-clock"></i>
-									<span>60분</span>
-								</div>
-								<div class="bottom-box">
-									<i class="fas fa-thumbs-up"></i>
-									<span>10</span>
-								</div>
-							</div>
-						</div>
-					</td>
-					<td>
-						<div class="thumbnail-box" onclick="">
-							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
-							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
-							<span>프로필명 01</span>
-							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
-							<div class="star-box">
-								<!-- 여기도 반복문 돌려야한다! 조건문과 같이 -->
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star-half-alt fa-lg"></i>
-								<i class="far fa-star fa-lg"></i>
-							</div>
-							<div class="bottom-box-parent">
-								<div class="bottom-box">
-									<i class="far fa-clock"></i>
-									<span>60분</span>
-								</div>
-								<div class="bottom-box">
-									<i class="fas fa-thumbs-up"></i>
-									<span>10</span>
-								</div>
-							</div>
-						</div>
-					</td>
+							</td>
+						<%} %>
+					<%} %>
+					
 				</tr>
 				<tr>
-					<td>
-						<div class="thumbnail-box" onclick="">
-							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
-							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
-							<span>프로필명 01</span>
-							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
-							<div class="star-box">
-								<!-- 여기도 반복문 돌려야한다! 조건문과 같이 -->
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star-half-alt fa-lg"></i>
-								<i class="far fa-star fa-lg"></i>
-							</div>
-							<div class="bottom-box-parent">
-								<div class="bottom-box">
-									<i class="far fa-clock"></i>
-									<span>60분</span>
+					<% for(RecentRecipe rr : secondRow){ %>
+						<td>
+							<div class="thumbnail-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= rr.getRecipeNo() %>">
+								<img src="<%= request.getContextPath() %>/<%= rr.getMainImg() %>"> <br>
+								<img src="<%= request.getContextPath() %>/<%= rr.getProfileImg() %>"><br>
+								<span><%= rr.getNickName() %></span>
+								<p><%= rr.getRecipeTitle() %></p>
+								<div class="star-box">
+									<% 	Double avgStar = Math.round(rr.getAvgStar()*10)/10.0;
+									if(avgStar < 0.3){ %>
+										<i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>									
+									<%}else if(avgStar < 0.8){%>
+										<i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>									
+									<%}else if(avgStar < 1.3){%>
+										<i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i> 							
+									<%}else if(avgStar < 1.8){%>
+										<i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>								
+									<%}else if(avgStar < 2.3){%>
+									    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+									<%}else if(avgStar < 2.8){%>
+									    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+									<%}else if(avgStar < 3.3){%>
+									    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+									<%}else if(avgStar < 3.8){%>
+									    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i><i class="far fa-star fa-lg"></i>
+									<%}else if(avgStar < 4.3){%>
+									    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="far fa-star fa-lg"></i>
+									<%}else if(avgStar < 4.8){%>
+									    <i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star-half-alt fa-lg"></i>
+									<%}else{%>
+										<i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i><i class="fas fa-star fa-lg"></i> 
+									<%} %>	
 								</div>
-								<div class="bottom-box">
-									<i class="fas fa-thumbs-up"></i>
-									<span>10</span>
-								</div>
-							</div>
-						</div>
-					</td>
-					<td>
-						<div class="thumbnail-box" onclick="">
-							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
-							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
-							<span>프로필명 01</span>
-							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
-							<div class="star-box">
-								<!-- 여기도 반복문 돌려야한다! 조건문과 같이 -->
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star-half-alt fa-lg"></i>
-								<i class="far fa-star fa-lg"></i>
-							</div>
-							<div class="bottom-box-parent">
-								<div class="bottom-box">
-									<i class="far fa-clock"></i>
-									<span>60분</span>
-								</div>
-								<div class="bottom-box">
-									<i class="fas fa-thumbs-up"></i>
-									<span>10</span>
+								<div class="bottom-box-parent">
+									<div class="bottom-box">
+										<i class="far fa-clock"></i>
+										<span><%= rr.getCookingTime() %></span>
+									</div>
+									<div class="bottom-box">
+										<i class="fas fa-thumbs-up"></i>
+										<span><%= rr.getLikeCount() %></span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</td>
-					<td>
-						<div class="thumbnail-box" onclick="">
-							<img src="<%= request.getContextPath() %>/resources/image/sampleFood.jpg"> <br>
-							<img src="<%= request.getContextPath() %>/resources/image/user.png"><br>
-							<span>프로필명 01</span>
-							<p>위치잡으려면 어쩔수 없이 ...으로 표기를 해줘야한다.</p>
-							<div class="star-box">
-								<!-- 여기도 반복문 돌려야한다! 조건문과 같이 -->
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star fa-lg"></i> 
-								<i class="fas fa-star-half-alt fa-lg"></i>
-								<i class="far fa-star fa-lg"></i>
-							</div>
-							<div class="bottom-box-parent">
-								<div class="bottom-box">
-									<i class="far fa-clock"></i>
-									<span>60분</span>
-								</div>
-								<div class="bottom-box">
-									<i class="fas fa-thumbs-up"></i>
-									<span>10</span>
-								</div>
-							</div>
-						</div>
-					</td>
+						</td>
+					<%} %>				
 				</tr>
 			</table>
 		</div>

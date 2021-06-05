@@ -33,9 +33,14 @@ public class MypageRecentRecipeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String before = request.getParameter("rcpNo");
-		String[] needWork = before.split(",");
+		String[] needWork;
 		String[] recentRecipeNo = new String[6];
-		
+		if(!before.equals("undefined")) {
+			needWork = before.split(",");
+		}else {
+			needWork = new String[]{"0","0","0","0","0","0"};			
+		}
+				
 		if(needWork.length != 6) {
 			for(int i=0; i<needWork.length; i++) {
 				recentRecipeNo[i] = needWork[i];
@@ -53,9 +58,29 @@ public class MypageRecentRecipeListController extends HttpServlet {
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
 		ArrayList<RecentRecipe> list = new ArrayList<>();
+		ArrayList<RecentRecipe> firstRow = new ArrayList<>();
+		ArrayList<RecentRecipe> secondRow = new ArrayList<>();
+
 		if(loginUser != null) {
 			list = new RecentRecipeService().selectList(recentRecipeNo); 
 			// 무조건 6개 담겨있다! 
+			
+			if(list.size()<4) {
+				// 3개 이하로 잡히면 그떄는 전체 리스트에 접근해줘도 된다. 
+				firstRow = list;			
+			}else {
+				// 혹여나 데이터의 갯수가 음 .. 4개가 넘고 이게 4개일지 5개일지 6개일지 모를떄는 !! 
+				// 일단은 3개가 넘는 다는 소리이다. 이렇게 되면 최소 4개 까지는 있다는 것이다. 
+				// 그럼 끝인덱스만을 알아오면 되는데 음 .. 
+				// E e = list.get(list.size() - 1);
+				for(int i=0; i<3; i++){
+					firstRow.add(list.get(i));
+				}
+				for(int i=3; i<list.size(); i++) {
+					secondRow.add(list.get(i));
+				}
+			}
+			
 		}
 
 		request.setAttribute("myPageNo", 2);
@@ -64,7 +89,9 @@ public class MypageRecentRecipeListController extends HttpServlet {
 		if(loginUser == null) {// 로그인 정보가 담겨있지 않다면 ! 로그인 페이지로 이동 
 			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 		}else {// 로그인 정보 담겨있으면 ! member 수정쪽으로 이동 
-			request.setAttribute("recentList", list);
+			request.setAttribute("firstRow", firstRow);
+			request.setAttribute("secondRow", secondRow);
+
 			request.getRequestDispatcher("views/recent_recipe/myPageRecentRecipe.jsp").forward(request, response);
 		}
 
