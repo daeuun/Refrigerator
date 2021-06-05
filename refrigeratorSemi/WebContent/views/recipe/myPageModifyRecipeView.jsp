@@ -2,12 +2,35 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.refrigerator.category.model.vo.MainCategory,
 				 com.refrigerator.category.model.vo.SubCategory,
+				 
+ 				 com.refrigerator.recipe.model.vo.Recipe,
+				 com.refrigerator.ingre_search.model.vo.IngreSearch,
+				 com.refrigerator.ingre.model.vo.Ingre,
+				 com.refrigerator.reicpe_order.model.vo.RecipeOrder,
+				 
 				 java.util.ArrayList" %>
     
 <%
 	int userNo = (int)request.getAttribute("userNo");
 	ArrayList<MainCategory> mList = (ArrayList<MainCategory>)request.getAttribute("mList");
 	ArrayList<SubCategory> sList = (ArrayList<SubCategory>)request.getAttribute("sList");
+	
+	// 레시피 Recipe vo객체에 담아온! 1행짜리 객체 
+	Recipe recipeInfo = (Recipe)request.getAttribute("myRecipe");
+	// 레시피 IngreSearch ArrayList로 여러행의 값을 등록시에 순차적으로 입력한 순서로 가져옴
+	ArrayList<IngreSearch> searchInfo = (ArrayList<IngreSearch>)request.getAttribute("myIngreSearch");
+	// 레시피 Ingre ArrayList로 여러행의 값을 등록시에 순차적으로 입력한 순서로 가져옴
+	ArrayList<Ingre> ingreInfo = (ArrayList<Ingre>)request.getAttribute("myIngre");
+   	// 레시피 RecipeOrder ArrayList로 여러행의 값을 등록시에 순차적으로 입력한 순서로 가져옴
+	ArrayList<RecipeOrder> orderInfo = (ArrayList<RecipeOrder>)request.getAttribute("myRecipeOrder");
+
+	//System.out.println(recipeInfo);  // 레시피에대한 정보가 담겨있는곳 
+	//System.out.println(searchInfo);  // 검색 버튼에 대한 정보가 담겨있는곳
+	//System.out.println(ingreInfo);   // 재료 정보가 담겨있는곳 
+	//System.out.println(orderInfo);   // 요리 순서가 담겨있는곳 
+	//System.out.println(userNo);      // 명시적으로 뺴온 유저번호값
+	//System.out.println(mList);       // 대분류 카테고리를 뿌려줄 정보  + option에 select해주기위한 값이 담긴곳 
+	//System.out.println(sList);       // 소분류 카테고리를 뿌려줄 정보  + option에 select해주기위한 값이 담긴곳 
 %>
     
     
@@ -21,11 +44,10 @@
 <title>Insert title here</title>
 <style>
 	.outer{
-		width: 800px;
-		margin-right: 70px;
+		width: 900px;
+		margin-right: 10px;
 		margin-top: 20px;
 		margin-bottom: 20px;
-		border: 1px solid blue;
 	}
 	
 	.outer>form>div{
@@ -113,8 +135,6 @@
 	    width:600px;
 	}
 	
-	
-	
 	.thumbnail-area{
 	    border-radius:3px;
 	    margin:auto;
@@ -134,7 +154,7 @@
 	.search-btn-area{
 	    width:880px;
 	    height:300px;
-	    margin:50px 60px;
+	    margin:50px 50px;
 	}
 	
 	.search-btn-area>div{
@@ -271,6 +291,14 @@
 	.select-title, #hide-org{
 		display:none;
 	}
+
+    /* Jaewon css 추가  */
+    #thumbnail-img{
+        margin-left: 12px;
+        object-fit: cover;        
+    }
+
+
 </style>
 </head>
 
@@ -302,24 +330,30 @@
                         <table>
                             
                             <tr>
-                                <th width="180"><label for=""><span class="vital">*</span> 레시피 제목</label></th>
-                                <td colspan="2"><input type="text" name="title" style="width:400px; height:50px;" placeholder="예) 소고기 미역국끓이기" required></td>
+                                <th width="180"><label for=""><span class="vital">*</span> 레시피<br> &nbsp;&nbsp;&nbsp;제목</label></th>
+                                <td colspan="2"><input type="text" name="title" style="width:400px; height:50px;" placeholder="예) 소고기 미역국끓이기" value="<%= recipeInfo.getRecipeTitle() %>" required></td>
                             </tr>
                             
                             <tr>
-                                <th><label for=""><span class="vital">*</span> 요리 소개</label></th>
+                                <th><label for=""><span class="vital">*</span> 요리<br>&nbsp; 소개</label></th>
                                 <td>
-                                    <textarea name="intro" cols="54" rows="5" placeholder="레시피의 탄생배경을 적어주세요." required style="resize: none;"></textarea>
+                                    <textarea name="intro" cols="54" rows="5" placeholder="레시피의 탄생배경을 적어주세요." required style="resize: none;"><%= recipeInfo.getRecipeIntro() %></textarea>
                                 </td>
                             </tr>
                             
                             <tr>
-                                <th><label><span class="vital">*</span> 요리 정보</label></th>
+                                <th><label><span class="vital">*</span> 요리 <br>&nbsp; 정보</label></th>
 
                                 <td colspan="2">
                                     &nbsp;&nbsp;&nbsp;
                                     인분
-                                    <select name="servings" required>
+                                    <script>
+                                    	var serv = "<%=recipeInfo.getSeveralServings()%>";
+                                    	$(function(){
+	                                   		$('#servValue').val(serv).prop("selected",true);
+                                    	})
+                                 	</script>
+                                    <select id="servValue" name="servings" required>
                                         <option value="1">1인분</option>
                                         <option value="2">2인분</option>
                                         <option value="3">3인분</option>
@@ -329,7 +363,13 @@
                                     </select>
                                     &nbsp;&nbsp;&nbsp;
                                     시간
-                                    <select name="time" required>
+                                    <script>
+                                    	var time = "<%=recipeInfo.getCookingTime()%>";
+                                    	$(function(){
+	                                   		$('#timeValue').val(time).prop("selected",true);
+                                    	})
+                                 	</script>
+                                    <select id="timeValue" name="time" required>
                                         <option value="10">10분이하</option>
                                         <option value="20">20분이하</option>
                                         <option value="30">30분이하</option>
@@ -347,7 +387,7 @@
                     </div>
                     
                     <div class="form1-area2" >
-                        <div class="thumbnail-area" border="1"><img width="200" height="200" id="thumbnail-img"></div>
+                        <div class="thumbnail-area" border="1"><img src="<%= request.getContextPath() %>/<%= recipeInfo.getMainImg() %>" width="200" height="200" id="thumbnail-img"></div>
                         <div align="center"><span>*</span><button type="button" id="insertMainImg" class="btn btn-secondary btn-sm">대표이미지 등록</button></div>
                         <div><input type="file" id="file11" class="file" name="file11" required onchange="loadImg(this, 11);"></div>
                     </div>
@@ -430,7 +470,7 @@
             <div class="content-area2">
                 
                 <div>
-                    <span class="vital">*</span><label class="content-title">필수재료</label>
+                    <span class="vital">*</span><label class="content-title">&nbsp;필수재료</label>
                 </div>
                 
                 <div>
@@ -517,7 +557,7 @@
                 <!--부가재료영역-->
                 
                 <div>
-                    <span class="vital">*</span><label class="content-title" for="">부가재료</label>
+                    <span class="vital">*</span><label class="content-title" for="">&nbsp;부가재료</label>
                 </div>
                 
                 <div>
@@ -576,7 +616,7 @@
                 
                 
                 <div>
-                    <span class="vital">*</span><label class="content-title" for="">요리순서</label>
+                    <span class="vital">*</span><label class="content-title" for="">&nbsp;요리순서</label>
                 </div>
                 
                 <div class="guide-area">
@@ -603,9 +643,9 @@
                                 <label class="order-no">1</label>
                                 <input type="hidden" name="order" value="1">
                             </td>
-                            <th width="500"><textarea class="order-textarea" name="expln1" required></textarea></th>
+                            <th width="380"><textarea class="order-textarea" name="expln1" required></textarea></th>
                             <td width="160"><img id="orderImg1" class="order-img"></td>
-                            <th width="50"><span class="order-ct-close"><img width="30px" height="30px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjYxMi4wMDhweCIgaGVpZ2h0PSI2MTIuMDA4cHgiIHZpZXdCb3g9IjAgMCA2MTIuMDA4IDYxMi4wMDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYxMi4wMDggNjEyLjAwODsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9Il94MzlfXzQxXyI+DQoJCTxnPg0KCQkJPHBhdGggZD0iTTUzNS40NCw5NS42NjZIMTkyLjI2N2MtNS4zNTQtMC4zMjUtMTAuODA0LDEuMzM4LTE0LjkxNiw1LjQxMkw1LjUxNSwyOTEuMTU2Yy00LjAzNSwzLjk5Ny01Ljc1Niw5LjMzMi01LjQ4OCwxNC41NzINCgkJCQljLTAuMjY4LDUuMjM5LDEuNDU0LDEwLjU1Niw1LjQ4OCwxNC41NzFsMTcxLjgzNiwxOTAuMDc5YzMuNzQ4LDMuNzA5LDguNjI0LDUuNTQ1LDEzLjUyLDUuNjAzdjAuNDAxaDM0NC41Nw0KCQkJCWM0Mi4yOCwwLDc2LjU2Ny0zNC4yNDgsNzYuNTY3LTc2LjQ5VjE3Mi4xNzVDNjEyLjAwOCwxMjkuOTE0LDU3Ny43MjEsOTUuNjY2LDUzNS40NCw5NS42NjZ6IE00MzMuMTU0LDM0OC45MDYNCgkJCQljNy40NzcsNy40NzcsNy40NzcsMTkuNTgyLDAsMjcuMDM5Yy03LjQ3OCw3LjQ3OC0xOS42MDEsNy40NzgtMjcuMDc4LDBsLTQyLjgxNS00Mi43NzdsLTQzLjM3LDQzLjMzMg0KCQkJCWMtNy41MzQsNy41MTYtMTkuNzUzLDcuNTE2LTI3LjI4OCwwYy03LjUzNS03LjUzNC03LjUzNS0xOS43MzQsMC0yNy4yNDlsNDMuMzctNDMuMzMzbC00Mi44MTUtNDIuNzc3DQoJCQkJYy03LjQ3Ny03LjQ3Ny03LjQ3Ny0xOS41ODIsMC0yNy4wNGM3LjQ3Ny03LjQ3NywxOS42MDEtNy40NzcsMjcuMDc4LDBsNDIuODE1LDQyLjc3N2w0My45ODEtNDMuOTI1DQoJCQkJYzcuNTM0LTcuNTM0LDE5Ljc1NC03LjUzNCwyNy4yODgsMHM3LjUzNCwxOS43MzQsMCwyNy4yNWwtNDMuOTgxLDQzLjkyNUw0MzMuMTU0LDM0OC45MDZ6Ii8+DQoJCTwvZz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="></span></th>
+                            <th style="padding-right: 20px;" width="50"><span class="order-ct-close"><img width="30px" height="30px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjYxMi4wMDhweCIgaGVpZ2h0PSI2MTIuMDA4cHgiIHZpZXdCb3g9IjAgMCA2MTIuMDA4IDYxMi4wMDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYxMi4wMDggNjEyLjAwODsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9Il94MzlfXzQxXyI+DQoJCTxnPg0KCQkJPHBhdGggZD0iTTUzNS40NCw5NS42NjZIMTkyLjI2N2MtNS4zNTQtMC4zMjUtMTAuODA0LDEuMzM4LTE0LjkxNiw1LjQxMkw1LjUxNSwyOTEuMTU2Yy00LjAzNSwzLjk5Ny01Ljc1Niw5LjMzMi01LjQ4OCwxNC41NzINCgkJCQljLTAuMjY4LDUuMjM5LDEuNDU0LDEwLjU1Niw1LjQ4OCwxNC41NzFsMTcxLjgzNiwxOTAuMDc5YzMuNzQ4LDMuNzA5LDguNjI0LDUuNTQ1LDEzLjUyLDUuNjAzdjAuNDAxaDM0NC41Nw0KCQkJCWM0Mi4yOCwwLDc2LjU2Ny0zNC4yNDgsNzYuNTY3LTc2LjQ5VjE3Mi4xNzVDNjEyLjAwOCwxMjkuOTE0LDU3Ny43MjEsOTUuNjY2LDUzNS40NCw5NS42NjZ6IE00MzMuMTU0LDM0OC45MDYNCgkJCQljNy40NzcsNy40NzcsNy40NzcsMTkuNTgyLDAsMjcuMDM5Yy03LjQ3OCw3LjQ3OC0xOS42MDEsNy40NzgtMjcuMDc4LDBsLTQyLjgxNS00Mi43NzdsLTQzLjM3LDQzLjMzMg0KCQkJCWMtNy41MzQsNy41MTYtMTkuNzUzLDcuNTE2LTI3LjI4OCwwYy03LjUzNS03LjUzNC03LjUzNS0xOS43MzQsMC0yNy4yNDlsNDMuMzctNDMuMzMzbC00Mi44MTUtNDIuNzc3DQoJCQkJYy03LjQ3Ny03LjQ3Ny03LjQ3Ny0xOS41ODIsMC0yNy4wNGM3LjQ3Ny03LjQ3NywxOS42MDEtNy40NzcsMjcuMDc4LDBsNDIuODE1LDQyLjc3N2w0My45ODEtNDMuOTI1DQoJCQkJYzcuNTM0LTcuNTM0LDE5Ljc1NC03LjUzNCwyNy4yODgsMHM3LjUzNCwxOS43MzQsMCwyNy4yNWwtNDMuOTgxLDQzLjkyNUw0MzMuMTU0LDM0OC45MDZ6Ii8+DQoJCTwvZz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="></span></th>
                             </tr>
                         </table>
                         

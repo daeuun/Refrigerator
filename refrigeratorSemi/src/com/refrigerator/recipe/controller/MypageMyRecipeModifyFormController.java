@@ -70,14 +70,6 @@ public class MypageMyRecipeModifyFormController extends HttpServlet {
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("mList", mList);
 		request.setAttribute("sList", sList);
-
-		System.out.println(myRecipe);
-		System.out.println(myIngreSearch); //요거 3개가 안왔어! 해당레시피가 안달려있는것일수도 있어
-		System.out.println(myIngre);       //요거 3개가 안왔어! 해당레시피가 안달려있는것일수도 있어
-		System.out.println(myRecipeOrder); //요거 3개가 안왔어! 해당레시피가 안달려있는것일수도 있어
-		System.out.println(userNo);
-		System.out.println(mList);
-		System.out.println(sList);
 		
 		request.getRequestDispatcher("views/recipe/myPageModifyRecipeView.jsp").forward(request, response);		
 	}
