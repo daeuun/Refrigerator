@@ -296,7 +296,7 @@ public class RecipeDao{
 	 * 페이징 - 총 페이지 수
 	 */
 	public int selectListCount(Connection conn) {
-		// select => ResultSet 한행
+		
 		int listCount = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -815,6 +815,73 @@ public class RecipeDao{
 		}
 		return list;
 	}
+	
+	/**
+	 * @author leeyeji
+	 * 쉐프 레시피 총 페이지 수
+	 */
+	public int chefRecipeCount(Connection conn, int userNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("chefRecipeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.print(listCount);
+		return listCount;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 오늘의 쉐프 레시피 작성 목록
+	 */
+	public ArrayList<Recipe> selectChefRecipeList(Connection conn, PageInfo pi, int userNo){
+		
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectChefRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+									rset.getString("recipe_title"),
+									rset.getDouble("avrg_star_point"),
+									rset.getInt("count"),
+									rset.getString("main_img")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	
 	
 	

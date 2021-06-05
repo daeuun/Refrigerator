@@ -442,16 +442,32 @@
 	</entry>
 	
 	<!-- @author leeyeji -->
+	<!-- 쉐프 레시피 총 페이지 수 -->
+	<entry key="chefRecipeCount">
+		        SELECT
+				       COUNT(*) COUNT
+				  FROM RECIPE
+		         WHERE USER_NO = ?
+	</entry>
+	
+	<!-- @author leeyeji -->
 	<!-- 오늘의 쉐프 레시피 목록 조회 -->
 	<entry key="selectChefRecipeList">
-		SELECT 
-		       RECIPE_NO
-		     , RECIPE_TITLE
-		     , AVRG_STAR_POINT
-		     , COUNT
-		     , MAIN_IMG
-		  FROM RECIPE
-		 WHERE USER_NO = ?
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+                               RECIPE_NO
+                             , RECIPE_TITLE
+                             , AVRG_STAR_POINT
+                             , COUNT
+                             , MAIN_IMG
+                          FROM RECIPE
+                         WHERE USER_NO = ?
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	

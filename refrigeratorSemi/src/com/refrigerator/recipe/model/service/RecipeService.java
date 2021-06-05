@@ -286,9 +286,25 @@ public class RecipeService {
 	
 	/**
 	 * @author leeyeji
+	 * 쉐프 레시피 총 페이지 수
+	 */
+	public int chefRecipeCount(int userNo) {
+		Connection conn = getConnection();
+		int listCount = new RecipeDao().chefRecipeCount(conn, userNo);
+		close(conn);
+		return listCount;
+	}
+	
+	/**
+	 * @author leeyeji
 	 * 오늘의 쉐프 레시피 목록 조회
 	 */
-	
+	public ArrayList<Recipe> selectChefRecipeList(PageInfo pi, int userNo){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectChefRecipeList(conn, pi, userNo);
+		close(conn);
+		return list;
+	}
 	
 	/**
 	 * 레시피 상세 보기 페이지의 재료 검색 버튼 

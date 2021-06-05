@@ -33,6 +33,10 @@ public class ChefRecipeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 받아오는 값으로 수정하기!
+		int userNo = 4; //Integer.parseInt(request.getParameter("uno"))
+		
+		
 		// 페이징처리 셋팅
 		int listCount; 	
 		int currentPage;
@@ -44,7 +48,7 @@ public class ChefRecipeListController extends HttpServlet {
 		int endPage;
 								
 		// 총 갯수
-		listCount = new RecipeService().selectListCount();
+		listCount = new RecipeService().chefRecipeCount(userNo);
 								
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 								
@@ -64,12 +68,12 @@ public class ChefRecipeListController extends HttpServlet {
 								
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 				
-		ArrayList<Recipe> pageList = new RecipeService().selectUserRecipeList(pi);
+		ArrayList<Recipe> pageList = new RecipeService().selectChefRecipeList(pi, userNo);
 				
 		request.setAttribute("pi", pi);
 		request.setAttribute("pageList", pageList);
 		
-		
+		request.getRequestDispatcher("views/recipe/chefRecipeListView.jsp").forward(request, response);
 		
 	}
 
