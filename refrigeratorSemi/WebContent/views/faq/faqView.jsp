@@ -77,11 +77,12 @@
 
         <%@ include file="../common/user/userSideBar.jsp" %>
 
-	    <div align="right" style="width: 1050px;">
-	        <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
-	        <br><br>
-	    </div>
-
+		<% if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
+		    <div align="right" style="width: 1050px;">
+		        <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
+		        <br><br>
+		    </div>
+		<%} %>
 
         <!-- 게시판 틀-->
         <div id="FAQ-list">

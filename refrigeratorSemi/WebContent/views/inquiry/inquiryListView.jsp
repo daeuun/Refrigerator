@@ -93,12 +93,13 @@
         <div class="user-side-nav">
             <%@ include file="../common/user/userSideBar.jsp" %>
         </div>
-
-	    <div align="right" style="width: 1050px;">
-	        <a href="<%=contextPath %>/enrollForm.inq" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
-	        <br><br>
-	    </div>
-
+		
+		<%if(loginUser != null) {%>
+		    <div align="right" style="width: 1050px;">
+		        <a href="<%=contextPath %>/enrollForm.inq" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
+		        <br><br>
+		    </div>
+		<%} %>
         <!-- 게시판 틀-->
 
         <div class="contact-list">

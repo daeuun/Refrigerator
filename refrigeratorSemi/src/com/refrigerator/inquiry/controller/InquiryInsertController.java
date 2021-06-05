@@ -47,7 +47,6 @@ public class InquiryInsertController extends HttpServlet {
 		
 		if(result > 0) {
 			
-			request.getSession().setAttribute("alertMsg", "1:1문의가 등록되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.inq?currentPage=1");
 			
 		}else {

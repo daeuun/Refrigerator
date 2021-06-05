@@ -9,6 +9,7 @@
 	//String contextPath = request.getContextPath();
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+	int listCount = (int)request.getAttribute("listCount");
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -110,7 +111,7 @@
                     <p>"<span id="search-title">조회수 높은 레시피</span>"에 대한 검색결과</p>
                     <p>
                         총 
-                        <span id="search-num">1000</span>
+                        <span id="search-num"><%=listCount %></span>
                         개의 맛있는 레시피가 있습니다.
                     </p>
                 </div>

@@ -76,10 +76,12 @@
 
 	
 		<!-- 글작성 버튼 클릭시 -->
-	    <div align="right" style="width: 1050px;">
-            <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
-	        <br><br>
-	    </div>
+		<% if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
+		    <div align="right" style="width: 1050px;">
+	            <a href="" class="btn btn-sm" id="btn-noticeWrite">글작성</a>
+		        <br><br>
+		    </div>
+		<%} %>
 		
 		<div class="noticeListView">
 	        <!-- 게시판 틀-->
