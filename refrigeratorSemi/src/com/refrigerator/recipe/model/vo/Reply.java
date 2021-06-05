@@ -8,6 +8,9 @@ import java.util.Date;
  * @date 0528
  */
 
+
+
+
 public class Reply {
 
 	 private int replyNo;
