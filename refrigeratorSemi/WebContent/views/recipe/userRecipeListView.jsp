@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- @author leeyeji -->
+<%@ page import="java.util.ArrayList, com.refrigerator.recipe.model.vo.Recipe
+				 , com.refrigerator.common.model.vo.PageInfo" %>
+<%
+	ArrayList<Recipe> pageList = (ArrayList<Recipe>)request.getAttribute("pageList");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,61 +131,49 @@
 
             <div class="thumb-list-area">
 
-                <div class="thumbnail" align="center">
-                    <input type="hidden" value="<%=b.getBoardNo()%>">
-                    <div id="recipe-img">
-                        <img src="../../resources/img/salad.jpeg" width="200" height="150">
-                    </div>
-
-                    <p style="margin-top: 5px;">
-                        <b>닭가슴살 샐러드</b><br>
-                        별점 : 3.5(5.0) &nbsp;|&nbsp; 조회수 : 0
-                    </p>
-
-                </div>
-                <div class="thumbnail" align="center">
-                    <input type="hidden" value="<%=b.getBoardNo()%>">
-                    <img src="" width="200" height="150">
-
-                    <p style="margin-top: 5px;">
-                        <b>닭가슴살 샐러드</b><br>
-                        조회수 :
-                    </p>
-
-                </div>
-                <div class="thumbnail" align="center">
-                    <input type="hidden" value="<%=b.getBoardNo()%>">
-                    <img src="" width="200" height="150">
-
-                    <p style="margin-top: 5px;">
-                        <b>닭가슴살 샐러드</b><br>
-                        조회수 :
-                    </p>
-
-                </div>
-                <div class="thumbnail" align="center">
-                    <input type="hidden" value="<%=b.getBoardNo()%>">
-                    <img src="" width="200" height="150">
-
-                    <p style="margin-top: 5px;">
-                        <b>닭가슴살 샐러드</b><br>
-                        조회수 :
-                    </p>
-
-                </div>
-                <div class="thumbnail" align="center">
-                    <input type="hidden" value="<%=b.getBoardNo()%>">
-                    <img src="" width="200" height="150">
-
-                    <p style="margin-top: 5px;">
-                        <b>닭가슴살 샐러드</b><br>
-                        조회수 :
-                    </p>
-
-                </div>
+				<%for(Recipe r : pageList) {%>
+	                <div class="thumbnail" align="center">
+	                    <input type="hidden" value="<%=r.getRecipeNo()%>">
+	                    <div id="recipe-img">
+	                        <img src="<%=contextPath %>/<%=r.getMainImg()%>" width="200" height="150">
+	                    </div>
+	
+	                    <p style="margin-top: 5px;">
+	                        <b><%=r.getRecipeTitle()%></b><br>
+	                        별점 : <%=r.getAvrgStarPoint()%>(5.0) &nbsp;|&nbsp; 조회수 : <%=r.getCount() %>
+	                    </p>
+	
+	                </div>
+                <%}%>
+                
             </div>
 
         </section>
+        <br>
+        
+        <!-- 페이징 -->
+        <div align="center" class="paging-area">
+		        
+			<% if(currentPage != 1) { %>
+				<button onclick="location.href='<%= contextPath%>/userRecipe.recipe?currentPage=<%=currentPage-1%>';"> &lt; </button>
+			<% } %>
+						
+				<% for(int p=startPage; p<=endPage; p++) {%>
+			            	
+					<% if(p != currentPage){ %>
+						<button onclick="location.href='<%= contextPath%>/userRecipe.recipe?currentPage=<%=p%>';"><%= p %></button>
+					<% }else{ %>
+						<button disabled><%= p %></button>
+					<%} %>
+			            	
+				<% } %>
+			
+			<% if(currentPage != maxPage) { %>
+				<button onclick="location.href='<%= contextPath%>/userRecipe.recipe?currentPage=<%=currentPage+1%>'"> &gt; </button>
+			<% } %>
+					
+		</div>
+        <br><br>
     </div>
     <script>
 

@@ -121,19 +121,19 @@
             <div class="thumb-list-area">
 
                 	<%for(Recipe r : pageList) {%>
-                <div class="thumbnail" align="center">
-	                    <!-- input value에 각 레시피 번호-->
-	                    <input type="hidden" value="<%=r.getRecipeNo()%>">
-	                    <div id="recipe-img">
-	                        <img src="<%=contextPath %>/<%=r.getMainImg() %>" width="200" height="150">
-	                    </div>
-	
-	                    <p style="margin-top: 5px;">
-	                        <span id="recipe-title" style="height:50"><b><%=r.getRecipeTitle() %></b></span><br>
-	                        <span style="font-size:14px"><%=r.getRecipeWriter() %></span> <br>
-	                        <span style="font-size:14px">별점 : <%=r.getAvrgStarPoint() %>(5.0) &nbsp;|&nbsp; 조회수 : <%=r.getCount() %></span> 
-	                    </p>
-                </div>
+		                <div class="thumbnail" align="center">
+			                    <!-- input value에 각 레시피 번호-->
+			                    <input type="hidden" value="<%=r.getRecipeNo()%>">
+			                    <div id="recipe-img">
+			                        <img src="<%=contextPath %>/<%=r.getMainImg() %>" width="200" height="150">
+			                    </div>
+			
+			                    <p style="margin-top: 5px;">
+			                        <span id="recipe-title" style="height:50"><b><%=r.getRecipeTitle() %></b></span><br>
+			                        <span style="font-size:14px"><%=r.getRecipeWriter() %></span> <br>
+			                        <span style="font-size:14px">별점 : <%=r.getAvrgStarPoint() %>(5.0) &nbsp;|&nbsp; 조회수 : <%=r.getCount() %></span> 
+			                    </p>
+               			 </div>
 					<%} %>
                 
             </div>

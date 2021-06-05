@@ -10,23 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.common.model.vo.PageInfo;
-import com.refrigerator.member.model.service.MemberService;
-import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
 
 /**
- * @author leeyeji
- * Servlet implementation class UserRecipeListController
+ * Servlet implementation class ChefRecipeListController
  */
-@WebServlet("/userRecipe.recipe")
-public class UserRecipeListController extends HttpServlet {
+@WebServlet("/chefList.recipe")
+public class ChefRecipeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserRecipeListController() {
+    public ChefRecipeListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,9 +32,6 @@ public class UserRecipeListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 수정하기!!!!!!!!
-		int recipeNo = 2; //Integer.parseInt(request.getParameter("rno"))
 		
 		// 페이징처리 셋팅
 		int listCount; 	
@@ -48,38 +42,34 @@ public class UserRecipeListController extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-						
+								
 		// 총 갯수
 		listCount = new RecipeService().selectListCount();
-						
+								
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-						
+								
 		pageLimit = 5;
-						
+								
 		boardLimit = 12;
 						
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
-						
+								
 		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
-						
+								
 		endPage = startPage + pageLimit - 1;
-						
+								
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-						
+								
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
-		ArrayList<Recipe> pageList = new RecipeService().selectUserRecipeList(pi, recipeNo);
-		
-		if(recipeNo > 0) {
-			ArrayList<Member> userInfo = new MemberService().selectUserInfo(recipeNo);
-		}
-		
+				
+		ArrayList<Recipe> pageList = new RecipeService().selectUserRecipeList(pi);
+				
 		request.setAttribute("pi", pi);
 		request.setAttribute("pageList", pageList);
 		
-		request.getRequestDispatcher("views/recipe/userRecipeListView.jsp").forward(request, response);
+		
 		
 	}
 

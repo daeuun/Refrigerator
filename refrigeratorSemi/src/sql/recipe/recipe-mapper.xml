@@ -417,7 +417,44 @@
 	
 	</entry>
 	
+	<!-- @author leeyeji -->
+	<!-- 특정 유저 레시피 목록 조회 -->
+	<entry key="selectUserRecipeList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, R.*
+		          FROM (
+		                SELECT 
+                               RECIPE_NO
+                             , RECIPE_TITLE
+                             , AVRG_STAR_POINT
+                             , COUNT
+                             , MAIN_IMG
+                          FROM RECIPE
+                         WHERE USER_NO = (
+                                           SELECT
+                                                   USER_NO
+                                              FROM RECIPE
+                                             WHERE RECIPE_NO = ?
+                                         )
+                           AND STATUS = 'N'
+		                )R
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
+	<!-- @author leeyeji -->
+	<!-- 오늘의 쉐프 레시피 목록 조회 -->
+	<entry key="selectChefRecipeList">
+		SELECT 
+		       RECIPE_NO
+		     , RECIPE_TITLE
+		     , AVRG_STAR_POINT
+		     , COUNT
+		     , MAIN_IMG
+		  FROM RECIPE
+		 WHERE USER_NO = ?
+	</entry>
 	
 
 </properties>

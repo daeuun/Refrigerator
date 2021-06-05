@@ -119,6 +119,16 @@ public class Recipe {
 		this.mainImg = mainImg;
 	}
 	
+	
+
+	public Recipe(int recipeNo, String recipeTitle, double avrgStarPoint, int count, String mainImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeTitle = recipeTitle;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.mainImg = mainImg;
+	}
 
 	public int getRecipeNo() {
 		return recipeNo;

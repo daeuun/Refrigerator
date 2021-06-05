@@ -240,16 +240,6 @@ public class RecipeService {
 		return list;
 	}
 	
-	/**
-	 * @author leeyeji
-	 * 특정 유저 레시피 목록 조회
-	 */
-	public ArrayList<Recipe> selectUserRecipeList(PageInfo pi){
-		Connection conn = getConnection();
-		ArrayList<Recipe> list = new RecipeDao().selectUserRecipeList(conn, pi);
-		close(conn);
-		return list;
-	}
 	
 	/**
 	 * 레시피 상세조회 클릭시 해당 레시피에 조회수 증가
@@ -304,10 +294,22 @@ public class RecipeService {
 		return subIngre;
 		
 	}
+
+	/**
+	 * @author leeyeji
+	 * 특정 유저 레시피 목록 조회
+	 */
+	public ArrayList<Recipe> selectUserRecipeList(PageInfo pi, int recipeNo){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectUserRecipeList(conn, pi, recipeNo);
+		close(conn);
+		return list;
+	}
 	
-	
-	
-	
+	/**
+	 * @author leeyeji
+	 * 오늘의 쉐프 레시피 목록 조회
+	 */
 	
 	
 	

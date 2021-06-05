@@ -724,23 +724,44 @@ public class RecipeDao{
 	}
 	
 	
-	
-	
-	
 	/**
 	 * @author leeyeji
 	 * 특정 유저 레시피 목록 조회
 	 */
-	/*
-	public ArrayList<Recipe> selectUserRecipeList(Connection conn, PageInfo pi){
+	public ArrayList<Recipe> selectUserRecipeList(Connection conn, PageInfo pi, int recipeNo){
 		// select => ResultSet 여러행
 		ArrayList<Recipe> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectUserRecipeList");
 		
-		
-	}*/
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, recipeNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+								    rset.getString("recipe_title"),
+								    rset.getDouble("avrg_star_point"),
+								    rset.getInt("count"),
+								    rset.getString("main_img")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	
 	
