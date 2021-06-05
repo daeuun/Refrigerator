@@ -69,6 +69,7 @@ public class RecipeStarRatingListController extends HttpServlet {
 				
 		request.setAttribute("pi", pi);
 		request.setAttribute("pageList", pageList);
+		request.setAttribute("listCount", listCount);
 				
 		request.getRequestDispatcher("views/recipe/recipeStarRatingListView.jsp").forward(request, response);
 		

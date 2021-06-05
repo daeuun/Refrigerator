@@ -83,6 +83,7 @@ public class MainRecipeSortViewController extends HttpServlet {
 				
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("listCount", listCount);
 				
 		request.getRequestDispatcher("views/recipe/MainTest.jsp").forward(request, response);
 		

@@ -6,7 +6,8 @@
 				 , com.refrigerator.common.model.vo.PageInfo" %>
 <%
 	ArrayList<Recipe> pageList = (ArrayList<Recipe>)request.getAttribute("pageList");
-	
+	Member userInfo = (Member)request.getAttribute("userInfo");	
+
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -110,15 +111,15 @@
 
                 <div class="user-img">
                     <div id="img-area" align="right">
-                        <img src="../../resources/img/dog.jpeg" style="width: 150px; height: 150px;">
+                        <img src="<%=userInfo.getProfileImg() %>" style="width: 150px; height: 150px;">
                     </div>
                 </div>
 
                 <div class="user-information">
 
                     <div id="user-info-area">
-                        <strong>마법의 소라고동</strong>
-                        <p>먹기위해 삽니다.</p>
+                        <strong><%=userInfo.getNickname() %></strong>
+                        <p><%=userInfo.getIntro() %></p>
                     </div>
                     <div id="follow-area">
                         <button type="submit" class="btn fol-btn" align="right">팔로우</button>

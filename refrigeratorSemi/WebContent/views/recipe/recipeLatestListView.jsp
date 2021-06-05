@@ -7,6 +7,7 @@
 				 , com.refrigerator.common.model.vo.PageInfo" %>
 <%
 	ArrayList<Recipe> pageList = (ArrayList<Recipe>)request.getAttribute("pageList");
+	int listCount = (int)request.getAttribute("listCount");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -109,7 +110,7 @@
                     <p>"<span id="search-title">최신순 레시피</span>"에 대한 검색결과</p>
                     <p>
                         총 
-                        <span id="search-num">1000</span>
+                        <span id="search-num"><%=listCount %></span>
                         개의 맛있는 레시피가 있습니다.
                     </p>
                 </div>

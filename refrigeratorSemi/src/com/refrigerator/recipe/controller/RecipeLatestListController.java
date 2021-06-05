@@ -69,6 +69,7 @@ public class RecipeLatestListController extends HttpServlet {
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("pageList", pageList);
+		request.setAttribute("listCount", listCount);
 		
 		request.getRequestDispatcher("views/recipe/recipeLatestListView.jsp").forward(request, response);
 	

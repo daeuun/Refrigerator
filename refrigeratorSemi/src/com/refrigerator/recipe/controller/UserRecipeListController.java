@@ -38,6 +38,7 @@ public class UserRecipeListController extends HttpServlet {
 		
 		// 수정하기!!!!!!!!
 		int recipeNo = 2; //Integer.parseInt(request.getParameter("rno"))
+		int userNo = 3; //Integer.parseInt(request.getParameter("uno"))
 		
 		// 페이징처리 셋팅
 		int listCount; 	
@@ -72,12 +73,11 @@ public class UserRecipeListController extends HttpServlet {
 		
 		ArrayList<Recipe> pageList = new RecipeService().selectUserRecipeList(pi, recipeNo);
 		
-		if(recipeNo > 0) {
-			ArrayList<Member> userInfo = new MemberService().selectUserInfo(recipeNo);
-		}
+		Member userInfo = new MemberService().selectProfile(userNo);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("pageList", pageList);
+		request.setAttribute("userInfo", userInfo);
 		
 		request.getRequestDispatcher("views/recipe/userRecipeListView.jsp").forward(request, response);
 		
