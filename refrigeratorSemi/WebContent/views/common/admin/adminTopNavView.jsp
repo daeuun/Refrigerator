@@ -89,11 +89,11 @@
 	<div class="top-nav">
 
         <div class="logo" a> 
-            <img src="../../resources/image/logo_pic.png" width="" align="left">
+            <img src="<%=request.getContextPath() %>/resources/image/logo_pic.png" width="" align="left">
         </div>
 
         <div class="home-btn">
-            <a class="nav-home" href="">Home</a>
+            <a class="nav-home" href="<%=request.getContextPath()%>/adList.me?currentPage=1">Home</a>
         </div>
 
         <div class="admin-check">
