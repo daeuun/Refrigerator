@@ -176,7 +176,9 @@ public class RecipeinsertController extends HttpServlet {
 				ordList.get(i).setRecipeExpln(multiRequest.getParameter("expln" + j));
 				
 				if(multiRequest.getOriginalFileName("orderImg" + j) != null) {
-					ordList.get(i).setRecipeImg(request.getContextPath() + "/resources/recipe_order_upfiles/" + multiRequest.getFilesystemName("file" + j));
+					ordList.get(i).setRecipeImg(request.getContextPath() 
+												+ "/resources/recipe_order_upfiles/" 
+												+ multiRequest.getFilesystemName("orderImg" + j));
 				}
 				
 			}

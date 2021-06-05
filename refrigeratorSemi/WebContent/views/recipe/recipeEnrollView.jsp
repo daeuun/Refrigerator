@@ -804,7 +804,7 @@
             if(orderCount < 10){
             	
                 var $clone = $("#order-area").clone(false);
-                orderCount++;
+                ++orderCount;
                 $("input[name=orderCount]").val(orderCount);
                             
                 $clone.find("label[class=order-no]").text(orderCount);
@@ -822,6 +822,7 @@
             $("#orderImg"+orderCount).click(function(){
                 $("#file"+orderCount).click();
             })
+           
                     
         })
  
