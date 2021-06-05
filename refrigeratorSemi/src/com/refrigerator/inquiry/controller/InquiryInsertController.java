@@ -42,7 +42,7 @@ public class InquiryInsertController extends HttpServlet {
 		i.setInqryWriter(userNo);
 		i.setInqryTitle(inqryTitle);
 		i.setInqryContent(inqryContent);
-		System.out.print(i);
+		
 		int result = new InquiryService().insertInquiry(i);
 		
 		if(result > 0) {
