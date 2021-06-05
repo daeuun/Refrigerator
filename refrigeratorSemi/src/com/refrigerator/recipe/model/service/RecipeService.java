@@ -185,16 +185,10 @@ public class RecipeService {
 	 */
 	
 	public Recipe selectRecipeDetailList(int recipeNo){
-		
 		Connection conn = getConnection();
-		
 		Recipe rc = new RecipeDao().selectRecipeDetailList(conn,recipeNo);
-		
 		close(conn);
-		
 		return rc;
-		
-		
 		
 	}
 	
@@ -206,16 +200,10 @@ public class RecipeService {
 	 */
 	
 	public ArrayList<RecipeOrder>selectRecipeOrder(int recipeNo){
-		
 		Connection conn = getConnection();
-		
 		ArrayList<RecipeOrder> list = new RecipeDao().selectRecipeOrder(conn, recipeNo);
-		
 		close(conn);
-		
 		return list;
-
-		
 	}
 	
 	/**
@@ -248,7 +236,6 @@ public class RecipeService {
 	 */
 	
 	public int increaseCount(int recipeNo) {
-		
 		Connection conn = getConnection();
 		int result = new RecipeDao().increaseCount(conn, recipeNo);
 		if(result > 0) {
@@ -257,7 +244,6 @@ public class RecipeService {
 			rollback(conn);
 		}
 		close(conn);
-		
 		return result;
 	}
 	
@@ -268,14 +254,10 @@ public class RecipeService {
 	 */
 	
 	public ArrayList<Ingre>selectMainIngreList(int recipeNo){
-		
 		Connection conn = getConnection();
 		ArrayList<Ingre>ingre = new RecipeDao().selectMainIngreList(conn, recipeNo);
-		
 		close(conn);
-		
 		return ingre;
-		
 	}
 	
 	/**
@@ -285,14 +267,10 @@ public class RecipeService {
 	 */
 	
 	public ArrayList<SubIngre>selectSubIngreList(int recipeNo){
-		
 		Connection conn = getConnection();
 		ArrayList <SubIngre> subIngre = new RecipeDao().selectSubIngreList(conn,recipeNo);
-		
-		
 		close(conn);
 		return subIngre;
-		
 	}
 
 	/**
@@ -310,6 +288,20 @@ public class RecipeService {
 	 * @author leeyeji
 	 * 오늘의 쉐프 레시피 목록 조회
 	 */
+	
+	
+	/**
+	 * 레시피 상세 보기 페이지의 재료 검색 버튼 
+	 * @author seong
+	 * @date 6/5 
+	 */
+	
+	public ArrayList<IngreSearch>selectIngreSearchList(int recipeNo){
+		Connection conn = getConnection();
+		ArrayList<IngreSearch> list = new RecipeDao().selectIngreSearchList(conn, recipeNo);
+		close(conn);
+		return list;
+	}
 	
 	
 	

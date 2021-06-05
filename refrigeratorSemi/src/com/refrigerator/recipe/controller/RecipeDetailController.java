@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.ingre.model.vo.Ingre;
 import com.refrigerator.ingre.model.vo.SubIngre;
+import com.refrigerator.ingre_search.model.vo.IngreSearch;
 import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
 import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
@@ -57,6 +58,8 @@ public class RecipeDetailController extends HttpServlet {
 		//부가 재료 조회 
 		ArrayList<SubIngre> subIngre = new RecipeService().selectSubIngreList(recipeNo);
 		
+		//재료 검색 버튼
+		ArrayList<IngreSearch> ingreSearch =  new RecipeService().selectIngreSearchList(recipeNo);
 		
 		if(rc != null ) { // 레시피 정보가 있을 때 
 			
@@ -67,6 +70,7 @@ public class RecipeDetailController extends HttpServlet {
 			request.setAttribute("list2", list);
 			request.setAttribute("rc", rc);
 			request.setAttribute("recipeNo", recipeNo);
+			request.setAttribute("IngreSeach", ingreSearch);
 			request.getRequestDispatcher("views/recipe/recipeDetailView.jsp").forward(request, response);
 			
 		/*윗부분 작업중*/

@@ -9,6 +9,8 @@ public class IngreSearch {
 	private int ingredientSearch;
 	private int recipeNo;
 	private int categorySno;
+	private String categoryName; // @author seong
+	private String ingreName; // @author seong
 	
 	public IngreSearch(){}
 	
@@ -24,6 +26,39 @@ public class IngreSearch {
 		this.ingredientSearch = ingredientSearch;
 		this.recipeNo = recipeNo;
 		this.categorySno = categorySno;
+	}
+	
+	/**
+	 * 레시피 상세 페이지에 재료 버튼 
+	 * @author seong
+	 * @6/5
+	 * @return
+	 */
+	
+	public IngreSearch(int ingredientSearch, int recipeNo, String categoryName, String ingreName) {
+		super();
+		this.ingredientSearch = ingredientSearch;
+		this.recipeNo = recipeNo;
+		this.categoryName = categoryName;
+		this.ingreName = ingreName;
+	}
+	
+	
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getIngreName() {
+		return ingreName;
+	}
+
+	public void setIngreName(String ingreName) {
+		this.ingreName = ingreName;
 	}
 
 	public int getIngredientSearch() {
@@ -53,7 +88,10 @@ public class IngreSearch {
 	@Override
 	public String toString() {
 		return "IngreSearch [ingredientSearch=" + ingredientSearch + ", recipeNo=" + recipeNo + ", categorySno="
-				+ categorySno + "]";
+				+ categorySno + ", categoryName=" + categoryName + ", ingreName=" + ingreName + "]";
 	}
+
+
+	
 	
 }

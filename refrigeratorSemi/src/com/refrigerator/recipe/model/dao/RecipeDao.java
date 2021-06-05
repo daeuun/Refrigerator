@@ -723,6 +723,59 @@ public class RecipeDao{
 		
 	}
 	
+	/**
+	 * 레시피 상세 보기 페이지의 재료 검색 버튼 
+	 * @author seong
+	 * @date 6/5 
+	 */
+	
+	
+	public ArrayList<IngreSearch>selectIngreSearchList(Connection conn, int recipeNo){
+		
+		
+		ArrayList<IngreSearch> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectIngreSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, recipeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new IngreSearch(
+						
+					
+						rset.getInt("INGREDIENT_SEARCH")
+						,rset.getInt("RECIPE_NO")
+						,rset.getString("CATEGORY_NAME")
+						,rset.getString("INGREDIENT_NAME")
+						
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return list;
+		
+		
+	}
+	
+	
 	
 	/**
 	 * @author leeyeji

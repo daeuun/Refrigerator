@@ -4,7 +4,8 @@
 <%@ page import =" java.util.ArrayList, com.refrigerator.recipe.model.vo.Review
 				,com.refrigerator.category.model.vo.*
 				,com.refrigerator.reicpe_order.model.vo.*
-				,com.refrigerator.ingre.model.vo.*" %>
+				,com.refrigerator.ingre.model.vo.*
+				,com.refrigerator.ingre_search.model.vo.*" %>
 				
 <%
 
@@ -12,6 +13,7 @@
 	ArrayList<RecipeOrder>list2 = (ArrayList<RecipeOrder>)request.getAttribute("list2");
 	ArrayList <Ingre> ingre = (ArrayList<Ingre>)request.getAttribute("ingre");
 	ArrayList <SubIngre> subIngre = (ArrayList<SubIngre>)request.getAttribute("subIngre");
+	ArrayList <IngreSearch> ingreSearch = (ArrayList<IngreSearch>)request.getAttribute("IngreSeach");
 	
 	int recipeNo = (int)request.getAttribute("recipeNo");
 	Recipe rc = (Recipe)request.getAttribute("rc");
@@ -395,7 +397,7 @@
 		
 		                    <tr>
 		                        <th><%=in.getIngreName()%></th>
-		                        <td id="la0"><%=in.getIngreAmount() %></td>
+		                        <td id="la0"><%=in.getIngreAmount() / rc.getSeveralServings()%></td>
 		                        <td><%=in.getIngreUnit() %></td>
 		 
 		                    </tr>
@@ -416,7 +418,7 @@
 		                  
 		                    <tr>
 		                        <th><%=si.getSubIngreName()%></th>
-		                        <td id="la10"><%=si.getSubIngreAmount() %></td>
+		                        <td><%=si.getSubIngreAmount() / rc.getSeveralServings() %></td>
 		                        <td><%=si.getSubIngreUnit() %></td>
 		                    </tr>
 		                    
@@ -431,7 +433,7 @@
             <!--재료 계산기 클릭시 모달창 출력-->
             <div class="igre-calculator">
                 <div align="right" style="width: 900px">
-                    <b><%=rc.getSeveralServings() %></b>인 기준 | 
+                    <b>1</b>인 기준 | 
                     <a data-toggle="tooltip" title=" 재료 계산해드릴게요 !">
                         <img src="<%=contextPath%>/resources/image/icon-cal.png" class="icon"  data-toggle="modal" data-target="#calculatorModal" >
                     </a>
@@ -446,7 +448,7 @@
 
             <!--모달창-->
             <!-- The Modal -->
-            <form action="">
+            
                 <div class="modal" id="calculatorModal">
                     <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -462,7 +464,7 @@
                 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <select name="" id="select-servings">
+                            <select name="servings" id="select-servings" onchange="calculator();">
 
                                 <option value="1" selected>1명</option>
                                 <option value="2">2명</option>
@@ -474,8 +476,6 @@
 
                             <button type="submit" class="btn btn-success btn-sm" onclick="calculator();" >확인</button>
                             
-                            <!--모달창 클릭시 재료의 내용 변경-->
-                            <!--ajax이용해서 값 변경하기-->
                           
                             <script>
 	                            
@@ -484,14 +484,10 @@
 	                            };
 
                             </script>
-                  
-
 
                         </div>
                     </div>
                 </div>
-            </form>
-
             </div>
             <br>
             <hr>
@@ -552,21 +548,14 @@
                         
                             <!-- 반복문으로  -->
                         	<% for(RecipeOrder ro : list2) {%>
-			                        
 		                        <div class="slide" >
-		                        
-		                       
 		                            <img src="<%=ro.getRecipeImg()%>" class="cooking-order-img">
 		                            <br><br>
 		                            <div class="cooking-order-text">
-		
-		                                <p><%=ro.getRecipeExpln()%></p>
-		                                
+		                               <h1><%=ro.getRecipeExpln()%></h1>
 		                            </div>
-		
 		                        </div>
-
-                   		<% }  %>
+                   			<% }  %>
                    		
                    		
                     <a class="prev" onclick="button_click(-1)">&#10094</a>
@@ -597,11 +586,11 @@
 
                     <br><br><br><Br>
            
-            <div class="ingredients-search">
-                <button type="button" class="btn btn-sm btn-success">재료1</button>
-                <button type="button" class="btn btn-sm btn-success">재료2</button>
-                <button type="button" class="btn btn-sm btn-success">재료3</button>
-            </div>
+	            <div class="ingredients-search">
+	            	<%for(IngreSearch in : ingreSearch) {%>
+	                <button type="button" class="btn btn-sm btn-success"><%=in.getIngreName()%></button>
+	                <%} %>
+	            </div>
             <br><br>
 
            
@@ -710,6 +699,7 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                 <% if(loginUser != null) { %>
                                     <td style="width: 80%;">
                                         <div class="form-group">
                                         <label for="usr"></label>
@@ -718,7 +708,7 @@
                                     </td>
                                     <td><button class="btn btn-sm btn-success" onclick="insertReply();">등록</button></td>
                                 </tr>
-                            
+                            	<%} %>
                             </table>
                             
                             
@@ -815,6 +805,7 @@
                            setInterval(selectReplylist,1000);
                        })
                        
+                       <%if(loginUser!=null){%>   
              			/*댓글 작성*/
                        function insertReply(){
                        	$.ajax({
@@ -834,14 +825,13 @@
                        		
                        		},error : function(){
                        			
-                       			
-                       			
                        		}, complete : function(){
                        			
                        		}
                         	
                         	})
                         }
+                       <%}%>
                         
                         /*댓글 조회 */
                         function selectReplyList(){
