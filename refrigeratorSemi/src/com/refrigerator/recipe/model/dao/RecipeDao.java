@@ -843,7 +843,6 @@ public class RecipeDao{
 			close(rset);
 			close(pstmt);
 		}
-		System.out.print(listCount);
 		return listCount;
 	}
 	
@@ -878,6 +877,9 @@ public class RecipeDao{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		return list;
 	}
