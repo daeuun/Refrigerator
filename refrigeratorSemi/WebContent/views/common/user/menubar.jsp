@@ -7,7 +7,7 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+	//ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
 	
 	
 %>
