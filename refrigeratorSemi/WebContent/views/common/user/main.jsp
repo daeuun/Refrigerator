@@ -603,7 +603,7 @@
                 <div>
 
                     <div class="home-section_more"> <!-- 더보기 버튼-->
-                        <a class="home-section_more-btn" href="오늘의레시피 목록페이지 경로">더보기</a>
+                        <a class="home-section_more-btn" href="<%=contextPath %>/recipeView.main?currentPage=1">더보기</a>
                     </div>
 
                     <!-- 레시피 전체 목록 -->
