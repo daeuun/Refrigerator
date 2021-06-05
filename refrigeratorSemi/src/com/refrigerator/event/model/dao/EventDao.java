@@ -192,7 +192,7 @@ public class EventDao {
 		}finally {
 			close(pstmt);
 		}
-		System.out.println(adEvent);
+
 		return result;
 		
 	}
