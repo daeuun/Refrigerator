@@ -884,6 +884,73 @@ public class RecipeDao{
 	
 	
 	
+	/** 마이페이지 내 레시피 목록 갯수 구하는 메소드 
+	 * @author Jaewon 
+	 */
+	public int selectMyRecipeListCount(Connection conn, int userNo) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyRecipeListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	/** 마이페이지 내 레시피 목록 갯수 구하는 메소드 
+	 * @author Jaewon 
+	 */
+	public ArrayList<Recipe> selectMyRecipeList(Connection conn, PageInfo pi, int userNo){
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+									rset.getString("user_id"),
+									rset.getString("recipe_title"),
+									rset.getDouble("avrg_star_point"),
+									rset.getInt("count"),
+									rset.getInt("scrap_count"),
+									rset.getString("recipe_enroll_date"),
+									rset.getString("main_img")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
 	
 }

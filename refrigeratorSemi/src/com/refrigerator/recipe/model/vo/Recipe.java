@@ -130,6 +130,23 @@ public class Recipe {
 		this.mainImg = mainImg;
 	}
 
+	
+	/** 마이페이지 내가쓴레시피 조회해온것 담아오는것 
+	 * @author Jaewon
+	 */
+	public Recipe(int recipeNo, String recipeWriter, String recipeTitle, double avrgStarPoint, int count,
+			int scrapCount, String recipeEnrollDate, String mainImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeWriter = recipeWriter;
+		this.recipeTitle = recipeTitle;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.scrapCount = scrapCount;
+		this.recipeEnrollDate = recipeEnrollDate;
+		this.mainImg = mainImg;
+	}
+
 	public int getRecipeNo() {
 		return recipeNo;
 	}

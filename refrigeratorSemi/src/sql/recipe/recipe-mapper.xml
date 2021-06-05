@@ -488,5 +488,41 @@
 	
 	</entry>
 	
+	<!-- @author Jaewon -->
+	<!-- 마이페이지 페이징 처리용  -->
+	<entry key="selectMyRecipeListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM RECIPE
+         WHERE USER_NO = ?
+           AND STATUS = 'N'
+	</entry>
+
+	<!-- @author Jaewon -->
+	<!-- 마이페이지 내가 쓴레시피 정보 조회해오는 sql문  -->
+	<entry key="selectMyRecipeList">
+    	SELECT * 
+		  FROM (
+		         SELECT ROWNUM RNUM, A.*
+		           FROM
+		                (SELECT 
+		                		RECIPE_NO
+                              , USER_ID 
+                              , RECIPE_TITLE
+		                      , AVRG_STAR_POINT
+		                      , COUNT 
+                              , R.SCRAP_COUNT
+                              , RECIPE_ENROLL_DATE	
+                              , MAIN_IMG	                      
+		                  FROM RECIPE R
+		                  JOIN MEMBER M
+                            ON R.USER_NO = M.USER_NO
+		                  WHERE R.STATUS = 'N' 
+                            AND R.USER_NO = ?
+		                  ORDER BY RECIPE_ENROLL_DATE DESC
+		              )A
+		      )
+		  WHERE RNUM BETWEEN ? AND ?;
+	</entry>
 
 </properties>

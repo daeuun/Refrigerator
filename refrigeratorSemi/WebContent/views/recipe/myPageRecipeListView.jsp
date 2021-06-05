@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="com.refrigerator.common.model.vo.PageInfo, java.util.ArrayList , com.refrigerator.reply.model.vo.Reply"%>    
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Reply> list = (ArrayList<Reply>)request.getAttribute("replyList");
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
+	// 아래는 현재 페이지에서 필요한 페이징 변수들이다. 
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();	
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>

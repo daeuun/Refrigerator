@@ -12,15 +12,7 @@
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-		
-	//※ 셈플데이터가 얼마없어서 보기 좀그랬지만 이제 다 뽑아왔다 내일 바로 
-	// 1) 화면단에 뿌려주기  (조회된 댓글이 없을떄 보여줄 화면  / 조회된 것이 있을때 보여줄것 )
-    // 2) 셈플데이터 추가해주고 (최소 6개는 더 만들어서 심어주자)
-	// 3) 페이징 잘먹는지 확인 
-    // 4) 후에 수정 해결해주고 
-    // 5) 삭제 처리까지 해주자
-	
+	int maxPage = pi.getMaxPage();	
 %>    
     
 <!DOCTYPE html>

@@ -117,8 +117,7 @@
                     <a class="nav-link" href="<%=request.getContextPath()%>/myScrap.scr">찜한레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">       	
-                    <!-- servlet만들러 가자~  -->     
-                    <a class="nav-link" href="<%=request.getContextPath()%>">내가 쓴 레시피<i class="fas fa-chevron-right"></i></a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/mylist.rcp?currentPage=1">내가 쓴 레시피<i class="fas fa-chevron-right"></i></a>
                 </li>
                 <li class="nav-item">        
                     <a class="nav-link" href="<%=request.getContextPath()%>/mylist.rpl?currentPage=1">내 댓글 관리<i class="fas fa-chevron-right"></i></a>

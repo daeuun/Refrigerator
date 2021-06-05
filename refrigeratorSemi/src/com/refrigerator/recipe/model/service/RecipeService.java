@@ -321,4 +321,26 @@ public class RecipeService {
 	
 	
 	
+	/** 마이페이지 내 레시피 목록 갯수 구하는 메소드 
+	 * @author Jaewon 
+	 */
+	public int selectMyRecipeListCount(int userNo) {
+		Connection conn = getConnection();
+		int listCount = new RecipeDao().selectMyRecipeListCount(conn, userNo);
+		close(conn);
+		return listCount;
+	}
+
+
+	/** 마이페이지 내 레시피에서  지정한 보여줄 게시글 수에 따른 레시피 정보 조회 메소드 
+	 * @author Jaewon 
+	 */
+	public ArrayList<Recipe> selectMyRecipeList(PageInfo pi, int userNo){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectMyRecipeList(conn, pi, userNo);
+		close(conn);
+		return list;
+	}
+
+	
 }
