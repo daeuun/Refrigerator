@@ -522,7 +522,86 @@
 		                  ORDER BY RECIPE_ENROLL_DATE DESC
 		              )A
 		      )
-		  WHERE RNUM BETWEEN ? AND ?;
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- @author Jaewon -->
+	<!-- 마이페이지 내가 쓴레시피 status 바꾸는 sql문  -->
+	<entry key="deleteMyRecipe">
+		UPDATE
+		       RECIPE
+		   SET STATUS = 'Y'
+		 WHERE USER_NO = ?
+		   AND RECIPE_NO = ?
 	</entry>
 
+	<!-- @author Jaewon -->
+	<!-- 마이페이지 내가 쓴레시피 수정버튼 클릭시 넘어가는 페이지에 필요한 정보 추출용 sql문  -->
+	<!-- 혹여나 필요하신분이 있을까 싹다 가져오는 SQL문으로 만듭니다. -->	
+	<entry key="selectMyRecipe">
+	    SELECT 
+    		   RECIPE_NO
+             , USER_NO
+             , RECIPE_TITLE
+             , RECIPE_INTRO
+             , SEVERAL_SERVINGS
+             , COOKING_TIME
+             , AVRG_STAR_POINT
+             , COUNT 
+             , LIKE_COUNT
+             , SCRAP_COUNT
+             , RECIPE_ENROLL_DATE
+             , STATUS
+             , MAIN_IMG
+             , INGRE_IMG
+	     FROM RECIPE 
+	    WHERE RECIPE_NO = ?
+	      AND USER_NO = ?
+	</entry>
+	
+	<!-- @author Jaewon -->
+	<!-- 여러행 조회될 여지가 있다. 얘는 재료버튼 가져오는 sql문  -->
+	<entry key="selectMyIngreSearch">
+		SELECT	
+			   INGREDIENT_SEARCH
+		     , RECIPE_NO
+	         , CATEGORY_SNO
+	      FROM INGRE_SEARCH
+	     WHERE RECIPE_NO = ?
+	     ORDER
+	        BY INGREDIENT_SEARCH ASC      
+	</entry>
+	
+	<!-- @author Jaewon -->
+	<!-- 여러행 조회될 여지가 있다. 얘는 재료 가져오는 sql문  -->
+	<entry key="selectMyIngre">
+		SELECT	
+			   INGRE_NO
+			 , RECIPE_NO
+			 , CATEGORY_SNO
+			 , INGRE_AMOUNT
+			 , INGRE_UNIT
+			 , INGRE_CATEGORY
+	      FROM INGRE
+	     WHERE RECIPE_NO = ?  
+   	     ORDER
+	        BY INGRE_NO ASC    
+	</entry>
+	
+	<!-- @author Jaewon -->
+	<!-- 여러행 조회될 여지가 있다. 얘는 요리 가져오는 sql문  -->
+	<entry key="selectMyRecipeOrder">
+		SELECT	
+			   RECIPE_ORDER_NO
+			 , RECIPE_NO
+			 , RECIPE_ORDER
+			 , RECIPE_EXPLN
+			 , RECIPE_IMG
+	      FROM RECIPE_ORDER
+	     WHERE RECIPE_NO = ? 
+     	 ORDER
+	        BY RECIPE_ORDER_NO ASC   
+	</entry>
+
+	
 </properties>

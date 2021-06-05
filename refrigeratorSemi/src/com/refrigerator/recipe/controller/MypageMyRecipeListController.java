@@ -13,7 +13,6 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
-import com.refrigerator.reply.model.service.ReplyService;
 
 /**
  * Servlet implementation class MypageMyRecipeListController

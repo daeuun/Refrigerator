@@ -146,6 +146,30 @@ public class Recipe {
 		this.recipeEnrollDate = recipeEnrollDate;
 		this.mainImg = mainImg;
 	}
+	
+	
+	/** 레시피 정보 모두 가져오기위한 매개변수 생성자 (레시피 작성자 아이디 제외) 
+	 * @author Jaewon
+	 */
+	public Recipe(int recipeNo, int userNo, String recipeTitle, String recipeIntro, int severalServings,
+			int cookingTime, double avrgStarPoint, int count, int likeCount, int scrapCount, String recipeEnrollDate,
+			String status, String mainImg, String ingreImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.userNo = userNo;
+		this.recipeTitle = recipeTitle;
+		this.recipeIntro = recipeIntro;
+		this.severalServings = severalServings;
+		this.cookingTime = cookingTime;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.likeCount = likeCount;
+		this.scrapCount = scrapCount;
+		this.recipeEnrollDate = recipeEnrollDate;
+		this.status = status;
+		this.mainImg = mainImg;
+		this.ingreImg = ingreImg;
+	}
 
 	public int getRecipeNo() {
 		return recipeNo;

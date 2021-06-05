@@ -342,5 +342,60 @@ public class RecipeService {
 		return list;
 	}
 
+	/** 마이페이지 내 레시피에서 삭제 (update status)하는 메소드
+	 * @author Jaewon 
+	 */
+	public int deleteMyRecipe(int userNo,int recipeNo) {
+		Connection conn = getConnection();
+		int result = new RecipeDao().deleteMyRecipe(conn, userNo, recipeNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	//---------------------------------------------------------------------------
+	/** 마이페이지 내 레시피에서 수정페이지로 정보를 넘기며 이동하는 메소드
+	 * @author Jaewon 
+	 */
+	public Recipe selectMyRecipe(int userNo,int recipeNo) {
+		Connection conn = getConnection();
+		Recipe myRecipe = new RecipeDao().selectMyRecipe(conn, userNo, recipeNo);
+		close(conn);
+		return myRecipe;
+	}
 	
+	/** 내 레시피의 ingreSearch정보를 가져오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<IngreSearch> selectMyIngreSearch(int recipeNo){
+		Connection conn = getConnection();
+		ArrayList<IngreSearch> list = new RecipeDao().selectMyIngreSearch(conn, recipeNo);
+		close(conn);
+		return list;
+	}
+	
+	/** 내 레시피의 ingre정보를 가져오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<Ingre> selectMyIngre(int recipeNo){
+		Connection conn = getConnection();
+		ArrayList<Ingre> list = new RecipeDao().selectMyIngre(conn, recipeNo);
+		close(conn);
+		return list;
+	}
+
+	/** 내 레시피의 RecipeOrder정보를 가져오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<RecipeOrder> selectMyRecipeOrder(int recipeNo){
+		Connection conn = getConnection();
+		ArrayList<RecipeOrder> list = new RecipeDao().selectMyRecipeOrder(conn, recipeNo);
+		close(conn);
+		return list;
+	}
+
+	//---------------------------------------------------------------------------
 }

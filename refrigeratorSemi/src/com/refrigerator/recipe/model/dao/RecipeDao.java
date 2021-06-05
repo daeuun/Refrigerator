@@ -952,7 +952,160 @@ public class RecipeDao{
 		}
 		return list;
 	}
-
 	
+	/** 마이페이지 내 레시피 목록 갯수 구하는 메소드 
+	 * @author Jaewon 
+	 */
+	public int deleteMyRecipe(Connection conn, int userNo,int recipeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMyRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, recipeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+//-------------------------------------------------------------------------------------		
+	/** 마이페이지 내 레시피에서 수정페이지로 정보를 넘기며 이동하는 메소드
+	 * @author Jaewon 
+	 */
+	public Recipe selectMyRecipe(Connection conn, int userNo,int recipeNo) {
+		Recipe myRecipe = new Recipe();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			pstmt.setInt(2, userNo);
+			rset = pstmt.executeQuery();
+			
+			// 일단 싹다 가져가자 뭐가 필요한지 모른다.
+			if(rset.next()) {
+				myRecipe = new Recipe(rset.getInt("RECIPE_NO")
+									, rset.getInt("USER_NO")
+									, rset.getString("RECIPE_TITLE")
+									, rset.getString("RECIPE_INTRO")
+									, rset.getInt("SEVERAL_SERVINGS")
+									, rset.getInt("COOKING_TIME")
+									, rset.getDouble("AVRG_STAR_POINT")
+									, rset.getInt("COUNT")
+									, rset.getInt("LIKE_COUNT")
+									, rset.getInt("SCRAP_COUNT")
+									, rset.getString("RECIPE_ENROLL_DATE")
+									, rset.getString("STATUS")
+									, rset.getString("MAIN_IMG")
+									, rset.getString("INGRE_IMG"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return myRecipe;
+	}
+
+	/** 내 레시피의 ingreSearch정보를 가져오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<IngreSearch> selectMyIngreSearch(Connection conn, int recipeNo){
+		ArrayList<IngreSearch> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyIngreSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new IngreSearch(rset.getInt("INGREDIENT_SEARCH")
+									   , rset.getInt("RECIPE_NO")
+						               , rset.getInt("CATEGORY_SNO")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/** 내 레시피의 ingre정보를 가져오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<Ingre> selectMyIngre(Connection conn, int recipeNo){
+		ArrayList<Ingre> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyIngre");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Ingre(rset.getInt("INGRE_NO")
+								 , rset.getInt("RECIPE_NO")
+								 , rset.getInt("CATEGORY_SNO")
+							     , rset.getInt("INGRE_AMOUNT")
+							     , rset.getString("INGRE_UNIT")
+							     , rset.getString("INGRE_CATEGORY")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/** 내 레시피의 RecipeOrder정보를 가져오는 메소드
+	 * @author Jaewon 
+	 */
+	public ArrayList<RecipeOrder> selectMyRecipeOrder(Connection conn, int recipeNo){
+		ArrayList<RecipeOrder> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyRecipeOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new RecipeOrder(rset.getInt("RECIPE_ORDER_NO")
+								 , rset.getInt("RECIPE_NO")
+								 , rset.getInt("RECIPE_ORDER")
+							     , rset.getString("RECIPE_EXPLN")
+							     , rset.getString("RECIPE_IMG")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+//-------------------------------------------------------------------------------------		
 	
 }
