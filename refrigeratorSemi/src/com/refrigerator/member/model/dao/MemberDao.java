@@ -44,12 +44,14 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "user_id");
-			pstmt.setString(2, "user_pwd");
-			pstmt.setString(3, "user_pwd");
-			pstmt.setString(4, "birthday");
-			pstmt.setString(5, "gender");
-			pstmt.setString(6, "email");
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getNickname());
+			pstmt.setString(3, m.getUserPwd());
+			pstmt.setString(4, m.getUserName());
+			pstmt.setString(5, m.getBirthday());
+			pstmt.setString(6, m.getGender());
+			pstmt.setString(7, m.getEmail());
+			pstmt.setString(8, m.getProfileImg());
 			
 			result = pstmt.executeUpdate();
 			

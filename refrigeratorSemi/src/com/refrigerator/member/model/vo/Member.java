@@ -53,14 +53,16 @@ public class Member {
 	}
 	
 
-	public Member(String userId, String userPwd, String userName, String birthday, String gender, String email) {
+	public Member(String userId, String nickname, String userPwd, String userName, String birthday, String gender, String email, String profileImg) {
 		super();
 		this.userId = userId;
+		this.nickname = nickname;
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.birthday = birthday;
 		this.gender = gender;
 		this.email = email;
+		this.profileImg = profileImg;
 	}
 	
 	public Member(int userNo, String userId, String userName, String grade, String gender, String email, String phone,

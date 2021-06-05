@@ -38,6 +38,7 @@ public class MemberInsertController extends HttpServlet {
 		// 2) 요청시 전달값 뽑아서 변수 및 객체에 기록하기 
 		// 아이디, 비밀번호, 이름, 생년월일(yyyy/mm/dd), 성별, 이메일
 		String userId = request.getParameter("userId");
+		String nickname = request.getParameter("nickname");
 		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
 		String birthYear = request.getParameter("birthYear");
@@ -45,11 +46,12 @@ public class MemberInsertController extends HttpServlet {
 		String birthDay = request.getParameter("birthDay");
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
+		String profileImg = request.getParameter("profileImg");
 		
 		String birthday = birthYear + birthMonth + birthDay;
 		
 		// 3) 매개변수 생성자 이용해서 Member객체에 새로 담기
-		Member m = new Member(userId, userPwd, userName, birthday, gender, email);
+		Member m = new Member(userId, nickname, userPwd, userName, birthday, gender, email, profileImg);
 		
 		// 4) 서비스 메소드 호출 & 결과받기 (처리된 행수)
 		int result = new MemberService().insertMember(m);
