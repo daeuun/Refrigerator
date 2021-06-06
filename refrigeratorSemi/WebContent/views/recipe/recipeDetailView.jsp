@@ -398,8 +398,6 @@
 		<form action="<%=contextPath %>/insertRecipe.repo"> 
 			<% if(loginUser != null) { %>
 		        <div align="right" class="report-user">
-		        	<input type="hidden" name="userId" value="<%=loginUser.getUserNo()%>">
-		            <input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
 		            <!--로그인한 사용자만 신고할 수 있도록-->
 		            <a href="" class="report-user-btn" data-toggle="modal" data-target="#recipe-report">신고하기</a>
 		            
@@ -412,6 +410,8 @@
 	                        <!-- Modal Header -->
 	                        <div class="modal-header">
 	                        <div>
+					        	<input type="hidden" name="userId" value="<%=loginUser.getUserNo()%>">
+					            <input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
 	                            <span style="text-align: center;"><b>레시피</b> 신고</span>
 	                        </div>
 	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
