@@ -602,6 +602,20 @@
      	 ORDER
 	        BY RECIPE_ORDER_NO ASC   
 	</entry>
+	
+	<!-- @author daeun -->
+	<!-- 메인페이지 - 레시피 정보 조회 -->
+	<entry key="selectMainRecipe">
+		SELECT 
+		        RECIPE_NO
+		      , NICKNAME
+		      , RECIPE_TITLE
+		      , COUNT
+		      , R.LIKE_COUNT AS LIKE_COUNT
+		  FROM RECIPE R
+		  JOIN MEMBER USING (USER_NO)
+		 WHERE R.STATUS = 'N'
+	</entry>
 
 	
 </properties>
