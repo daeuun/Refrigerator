@@ -136,7 +136,7 @@
 	                <div class="thumbnail" align="center">
 	                    <input type="hidden" value="<%=r.getRecipeNo()%>">
 	                    <div id="recipe-img">
-	                        <img src="<%=contextPath %>/<%=r.getMainImg()%>" width="200" height="150">
+	                        <img src="<%=r.getMainImg()%>" width="200" height="150">
 	                    </div>
 	
 	                    <p style="margin-top: 5px;">
