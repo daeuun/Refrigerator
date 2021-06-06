@@ -5,7 +5,6 @@
 				 com.refrigerator.member.model.vo.Member"%>
    
 <%
-	String contextPath = request.getContextPath();
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
 %>
 
@@ -711,7 +710,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -747,7 +746,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -783,7 +782,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -819,7 +818,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -855,7 +854,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -891,7 +890,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -928,7 +927,7 @@
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
                                         </div>
                                     </div>
@@ -953,7 +952,7 @@
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                                <%= list.getNickname() %>
+                                                <%= list.getRecipeWriter() %>
                                             </span>
                                         </div>
                                     </div>
