@@ -378,13 +378,13 @@
                 <span class="recipe-sub-info-cooking-time"><b><%=rc.getCookingTime() %></b></span>분정도 걸려요 
             </div>
         </div>
-		
+		<!-- 레시피 찜하기 -->
 		<%if(loginUser != null) { %>
 			<form action="<%=contextPath%>/insert.scrap">
 		        <div class="recipe-scrape" align="center" onclick="scrapInsert();">
 		            <br><br>
 		            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
-		            <input type="hidden" name="rno" value="<%=rc.getRecipeNo()%>">
+		            <input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
 		            <button type="submit" class="btn btn-outline-success btn-sm">이 레시피를 찜할래요</button>
 		        </div>
 			</form>
@@ -394,8 +394,8 @@
 	
         <br>
         
-		<!-- form  -->
-		<form action="<%=contextPath %>/insertRecipe.repo">
+		<!-- 신고하기 -->
+		<form action="<%=contextPath %>/insertRecipe.repo"> 
 			<% if(loginUser != null) { %>
 		        <div align="right" class="report-user">
 		        	<input type="hidden" name="userId" value="<%=loginUser.getUserNo()%>">
@@ -427,7 +427,7 @@
 	                                            신고 사유
 	                                        </th>
 	                                        <td>
-	                                        	<input type="text" name="report" id="sports" placeholder="신고사유를 적어주세요">
+	                                        	<input type="text" name="report-re" id="report-re" placeholder="신고사유를 적어주세요">
 	                                        </td>
 	                                    </tr>
 	                                    
@@ -447,7 +447,7 @@
 		        </div>
 			<% } %>
 		</form>
-		<!-- form 닫기 -->
+		<!-- 신고하기 끝 -->
 
         
         <hr>

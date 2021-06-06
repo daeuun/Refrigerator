@@ -31,13 +31,13 @@ public class ScrapInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 수정하기
-		int recipeNo = Integer.parseInt(request.getParameter("rno"));
+		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		int result = new ScrapService().insertScrap(recipeNo, userNo);
 		
 		if(result>0) {
-			response.sendRedirect(request.getContextPath() + "/detail.recipe?currentPage=" + recipeNo);
+			response.sendRedirect(request.getContextPath() + "/detail.recipe?rno=" + recipeNo);
 		}else {
 			
 			request.setAttribute("errorMsg", "찜하기에 실패하였습니다.");
