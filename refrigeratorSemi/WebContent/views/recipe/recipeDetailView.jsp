@@ -331,7 +331,7 @@
         
         <div align="center">
             <div class="bannner">
-                <img src="<%=contextPath%>/resources/image/recipe-main-img.jpg" id="main-img">
+                <img src="<%=rc.getMainImg()%>" id="main-img">
                 <span class="text" align="right" style="width: 580px;">
                     <span><img src="<%=contextPath%>/resources/image/icon-star.png" alt=""><%=rc.getAvrgStarPoint()%></span>
                     <span><img src="<%=contextPath%>/resources/image/icon-bookmark.png" alt=""><%=rc.getScrapCount() %></span>
