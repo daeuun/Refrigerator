@@ -50,17 +50,12 @@ public class MypageMyRecipeModifyFormController extends HttpServlet {
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
-	
-		System.out.println(userNo);
-		System.out.println(recipeNo);
-		
+			
 		Recipe myRecipe = new RecipeService().selectMyRecipe(userNo, recipeNo);
 		// 아래 3개는 여러행 조회될 여지가 있다. 
 		ArrayList<IngreSearch> myIngreSearch = new RecipeService().selectMyIngreSearch(recipeNo);
 		ArrayList<Ingre> myIngre = new RecipeService().selectMyIngre(recipeNo);
 		ArrayList<RecipeOrder> myRecipeOrder = new RecipeService().selectMyRecipeOrder(recipeNo);
-
-
 
 		request.setAttribute("myPageNo", 4);
 		request.setAttribute("myRecipe", myRecipe);

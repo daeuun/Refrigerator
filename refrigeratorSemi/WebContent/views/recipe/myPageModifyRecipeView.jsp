@@ -297,7 +297,10 @@
         margin-left: 12px;
         object-fit: cover;        
     }
-
+	
+	img{
+        object-fit: cover;        	
+	}
 
 </style>
 </head>
@@ -413,7 +416,7 @@
                         </div>
                         
                         <div align="center" style="padding-top:10px; padding-bottom:10px;">
-                            <img src="" class="ingre-img">
+                            <img src="<%= request.getContextPath()%>/<%= recipeInfo.getIngreImg() %>" class="ingre-img">
                         </div>
                         
                     <div align="center">
@@ -431,7 +434,24 @@
                     </div>
                     
                     <div id="serach-btn-input-area">
-                        
+                    
+                    	<!-- Jaewon -->
+                        <!-- ★★★★★ 검색버튼쪽은 ㅜ 제가 스크립트 넣으면 희락님 스크립트가 씹혀버려서 화면에  
+                    		정보뿌리는게 불가하여 넘어갔습니다 , 아래는 흔적입니다 ㅜ 
+                    		
+                    		희락님이 대분류와 소분류를 연동하여 뿌라는것을 해주신듯하다. 
+                        <script>. 
+                        	// 몇번째 버튼인지
+                         	var btnOrder = "<%= searchInfo.get(0).getIngredientSearch() %>";
+                         	// 해당 버튼의 카테고리 번호가 무었인지?
+                         	var subCatNo = "<%= searchInfo.get(0).getCategorySno() %>"; 
+
+                         	$(function(){
+                         		$('select[name="btnSubCat0"]').val(subCatNo).prop("selected",true);
+                         	})
+                      	</script>                    	
+                    	-->
+                    
                         <select class="mc" name="btnMainCat0">
                         	<% for(MainCategory mc : mList) {%>
 	                            <option value="<%=mc.getCategoryMainNo()%>"><%=mc.getCategoryName()%></option>
@@ -479,6 +499,27 @@
                 </div>
                 
                 <div id="hide-org" class="ingre-area">
+
+                   	<!-- Jaewon -->
+                   	<!-- 아래부분도 제가  script를 넣으면 씹히는상황이 생겨서 ㅜㅜ 흔적은 일단 남겨두겠습니다. -->                    
+                    <!-- <script> 
+                    	<% for(Ingre iInfo : ingreInfo){ %>
+	                    	// 재료 필수인지 아닌지  | 담겨있는 값이 "필수" 인지 "부가인지" 
+	                    	var ingreStatus = "<%= iInfo.getIngreCategory() %>";
+							// 해당 재료정보의 subCategory 
+	                     	var ingresubCatNo = "<%= iInfo.getCategorySno() %>";
+	                     	// 해당 재료정보의 재료량 (숫자임) 
+	                     	var ingreAmount = "<%= iInfo.getIngreAmount() %>"; 
+	                     	// 해당 재료정보의 재료량 (단위) 
+	                     	var ingreUnit = "<%= iInfo.getIngreUnit() %>"; 
+	                     	
+	                     	$(function(){
+	                     		$('select[name="ingSubCat0"]').val(ingresubCatNo).prop("selected",true);
+	                     		$('select[name="ingAmount0"]').val(ingreAmount);
+	                     		$('select[name="ingUnit0"]').val(ingreUnit).prop("selected",true);
+	                     	})
+                     	<% } %>
+                  	</script> -->
                     
                     <select class="mc" name="ingMainCat0">
                     	<% for(MainCategory mc : mList) {%>
@@ -566,6 +607,7 @@
                 </div>
                 
                 <div id="add-area">
+                	<!-- Jaewon 해당 영역도 마찬 가지로 servlet을 통해 가져온 저보를 뿌려주거나 option을 선택하는  script가 씹힙니다.  -->
                     
                     <select class="mc" name="addMainCat1" placeholder="ddd">
                       <% for(MainCategory mc : mList) {%>
@@ -648,6 +690,30 @@
                             <th style="padding-right: 20px;" width="50"><span class="order-ct-close"><img width="30px" height="30px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjYxMi4wMDhweCIgaGVpZ2h0PSI2MTIuMDA4cHgiIHZpZXdCb3g9IjAgMCA2MTIuMDA4IDYxMi4wMDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYxMi4wMDggNjEyLjAwODsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9Il94MzlfXzQxXyI+DQoJCTxnPg0KCQkJPHBhdGggZD0iTTUzNS40NCw5NS42NjZIMTkyLjI2N2MtNS4zNTQtMC4zMjUtMTAuODA0LDEuMzM4LTE0LjkxNiw1LjQxMkw1LjUxNSwyOTEuMTU2Yy00LjAzNSwzLjk5Ny01Ljc1Niw5LjMzMi01LjQ4OCwxNC41NzINCgkJCQljLTAuMjY4LDUuMjM5LDEuNDU0LDEwLjU1Niw1LjQ4OCwxNC41NzFsMTcxLjgzNiwxOTAuMDc5YzMuNzQ4LDMuNzA5LDguNjI0LDUuNTQ1LDEzLjUyLDUuNjAzdjAuNDAxaDM0NC41Nw0KCQkJCWM0Mi4yOCwwLDc2LjU2Ny0zNC4yNDgsNzYuNTY3LTc2LjQ5VjE3Mi4xNzVDNjEyLjAwOCwxMjkuOTE0LDU3Ny43MjEsOTUuNjY2LDUzNS40NCw5NS42NjZ6IE00MzMuMTU0LDM0OC45MDYNCgkJCQljNy40NzcsNy40NzcsNy40NzcsMTkuNTgyLDAsMjcuMDM5Yy03LjQ3OCw3LjQ3OC0xOS42MDEsNy40NzgtMjcuMDc4LDBsLTQyLjgxNS00Mi43NzdsLTQzLjM3LDQzLjMzMg0KCQkJCWMtNy41MzQsNy41MTYtMTkuNzUzLDcuNTE2LTI3LjI4OCwwYy03LjUzNS03LjUzNC03LjUzNS0xOS43MzQsMC0yNy4yNDlsNDMuMzctNDMuMzMzbC00Mi44MTUtNDIuNzc3DQoJCQkJYy03LjQ3Ny03LjQ3Ny03LjQ3Ny0xOS41ODIsMC0yNy4wNGM3LjQ3Ny03LjQ3NywxOS42MDEtNy40NzcsMjcuMDc4LDBsNDIuODE1LDQyLjc3N2w0My45ODEtNDMuOTI1DQoJCQkJYzcuNTM0LTcuNTM0LDE5Ljc1NC03LjUzNCwyNy4yODgsMHM3LjUzNCwxOS43MzQsMCwyNy4yNWwtNDMuOTgxLDQzLjkyNUw0MzMuMTU0LDM0OC45MDZ6Ii8+DQoJCTwvZz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="></span></th>
                             </tr>
                         </table>
+                        
+                     <!-- Jaewon
+                     		희락님 이부분도 일단은 들어가게는 해놓았는데 ㅜ 
+                     		추가버튼 클릭시 클론되는것들은 id값이나 class값에 선택함에 있어 어려움이있어 이정도가 제 한계인듯합니다 ㅜ 부탁드려도 될까요 ?
+                      --> 
+                     <script> 
+                    	<% for(RecipeOrder ro : orderInfo){ %>
+	                    	//  recipe_order컬럼값을 담는변수
+	                    	var recipeOrder = "<%= ro.getRecipeOrder() %>";
+	                    	//  recipe_order컬럼값을 담는변수
+	                     	var recipeExpln = "<%= ro.getRecipeExpln() %>";
+	                    	//  recipe_order컬럼값을 담는변수
+	                     	var recipeImg = "<%= ro.getRecipeImg() %>"; 
+	                     	
+	                     	$(function(){
+	                     		for(var i=0; i<<%= orderInfo.size() %>; i++){
+		                     		if($("label[class='order-no']").text() == recipeOrder ){}
+		                     		// 기능구현에 있어서는 셈플스크립트상에는 resources앞에 /가없는데 레시피 오더 테이블쪽에 (레시피등록을 할시) /가 붙는 형태이다. 일단 붙는것을 기준으로 만들자 
+		                     		$('#orderImg1').attr("src", "<%= request.getContextPath() %><%= ro.getRecipeImg() %>");
+		                     		$('textarea[name="expln1"]').text(recipeExpln);
+	                     		}
+	                     	})
+                     	<% } %>
+                  	</script>
                         
                     </div>
                     
