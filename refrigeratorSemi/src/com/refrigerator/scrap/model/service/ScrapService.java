@@ -37,9 +37,9 @@ public class ScrapService {
 	 * @author leeyeji
 	 * 유저 레시피 스크랩 insert
 	 */
-	public int insertScrap(int recipeNo, String userId) {
+	public int insertScrap(int recipeNo, int userNo) {
 		Connection conn = getConnection();
-		int result = new ScrapDao().insertScrap(conn, recipeNo, userId);
+		int result = new ScrapDao().insertScrap(conn, recipeNo, userNo);
 		if(result > 0) {
 			commit(conn);
 		}else {

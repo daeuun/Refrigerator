@@ -95,7 +95,7 @@ public class ScrapDao {
 	 * @author leeyeji
 	 * 유저 레시피 스크랩 insert
 	 */
-	public int insertScrap(Connection conn, int recipeNo, String userId) {
+	public int insertScrap(Connection conn, int recipeNo, int userNo) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -104,7 +104,7 @@ public class ScrapDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, recipeNo);
-			pstmt.setString(2, userId);
+			pstmt.setInt(2, userNo);
 			
 			result = pstmt.executeUpdate();
 			

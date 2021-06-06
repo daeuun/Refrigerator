@@ -31,10 +31,10 @@ public class ScrapInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 수정하기
-		int recipeNo = 2; //Integer.parseInt(request.getParameter("rno"));
-		String userId = "user05"; //request.getParameter("userId");
+		int recipeNo = Integer.parseInt(request.getParameter("rno"));
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		int result = new ScrapService().insertScrap(recipeNo, userId);
+		int result = new ScrapService().insertScrap(recipeNo, userNo);
 		
 		if(result>0) {
 			response.sendRedirect(request.getContextPath() + "/detail.recipe?currentPage=" + recipeNo);

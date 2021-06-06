@@ -36,12 +36,7 @@
 		VALUES 
 		     (
 		       ?
-		     , (
-		         SELECT 
-		               USER_NO
-		          FROM MEMBER
-		         WHERE USER_ID = ?
-		       )
+		     , ?
 		     )
 	</entry>
 	

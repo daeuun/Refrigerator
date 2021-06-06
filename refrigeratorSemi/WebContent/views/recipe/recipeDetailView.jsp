@@ -291,6 +291,20 @@
     .area-header,.recipe-review-header{
         padding-left: 200px;
     }
+    
+    /*신고하기 모달*/
+    .report-mbody div{
+        width: 300px;
+        height: 30px;
+        color: rgb(0, 120, 51);
+        font-weight: bold;
+        border-radius: 5px;
+        text-align: center;
+        margin: 10px;  
+        font-size: 15px;
+        line-height: 30px;
+    }
+    /*.modal-header, .modal-content, .modal-footer{border: 0px;}*/
 </style>
 
 
@@ -361,21 +375,76 @@
                 <span class="recipe-sub-info-cooking-time"><b><%=rc.getCookingTime() %></b></span>분정도 걸려요 
             </div>
         </div>
-
-        <div class="recipe-scrape" align="center">
-            <br><br>
-            <button type="button" class="btn btn-outline-success btn-sm">이 레시피를 찜할래요</button>
-        </div>
-
-
-
+		
+		<%if(loginUser != null) { %>
+			<form action="<%=contextPath%>/insert.scrap">
+		        <div class="recipe-scrape" align="center" onclick="scrapInsert();">
+		            <br><br>
+		            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+		            <input type="hidden" name="rno" value="<%=rc.getRecipeNo()%>">
+		            <button type="submit" class="btn btn-outline-success btn-sm">이 레시피를 찜할래요</button>
+		        </div>
+			</form>
+		<% }else{ %>
+			
+		<% } %>
+	
         <br>
-		<% if(loginUser != null) { %>
-	        <div align="right" class="report-user">
-	            <!--로그인한 사용자만 신고할 수 있도록-->
-	            <a href="" class="report-user-btn">신고하기</a>
-	        </div>
-		<%} %>
+        
+		<!-- form  -->
+		<form action="<%=contextPath %>/insertRecipe.repo">
+			<% if(loginUser != null) { %>
+		        <div align="right" class="report-user">
+		        	<input type="hidden" name="userId" value="<%=loginUser.getUserNo()%>">
+		            <input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
+		            <!--로그인한 사용자만 신고할 수 있도록-->
+		            <a href="" class="report-user-btn" data-toggle="modal" data-target="#recipe-report">신고하기</a>
+		            
+		            
+		            <!-- The Modal -->
+	                    <div class="modal" id="recipe-report" >
+	                    <div class="modal-dialog modal-dialog-centered ">
+	                    <div class="modal-content report-modal" >
+	                
+	                        <!-- Modal Header -->
+	                        <div class="modal-header">
+	                        <div>
+	                            <span style="text-align: center;"><b>레시피</b> 신고</span>
+	                        </div>
+	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                        </div>
+	                        
+	                        <!-- Modal body -->
+	                        <div class="modal-body">
+	                            <div class="modal-body-list report-mbody">
+	                                
+	                                <table>
+	                                    <tr>
+	                                        <th>
+	                                            신고 사유
+	                                        </th>
+	                                        <td>
+	                                        	<input type="text" name="report" id="sports" placeholder="신고사유를 적어주세요">
+	                                        </td>
+	                                    </tr>
+	                                    
+	                                </table>
+	                            </div>
+	  
+	                        </div>
+	                
+	                        <!-- Modal footer -->
+	                        <div class="modal-footer">
+	                        <button type="submit" class="btn btn-success">신고하기</button>
+	                        </div>
+	                
+	                    </div>
+	                    </div>
+	                    </div>
+		        </div>
+			<% } %>
+		</form>
+		<!-- form 닫기 -->
 
         
         <hr>
