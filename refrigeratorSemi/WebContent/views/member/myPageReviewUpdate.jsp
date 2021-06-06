@@ -5,7 +5,8 @@
 				 com.refrigerator.recipe.model.vo.Review,
 				 java.util.ArrayList"%>
 <%
-	ArrayList<Review> list = (ArrayList<Review>) request.getAttribute("list");
+
+ArrayList<Review> list = (ArrayList<Review>) request.getAttribute("list");
 
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 
@@ -13,6 +14,7 @@ int currentPage = pi.getCurrentPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 int maxPage = pi.getMaxPage();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -71,6 +73,11 @@ button {
 .count-area {
 	color: orange;
 }
+
+.page-area{
+	margin-right:130px;
+}
+
 </style>
 </head>
 <body>
@@ -111,7 +118,7 @@ button {
 							if (list.isEmpty()) {
 						%>
 						<tr>
-							<td colspan="6">작성하신 요리 후기가 없습니다.</td>
+							<td colspan="7">작성하신 요리 후기가 없습니다.</td>
 						</tr>
 						<%
 							} else {
@@ -128,6 +135,9 @@ button {
 							<td width="200"><%=list.get(i).getReviewContent()%></td>
 							<td>★<%=list.get(i).getStar()%></td>
 							<td><%=list.get(i).getModifyDate()%></td>
+							<td>
+								<button type="button" id="modify-btn" >수정</button>
+							</td>
 						</tr>
 						<%
 							}
@@ -135,8 +145,34 @@ button {
 						<%
 							}
 						%>
+						
+						<!-- 삭제 모달 -->
+						<div class="modal fade" id="modify">
+							<div class="modal-dialog">
+								<div class="modal-content">
 
-						<!-- The Modal -->
+									<!-- Modal Header -->
+									<div align="right">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+
+									<!-- Modal body -->
+									<div class="modal-body" style="margin:auto">
+										<p>
+											<span style="color: red">선택한 요리 후기를 삭제</span>하시겠습니까?
+										</p>
+									</div>
+
+									<div class="modal-btn">
+										<button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</a> 
+										<button type="submit" class="btn btn-danger btn-sm">삭제</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						
+						<!-- 삭제 모달 -->
 						<div class="modal fade" id="delete">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -175,7 +211,7 @@ button {
 			</div>
 
 			<br>
-			<div align="center" class="paging-area">
+			<div align="center" class="page-area">
 				<%
 					if (currentPage != 1) {
 				%>
@@ -216,7 +252,15 @@ button {
 		</div>
 
 	</div>
+	
+	
+	
+		<%@ include file="../common/user/footer.jsp" %>
+	
+	
 
+	
+	
 	<script>
 		$(function() {
 			var $xx = $(".review-table input[type=checkbox]");

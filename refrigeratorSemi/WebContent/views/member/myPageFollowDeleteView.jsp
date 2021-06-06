@@ -26,7 +26,7 @@
 
         /*공통*/
         .outer{
-            width:750px;
+            width:780px;
             margin:20px 120px 0px 20px;
         }
         label{
@@ -130,22 +130,25 @@
 		button{
 			border:none;
 		}
+		
+		.page-area{
+			margin-top: 20px;
+		}
 
 </style>
 </head>
 <body>
+
 <%@ include file="../common/user/menubar.jsp" %>
 <%@ include file="../common/user/myPageVerticalNav.jsp" %>
 	
-	
-    
 	<div class="outer">
 
     <div class="menu-path" style="font-size:12px;">
         마이페이지 > <label>후기&별점관리</label> 
     </div>
     
-    <br><br>
+    <br>
     
     <div class="menu-title">
         <label>팔로우 중</label><span> <%=pi.getListCount()%></span>
@@ -245,13 +248,7 @@
 		</script>
        
 
-    </div>
-    
-    
-
-    <br>
-    
-      <div align="center" class="paging-area">
+      <div align="center" class="page-area">
         	<%if(currentPage != 1) {%>
             <button onclick="location.href='<%=contextPath%>/deleteForm.fol?currentPage=<%=currentPage-1%>';">&lt;</button>
             <%} %>
@@ -267,6 +264,15 @@
             <%} %>
         </div>
     <br>
+    </div>
+    
+    </div>
+    
+
+    <br>
+    
+    
+    <%@ include file="../common/user/footer.jsp" %>
 
 </body>
 </html>

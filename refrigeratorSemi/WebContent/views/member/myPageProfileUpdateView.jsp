@@ -141,6 +141,8 @@
 
         </div>
     </div>
+    
+    <%@ include file="../common/user/footer.jsp" %>
 
     <script>
     
