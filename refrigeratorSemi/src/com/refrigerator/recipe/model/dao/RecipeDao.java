@@ -1210,6 +1210,31 @@ public class RecipeDao{
 		return replyCount;
 	}
 	
+	/**
+	 * 레시피 평균 별점 업데이트
+	 * @author seong
+	 * @date 6/6
+	 */
+	
+	public int avgStarUpdate(Connection conn,int recipeNo) {
+		
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("avgStarUpdate");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			pstmt.setInt(2, recipeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	
 	

@@ -437,6 +437,21 @@ public class RecipeService {
 		return replyCount;
 	}
 	
+	/**
+	 * 레시피 평균 별점 업데이트
+	 * @author seong
+	 * @date 6/6
+	 */
+	
+	public int avgStarUpdate(int recipeNo) {
+		
+		Connection conn= getConnection();
+		int result = new RecipeDao().avgStarUpdate(conn,recipeNo);
+		close(conn);
+		return result;
+		
+	}
+	
 
 
 }

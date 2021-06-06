@@ -66,6 +66,9 @@ public class ReviewInsertController extends HttpServlet {
 			
 			int result = new RecipeService().insertReview(rv);
 			
+			// 요리 후기 작성시 별점 변경
+			int avgStar = new RecipeService().avgStarUpdate(recipeNo);
+			
 			if(result>0) {
 				
 				request.getSession().setAttribute("alertMsg", "요리후기 작성 성공 ! ");

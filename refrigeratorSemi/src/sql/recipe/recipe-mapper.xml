@@ -638,6 +638,17 @@
 	WHERE RECIPE_NO = ?
 	
 	</entry>
+	
+	<!-- @author seong -->
+	<!-- 레시피 상세 페이지에서 평균 별점 업데이트 -->
+	<entry key="avgStarUpdate">
+		UPDATE RECIPE
+		SET AVRG_STAR_POINT = (SELECT TRUNC(AVG(STAR),2)
+		                        FROM REVIEW 
+		                        WHERE RECIPE_NO = ?)
+		WHERE RECIPE_NO = ?
+	</entry>
+	
 
 	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 	

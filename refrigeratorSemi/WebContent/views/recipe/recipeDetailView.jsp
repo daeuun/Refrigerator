@@ -292,7 +292,9 @@
     }
 
     .area-header,.recipe-review-header{
-        padding-left: 200px;
+		margin:auto;
+        algin : center;
+        width:800px;
     }
     
     /*신고하기 모달*/
@@ -449,8 +451,8 @@
 		</form>
 		<!-- form 닫기 -->
 
-        
-        <hr>
+        <br>
+        <hr class="area-header">
 
         <br><br>
 
@@ -562,8 +564,8 @@
                 </div>
             </div>
             <br>
-            <hr>
-
+            <hr class="area-header">
+			<br>
         </div>
 
 
@@ -683,7 +685,7 @@
                     <div><h5>요리 후기 <b><%=reviewCount%></b></h5></div>
                     
                     <!--로그인한 회원만 보여지는 버튼 ! -->
-                    <% if( loginUser != null){ %>
+                   <% if( loginUser != null){ %>
 	                    <div class="recipe-review-body" >
 	                    	<form action="<%=contextPath%>/enrollForm.review">
 		                    	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
@@ -691,8 +693,7 @@
 		                    	<button type="submit"  id="review-enroll-btn" class="btn btn-sm"> 작성하기	</button>
 	                        </form>
 	                    </div>
-                    <% } %>
-                    
+                  <% } %>
                      <hr>
                 </div>
 
@@ -755,11 +756,10 @@
                 <!--댓글 추가 및 삭제시 댓글 숫자 증감-->
                 <div class="area-header"><h5>댓글 <b><%=replyCount %></b></h5>
                 
-                <hr>
+                <hr> 
                 </div>
                 
-
-                
+				
                 <br>
                 <!--댓글 입력하는 영역-->
                 
@@ -807,7 +807,7 @@
                     </div>
                 
 
-               
+               <br>
                 <!--댓글 조회하는 전체 영역-->
 
                 <div id="reply-list-area">
