@@ -15,10 +15,12 @@
 		  , BIRTHDAY
 		  , GENDER
 		  , EMAIL
+		  , PROFILE_IMG
 		  )
 		  VALUES
 		  (
 		    SEQ_UNO.NEXTVAL
+		  , ?
 		  , ?
 		  , ?
 		  , ?
