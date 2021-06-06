@@ -34,7 +34,7 @@ int maxPage = pi.getMaxPage();
 }
 
 .menu-title {
-	width: 700px;
+	width: 745px;
 	font-size: 18px;
 	color: rgb(0, 102, 51);
 	font-weight: 600;
@@ -77,6 +77,9 @@ button {
 .page-area{
 	margin-right:130px;
 }
+
+/*리뷰 수정 모달영역*/
+
 
 </style>
 </head>
@@ -136,7 +139,7 @@ button {
 							<td>★<%=list.get(i).getStar()%></td>
 							<td><%=list.get(i).getModifyDate()%></td>
 							<td>
-								<button type="button" id="modify-btn" >수정</button>
+								<button type="button" id="modify-btn" data-toggle="modal" data-target="#modify">수정</button>
 							</td>
 						</tr>
 						<%
@@ -146,7 +149,7 @@ button {
 							}
 						%>
 						
-						<!-- 삭제 모달 -->
+						<!-- 수정 모달 -->
 						<div class="modal fade" id="modify">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -157,16 +160,18 @@ button {
 									</div>
 
 									<!-- Modal body -->
+									<form action="update.rv" method="post" enctype="multipart/form-data">
 									<div class="modal-body" style="margin:auto">
-										<p>
-											<span style="color: red">선택한 요리 후기를 삭제</span>하시겠습니까?
-										</p>
+										<div><img class="review-img"></div>
+										<span>이 레시피의 별점은?</span>
 									</div>
+									<input type="file" >
 
 									<div class="modal-btn">
 										<button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</a> 
-										<button type="submit" class="btn btn-danger btn-sm">삭제</a>
+										<button type="submit" class="btn btn-danger btn-sm">수정</a>
 									</div>
+									</form>
 
 								</div>
 							</div>

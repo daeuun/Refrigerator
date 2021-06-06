@@ -264,24 +264,53 @@
                                 
                         <!-- Modal body -->
                         <div class="delete-modal-body">
-                            <form action="" method="POST">
+                            <form action="/delete.me" method="POST">
                                 <label class="add-exp">회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요</label>
                                     
-                                <p><b>사용하고 계신 아이디(user01)는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</b><br><br>
+                                <p><b>사용하고 계신 아이디(<%=loginUser.getUserId()%>)는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</b><br><br>
                                 <label class="red-exp">탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가</label>하오니 신중하게 선택하시기 바랍니다.
                                 </p>
 
-                                <input type="password" name="userPwd" placeholder="비밀번호 입력">
+                                <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호 입력" required>
 
                                 <div class="form-btn" width="500">
                                     <button class="btn btn-secondary btn-cancel" data-dismiss="modal">취소</button> &nbsp;&nbsp;&nbsp;
-                                    <button type="submit" class="btn btn-danger btn-delete">회원탈퇴</button>
+                                    <button type="button" id="delete" class="btn btn-danger btn-delete">회원탈퇴</button>
                                 </div>
                             </form>
                         </div>
                     </div>                  
                 </div>
             </div>
+            
+            <script>
+            	// 회원 탈퇴 비밀번호 입력시 작동하는 ajax
+            	$("#delete").click(function(){
+            		
+            		$.ajax({
+            			url:"jqAjaxDelete.me",
+            			type:"POST",
+            			data:{userPwd:$("#userPwd").val()},
+            			success: function(result){
+            				
+            				if (result > 0){
+								
+            					location.href= "<%=contextPath%>";
+            					
+            				}else{
+            					
+            					alert("비밀번호가 일치 하지 않습니다. 다시 입력해주세요.");
+            				}
+            				
+            			},error:function(){
+            				
+            			}
+            		})
+            		
+            	})
+            	
+            
+            </script>
 <!----------------------------------------(희락님) 회원탈퇴 모달 영역 끝-------------------------------------------------------------------->
 
         </div>

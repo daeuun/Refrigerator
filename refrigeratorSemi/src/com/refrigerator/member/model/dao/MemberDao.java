@@ -427,6 +427,30 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	/**
+	 * @author HeeRak
+	 * 회원 탈퇴
+	 */
+	public int deleteUserMember(Connection conn, int userNo, String userPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteUserMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setString(2, userPwd);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

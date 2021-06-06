@@ -190,5 +190,15 @@
 		 WHERE USER_ID = ?
 		   AND USER_PWD = ? 
 	</entry>
+	
+	<!-- HeeRak-->
+	<!-- 회원 탈퇴 -->
+	<entry key="deleteUserMember">
+		UPDATE MEMBER
+		   SET STATUS = 'N'
+		 WHERE USER_NO = ?
+		   AND USER_PWD = ?
+		   AND STATUS = 'Y' 
+	</entry>
 
 </properties>

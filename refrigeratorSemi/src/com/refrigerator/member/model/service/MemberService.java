@@ -195,6 +195,23 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+
+	/**
+	 * @author HeeRak
+	 * 회원 탈퇴
+	 */
+	public int deleteUserMember(int userNo, String userPwd) {
+		Connection conn = getConnection();
+		int result = new MemberDao().deleteUserMember(conn, userNo, userPwd);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 	
 	
