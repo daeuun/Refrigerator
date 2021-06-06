@@ -95,5 +95,87 @@
 		 WHERE BANNER_NO = ?
 	</entry>
 	
+	<!-- @author daeun -->
+	<!-- 배너 관리자페이지 : 메인 레시피 조회 -->
+	<entry key="selectBannerRecipeList">
+		SELECT *
+		FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT
+		                       BANNER_NO
+		                     , BANNER_NAME
+		                     , COMPANY_NAME
+		                     , BANNER_CATEGORY
+		                     , BANNER_STATUS
+		                     , ENROLL_DATE
+				             , MODIFY_DATE
+				             , START_DATE
+				             , END_DATE
+				             , BANNER_IMG
+				             , PAGE
+		                  FROM BANNER
+		                 ORDER
+		                    BY ENROLL_DATE DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<!-- @author daeun -->
+	<!-- 배너 관리자페이지 : 메인 레시피 등록 -->
+	<entry key="insertBannerRecipe">
+		INSERT
+		  INTO BANNER
+		     ( 
+		       BANNER_NO
+		     , BANNER_CATEGORY
+		     , BANNER_NAME
+		     , COMPANY_NAME
+		     , BANNER_STATUS
+		     , START_DATE
+		     , END_DATE
+		     , BANNER_IMG
+		     , PAGE
+		     ) 
+		VALUES
+		     (
+		       SEQ_BNNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , '1'
+		     )
+	</entry>
+	
+	<!-- @author daeun -->
+	<!-- 배너 관리자페이지 : 메인 레시피 수정 -->
+	<entry key="updateBannerRecipe">
+		UPDATE 
+		       BANNER
+		   SET BANNER_CATEGORY = ?
+		     , BANNER_NAME = ?
+		     , COMPANY_NAME = ?
+		     , BANNER_STATUS = ?
+		     , START_DATE = ?
+		     , END_DATE = ?
+		     , BANNER_IMG = ?
+		 WHERE BANNER_NO = ?
+		   AND PAGE = '1'
+	</entry>
+	
+	<!-- @author daeun -->
+	<!-- 배너 관리자페이지 : 메인 레시피 삭제 -->
+	<entry key="deleteBannerRecipe">
+		UPDATE
+		       BANNER
+		   SET BANNER_STATUS = 'N'
+		 WHERE BANNER_NO = ?
+	</entry>	
+	
 	
 </properties>

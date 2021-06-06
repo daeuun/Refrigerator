@@ -1,492 +1,482 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.ArrayList,
+				 com.refrigerator.common.model.vo.PageInfo,
+			     com.refrigerator.banner.model.vo.Banner"
+%>
+
+<%
+	String contextPath = request.getContextPath();
+	ArrayList<Banner> list = (ArrayList<Banner>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="./jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
-<script src="./bootstrapt/js/bootstrap.min.js"></script>
-<title>Document</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <style>
-    /* 사이드바 영역 */
-    .side-nav{
-        width: 150px;
-        height: 900px;
-        background: rgb(0, 153, 102);
-        float: left;
-    }
-    .side-title button{
-        text-align: left;
-        color: white;
-        font-size: 20px;
-        padding-top: 10px;
-        padding-left: 10px;
-        font-weight: bold;
-    }
-    .side-title:hover{
+    .total_outer{
         color: black;
-        cursor: pointer;
+        width: 1200px;
+        margin: auto;
     }
-    #side-sub{
-        margin-top: 3px;
-        margin-left: 10px;
-        background: white;
-        width: 130px;
-        border-radius: 5px;
-        text-align: center;
-        padding-bottom: 3px;
-        display: none;
+    .table-warp{
+        width: 1000px;
+        height: 100px;
+        font-size: 16px;
     }
-    #side-sub a{
-        font-size: 13px;
-        color: black;
+
+    .select-list>a{
         text-decoration: none;
-        display: inline-block;
+        color: black;
     }
-    #side-sub a:hover{
-        color: rgb(0, 120, 51);
+    .search-container button{
+        background-color: #28a745;
+        color: white;
+    }
+    .member-btn a{
+        background: #28a745;
+    }
+
+
+    .checked-bannerList>tr:hover{
+        cursor: pointer;
+        background-color: rgb(248, 248, 248);
+        opacity: 0.7;
+    }
+
+    .thead{
+        background-color: rgb(224, 224, 224);
+    }
+    
+    /*모달창내부 : 제목*/
+    .modal-body-content div{
+        width: 120px;
+        height: 30px;
+        background-color: #28a745;
+        border-radius: 5px;
+        color:white;
+        text-align: center;
+        margin:10px 20px;  
+        font-size: 14px;
+        line-height: 30px;
+    }
+
+    .paging-area{
+        margin: 40px 0 50px 0;
+    }
+    
+
+    /* 모달 */
+    .modal-dialog.modal-80size {
+    width: 100%;
+    height: 100%;
+    margin: 100px 0;
+    padding: 0;
+    }
+    .modal-content.modal-80size {
+    height: auto;
+    min-height: 80%;
+    }
+    .modal.modal-center {
+    text-align: center;
+    }
+    .modal-dialog.modal-center {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    }
+    #myModalLabel{
+        text-align: center;
         font-weight: bold;
     }
-
-    /* 본문 영역 */
-    /* 상단 메뉴바 */
-    .outer{
-            width: 900px;
-            height: 1000px;
-            font-size: 16px;
+    .modal-content-wrap{
+        margin: auto;
     }
-    .path-area{
-            font-size:16px;
-            
-            color:rgb(155, 155, 155);  
+    .modal-body-content input , .modal-body-content select{ /*모달창내부 input*/
+        width: 400px;
     }
-    .path-area>span{
-            text-decoration: underline;  
-            font-weight:500;
-            color: black;  
-    }
-    /* 관리자 페이지 내부 - 레시피 목록 영역 */
-    .banner-recipe-wrap{
-        display: inline-block;
-        width: 300px;
-        height: 300px;
-        margin: 20px 0 30px 45px;
-    }
-    .recipe_image-wrap{
-        display: inline-block;
-        width: 300px;
-        height: 200px;
-        background-color: sandybrown;
-    }
-    .recipe_content{
-        width: 300px;
-        margin: 5px 0;
-    }
-    .banner-recipe{
-        margin: 0 0 0 150px;
-        width: 1100px;
-    }
-
-    /* 관리자 페이지 내부 - 검색 영역 */
-    .recipe-top-area{
-        display: flex;
-        height: 40px;
-        padding: 4px 60px 4px 680px;
-    }
-    .recipe-search{
-        width: 270px;
-    }
-    .recipe-search_input{
-        float: left;
-        box-sizing: border-box; 
-        height: 35px; 
-        width: 200px; 
-        padding: 0 10px;
-        line-height: 0; 
-        border-radius: 4px 0 0 4px; 
-        border: 1px solid #cccccc;
-    }
-    .recipe-search_input-icon{
-        display: inline-block; 
-        box-sizing: border-box; 
-        border-radius: 0 4px 4px 0;
-        height: 35px; 
-        width: 40px;
-        line-height: 0; 
-        border: 0;
-        background-color: rgb(0, 153, 102);
-    }
-    .recipe-search_btn{
-        display: inline-block; 
-        border: 0;
-        border-radius: 4px;
-        width: 80px;
-        height: 35px;
-        background-color: rgb(0, 153, 102);
-        color: #fff;
-        font-weight: 600px;
-    }
-    /*모달*/
-    .modal_enroll, .modal_update { 
-        display: inline-block;
-        position: fixed; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-        height: 100%; 
-        background-color: rgba(0, 0, 0, 0.5); 
-        opacity: 0; 
-        visibility: hidden; 
-        transform: scale(1.1); 
-        transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-     } 
-    .modal-content { 
-        position: absolute; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%); 
-        background-color: white; 
-        padding: 10px 15px; 
-        width: 600px; 
-        height: 500px; 
-        border-radius: 5px; 
-     } 
-    .show-modal { 
-        display: inline-block;
-        opacity: 1; 
-        visibility: visible; 
-        transform: scale(1.0); 
-        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
-    }
-    .close-btn { 
-        float: right; 
-        width: 25px;
-        height: 25px;
-        line-height: 20px; 
-        text-align: center; 
-        cursor: pointer; 
-        border-radius: 3px; 
-        background-color: lightgray; 
-     }  
-    .close-btn:hover { 
-        background-color: darkgray; 
-    }
-    .modal-title{
-        width: 100%;
-        height: 60px;
-        font-size: 25px;
-        font-weight : 800;
+    .btn-submit{ /*닫기버튼*/
+        background-color: #28a745;
+        border-radius: 5px;
+        color:white;
         text-align: center;
     }
-    .form-control, .modal select{ 
-        display: block; 
-        box-sizing: border-box; 
-        width: 100%; 
-        padding: 20px 10px; 
-        line-height: 0; 
-        border-radius: 4px; 
-        border: 1px solid #cccccc;
-    }
-    .modal label, .modal select {
-        margin: 5px 0;
-    }
-    .recipe_content_label{
-        display: inline-block;
-        width: 55px;
-        background-color: rgb(0, 153, 102);
-        text-align: center;
-        border-radius: 2px;
-        color: #fff;
-        line-height: 2; 
-    }
-    .recipe_content_area-title,.recipe_content_area-userId,.recipe_content_area-status{
-        display: inline-block;
-        width: 240px;
-    }
+
 </style>
+
 </head>
 <body>
 
-	<div class="side-nav" align="left">
-        <!--회원관리-->
-        <div class="side-title">
-            <button type="button" data-toggle="collapse1" data-target="#side-sub" class="btn side-btn">
-                회원 관리
-            </button>
-            <div id="side-sub" class="collapse1">
-                <a href="">회원 목록</a><br>
-                <a href="">신고 내역</a>
-            </div>
-        </div>
+    <%@ include file="../common/admin/adminTopNavView.jsp" %>
 
-        <!--문의 관리-->
-        <div class="side-title">
-            <button type="button" data-toggle="collapse2" data-target="#side-sub" class="btn side-btn">
-                문의 관리
-            </button>
-            <div id="side-sub" class="collapse2">
-                <a href="">공지사항</a><br>
-                <a href="">FAQ</a><br>
-                <a href="">문의/답변</a><br>
-            </div>
-        </div>
+    <div class="total_outer">
 
-        <!--사이트 관리-->
-        <div class="side-title">
-            <button type="button" data-toggle="collapse3" data-target="#side-sub" class="btn side-btn">
-                사이트 관리
-            </button>
-            <div id="side-sub" class="collapse3">
-                <a href="">이용약관</a><br>
-                <a href="">카테고리</a><br>
-                <a href="">네비게이션바</a><br>
-                <a href="">배너</a>
-            </div>
-        </div>
-
-        <!--게시판 관리-->
-        <div class="side-title">
-            <button type="button" data-toggle="collapse4" data-target="#side-sub" class="btn side-btn">
-                게시판 관리
-            </button>
-            <div id="side-sub" class="collapse3">
-                <a href="">요리 후기</a><br>
-                <a href="">댓글</a><br>
-                <a href="">이벤트</a><br>
-            </div>
-        </div>
-
-        <!--통계 관리-->
-        <div class="side-title">
-            <button type="button" data-toggle="collapse4" data-target="#side-sub" class="btn side-btn">
-                통계 관리
-            </button>
-            <div id="side-sub" class="collapse4">
-                <a href="">레시피</a>
-            </div>
-        </div>
-
-        <!--레시피 관리-->
-        <div class="side-title">
-            <button type="button" class="btn side-btn">
-                레시피 관리
-            </button>
-            <div id="side-sub" class="collapse5">
-                <a href="">레시피 삭제</a><br>
-                <a href="">메인 노출 레시피</a><br>
-                <a href="">메인 레시피 목록</a><br>
-            </div>
-        </div>
-
-    </div>
-
-    
-    <script>
+        <div> %@ include file="../common/admin/adminSideBarView.jsp" %> </div>  
         
-        $(function(){
+        <!-- 본문 내용 area -->
+        <div class="outer">
 
-            $(".side-btn").click(function(){
-
-                var $side = $(this).next();
-
-                if($side.css("display") == "none"){
-                    $(this).siblings("div").show(200);
-                }else{
-                    $side.hide(200);
-                }
-
-            })
-        })
-
-    </script>
-
-    <!-- 본문 내용 area -->
-    <div class="outer">
-        <div class="path-area"> 
-            홈 > 사이트관리 > <span class="current-menu">배너</span> 
-        </div>
-
-        <br>
-        <h2 style="height: 10px;">메인레시피 등록</h2>
-        <br>
-
-        <!-- 레시피 목록 전체 영역 -->
-        <div class="banner-recipe">
-
-            <div class="recipe-top-area">
-
-                <div class="recipe-search">
-                    <input class="recipe-search_input" type="text" value="글번호를 입력하세요">
-                    <button class="recipe-search_input-icon"><img style="width: 15px;" src="../../resources/image/searchicon.png" alt=""></button>
-                </div>
-                
-                <button class="recipe-search_btn" type="submit">등록</button>
-
+            <div class="select-list"  align="right" style="width: 450px;" >
+                <a href="">홈</a> >
+                <a href="">게시판 관리</a> >
+                <a href="">이벤트</a>
             </div>
+            <br>
+
+
+            <br><br>
+
+            <!-------------------------------------------------- 테이블 -------------------------------------------------->
+
+            <div class="btn" align="right" style="width: 300px;">
+
+                <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#my80sizeCenterModal">등록</a>
+                    
+            </div>  
+
+            <!--레시피 목록 영역-->
+            <table class="table-warp" border="1" align="center">
+
+                <thead class="thead">
+                    <tr align="center" >
+                        <th width="50">분류</th> 
+                        <th colspan="2" width="90">레시피 제목</th>
+                        <th width="60">작성자</th> 
+                        <th width="30">상태</th>
+                        <th width="90">배너 등록일</th>
+                        <th width="90">배너 수정일</th>
+                        <th width="90">배너 종료일</th>
+                        <th width="50">레시피 이미지</th>
+                        <th colspan="2" width="30" >수정/삭제</th>    
+                    </tr>
+
+                </thead>
+
+                <tbody class="checked-bannerList">
+                    <%if(list.isEmpty()) { %>
+                            
+                        <tr>
+                            <td colspan="11" style="text-align: center;">등록된 배너 레시피가 없습니다.</td>
+                        </tr>
+                            
+                        <% } else {%>
+                        
+                            <% for(Banner ba : list) { %>
+                                
+                                <tr align="center">
+                                    
+                                    <input type="hidden" name="bannerNo" value = <%=ba.getBannerNo()%> >
+                                    <th width="30"><%=ba.getBannerCategory() %></th> 
+                                    <th colspan="2" width="200"><%=ba.getBannerName() %></th>
+                                    <th width="40"><%=ba.getCompanyName() %></th> 
+                                    <th width="30"><%=ba.getBannerStatus() %></th>
+                                    <th width="60"><%=ba.getEnrollDate() %></th>
+                                    <th width="60"><%=ba.getModifyDate() %></th>
+                                    <th width="60"><%=ba.getEndDate() %></th>
+                                    <th width="30"><%=ba.getBannerImg() %></th>
+                                    <td><button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#banner_modify_Modal" onclick="modifyBanner(this);">수정</button></td>
+                                    <td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#banner_delete_Modal" onclick="deleteBanner();">삭제</a></td>
+                                </tr>
+
+                        <%} %>
+
+                    <%} %>
+                </tbody>
+
+                                        
+            </table>
+            
+            <!-------------------------------------------------- 모달 -------------------------------------------------->
+
+            <!---------------------------------------------- 1. 등록 모달 ---------------------------------------------->
+                <div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
+                    <div class="modal-dialog modal-80size modal-center" role="document">
+
+                        <!-- 모달 창 영역 -->
+                        <div class="modal-content modal-80size" style="width: 800px;">
+                            <div class="modal-content-wrap">
+                                <!-- header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">배너 등록</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+
+                                <!-- body+footer영역 감싸는 form -->
+                                <form action="<%=contextPath%>/adRecipeInsert.banner" method="post" enctype="multipart/form-data">
+                                    <!-- body -->
+                                    <div class="modal-body">
+                                        <div class="modal-body-content">
+                                                        
+                                            <table>
+                                                <!--배너번호 hidden-->
+                                                <tr>
+                                                    <td><input type="hidden" name="bannerNo" id="bannerNo" value=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div class="modal-Banner-category">분류</div></td>
+                                                    <td>
+                                                        <select id="enrollBannerCategory" name="bannerCategory" >
+                                                            <option value="이벤트">이벤트</option>
+                                                            <option value="공모전">공모전</option>
+                                                            <option value="광고">광고</option>
+                                                            <option value="레시피 배너">레시피 배너</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div class="modal-recipe-title">레시피 제목</div></td>
+                                                    <td><input type="text" id="enrollBannerTitle"  name="bannerName" placeholder="제목을 입력해주세요"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div class="modal-recipe-nickname">작성자</div></td>
+                                                    <td><input type="text" id="enrollCompanyName"  name="companyName" placeholder="작성자의 닉네임을 입력해주세요"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div>상태</div></td>
+                                                    <td>
+                                                        <select id="bannerStatus"  name="bannerStatus" >
+                                                            <option value="Y">게시중</option>
+                                                            <option value="N">게시안함</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div>배너 시작일</div></td>
+                                                    <td><input type="date" id="enrollStartDate" name="startDate"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div>배너 종료일</div></td>
+                                                    <td><input type="date" id="enrollEndDate" name="endDate"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div>레시피 대표이미지</div></td>
+                                                    <td><input type="file"  id="enrollBannerUpfile" name="bannerImg"></td> 
+                                                </tr>
+            
+                                            </table>
+            
+                                        </div>
+                                    </div>
+                                    <!-- footer -->
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-success" value="등록"></input>
+                                    </div>
+                                </form> 
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <!---------------------------------------------- 2. 수정 모달 ---------------------------------------------->
+            
+            <form action="<%=contextPath%>/adRecipeUpdate.banner" id="modify-modal_form" method="post" enctype="multipart/form-data">
+            <div class="modal modal-center fade" id="banner_modify_Modal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
+                <div class="modal-dialog modal-80size modal-center" role="document">
+
+                    <!-- 모달 창 영역 -->
+                    <div class="modal-content modal-80size" style="width: 800px;">
+                        <div class="modal-content-wrap">
+                            <!-- header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">배너 등록</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+
+                            <!-- body -->
+                            <div class="modal-body">
+                                <div class="modal-body-content">
+                                                    
+                                    <table>
+                                        <!--배너번호 hidden-->
+                                        <tr>															<!-- value값이 여기서 안들어감 -->
+                                            <td><input type="hidden" name="updateNo" id="passedUpdateNo" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="modal-Banner-category">분류</div></td>
+                                            <td>
+                                                    <select id="updateBannerCategory" name="updateBannerCategory" value="">
+                                                        <option value="이벤트">이벤트</option>
+                                                        <option value="공모전">공모전</option>
+                                                        <option value="광고">광고</option>
+                                                        <option value="레시피 배너">레시피 배너</option>
+                                                    </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="modal-recipe-title">레시피 제목</div></td>
+                                            <td><input type="text" id="updateBannerName"  name="updateBannerName" value="" placeholder="제목을 입력해주세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="modal-recipe-nickname">작성자</div></td>
+                                            <td><input type="text" id="updateCompanyName"  name="updateCompanyName" value="" placeholder="작성자의 닉네임을 입력해주세요"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>상태</div></td>
+                                            <td>
+                                                    <select id="updateBannerStatus" name="updateBannerStatus" value="">
+                                                        <option value="Y">게시중</option>
+                                                        <option value="N">게시안함</option>
+                                                    </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>배너 시작일</div></td>
+                                            <td><input type="date" id="updateStartDate" name="updateStartDate" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>배너 종료일</div></td>
+                                            <td><input type="date" id="updateEndDate" name="updateEndDate" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>레시피 대표이미지</div></td>
+                                            <td><input type="file"  id="updateBannerImg" name="updateBannerImg" value=""></td> 
+                                        </tr>
+        
+                                    </table>
+        
+                                </div>
+                            </div>
+                            <!-- footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-success" value="등록"></input>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <!---------------------------------------------- 3. 삭제 모달 ---------------------------------------------->
+            <form action="<%=contextPath%>/adRecipeDelete.banner" id="delete-modal_form" >
+                
+                <div class="modal" id="banner_delete_Modal">
+                <div class="modal-dialog modal-dialog-centered">
+                <!-- 모달 전체 -->
+                <div class="modal-content">
+                
+                    <!-- 모달 헤더영역 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>배너 삭제</b></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                                
+                    <!-- 모달 관리자작성영역 -->
+                    <input type="hidden" name="deleteBannerNo" id="deleteBannerNo">
+                    <div class="modal-body">
+                        메인에서 해당 배너 레시피를 삭제하시겠습니까?
+                    </div>
+                                
+                    <!-- 모달 푸터 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
+                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                    </div>
+                            
+                </div>
+                </div>
+                </div>
+                        
+            </form>
+
             
 
-            <!-- 레시피 개별 영역 -->
-            <div class="banner-recipe-wrap">
+            
+            
+            
+            <!-------------------------------------------------- paging -------------------------------------------------->
+                
+            <div class="paging-area" align="center">
 
-                <!-- 레시피 이미지 영역 -->
-                <div class="recipe_image-wrap">
-                    <a class="recipe_image" href="레시피 대표이미지 경로제시"></a>
-                </div>
-
-                <!-- 제목/작성자/상태 -->
-                <div class="recipe_content-wrap">
-
-                    <div class="recipe_content">
-                        <!-- 레시피 제목 -->
-                        <div class="recipe_content_label">
-                            제목
-                        </div>
-                        <div class="recipe_content_area-title">
-                            초간단 돼지고기 김치찌개 - 입맛 없을 땐 딱!!
-                        </div>
-                    </div>
-
-                    <div class="recipe_content">
-                        <!-- 레시피 작성자 -->
-                        <div class="recipe_content_label">
-                            작성자
-                        </div>
-                        <div class="recipe_content_area-userId">
-                            user01
-                        </div>
-                    </div>
-
-                    <div class="recipe_content">
-                        <!-- 레시피 상태 -->
-                        <div class="recipe_content_label">
-                            상태
-                        </div>
-                        <div class="recipe_content_area-status">
-                            게시중
-                        </div>
-                    </div>
+                    <% if(currentPage != 1) { %>
+                        <button onclick="location.href='<%=contextPath%>/adRecipeList.banner?currentPage=<%=currentPage-1%>';">&lt;</button>
+                    <% } %>
+                        
+                    <% for(int p=startPage; p<=endPage;p++) {%>
                     
-                    
-                </div>
-
+                            <% if(p != currentPage) {%>
+                                <button onclick="location.href='<%=contextPath%>/adRecipeList.banner?currentPage=<%=p%>';"><%=p%></button>
+                            <%} else { %>
+                                <button disabled><%= p %></button>
+                            <%} %>
+                        
+                    <%} %>
+                        
+                    <%if(currentPage != maxPage) {%>
+                        <button onclick="location.href='<%=contextPath%>/adRecipeList.banner?currentPage=<%=currentPage+1%>';">&gt;</button>
+                    <%} %>
+                        
             </div>
+                
+            
+            
 
-        </div>
-        
-        <!-- 등록시 팝업 될 모달영역 --> 
-        <div class="modal_enroll"> 
-            <div class="modal-content"> 
 
-                <span class="close-btn">&times;</span> 
-
-                <div class="modal-title">메인 레시피 등록</div> 
-
-                <form action="#post.php" method="POST"> 
-
-                    <label for="recipe-no">글번호</label> 
-                    <div class="form-control">
-                        글번호
-                    </div>
-
-                    <label for="recipe-no">글제목</label> 
-                    <div class="form-control">
-                        초간단 돼지고기 김치찌개 - 입맛 없을 땐 딱!!
-                    </div>
-
-                    <label for="recipe-no">작성자</label> 
-                    <div class="form-control">
-                        작성자
-                    </div>
-
-                    <label for="recipe-status">상태</label> 
-                    <select name="status" id="">
-                        <option value="Y">게시중</option>
-                        <option value="N">게시안함</option>
-                    </select>
-
-                    <input type="submit" id="submit" value="등록"> 
-                </form> 
-
-            </div> 
-        </div>
-
-        <!-- 수정시 팝업 될 모달영역 --> 
-        <div class="modal_update"> 
-            <div class="modal-content"> 
-
-                <span class="close-btn">&times;</span> 
-
-                <div class="modal-title">메인 레시피 수정</div> 
-
-                <form action="#post.php" method="POST"> 
-
-                    <label for="recipe-no">글번호</label> 
-                    <div class="form-control">
-                        글번호
-                    </div>
-
-                    <label for="recipe-no">글제목</label> 
-                    <div class="form-control">
-                        초간단 돼지고기 김치찌개 - 입맛 없을 땐 딱!!
-                    </div>
-
-                    <label for="recipe-no">작성자</label> 
-                    <div class="form-control">
-                        작성자
-                    </div>
-
-                    <label for="recipe-status">상태</label> 
-                    <select name="status" id="">
-                        <option value="Y">게시중</option>
-                        <option value="N">게시안함</option>
-                    </select>
-
-                    <input type="submit" id="submit" value="수정"> 
-                </form> 
-
-            </div> 
-        </div>
-
+        </div>    
     </div>
 
-    
-    
 
+    <script> 
 
-    <script>
-        
-        var modal = document.querySelector(".modal_enroll"); 
-        var recipe_search_btn = document.querySelector(".recipe-search_btn");
-        var banner_recipe_wrap = document.querySelector(".banner-recipe-wrap");
-        var closeButton = document.querySelector(".close-btn"); 
-        var cancelButton = document.querySelector("#cancel");
+        /* 수정하기 버튼 클릭시, 이벤트 번호를 모달로 전달 */
+        function modifyBanner(passedBtn){
 
-        function toggleModal() { 
-             modal.classList.toggle("show-modal"); 
+        	var bannerNo = $(passedBtn).parent().parent().children("input[type='hidden']").val();
+
+        	$("#passedUpdateNo").val(bannerNo);
+
+            //$("#updateNo").val(bannerNo);
+            
+            <% for(Banner ba : list) { %>
+                        
+            
+                if(bannerNo == <%=ba.getBannerNo()%>){
+                	
+                	$("#updateBannerCategory").val("<%=ba.getBannerCategory()%>");
+                	$("#updateBannerName").val("<%=ba.getBannerName()%>");
+                	$("#updateCompanyName").val("<%=ba.getCompanyName()%>");
+                	$("#updateBannerStatus").val("<%=ba.getBannerStatus()%>");
+                    
+                    $("#updateStartDate").val("<%=ba.getStartDate()%>");
+                    $("#UpdateEndDate").val("<%=ba.getEndDate()%>");
+                }
+                
+                  
+            <%}%>
+            
+            
         }
+        
+        /* 삭제하기 버튼 클릭시, 이벤트 번호를 모달로 전달 */
+        function deleteBanner(){
+        
+            $("#deleteBannerNo").val($(event.target).parent().siblings("input[type=hidden]").val());
 
-        function windowOnClick(event) { 
-             if (event.target === modal) { 
-                 toggleModal(); 
-            } 
         }
-
-        recipe_search_btn.addEventListener("click", toggleModal); 
-        banner_recipe_wrap.addEventListener("click", toggleModal); 
-        closeButton.addEventListener("click", toggleModal); 
-        window.addEventListener("click", windowOnClick); 
-
-        
-        
-
+  
     </script>
+
     
+
 
 </body>
 </html>

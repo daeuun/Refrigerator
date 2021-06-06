@@ -1,26 +1,26 @@
 package com.refrigerator.banner.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.refrigerator.recipe.model.service.RecipeService;
+import com.refrigerator.banner.model.service.BannerService;
 
 /**
- * Servlet implementation class AdminBannerRecipeController
+ * Servlet implementation class AdminBannerRecipeDeleteController
  */
-/*관리자페이지 - 배너 레시피 관리 페이지로 이동*/
-@WebServlet("/adRecipe.ba")
-public class AdminBannerRecipeController extends HttpServlet {
+@WebServlet("/adRecipeDelete.banner")
+public class AdminBannerRecipeDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminBannerRecipeController() {
+    public AdminBannerRecipeDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,26 +28,22 @@ public class AdminBannerRecipeController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    /*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
+		int bannerNo = Integer.parseInt(request.getParameter("deleteBannerNo"));
 		
-		int recipeNo = Integer.parseInt(request.getParameter("rno"));
-		String status = request.getParameter("status");
+		int result = new BannerService().deleteBannerRecipe(bannerNo);	
 		
-		Recipe rc = new RecipeService().selectRecipe();
-		
-		if(rc>0) { // 조회결과 있음 
+		if(result > 0) { // 성공 => 리스트 페이지 보여주기 
+			request.getSession().setAttribute("alert", "메인 배너에 레시피가 성공적으로 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/adRecipeList.banner?currentPage=1");  // url재요청
 			
-			request.getRequestDispatcher("views/banner/adminBannerRecipe.jsp").forward(request, response);
-		
-		}else { // 조회결과 없음
-			request.setAttribute("errorMsg", "조회결과가 없습니다. 다시 한번 입력사항을 확인해주세요.");
+		}else { // 실패 => 에러페이지 보여지도록 에러문구 담아서 전달
+			request.setAttribute("errorMsg", "삭제에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
-	}*/
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
