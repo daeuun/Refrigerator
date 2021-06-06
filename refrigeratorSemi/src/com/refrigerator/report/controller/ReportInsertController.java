@@ -1,26 +1,23 @@
-package com.refrigerator.scrap.controller;
+package com.refrigerator.report.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.refrigerator.scrap.model.service.ScrapService;
-
 /**
- * Servlet implementation class ScrapInsertController
+ * Servlet implementation class ReportInsertController
  */
-@WebServlet("/insert.scrap")
-public class ScrapInsertController extends HttpServlet {
+@WebServlet("/insertRecipe.repo")
+public class ReportInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScrapInsertController() {
+    public ReportInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +26,8 @@ public class ScrapInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 수정하기
-		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		
-		int result = new ScrapService().insertScrap(recipeNo, userNo);
-		
-		if(result>0) {
-			response.sendRedirect(request.getContextPath() + "/detail.recipe?rno=" + recipeNo);
-		}else {
-			
-			request.setAttribute("errorMsg", "찜하기에 실패하였습니다.");
-			request.getRequestDispatcher("views/common/user/errerPage.jsp").forward(request, response);
-			
-		}
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
