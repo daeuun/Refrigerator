@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.scrap.model.service.ScrapService;
 
 /**
+ * @author leeyeji
  * Servlet implementation class ScrapInsertController
  */
 @WebServlet("/insert.scrap")
@@ -37,10 +38,12 @@ public class ScrapInsertController extends HttpServlet {
 		int result = new ScrapService().insertScrap(recipeNo, userNo);
 		
 		if(result>0) {
+			
+			request.getSession().setAttribute("alertMsg", " 이 레피시를 찜했습니다! ");
 			response.sendRedirect(request.getContextPath() + "/detail.recipe?rno=" + recipeNo);
+			
 		}else {
 			
-			request.setAttribute("errorMsg", "찜하기에 실패하였습니다.");
 			request.getRequestDispatcher("views/common/user/errerPage.jsp").forward(request, response);
 			
 		}

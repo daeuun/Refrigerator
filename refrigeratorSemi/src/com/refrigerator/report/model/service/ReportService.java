@@ -53,6 +53,21 @@ public class ReportService {
 		return result;
 	}
 	
+	/**
+	 * @author leeyeji
+	 * 레시피 신고하기
+	 */
+	public int insertRecipeReport(int userNo, int recipeNo, String reportRe) {
+		Connection conn = getConnection();
+		int result = new ReportDao().insertRecipeReport(conn, userNo, recipeNo, reportRe);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 	
 }

@@ -119,8 +119,32 @@ public class ReportDao {
 		return result;
 	}
 	
-	
-	
+	/**
+	 * @author leeyeji
+	 * 레시피 신고하기
+	 */
+	public int insertRecipeReport(Connection conn, int userNo, 
+									int recipeNo, String reportRe) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertRecipeReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, recipeNo);
+			pstmt.setString(3, reportRe);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 

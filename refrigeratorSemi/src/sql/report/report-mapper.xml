@@ -44,6 +44,20 @@
 		 WHERE USER_NO = ?
 	</entry>
 	
-	
+	<!-- @author leeyeji -->
+	<!-- 레시피 신고하기 -->
+	<entry key="insertRecipeReport">
+		INSERT
+  		  INTO REPORT
+		VALUES 
+		     (
+		       SEQ_REPNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , 2
+		     )
+	</entry>
 
 </properties>

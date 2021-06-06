@@ -412,7 +412,7 @@
 	                        <!-- Modal Header -->
 	                        <div class="modal-header">
 	                        <div>
-					        	<input type="hidden" name="userId" value="<%=loginUser.getUserNo()%>">
+					        	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
 					            <input type="hidden" name="recipeNo" value="<%=rc.getRecipeNo()%>">
 	                            <span style="text-align: center;"><b>레시피</b> 신고</span>
 	                        </div>
