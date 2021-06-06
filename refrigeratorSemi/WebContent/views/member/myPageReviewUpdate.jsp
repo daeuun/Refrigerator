@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="com.refrigerator.common.model.vo.PageInfo,
-				 com.refrigerator.recipe.model.vo.Review,
+				 com.refrigerator.review.model.vo.Review,
 				 java.util.ArrayList"%>
 <%
 
@@ -34,7 +34,7 @@ int maxPage = pi.getMaxPage();
 }
 
 .menu-title {
-	width: 745px;
+	width: 750px;
 	font-size: 18px;
 	color: rgb(0, 102, 51);
 	font-weight: 600;
@@ -79,6 +79,38 @@ button {
 }
 
 /*리뷰 수정 모달영역*/
+.review-img{
+	width:150px;
+	height:150px;
+}
+#inputFile{
+	width:300px;
+	height:40px;
+	margin-bottom:20px;
+	font-size:14px;
+} 
+
+#review-content{
+	width:300px;
+	height:60px;
+}
+
+#btn-modify{
+	background: rgb(0, 102, 51);
+	color:white;
+}
+
+input[type=file]{
+	display:none;
+}
+
+.guide{
+	font-size:14px;
+}
+
+.modify-title{
+	font-size: 22px;
+}
 
 
 </style>
@@ -112,6 +144,7 @@ button {
 						<th width="240">제목</th>
 						<th width="100">별점</th>
 						<th width="130">작성일</th>
+						<th width="50"></th>
 					</tr>
 				</thead>
 
@@ -132,14 +165,14 @@ button {
 						<tr>
 							<td><input type="checkbox" name="deleteCheck<%=i + 1%>"
 								value="<%=list.get(i).getReviewNo()%>"></td>
-							<td><img src="<%=list.get(i).getReviewImg()%>" width="100"
+							<td><img src="<%=list.get(i).getImgName()%>" width="100"
 								height="100"></td>
 							<td><%=list.get(i).getReviewNo()%></td>
 							<td width="200"><%=list.get(i).getReviewContent()%></td>
 							<td>★<%=list.get(i).getStar()%></td>
 							<td><%=list.get(i).getModifyDate()%></td>
 							<td>
-								<button type="button" id="modify-btn" data-toggle="modal" data-target="#modify">수정</button>
+								<button type="button" id="modify-btn" data-toggle="modal" data-target="#modify" onclick="selectReview(<%=list.get(i).getReviewNo()%>);">수정</button>
 							</td>
 						</tr>
 						<%
@@ -161,16 +194,38 @@ button {
 
 									<!-- Modal body -->
 									<form action="update.rv" method="post" enctype="multipart/form-data">
-									<div class="modal-body" style="margin:auto">
-										<div><img class="review-img"></div>
-										<span>이 레시피의 별점은?</span>
-									</div>
-									<input type="file" >
-
-									<div class="modal-btn">
-										<button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</a> 
-										<button type="submit" class="btn btn-danger btn-sm">수정</a>
-									</div>
+										<div class="modal-body" align="center">
+											<div><img class="review-img"></div>
+											<br>
+											<span class="modify-title">이 레시피의 별점은?</span>
+											<br>
+											<br>
+											<select name="starPoint" id="star-point" required style="maring:atuo">
+												<option value="0.5">0.5</option>
+												<option value="1">1</option>
+												<option value="1.5">1.5</option>
+												<option value="2">2</option>
+												<option value="2.5">2.5</option>
+												<option value="3">3</option>
+												<option value="3.5">3.5</option>
+												<option value="4">4</option>
+												<option value="4.5">4.5</option>
+												<option value="5">5</option>
+											</select>
+											
+											<br><br>
+											
+											<button type="button" id="inputFile">사진 첨부하기</button>
+											<p class="guide">한 장이라도 좋아요<br>완성된 요리를 자랑해주세요</p>
+											
+											<textarea id="review-content" required style="resize:none;" min="20" placeholder="자세한 리뷰는 다른 쉐프님들께 큰 도움이 될 거에요 (최소20자)"></textarea>
+										</div>
+										<input type="file" name="reviewImg">
+	
+										<div class="modal-btn">
+											<button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</a> 
+											<button type="submit" class="btn btn-sm" id="btn-modify">수정</a>
+										</div>
 									</form>
 
 								</div>
@@ -267,6 +322,28 @@ button {
 	
 	
 	<script>
+	
+		// 수정 모달 데이터 가져오기
+		function selectReview(rvNo){
+			
+			$.ajax({
+				url:"jqAjaxSelect.rv",
+				data:{reviewNo:rvNo},
+				success:function(review){
+					console.log(review);
+					$("#review-content").text(review.reviewContent);
+					$("#star-point").children("option[value=" + review.star + "]").prop("selected", true);
+					$(".review-img").prop("src", review.imgName);
+					
+				},errorPage:function(){
+					
+				}
+			})
+						
+						
+		}
+	
+		// 체크박스 전체선택 기능
 		$(function() {
 			var $xx = $(".review-table input[type=checkbox]");
 
@@ -283,42 +360,7 @@ button {
 				console.log($xx);
 			})
 		})
-		/*
-		var on1 = 0;
-		var on2 = 0;
-		var on3 = 0;
-
-		$(document).on("change", "input[class=delete-checkbox1]", function() {
-			if (on1 = 0) {
-				$("input[name=deleteRno1]").val($(this).val());
-				on1++;
-			} else {
-				$("input[name=deleteRno1]").val(null);
-				on1--;
-			}
-		})
-
-		$(document).on("change", "input[class=delete-checkbox2]", function() {
-			if (on2 = 0) {
-				$("input[name=deleteRno2]").val($(this).val());
-				on2++;
-			} else {
-				$("input[name=deleteRno2]").val(null);
-				on2--;
-			}
-		})
-
-		$(document).on("change", "input[class=delete-checkbox3]", function() {
-			console.log(on3);
-			if (on3 = 1) {
-				$("input[name=deleteRno3]").val(null);
-				on3--;
-			} else if (on3 = 0) {
-				$("input[name=deleteRno3]").val($(this).val());
-				on3++;
-			}
-		})
-		*/
+		
 	</script>
 
 
