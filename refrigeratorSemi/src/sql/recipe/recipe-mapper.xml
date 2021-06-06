@@ -603,5 +603,30 @@
 	        BY RECIPE_ORDER_NO ASC   
 	</entry>
 
+
+	<!-- @author seong -->
+	<!-- 레시피 상세 페이지에서 작성된 리뷰의 총 갯수 조회 -->
+	<entry key="selectReviewCount">
+	
+	SELECT COUNT (*) REVIEWCOUNT
+	FROM REVIEW
+	WHERE RECIPE_NO = ?
+	
+	</entry>
+	
+	
+	<!-- @author seong -->
+	<!-- 레시피 상세 페이지에서 작성된 댓글의 총 갯수 조회 -->
+	<entry key="selectReplyCount">
+	
+	SELECT COUNT (*) REPLYCOUNT
+	FROM REPLY
+	WHERE RECIPE_NO = ?
+	
+	</entry>
+
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
+	
 	
 </properties>
