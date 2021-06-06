@@ -170,6 +170,19 @@ public class Recipe {
 		this.mainImg = mainImg;
 		this.ingreImg = ingreImg;
 	}
+	
+	/** 메인페이지 - 레시피 정보 조회
+	 * @author daeun 
+	 */
+	public Recipe(int recipeNo, String recipeWriter, String recipeTitle, int count, int likeCount) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeWriter = recipeWriter;
+		this.recipeTitle = recipeTitle;
+		this.count = count;
+		this.likeCount = likeCount;
+		
+	}
 
 	public int getRecipeNo() {
 		return recipeNo;

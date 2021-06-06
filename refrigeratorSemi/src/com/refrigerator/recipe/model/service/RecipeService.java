@@ -319,6 +319,16 @@ public class RecipeService {
 		return list;
 	}
 	
+	/** 메인페이지 - 레시피 정보 조회
+	 * @author daeun
+	 */
+	public ArrayList<Recipe> selectMainRecipe(){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectMainRecipe(conn);
+		close(conn);
+		return list;
+	}
+	
 	
 	
 	/** 마이페이지 내 레시피 목록 갯수 구하는 메소드 

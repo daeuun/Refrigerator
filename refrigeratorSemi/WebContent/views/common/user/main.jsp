@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, 
+				 com.refrigerator.recipe.model.vo.Recipe,
+				 com.refrigerator.member.model.vo.Member"%>
+   
+<%
+	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -373,10 +380,63 @@
         }
 
 
-        /**********************슬라이더테스트*******************************/
+        /********************** 슬라이더 *******************************/
         .carousel-inner img {
             width: 100%;
             height: 100%;
+        }
+        .home-chefs-list-wrap{ /*배경*/
+            margin: auto;
+            border-top-left-radius: 50px ;
+            border-top-right-radius: 50px;
+            background-color: #e4dfce; 
+            width: 1000px; 
+            height: 400px;
+        }
+        .slide{
+            width: 1000px;
+        }
+        .carousel-item{ /* 셰프모음페이지 */
+            display: inline-block;
+            width: 600px;
+            height: 400px;
+            left: 150px;
+        }
+        .carousel-item>ul>li{
+            display: inline-block;
+            width: 200px;
+            height: 350px;
+            margin: 0 10px;
+            text-align: center;
+            line-height: 170px;
+        }
+        .home-chef>li{
+            text-align: center;
+        }
+        .home-chef>li>a{
+            display: table-cell;
+            width: 20px;
+        }
+        .home-chef_image{
+            display: inline-block;
+            margin: auto;
+        }
+        .carousel-item span{
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+        #chefFriend1{
+            background-color: #ffffff;
+            margin: 10px;
+            padding: 20x;
+            border-radius: 4px;
+            font-size: 20px;
+            color: #999;
+        }
+        #chefFriend1:hover{
+            text-decoration: none;
+            cursor: pointer;
         }
         
     </style>
@@ -479,7 +539,9 @@
                 
 
             </div> 
-                
+            
+            
+        
 
                 
 
@@ -593,6 +655,19 @@
                 </ul>
             </nav>
 
+            <script>
+
+                $(function() {       
+        
+                    $(".home-viewRecipe").click(function() {
+        
+                        location.href = "<%=contextPath%>/detail.recipe?rno=" + $(this).children().eq(0).val();
+                    })
+        
+                })
+        
+            </script>
+
             <!-- 3. 오늘의 레시피 == 조회수 높은 레시피 -->
             <section class="home-section home-view-recipe"> 
                 <header class="home-section_header">
@@ -603,7 +678,7 @@
                 <div>
 
                     <div class="home-section_more"> <!-- 더보기 버튼-->
-                        <a class="home-section_more-btn" href="<%=contextPath %>/recipeView.main?currentPage=1">더보기</a>
+                        <a class="home-section_more-btn" href="오늘의레시피 목록페이지 경로">더보기</a>
                     </div>
 
                     <!-- 레시피 전체 목록 -->
@@ -611,6 +686,7 @@
 
                         <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
+                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -623,8 +699,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                        요즘 유행하는 로제 떡볶이? <br>
-                                        로제 스파게티 소스로 충분해!
+                                            <%= list.getRecipeTitle() %>
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -635,7 +710,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -645,8 +720,9 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (1) -->
+                        <!-- 개별 레시피 (2) -->
                         <div class="home-viewRecipe"> 
+                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -659,8 +735,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                        요즘 유행하는 로제 떡볶이? <br>
-                                        로제 스파게티 소스로 충분해!
+                                            <%= list.getRecipeTitle() %>
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -671,7 +746,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -681,8 +756,9 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (1) -->
+                        <!-- 개별 레시피 (3) -->
                         <div class="home-viewRecipe"> 
+                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -695,8 +771,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                        요즘 유행하는 로제 떡볶이? <br>
-                                        로제 스파게티 소스로 충분해!
+                                            <%= list.getRecipeTitle() %>
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -707,7 +782,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -717,8 +792,9 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (1) -->
+                        <!-- 개별 레시피 (4) -->
                         <div class="home-viewRecipe"> 
+                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -731,8 +807,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                        요즘 유행하는 로제 떡볶이? <br>
-                                        로제 스파게티 소스로 충분해!
+                                            <%= list.getRecipeTitle() %>
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -743,7 +818,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -753,8 +828,9 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (1) -->
+                        <!-- 개별 레시피 (5) -->
                         <div class="home-viewRecipe"> 
+                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -767,8 +843,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                        요즘 유행하는 로제 떡볶이? <br>
-                                        로제 스파게티 소스로 충분해!
+                                            <%= list.getRecipeTitle() %>
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -779,7 +854,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -789,8 +864,9 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (1) -->
+                        <!-- 개별 레시피 (6) -->
                         <div class="home-viewRecipe"> 
+                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -803,8 +879,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                        요즘 유행하는 로제 떡볶이? <br>
-                                        로제 스파게티 소스로 충분해!
+                                            <%= list.getRecipeTitle() %>
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -815,7 +890,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
 
                                         </div>
@@ -847,12 +922,12 @@
                                 <div>
                                     <div class="home-starRecipe_content">
                                         <div class="home-starRecipe_content-title">
-                                            초간단 레몬에이드 만들기
+                                            <%= list.getRecipeTitle() %>
                                         </div>
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
                                         </div>
                                     </div>
@@ -872,12 +947,12 @@
                                 <div>
                                     <div class="home-starRecipe_content">
                                         <div class="home-starRecipe_content-title">
-                                            초간단 레몬에이드 만들기
+                                            <%= list.getRecipeTitle() %>
                                         </div>
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                                유저닉네임~~
+                                                <%= list.getRecipeWriter() %>
                                             </span>
                                         </div>
                                     </div>
@@ -904,127 +979,113 @@
                 </header>
                 <div class="home-chefs-list-wrap">
 
-                    <div class="home-chef-wrap">
+                    <div id="demo" class="carousel slide" data-ride="carousel" >
 
-                        <!--쉐프모음페이지1-->
-                        <div class="home-chef">
-                            <li> <!-- 쉐프(1) -->
-                                <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:10px;" tabindex="0">
-                                    <img src="쉐프이미지경로">
-                                </a>
-                                <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
-                                    쉐프 닉네임~~~~
-                                </span>
-                                <a href="" id="chefFriend1" class="home-chef_subBtn">
-                                    구독하기
-                                </a>
-                            </li>
-                            <li> <!-- 쉐프(2) -->
-                                <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:10px;" tabindex="0">
-                                    <img src="쉐프이미지경로">
-                                </a>
-                                <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
-                                    쉐프 닉네임~~~~
-                                </span>
-                                <a href="" id="chefFriend1" class="home-chef_subBtn">
-                                    구독하기
-                                </a>
-                            </li>
-                            <li> <!-- 쉐프(3) -->
-                                <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:10px;" tabindex="0">
-                                    <img src="쉐프이미지경로">
-                                </a>
-                                <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
-                                    쉐프 닉네임~~~~
-                                </span>
-                                <a href="" id="chefFriend1" class="home-chef_subBtn">
-                                    구독하기
-                                </a>
-                            </li>
-                        </div>
+                        <!-- Indicators -->
+                        <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        </ul>
+                        
+                        <!-- The slideshow -->
+                        <div class="carousel-inner" style="list-style-type:none;">
+                            <div class="carousel-item active">
 
+                                <!--쉐프모음페이지1-->
+                                <ul class="home-chef-page">
+                                    <li> <!-- 쉐프(1) -->
+                                        <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
+                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                        </a>
+                                        <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
+                                            쉐프 닉네임
+                                        </span>
+                                        <a href="" id="chefFriend1" class="home-chef_subBtn">
+                                            구독
+                                        </a>
+                                    </li>
+                                    <li> <!-- 쉐프(2) -->
+                                        <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
+                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                        </a>
+                                        <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
+                                            쉐프 닉네임
+                                        </span>
+                                        <a href="" id="chefFriend1" class="home-chef_subBtn">
+                                            구독
+                                        </a>
+                                    </li>
+                                    <li> <!-- 쉐프(3) -->
+                                        <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
+                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                        </a>
+                                        <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
+                                            쉐프 닉네임
+                                        </span>
+                                        <a href="" id="chefFriend1" class="home-chef_subBtn">
+                                            구독
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                        <!--쉐프모음페이지2-->
-                        <div class="home-chef">
-                            <li> <!-- 쉐프(4) -->
-                                <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:10px;" tabindex="0">
-                                    <img src="쉐프이미지경로">
-                                </a>
-                                <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
-                                    쉐프 닉네임~~~~
-                                </span>
-                                <a href="" id="chefFriend1" class="home-chef_subBtn">
-                                    구독하기
-                                </a>
-                            </li>
-                            <li> <!-- 쉐프(5) -->
-                                <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:10px;" tabindex="0">
-                                    <img src="쉐프이미지경로">
-                                </a>
-                                <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
-                                    쉐프 닉네임~~~~
-                                </span>
-                                <a href="" id="chefFriend1" class="home-chef_subBtn">
-                                    구독하기
-                                </a>
-                            </li>
-                            <li> <!-- 쉐프(6) -->
-                                <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:10px;" tabindex="0">
-                                    <img src="쉐프이미지경로">
-                                </a>
-                                <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
-                                    쉐프 닉네임~~~~
-                                </span>
-                                <a href="" id="chefFriend1" class="home-chef_subBtn">
-                                    구독하기
-                                </a>
-                            </li>
+                            <div class="carousel-item">
+
+                                <!--쉐프모음페이지2-->
+                                <ul class="home-chef-page">
+                                    <li> <!-- 쉐프(4) -->
+                                        <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding: 30px 15px 0 15px;" tabindex="0">
+                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                        </a>
+                                        <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
+                                            쉐프 닉네임
+                                        </span>
+                                        <a href="" id="chefFriend1" class="home-chef_subBtn">
+                                            구독
+                                        </a>
+                                    </li>
+                                    <li> <!-- 쉐프(5) -->
+                                        <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
+                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                        </a>
+                                        <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
+                                            쉐프 닉네임
+                                        </span>
+                                        <a href="" id="chefFriend1" class="home-chef_subBtn">
+                                            구독
+                                        </a>
+                                    </li>
+                                    <li> <!-- 쉐프(6) -->
+                                        <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
+                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                        </a>
+                                        <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
+                                            쉐프 닉네임
+                                        </span>
+                                        <a href="" id="chefFriend1" class="home-chef_subBtn">
+                                            구독
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         
-                    </div>
-                </div>
-
-                
-                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                    <!-- Indicators -->
-                    <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    
-                    <!-- The slideshow -->
-                    <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="la.jpg" alt="Los Angeles" width="1100" height="500">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="ny.jpg" alt="New York" width="1100" height="500">
-                    </div>
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        </a>
                     </div>
                     
-                    <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    </a>
                 </div>
 
-
-
-
-				<%@ include file="footer.jsp" %>
             </section>
         </div>
     </div>
-
-
+    
+    
 
 
 </body>
