@@ -321,7 +321,7 @@
         <input type="hidden" id="orderCount" name="orderCount" value="1">
 
             <div class="enroll-form-title">
-                &nbsp;&nbsp;&nbsp;레시피 등록
+                &nbsp;&nbsp;&nbsp;레시피 수정
             </div>
             
             <div class="enroll-form1">

@@ -6,6 +6,7 @@
    
 <%
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+
 %>
 
 <!DOCTYPE html>
@@ -442,7 +443,6 @@
     </style>
 </head>
 <body>
-
 	<%@ include file="menubar.jsp" %>
     
     <div class="home-outer">

@@ -4,12 +4,11 @@
 				 java.util.ArrayList, 
 				 com.refrigerator.recipe.model.vo.Recipe,
 				 com.refrigerator.member.model.vo.Member"%>
+
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	//ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
-	
-	
 %>
 
 <!DOCTYPE html>
@@ -76,7 +75,12 @@
     }
     
     .navigation-secondary_menu {
-        padding: 0 0 0 320px;
+        margin: 0 0 0 320px;
+        
+		/* Jaewon */
+		display:flex;
+		justify-content:flex-start;
+        width:425px;      
     }
     .navigation-secondary_menu_item{
         position: relative;
@@ -84,12 +88,19 @@
         display: inline-block;
         cursor: pointer;
         font-size: 15px;
-        margin: 8px 10px;
+        margin: 8px 0px;
         font-weight: 700;
         padding: 6px 20px;
         color: #424242;
     }
     
+    /* Jaewon 각각 메뉴들 위치가 바뀌었을시의 위치잡기용 */
+    /*.menu{position: absolute;}*/
+    .menu1{width:55px;}
+    .menu2{width:100px;}
+    .menu3{width:85px;}
+    .menu4{width:85px;}
+    .menu5{width:100px;} 
     
     .navigation-first_logo, .navigation-search{
         text-align: center;
@@ -237,11 +248,11 @@
 
                     <!--메뉴바-->
                     <nav class="navigation-secondary_menu">
-                        <a class="navigation-secondary_menu_item">홈</a>
-                        <a class="navigation-secondary_menu_item">카테고리</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.event?currentPage=1">이벤트</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/recipeList.recipe?currentPage=1">레시피</a>
-                        <a class="navigation-secondary_menu_item" href="<%=contextPath%>/list.no?currentPage=1">고객센터</a>
+                        <a class="navigation-secondary_menu_item menu menu1">홈</a>
+                        <a class="navigation-secondary_menu_item menu menu2">카테고리</a>
+                        <a class="navigation-secondary_menu_item menu menu3" href="<%=contextPath%>/list.event?currentPage=1">이벤트</a>
+                        <a class="navigation-secondary_menu_item menu menu4" href="<%=contextPath%>/recipeList.recipe?currentPage=1">레시피</a>
+                        <a class="navigation-secondary_menu_item menu menu5" href="<%=contextPath%>/list.no?currentPage=1">고객센터</a>
                     </nav>
 
                     <!--로그인-->
