@@ -344,7 +344,7 @@ public class RecipeDao{
 			while(rset.next()) {
 				list.add(new Recipe(rset.getInt("recipe_no"),
 								    rset.getInt("user_no"),
-								    rset.getString("user_id"),
+								    rset.getString("nickname"),
 								    rset.getString("recipe_title"),
 								    rset.getString("recipe_intro"),
 								    rset.getDouble("avrg_star_point"),

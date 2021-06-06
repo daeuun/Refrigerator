@@ -236,7 +236,7 @@
 				        SELECT
 				               RECIPE_NO
 				             , USER_NO
-		                     , USER_ID
+		                     , NICKNAME
                              , RECIPE_TITLE
                              , RECIPE_INTRO
                              , AVRG_STAR_POINT

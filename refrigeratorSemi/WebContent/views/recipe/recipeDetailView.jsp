@@ -370,12 +370,12 @@
 
 
         <br>
-
-        <div align="right" class="report-user">
-            <!--로그인한 사용자만 신고할 수 있도록-->
-            <a href="" class="report-user-btn">신고하기</a>
-        </div>
-
+		<% if(loginUser != null) { %>
+	        <div align="right" class="report-user">
+	            <!--로그인한 사용자만 신고할 수 있도록-->
+	            <a href="" class="report-user-btn">신고하기</a>
+	        </div>
+		<%} %>
 
         
         <hr>
@@ -621,9 +621,11 @@
 	                        </form>
 	                    </div>
                     <% } %>
+                    
+                     <hr>
                 </div>
 
-                <hr>
+               
                 <br>
                 
                 
@@ -680,10 +682,13 @@
             <div class="reply-area" >
 
                 <!--댓글 추가 및 삭제시 댓글 숫자 증감-->
-                <div class="area-header"><h5>댓글 <b>2</b></h5></div>
+                <div class="area-header"><h5>댓글 <b>2</b></h5>
+                
+                <hr>
+                </div>
                 
 
-                <hr>
+                
                 <br>
                 <!--댓글 입력하는 영역-->
                 
@@ -699,24 +704,39 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                 <% if(loginUser != null) { %>
-                                    <td style="width: 80%;">
-                                        <div class="form-group">
-                                        <label for="usr"></label>
-                                        <input type="text" class="form-control" id="usr" placeholder="소중한 레시피에 쉐프님의 멋진 댓글을 남겨주세요 :) "  style="height: 30px;" name="<%=loginUser.getUserId()%>">
-                                        </div>
-                                    </td>
-                                    <td><button class="btn btn-sm btn-success" onclick="insertReply();">등록</button></td>
+                            		 <% if(loginUser != null) { %>
+                            		 
+	                                    <td style="width: 80%;">
+	                                        <div class="form-group">
+	                                        <label for="usr"></label>
+	                                        <input type="text" class="form-control" id="usr" placeholder="소중한 레시피에 쉐프님의 멋진 댓글을 남겨주세요 :) "  style="height: 30px;" name="<%=loginUser.getUserId()%>">
+	                                        </div>
+	                                    </td>
+	                                    
+	                                    <td><button class="btn btn-sm btn-success" onclick="insertReply();">등록</button></td>
+                                    <%}  else {%>
+                                    	
+	                                     <td style="width: 80%;">
+	                                        <div class="form-group">
+	                                        <label for="usr"></label>
+	                                        <input type="text" class="form-control" id="usr" placeholder="댓글은 회원 가입 후에 작성할 수 있어요! "  style="height: 30px;" disabled>
+	                                        </div>
+	                                    </td>
+	                                     
+	                                    <td><button class="btn btn-sm btn-success" onclick="insertReply();" disabled>등록</button></td>
+                                   <%} %>
+                                    
                                 </tr>
-                            	<%} %>
+                            	
+                            	
                             </table>
                             
                             
-                    
+                    	
                     </div>
                 
 
-                <br>
+               
                 <!--댓글 조회하는 전체 영역-->
 
                 <div id="reply-list-area">
