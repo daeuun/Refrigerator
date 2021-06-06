@@ -72,6 +72,10 @@
         display: flex;
         justify-content: center; 
         height: 50px;
+        
+        /*Jaewon */
+   		position:relative;
+        
     }
     
     .navigation-secondary_menu {
@@ -207,6 +211,58 @@
         color: #009764;
         cursor: pointer;
     }
+    
+    /*Jaewon */
+    /* 카테고리 클릭시 열리는 세부카테고리 div */
+     #inner-category{
+         width: 900px; 
+         height: 360px;
+         border: 1px solid lightgreen;
+         border-top: none;
+         border-radius: 3px;
+         margin-top: 1px;
+         display: none;
+         position: absolute;
+         transform: translateY(50px);
+         z-index: 10000;
+         background-color: rgba(255,255,255,0.95);
+     }
+
+     /* 세부카테고리 안에 테이블 스타일 */
+     #inner-category > table{
+         padding-top: 10px;
+         padding-left: 5px;
+     }
+
+     /* 세부카테고리 각각의 셀 스타일 */
+     #inner-category tr, #inner-category a{
+         color: black;
+         font-size: 14px;
+         line-height: 35px;
+         text-align: center;
+         text-decoration: none;
+         }
+
+     #inner-category th{
+         color: tomato;
+         border: 1px solid green;
+         border-radius: 10px;
+     }
+
+     /* 하단에 나가기 버튼 */
+     #inner-category button{
+         bottom: 10px;
+         position: absolute;
+         left: 50%;
+         transform: translateX(-50%);
+         border-radius: 5px;
+         background-color: rgb(0,151,100);
+         color: white;
+         border:none;
+		 font-weight:bold;         
+     }   
+    
+    
 </style>
 </head>
 <body>
@@ -260,6 +316,8 @@
 								$(eventMenu).css('order',list[2].menuOrder)
 								$(recipeMenu).css('order',list[3].menuOrder)
 								$(csMenu).css('order',list[4].menuOrder)
+								
+								$("#inner-category").css("transform","translate(-50px,50px)");
 							},
 							error:function(){
 								console.log("ajax통신실패");
@@ -272,7 +330,42 @@
                     <!--메뉴바-->
                     <nav class="navigation-secondary_menu">
                         <a class="navigation-secondary_menu_item menu menu1">홈</a>
-                        <a class="navigation-secondary_menu_item menu menu2">카테고리</a>
+                        <a href="javascript:showDiv()" class="navigation-secondary_menu_item menu menu2">카테고리</a>
+                       	<!-- Jaewon -->
+                        <div id="inner-category" align="center">
+                        <table>
+                            <!-- 어짜피 카테고리명 재료명을 조회해와서 뿌려줘야한다.!!! 
+					                                즉 상단에 스크립틀릿으로 카테고리 번호 카테고리명 재료명을 가져올것이다. 
+					                                이를 출력문으로 뿌려줄때에!! 
+					                                servlet 하나 만들어두고 ! 해당 카테고리 number를 넘기는 식으로 하면된다.  
+					                                위치는 잡아줬다. 아래는 반복문으로 만들어줄것이다. 
+					                                ★ 다만 좀 수정봐야하는게 대분류가 몇개가 될지는 아직 미지수이다 이부분 CSS처리해줘야한다.  
+					                            -->
+	                            <tr>
+	                                <th width=120 >육류</th>
+	                                <td width=86><a href="">소고기</a></td>
+	                                <td width=86><a href="">돼지고기</a></td> 
+	                                <td width=86><a href="">닭고기</a></td>
+	                                <td width=86><a href="">양고기</a></td> 
+	                                <td width=86><a href="">말고기</a></td>
+	                                <td width=86><a href="">리코타치즈</a></td>
+	                                <td width=86><a href="">다섯글자임</a></td>
+	                                <td width=86><a href="">예시예시</a>
+	                                <td width=86><a href="">예시예시</a></td>
+	                                <td width=86><a href="">예시예시</a></td>
+	                            </tr>
+	                        </table>
+	                        <button onclick="showDiv()">닫기버튼</button>
+	                    </div>               
+                        <script>
+			                // 세부카테고리페이지 열고닫히기 용 스크립트
+			                function showDiv() {
+			                    var categoryArea = document.getElementById("inner-category");
+			                    categoryArea.style.display =(categoryArea.style.display != 'block'?"block":"none"); 
+			                }
+			            </script>
+                       	<!-- Jaewon 끝-->
+	                        
                         <a class="navigation-secondary_menu_item menu menu3" href="<%=contextPath%>/list.event?currentPage=1">이벤트</a>
                         <a class="navigation-secondary_menu_item menu menu4" href="<%=contextPath%>/recipeList.recipe?currentPage=1">레시피</a>
                         <a class="navigation-secondary_menu_item menu menu5" href="<%=contextPath%>/list.no?currentPage=1">고객센터</a>
