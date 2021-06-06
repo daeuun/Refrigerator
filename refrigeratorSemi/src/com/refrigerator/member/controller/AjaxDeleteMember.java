@@ -39,9 +39,18 @@ public class AjaxDeleteMember extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		int result = new MemberService().deleteUserMember(userNo, userPwd);
-	
-		response.setContentType("text/html; charset=utf-8");
-		response.getWriter().print(result);
+		
+		if(result > 0) {
+			
+			request.getSession().invalidate();
+			response.setContentType("text/html; charset=utf-8");
+			response.getWriter().print(result);
+			
+		}else {
+			
+			response.setContentType("text/html; charset=utf-8");
+			response.getWriter().print(result);
+		}
 		
 	}
 

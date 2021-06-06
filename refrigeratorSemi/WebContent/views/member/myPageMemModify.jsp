@@ -293,13 +293,14 @@
             			data:{userPwd:$("#userPwd").val()},
             			success: function(result){
             				
-            				if (result > 0){
-								
+            				if(result > 0){
+            					
             					location.href= "<%=contextPath%>";
             					
             				}else{
-            					
+								
             					alert("비밀번호가 일치 하지 않습니다. 다시 입력해주세요.");
+            					
             				}
             				
             			},error:function(){
