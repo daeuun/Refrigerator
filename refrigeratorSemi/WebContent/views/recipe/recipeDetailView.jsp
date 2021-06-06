@@ -538,7 +538,7 @@
                 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <select name="servings" id="select-servings" onchange="calculator();">
+                            <select name="servings" id="select-servings">
 
                                 <option value="1" selected>1명</option>
                                 <option value="2">2명</option>
@@ -548,14 +548,21 @@
                             
                             </select>
 
-                            <button type="submit" class="btn btn-success btn-sm" onclick="calculator();" >확인</button>
+                            <button type="button" id="calculator" data-dismiss="modal" class="btn btn-success btn-sm" onclick="calculator();" >확인</button>
                             
                           
                             <script>
 	                            
 	                            function calculator(){
-	                                console.log($("#select-servings").children("option:selected").val());
-	                            };
+	                                var servings = $("#select-servings").children("option:selected").val();
+	                                
+	                                for(var i=0; i<<%=ingre.size()%>;i++) {
+	                                   var la = $("#la" + i).text();
+	                                   
+	                                   $("#la" + i).text(la*servings);
+	                                   
+	                                }
+	                            }
 
                             </script>
 
