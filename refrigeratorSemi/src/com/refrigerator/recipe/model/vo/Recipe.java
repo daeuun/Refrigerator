@@ -12,7 +12,7 @@ public class Recipe {
 	private String recipeIntro;
 	private int severalServings; 
 	private int cookingTime;
-	private double avrgStarPoint; 
+	private double avrgStarPoint; 	
 	private int count;
 	private int likeCount;
 	private int scrapCount;

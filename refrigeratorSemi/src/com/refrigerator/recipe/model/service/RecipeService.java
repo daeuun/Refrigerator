@@ -398,4 +398,35 @@ public class RecipeService {
 	}
 
 	//---------------------------------------------------------------------------
+
+
+	/**
+	 * 레시피 상세 페이지에서 작성된 리뷰의 총 갯수 조회
+	 * @author seong
+	 * @date 6/6
+	 */
+	
+	public int selectReviewCount(int recipeNo) {
+		Connection conn = getConnection();
+		int reviewCount = new RecipeDao().selectReviewCount(conn, recipeNo);
+		close(conn);
+		return reviewCount;
+	}
+	
+	
+	/**
+	 * 레시피 상세 페이지에서 작성된 댓글의 총 갯수 조회
+	 * @author seong
+	 * @date 6/6
+	 */
+	
+	public int selectReplyCount(int recipeNo) {
+		Connection conn = getConnection();
+		int replyCount = new RecipeDao().selectReplyCount(conn, recipeNo);
+		close(conn);
+		return replyCount;
+	}
+	
+
+
 }

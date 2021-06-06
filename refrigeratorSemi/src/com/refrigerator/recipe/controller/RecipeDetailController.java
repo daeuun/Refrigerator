@@ -61,6 +61,13 @@ public class RecipeDetailController extends HttpServlet {
 		//재료 검색 버튼
 		ArrayList<IngreSearch> ingreSearch =  new RecipeService().selectIngreSearchList(recipeNo);
 		
+		// 리뷰의 총 갯수
+		int reviewCount = new RecipeService().selectReviewCount(recipeNo);
+		
+		// 댓글의 총 갯수
+		int replyCount = new RecipeService().selectReplyCount(recipeNo);
+		
+		
 		if(rc != null ) { // 레시피 정보가 있을 때 
 			
 			ArrayList<RecipeOrder> list = new RecipeService().selectRecipeOrder(recipeNo);
@@ -71,6 +78,8 @@ public class RecipeDetailController extends HttpServlet {
 			request.setAttribute("rc", rc);
 			request.setAttribute("recipeNo", recipeNo);
 			request.setAttribute("IngreSeach", ingreSearch);
+			request.setAttribute("reviewCount", reviewCount);
+			request.setAttribute("replyCount",replyCount);
 			request.getRequestDispatcher("views/recipe/recipeDetailView.jsp").forward(request, response);
 			
 		/*윗부분 작업중*/

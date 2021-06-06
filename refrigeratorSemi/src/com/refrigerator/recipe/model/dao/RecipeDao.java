@@ -1108,4 +1108,74 @@ public class RecipeDao{
 	
 //-------------------------------------------------------------------------------------		
 	
+	
+	
+	/**
+	 * 레시피 상세 페이지에서 작성된 리뷰의 총 갯수 조회
+	 * @author seong
+	 * @date 6/6
+	 */
+	
+	public int selectReviewCount(Connection conn, int recipeNo) {
+		
+		int reviewCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectReviewCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				reviewCount = rset.getInt("REVIEWCOUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return reviewCount;
+	}
+		
+	/**
+	 * 레시피 상세 페이지에서 작성된 댓글의 총 갯수 조회
+	 * @author seong
+	 * @date 6/6
+	 */
+	
+	public int selectReplyCount(Connection conn, int recipeNo) {
+		
+		int replyCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectReplyCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, recipeNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				replyCount = rset.getInt("REPLYCOUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return replyCount;
+	}
+	
+	
+	
+	
+	
 }
