@@ -75,12 +75,12 @@
     }
     
     .navigation-secondary_menu {
-        margin: 0 0 0 320px;
+        margin: 0 0 0 230px;
         
 		/* Jaewon */
 		display:flex;
-		justify-content:flex-start;
-        width:425px;      
+        width:520px;
+        justify-content:space-between;      
     }
     .navigation-secondary_menu_item{
         position: relative;
@@ -207,10 +207,6 @@
         color: #009764;
         cursor: pointer;
     }
-
-        
-    
-
 </style>
 </head>
 <body>
@@ -245,6 +241,33 @@
             <div class="navigation-secondary-warp">
                 
                 <div class="navigation-secondary_content"> <!--flex--> 
+                
+                	<!-- Jaewon 네브 메뉴 순서 변경 기능 삽입 완료 -->
+					<script>
+					$(function(){						
+						$.ajax({ 
+							url : "select.nav",
+							type:"post", 
+							success: function(list){ 
+								var homeMenu = $('a[class="navigation-secondary_menu_item menu menu1"]');
+								var categoryMenu = $("a[class='navigation-secondary_menu_item menu menu2']");
+								var eventMenu = $("a[class='navigation-secondary_menu_item menu menu3']");
+								var recipeMenu = $("a[class='navigation-secondary_menu_item menu menu4']");
+								var csMenu = $("a[class='navigation-secondary_menu_item menu menu5']");
+																
+								$(homeMenu).css('order',list[0].menuOrder)
+								$(categoryMenu).css('order',list[1].menuOrder)
+								$(eventMenu).css('order',list[2].menuOrder)
+								$(recipeMenu).css('order',list[3].menuOrder)
+								$(csMenu).css('order',list[4].menuOrder)
+							},
+							error:function(){
+								console.log("ajax통신실패");
+								alert("예상치 못한 오류로 인해 조회가 불가합니다 개발자에게 문의하세요")
+							}
+						})
+					})
+					</script>
 
                     <!--메뉴바-->
                     <nav class="navigation-secondary_menu">
