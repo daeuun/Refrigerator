@@ -2,14 +2,13 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	
-	<!-- @author daeun 
-		  회원가입 -->
 	<entry key="insertMember">
 		INSERT 
 		  INTO MEMBER
 		  (
 		    USER_NO
 		  , USER_ID
+		  , NICKNAME
 		  , USER_PWD
 		  , USER_NAME
 		  , BIRTHDAY
@@ -20,6 +19,7 @@
 		  VALUES
 		  (
 		    SEQ_UNO.NEXTVAL
+		  , ?
 		  , ?
 		  , ?
 		  , ?

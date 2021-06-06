@@ -18,7 +18,6 @@ public class MemberService {
 	
 	
 	/** 회원가입폼
-	 * @author daeun
 	 * @param m 회원가입 폼에 작성한 사용자가 입력한 값들을 담아놓은 Member객체
 	 * @return 처리된 행수
 	 */
@@ -28,6 +27,8 @@ public class MemberService {
 		Connection conn = getConnection();
 		
 		int result = new MemberDao().insertMember(conn, m);
+		
+		System.out.println(m);
 		
 		if(result > 0) {
 			commit(conn);

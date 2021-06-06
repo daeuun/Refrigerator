@@ -53,13 +53,13 @@ public class MemberInsertController extends HttpServlet {
 		// 3) 매개변수 생성자 이용해서 Member객체에 새로 담기
 		Member m = new Member(userId, nickname, userPwd, userName, birthday, gender, email, profileImg);
 		
+		// System.out.println(gender); 여기서는 제대로 담기는데..?
+		
 		// 4) 서비스 메소드 호출 & 결과받기 (처리된 행수)
 		int result = new MemberService().insertMember(m);
 		
 		// 5) 처리 결과를 가지고 사용자가 보게될 응답뷰 결정
 		if(result > 0) { // 성공 => url재요청 + index페이지
-			
-			HttpSession session = request.getSession();
 			
 			response.sendRedirect(request.getContextPath());
 			

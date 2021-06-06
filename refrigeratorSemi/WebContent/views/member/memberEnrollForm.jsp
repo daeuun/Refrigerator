@@ -156,6 +156,11 @@
                     <div class="email-input_emailCheck" id="emailCheck" name="emailCheck"></div>
                 </div>
 
+                <!-- 프로필사진 input hidden -->
+                <div class="sign-up_form-group"> 
+                    <input class="form-control" type="hidden" id="profileImg" name="profileImg" value="" required>
+                </div>
+
                 <button class="sign-up_submit" id="signUp_Submit" type="submit">회원가입</button>
 
             </form>
@@ -167,9 +172,11 @@
 
     <script>
 
-        // 아이디 닉네임에 담기
-        var nickname = $("#userId").val();
-        $('input[name=nickname]').attr('value', nickname);
+        
+        // 프로필 기본 경로 input hidden 프로필에 담기
+        var profileImg = "resources/image/user.png";
+        $('input[name=profileImg]').attr('value',profileImg);
+
         
         $("#userId").focusout(function() {
             
@@ -181,6 +188,8 @@
                 $("#idCheck").text("멋진 아이디네요!");
                 $("#userId").css("border", "");
                 $("#idCheck").css("color", "#009764");
+                // 아이디 input hidden 닉네임에 담기
+                $('input[name=nickname]').attr('value', userId);
                     
             }else {//검증을 통과 하지 못했다면 
                 $("#idCheck").text("5~20자의 영문 소문자, 숫자만 사용가능합니다.");
@@ -353,6 +362,8 @@
                 $("#emailCheck").css("color", "#009764");
             }
          });
+
+
 
     
 	</script>
