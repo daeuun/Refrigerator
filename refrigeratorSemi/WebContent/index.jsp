@@ -44,13 +44,6 @@
 	<h1>안녕하세요 테스트입니다.</h1>
 	
 
-	
-	<!-- @author leeyeji -->
-	<div><a href="<%=contextPath%>/list.no?currentPage=1">공지사항 페이지</a></div>
-	
-	<!-- @author leeyeji -->
-	<div><a href="<%=contextPath%>/list.faq?currentPage=1">FAQ 페이지</a></div>
-	
 	<!-- @author daeun -->
 	<div><a href="<%=contextPath%>/main">메인</a></div>
 
