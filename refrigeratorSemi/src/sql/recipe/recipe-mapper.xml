@@ -478,6 +478,7 @@
 	
 		SELECT 
 				INGREDIENT_SEARCH
+				,CATEGORY_SNO
 		        ,RECIPE_NO
 		        ,CATEGORY_NAME
 		        ,INGREDIENT_NAME

@@ -13,7 +13,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.refrigerator.common.MyFileRenamePolicy;
 import com.refrigerator.recipe.model.service.RecipeService;
-import com.refrigerator.recipe.model.vo.Review;
+import com.refrigerator.review.model.vo.Review;
 
 /**
  * @author seong

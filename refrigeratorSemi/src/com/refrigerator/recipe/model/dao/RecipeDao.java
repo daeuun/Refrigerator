@@ -752,11 +752,12 @@ public class RecipeDao{
 				
 				list.add(new IngreSearch(
 						
-					
 						rset.getInt("INGREDIENT_SEARCH")
 						,rset.getInt("RECIPE_NO")
+						,rset.getInt("CATEGORY_SNO")
 						,rset.getString("CATEGORY_NAME")
 						,rset.getString("INGREDIENT_NAME")
+						
 						
 						));
 				
@@ -770,6 +771,7 @@ public class RecipeDao{
 			close(pstmt);
 			
 		}
+		
 		
 		return list;
 		

@@ -21,6 +21,7 @@
 	int reviewCount = (int)request.getAttribute("reviewCount");
 	int replyCount = (int)request.getAttribute("replyCount");
 	
+	
 	Recipe rc = (Recipe)request.getAttribute("rc");
 	
 	/*menubar.jsp로 가져갈 구문*/
@@ -675,9 +676,10 @@
            
 	            <div class="ingredients-search">
 	            	<%for(IngreSearch in : ingreSearch) {%>
-	                <button type="button" class="btn btn-sm btn-success"><%=in.getIngreName()%></button>
+	                <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=<%=in.getCategorySno()%>" type="button" class="btn btn-sm btn-success"><%=in.getIngreName()%></a>
 	                <%} %>
 	            </div>
+
             <br><br>
 
            

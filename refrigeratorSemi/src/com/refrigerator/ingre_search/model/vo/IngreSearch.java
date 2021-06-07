@@ -44,6 +44,19 @@ public class IngreSearch {
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public IngreSearch(int ingredientSearch, int recipeNo, int categorySno, String categoryName, String ingreName) {
+		super();
+		this.ingredientSearch = ingredientSearch;
+		this.recipeNo = recipeNo;
+		this.categorySno = categorySno;
+		this.categoryName = categoryName;
+		this.ingreName = ingreName;
+	}
+
 
 	public String getCategoryName() {
 		return categoryName;
