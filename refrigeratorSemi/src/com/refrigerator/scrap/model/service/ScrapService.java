@@ -50,6 +50,25 @@ public class ScrapService {
 	}
 	
 	
+	/**
+	 * 스크랩 insert시 스크랩 카운트 증가
+	 * @author seong
+	 */
+	
+	public int increaseScrapCount(int recipeNo,int userNo) {
+		
+		Connection conn = getConnection();
+		int scrapCount = new ScrapDao().increaseScrapCount(conn,recipeNo,userNo);
+		if(scrapCount>0){
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return scrapCount;
+	}
+	
+	
 	
 	
 }

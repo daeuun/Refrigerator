@@ -148,11 +148,21 @@
 	</entry>
 	
 	<!-- Hee Rak-->
-	<!-- 회원 한명 프로필 조회 -->
+	<!-- 회원 한명 프로필 수정 -->
 	<entry key="updateProfile">
 		UPDATE MEMBER
 		   SET PROFILE_IMG = ?
 		     , NICKNAME = ?
+		     , INTRO = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<!-- Hee Rak-->
+	<!-- 회원 한명 프로필 수정(이미지x) -->
+	<entry key="updateProfileNoImg">
+		UPDATE MEMBER
+		   SET NICKNAME = ?
 		     , INTRO = ?
 		     , MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?

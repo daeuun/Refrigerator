@@ -47,6 +47,9 @@ public class DeleteFollowController extends HttpServlet {
 			
 		}else {
 			
+			request.setAttribute("errorTitle", "언팔로우 실패");
+			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);
+			
 		}
 	}
 

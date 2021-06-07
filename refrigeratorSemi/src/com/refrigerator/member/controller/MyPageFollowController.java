@@ -37,7 +37,12 @@ public class MyPageFollowController extends HttpServlet {
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
-		int userNo = loginUser.getUserNo();
+		int userNo = 0;
+		if(loginUser == null) {// 로그인 정보가 담겨있지 않다면 ! 로그인 페이지로 이동 
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
+		}else {// 로그인 정보 담겨있으면 ! member 수정쪽으로 이동 
+			userNo = loginUser.getUserNo();
+		}
 		// 페이징 처리
 		int listCount ;
 		int currentPage;

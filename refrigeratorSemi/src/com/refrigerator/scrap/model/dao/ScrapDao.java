@@ -117,6 +117,36 @@ public class ScrapDao {
 	}
 	
 	
+	/**
+	 * 스크랩 insert시 스크랩 카운트 증가
+	 * @author seong
+	 */
+	
+	public int increaseScrapCount(Connection conn, int recipeNo, int userNo) {
+		
+		int scrapCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseScrapCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, recipeNo);
+			scrapCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		return scrapCount;
+		
+	}
+	
+	
 	
 	
 }

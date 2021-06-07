@@ -59,7 +59,7 @@ public class ReviewUpdateController extends HttpServlet {
 			
 			if(result > 0) { // 요리후기 수정 정상처리
 				
-				request.setAttribute("alertMsg", "요리후기 수정 성공");
+				request.getSession().setAttribute("alertMsg", "요리후기 수정 성공");
 				response.sendRedirect(request.getContextPath() + "/review.me?currentPage=1");
 				
 			}else {

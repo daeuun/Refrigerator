@@ -321,15 +321,29 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateProfile");
+		String sql2 = prop.getProperty("updateProfileNoImg");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, m.getProfileImg());
-			pstmt.setString(2, m.getNickname());
-			pstmt.setString(3, m.getIntro());
-			pstmt.setInt(4, m.getUserNo());
+			if(!m.getProfileImg().equals("")) {
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, m.getProfileImg());
+				pstmt.setString(2, m.getNickname());
+				pstmt.setString(3, m.getIntro());
+				pstmt.setInt(4, m.getUserNo());
+				
+				result = pstmt.executeUpdate();
+			}else {
+				
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setString(1, m.getNickname());
+				pstmt.setString(2, m.getIntro());
+				pstmt.setInt(3, m.getUserNo());
+				
+				result = pstmt.executeUpdate();
+				
+			}
 			
-			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
