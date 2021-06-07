@@ -46,7 +46,14 @@ public class MyPageReviewController extends HttpServlet {
 		int endPage;
 		
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		int userNo = m.getUserNo();
+		int userNo = 0;
+		
+		if(m == null) {// 로그인 정보가 담겨있지 않다면 ! 로그인 페이지로 이동 
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
+		}else {// 로그인 정보 담겨있으면 
+			userNo = m.getUserNo();
+		}
+		
 		
 		listCount = new ReviewService().selectUserReviewListCount(userNo);
 		

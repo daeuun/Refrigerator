@@ -70,10 +70,13 @@ public class ProfileUpdateController extends HttpServlet {
 			
 			if(reulst > 0) {
 				
+				request.getSession().setAttribute("alertMsg", "프로필 수정 성공");
 				response.sendRedirect(request.getContextPath() + "/updateForm.pro");
 				
 			}else {
 				
+				request.setAttribute("errorTitle", "프로필 수정 실패");
+				request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);
 				
 			}
 			

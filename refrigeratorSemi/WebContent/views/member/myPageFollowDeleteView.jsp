@@ -4,6 +4,7 @@
 				 com.refrigerator.follow.model.vo.FollowStats,
 				 java.util.ArrayList" %>
 <%
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<FollowStats> list = (ArrayList<FollowStats>)request.getAttribute("list");
 	
@@ -141,6 +142,15 @@
 
 <%@ include file="../common/user/menubar.jsp" %>
 <%@ include file="../common/user/myPageVerticalNav.jsp" %>
+
+	 <script>
+		//alertMsg
+		var msg = "<%=alertMsg%>";
+		if(msg != "null"){
+			alert(msg);
+			<% session.removeAttribute("alertMsg"); %>
+		}
+	</script>
 	
 	<div class="outer">
 

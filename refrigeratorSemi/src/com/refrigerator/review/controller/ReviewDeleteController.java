@@ -46,8 +46,14 @@ public class ReviewDeleteController extends HttpServlet {
 		int result = new ReviewService().deleteReviewUser(deleteList);
 		
 		if(result > 0) {
+			
+			request.getSession().setAttribute("alertMsg", "요리후기 삭제 성공");
 			response.sendRedirect(request.getContextPath() + "/review.me?currentPage=1");
+			
 		}else {
+			
+			request.setAttribute("errorTitle", "요리후기 삭제 실패");
+			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);
 			
 		}
 		

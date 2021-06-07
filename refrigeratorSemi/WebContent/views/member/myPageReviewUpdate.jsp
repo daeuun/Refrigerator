@@ -7,6 +7,7 @@
 <%
 
 ArrayList<Review> list = (ArrayList<Review>) request.getAttribute("list");
+String alertMsg = (String)session.getAttribute("alertMsg");
 
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 
@@ -119,6 +120,15 @@ input[type=file]{
 
 	<%@ include file="../common/user/menubar.jsp"%>
 	<%@ include file="../common/user/myPageVerticalNav.jsp"%>
+	
+	<script>
+		//alertMsg
+		var msg = "<%=alertMsg%>";
+		if(msg != "null"){
+			alert(msg);
+			<% session.removeAttribute("alertMsg"); %>
+		}
+	</script>
 
 	<div class="outer">
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.refrigerator.member.model.vo.Member"%>
 <%
 	Member m = (Member)request.getAttribute("m");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
     
  			<!--윤희락   05-26등록-->
@@ -97,6 +98,15 @@
 <%@ include file="../common/user/menubar.jsp" %>
 <%@ include file="../common/user/myPageVerticalNav.jsp" %>
     
+    <script>
+		//alertMsg
+		var msg = "<%=alertMsg%>";
+		if(msg != "null"){
+			alert(msg);
+			<% session.removeAttribute("alertMsg"); %>
+		}
+	</script>
+    
     <div class="outer">
 
         <div class="menu-path" style="font-size: 12px;">
@@ -120,7 +130,7 @@
                     
                     <img src="<%=m.getProfileImg()%>" id="profile-img" width="250" height="250">
 
-                    <input type="file" id="img-load" name="file1" onchange="loadImg(this, 1)" required>
+                    <input type="file" id="img-load" name="file1" onchange="loadImg(this, 1)">
                 </div>
                 
                 <div class="profIntro-area">
