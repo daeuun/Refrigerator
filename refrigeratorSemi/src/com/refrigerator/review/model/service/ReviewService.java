@@ -138,6 +138,23 @@ public class ReviewService {
 		close(conn);
 		return rv;
 	}
-	
+
+
+
+	/**
+	 * 마이페이지_ 요리후기 수정
+	 * @author HeeRak
+	 */
+	public int updateReview(Review rv) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().updateReview(conn, rv);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
 }

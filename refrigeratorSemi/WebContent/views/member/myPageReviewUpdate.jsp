@@ -165,7 +165,7 @@ input[type=file]{
 						<tr>
 							<td><input type="checkbox" name="deleteCheck<%=i + 1%>"
 								value="<%=list.get(i).getReviewNo()%>"></td>
-							<td><img src="<%=list.get(i).getImgName()%>" width="100"
+							<td><img src="<%=contextPath%><%=list.get(i).getImgName()%>" width="100"
 								height="100"></td>
 							<td><%=list.get(i).getReviewNo()%></td>
 							<td width="200"><%=list.get(i).getReviewContent()%></td>
@@ -182,55 +182,6 @@ input[type=file]{
 							}
 						%>
 						
-						<!-- 수정 모달 -->
-						<div class="modal fade" id="modify">
-							<div class="modal-dialog">
-								<div class="modal-content">
-
-									<!-- Modal Header -->
-									<div align="right">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
-
-									<!-- Modal body -->
-									<form action="update.rv" method="post" enctype="multipart/form-data">
-										<div class="modal-body" align="center">
-											<div><img class="review-img"></div>
-											<br>
-											<span class="modify-title">이 레시피의 별점은?</span>
-											<br>
-											<br>
-											<select name="starPoint" id="star-point" required style="maring:atuo">
-												<option value="0.5">0.5</option>
-												<option value="1">1</option>
-												<option value="1.5">1.5</option>
-												<option value="2">2</option>
-												<option value="2.5">2.5</option>
-												<option value="3">3</option>
-												<option value="3.5">3.5</option>
-												<option value="4">4</option>
-												<option value="4.5">4.5</option>
-												<option value="5">5</option>
-											</select>
-											
-											<br><br>
-											
-											<button type="button" id="inputFile">사진 첨부하기</button>
-											<p class="guide">한 장이라도 좋아요<br>완성된 요리를 자랑해주세요</p>
-											
-											<textarea id="review-content" required style="resize:none;" min="20" placeholder="자세한 리뷰는 다른 쉐프님들께 큰 도움이 될 거에요 (최소20자)"></textarea>
-										</div>
-										<input type="file" name="reviewImg">
-	
-										<div class="modal-btn">
-											<button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</a> 
-											<button type="submit" class="btn btn-sm" id="btn-modify">수정</a>
-										</div>
-									</form>
-
-								</div>
-							</div>
-						</div>
 						
 						<!-- 삭제 모달 -->
 						<div class="modal fade" id="delete">
@@ -262,13 +213,63 @@ input[type=file]{
 				</tbody>
 
 			</table>
-
-
 			<div class="allCheckbox">
 				<input type="checkbox" id="all-checkbox"> &nbsp;전체선택
 				<button class="btn btn-danger btn-sm" data-toggle="modal"
 					data-target="#delete">삭제</button>
 			</div>
+						<!-- 수정 모달 -->
+						<div class="modal fade" id="modify">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<!-- Modal Header -->
+									<div align="right">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+
+									<!-- Modal body -->
+									<form action="<%=contextPath %>/update.rv" method="post" enctype="multipart/form-data">
+										<div class="modal-body" align="center">
+											<div><img class="review-img"></div>
+											<br>
+											<span class="modify-title">이 레시피의 별점은?</span>
+											<br>
+											<br>
+											<select name="starPoint" id="star-point" required style="maring:atuo">
+												<option value="0.5">0.5</option>
+												<option value="1">1</option>
+												<option value="1.5">1.5</option>
+												<option value="2">2</option>
+												<option value="2.5">2.5</option>
+												<option value="3">3</option>
+												<option value="3.5">3.5</option>
+												<option value="4">4</option>
+												<option value="4.5">4.5</option>
+												<option value="5">5</option>
+											</select>
+											
+											<br><br>
+											
+											<button type="button" id="inputFile">사진 첨부하기</button>
+											<p class="guide">한 장이라도 좋아요<br>완성된 요리를 자랑해주세요</p>
+											
+											<textarea id="review-content" name="reviewContent" required style="resize:none;" min="20" placeholder="자세한 리뷰는 다른 쉐프님들께 큰 도움이 될 거에요 (최소20자)"></textarea>
+										</div>
+										<input type="file" name="reviewImg" onchange="loadImg(this);">
+										<input type="hidden" name="reviewNo">
+	
+										<div class="modal-btn">
+											<button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm">취소</button> 
+											<button type="submit" class="btn btn-sm" id="btn-modify">수정</button>
+										</div>
+									</form>
+
+								</div>
+							</div>
+						</div>
+
+
 
 			<br>
 			<div align="center" class="page-area">
@@ -330,17 +331,45 @@ input[type=file]{
 				url:"jqAjaxSelect.rv",
 				data:{reviewNo:rvNo},
 				success:function(review){
-					console.log(review);
+					var starPoint = review.star;
+					console.log(starPoint);
+					
 					$("#review-content").text(review.reviewContent);
-					$("#star-point").children("option[value=" + review.star + "]").prop("selected", true);
-					$(".review-img").prop("src", review.imgName);
+					$("#star-point").children("option").prop("selected", false);
+					$("#star-point").children("option[value='" + starPoint + "']").prop("selected", true);
+					$(".review-img").prop("src", "<%=contextPath%>" + review.imgName);
+					$("input[type=hidden]").val(rvNo);
 					
 				},errorPage:function(){
 					
 				}
 			})
-						
-						
+		}
+		
+		// 사진 첨부시 버튼 클릭 이관 / 이미지 로드
+		$(function(){
+			
+			$("#inputFile").click(function(){
+				$("input[name=reviewImg]").click();
+			})
+			
+		})
+		
+		function loadImg(inputFile){
+			
+			if(inputFile.files.length == 1){//선택한 파일이 존재하는 경우
+				console.log(inputFile);
+				var reader = new FileReader();
+				reader.readAsDataURL(inputFile.files[0]);
+				
+				reader.onload = function(e){
+					
+					$(".review-img").attr("src", e.target.result);
+				}
+				
+			}else{
+				$(".review-img").attr("src", null);
+			}
 		}
 	
 		// 체크박스 전체선택 기능

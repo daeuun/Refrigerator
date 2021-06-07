@@ -219,7 +219,7 @@ public class ReviewDao {
 				list.add(new Review(rset.getInt("review_no"),
 									rset.getInt("recipe_no"),
 									rset.getString("review_content"),
-									rset.getInt("star"),
+									rset.getDouble("star"),
 									rset.getString("img_name"),
 									rset.getDate("modify_date")
 									));
@@ -296,5 +296,44 @@ public class ReviewDao {
 		}
 		return rv;
 	}
+
+	/**
+	 * 마이페이지_ 요리후기 수정
+	 * @author HeeRak
+	 */
+	public int updateReview(Connection conn, Review rv) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReview");
+		String sql2 = prop.getProperty("updateReviewNoImg");
+				
+		try {
+			if(!rv.getImgName().equals("")) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, rv.getReviewContent());
+				pstmt.setDouble(2, rv.getStar());
+				pstmt.setString(3, rv.getImgName());
+				pstmt.setInt(4, rv.getReviewNo());
+				
+				result = pstmt.executeUpdate();
+			}else {
+				pstmt = conn.prepareStatement(sql2);
+				
+				pstmt.setString(1, rv.getReviewContent());
+				pstmt.setDouble(2, rv.getStar());
+				pstmt.setInt(3, rv.getReviewNo());
+				
+				result = pstmt.executeUpdate();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 }

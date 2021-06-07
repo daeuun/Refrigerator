@@ -23,6 +23,15 @@ public class Review {
 	public Review() {}
 
 	
+	public Review(int reviewNo, String reviewContent, double star, String imgName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.imgName = imgName;
+	}
+
+
 	public Review(int reviewNo, int userNo, String reivewContent, double star, String imgName, Date modifyDate) {
 		super();
 		this.reviewNo = reviewNo;

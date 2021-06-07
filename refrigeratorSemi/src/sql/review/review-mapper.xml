@@ -104,5 +104,25 @@ SELECT *
 	 WHERE REVIEW_NO = ?
 </entry>
 
+<!-- 마이페이지_리뷰 수정 -->
+<!-- @author Heerak-->
+<entry key="updateReview">
+	UPDATE REVIEW
+	   SET REVIEW_CONTENT = ?
+		 , STAR = ?
+		 , IMG_NAME = ?
+		 , MODIFY_DATE = SYSDATE
+	 WHERE REVIEW_NO = ?
+</entry>
+
+<!-- 마이페이지_리뷰 수정(사진x) -->
+<!-- @author Heerak-->
+<entry key="updateReviewNoImg">
+	UPDATE REVIEW
+	   SET REVIEW_CONTENT = ?
+		 , STAR = ?
+		 , MODIFY_DATE = SYSDATE
+	 WHERE REVIEW_NO = ?
+</entry>
 
 </properties>
