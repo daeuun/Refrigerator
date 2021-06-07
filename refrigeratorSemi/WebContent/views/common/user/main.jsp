@@ -686,7 +686,7 @@
 
                         <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
+                            <input type="hidden" name="recipeNo" value="">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -699,7 +699,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -710,7 +710,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
 
                                         </div>
@@ -722,7 +722,7 @@
 
                         <!-- 개별 레시피 (2) -->
                         <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
+                            <input type="hidden" name="recipeNo" value="">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -735,7 +735,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -746,7 +746,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
 
                                         </div>
@@ -758,7 +758,7 @@
 
                         <!-- 개별 레시피 (3) -->
                         <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
+                            <input type="hidden" name="recipeNo" value="">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -771,7 +771,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -782,7 +782,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
 
                                         </div>
@@ -794,7 +794,7 @@
 
                         <!-- 개별 레시피 (4) -->
                         <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
+                            <input type="hidden" name="recipeNo" value="">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -807,7 +807,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -818,7 +818,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
 
                                         </div>
@@ -830,7 +830,7 @@
 
                         <!-- 개별 레시피 (5) -->
                         <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
+                            <input type="hidden" name="recipeNo" value="">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -843,7 +843,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -854,7 +854,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
 
                                         </div>
@@ -866,7 +866,7 @@
 
                         <!-- 개별 레시피 (6) -->
                         <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="<%= list.getRecipeNo()%>">
+                            <input type="hidden" name="recipeNo" value="">
 
                             <a class="home-viewRecipe_link" href="상세레시피경로">
 
@@ -879,7 +879,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -890,7 +890,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
 
                                         </div>
@@ -922,12 +922,12 @@
                                 <div>
                                     <div class="home-starRecipe_content">
                                         <div class="home-starRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                          제목
                                         </div>
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                               닉네임
                                             </span>
                                         </div>
                                     </div>
@@ -947,12 +947,12 @@
                                 <div>
                                     <div class="home-starRecipe_content">
                                         <div class="home-starRecipe_content-title">
-                                            <%= list.getRecipeTitle() %>
+                                            제목
                                         </div>
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                                <%= list.getRecipeWriter() %>
+                                                닉네임
                                             </span>
                                         </div>
                                     </div>
