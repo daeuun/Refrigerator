@@ -877,7 +877,7 @@
                                                 "<td>"+"<b>"+ list[i].reviewWriter+"</b>"+"</td>" +
                                                 "<td>"+ list[i].enrollDate+"</td>" +
                                                 "<td rowspan='3' >" + 
-                                                    "<img src='" +"/"+list[i].reviewImg +"'"+"class='review-detail-img' id='review-modal-btn'>" +
+                                                    "<img src='" + "<%=contextPath%>" +"/"+list[i].reviewImg +"'"+"class='review-detail-img' id='review-modal-btn'>" +
                                                 "</td>" + 
                                             "</tr>" + 
                                             "<tr>" +
