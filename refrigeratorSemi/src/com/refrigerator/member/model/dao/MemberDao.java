@@ -466,7 +466,72 @@ public class MemberDao {
 		return result;
 	}
 	
+	/**
+	 * @author leeyeji
+	 * 검색한 회원 총 count
+	 */
+	public int selectUserListCount(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectUserListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;		
+	}
 	
+	/**
+	 * @author leeyeji
+	 * 회원 검색 결과
+	 */
+	public ArrayList<Member> selectSearchUserList(Connection conn, PageInfo pi, String userId){
+		
+		ArrayList<Member> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSearchUserList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Member(rset.getInt("user_no"),
+									rset.getString("user_id"),
+									rset.getString("user_name"),
+									rset.getString("user_type"),
+									rset.getString("grade"),
+									rset.getString("gender"),
+									rset.getString("email"),
+									rset.getString("phone"),
+									rset.getString("nickname"),
+									rset.getString("status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 
 }

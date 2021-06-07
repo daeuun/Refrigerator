@@ -214,5 +214,30 @@ public class MemberService {
 	}
 	
 	
+	/**
+	 * @author leeyeji
+	 * 검색한 총 회원 count
+	 */
+	public int selectUserListCount(String userId) {
+		Connection conn = getConnection();
+		int result = new MemberDao().selectUserListCount(conn, userId);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
+	/**
+	 * @author leeyeji
+	 * 회원 검색 결과
+	 */
+	public ArrayList<Member> selectSearchUserList(PageInfo pi, String userId){
+		Connection conn = getConnection();
+		ArrayList<Member> list = new MemberDao().selectSearchUserList(conn, pi, userId);
+		close(conn);
+		return list;
+	}
 }

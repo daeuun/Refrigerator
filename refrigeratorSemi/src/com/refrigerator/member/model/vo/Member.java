@@ -109,6 +109,21 @@ public class Member {
 		this.phone = phone;
 	}
 
+	public Member(int userNo, String userId, String userName, String userType, String grade, String gender,
+			String email, String phone, String nickname, String status) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userName = userName;
+		this.userType = userType;
+		this.grade = grade;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.nickname = nickname;
+		this.status = status;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}

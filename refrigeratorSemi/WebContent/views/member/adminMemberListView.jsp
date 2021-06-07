@@ -6,6 +6,7 @@
 <%
 	//String contextPath = request.getContextPath();
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("pageList");
+	ArrayList<Member> sList = (ArrayList<Member>)request.getAttribute("searchList");
 	Member spcMem = (Member)request.getAttribute("spcMem");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");

@@ -210,5 +210,41 @@
 		   AND USER_PWD = ?
 		   AND STATUS = 'Y' 
 	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 검색한 회원 총 count --> 
+	<entry key="selectUserListCount">
+        SELECT
+		       COUNT(*) COUNT
+		  FROM MEMBER
+         WHERE USER_ID LIKE ?
+	</entry>
+	
+	<!-- @author leeyeji --> 
+	<!-- 회원 검색 결과 -->
+	<entry key="selectSearchUserList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+                               USER_NO
+                             , USER_ID
+                             , USER_NAME
+                             , USER_TYPE
+                             , GRADE
+                             , GENDER
+                             , EMAIL
+                             , PHONE
+                             , NICKNAME
+                             , STATUS
+                          FROM MEMBER
+                         WHERE USER_ID LIKE ?
+                         ORDER
+		                    BY ENROLL_DATE DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 
 </properties>
