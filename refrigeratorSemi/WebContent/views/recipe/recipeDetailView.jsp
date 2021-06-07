@@ -5,7 +5,9 @@
 				,com.refrigerator.category.model.vo.*
 				,com.refrigerator.reicpe_order.model.vo.*
 				,com.refrigerator.ingre.model.vo.*
-				,com.refrigerator.ingre_search.model.vo.*" %>
+				,com.refrigerator.ingre_search.model.vo.*
+				,com.refrigerator.reply.model.vo.*
+				,com.refrigerator.review.model.vo.*" %>
 				
 <%
 
@@ -467,16 +469,15 @@
 					 <hr width="100px">
 					
 						<!-- 필수 재료 출력되는 구문 -->
-						<% for(Ingre in : ingre) { %>
-		
+						<% for(int i=0; i<ingre.size();i++) { %>
 		                    <tr>
-		                        <th><%=in.getIngreName()%></th>
-		                        <td id="la0"><%=in.getIngreAmount() / rc.getSeveralServings()%></td>
-		                        <td><%=in.getIngreUnit() %></td>
-		 
+		                        <th><%=ingre.get(i).getIngreName()%></th>
+		                        <td id="ing<%=i%>"><%=ingre.get(i).getIngreAmount() / rc.getSeveralServings()%></td>
+		                        <td><%=ingre.get(i).getIngreUnit() %></td>
+
 		                    </tr>
-		                    
-	                   <%} %>          
+						<%} %>
+						       
                 </table>
             
             </div>
@@ -557,11 +558,16 @@
 	                                var servings = $("#select-servings").children("option:selected").val();
 	                                
 	                                for(var i=0; i<<%=ingre.size()%>;i++) {
-	                                   var la = $("#la" + i).text();
+	                                	
+	                                   var ing = $("#ing" + i).text();
 	                                   
-	                                   $("#la" + i).text(la*servings);
+	                                   $("#ing" + i).text(ing*servings);
 	                                   
 	                                }
+	                                
+	                                
+	                                
+	                                
 	                            }
 
                             </script>
@@ -644,25 +650,25 @@
                   </div>
 
               
-                    <script>
-                    let currSlide = 1;
-                    showSlide(currSlide);
-                    
-                    function button_click(num){
-                        showSlide((currSlide += num));
-                    }
-                    function showSlide(num){
-                        const slides = document.querySelectorAll(".slide");
-                        if(num>slides.length){
-                        currSlide =1;
-                        }if(num<1){
-                        currSlide = slides.length;
-                        }
-                        for(let i=0; i<slides.length; i++){
-                        slides[i].style.display="none";
-                        }slides[currSlide -1].style.display="block";
-                    }
-                    </script>
+               <script>
+               let currSlide = 1;
+               showSlide(currSlide);
+               
+               function button_click(num){
+                   showSlide((currSlide += num));
+               }
+               function showSlide(num){
+                   const slides = document.querySelectorAll(".slide");
+                   if(num>slides.length){
+                   currSlide =1;
+                   }if(num<1){
+                   currSlide = slides.length;
+                   }
+                   for(let i=0; i<slides.length; i++){
+                   slides[i].style.display="none";
+                   }slides[currSlide -1].style.display="block";
+               }
+               </script>
 
 
                     <br><br><br><Br>
@@ -797,7 +803,7 @@
 	                                     <td style="width: 80%;">
 	                                        <div class="form-group">
 	                                        <label for="usr"></label>
-	                                        <input type="text" class="form-control" id="usr" placeholder="댓글은 회원 가입 후에 작성할 수 있어요! "  style="height: 30px;" disabled>
+	                                        <input type="text" class="form-control" id="usr" placeholder="댓글은 로그인 후에 작성할 수 있어요!"  style="height: 30px;" disabled>
 	                                        </div>
 	                                    </td>
 	                                     
@@ -857,28 +863,28 @@
                           				
                           				result += 
                           					"<br>" + 
-                          				
-                                           "<tr>" + 
-                                               "<td rowspan='3'>" +
-                                                   
-                                                   "<div class='box' style='background: #BDBDBD;''>" + 
-                                                       "<img class='profile' src=''>" + 
-                                                   "</div>" +
+                              				
+                                            "<tr>" + 
+                                                "<td rowspan='3'>" +
+                                                    
+                                                    "<div class='box' style='background: #BDBDBD;''>" + 
+                                                        "<img class='profile' src='"  + list[i].profileImg +  "'>" + 
+                                                    "</div>" +
 
-                                               "</td>" + 
-                                               "<td>"+"<b>"+ list[i].reviewWriter+"</b>"+"</td>" +
-                                               "<td>"+ list[i].enrollDate+"</td>" +
-                                               "<td rowspan='3' >" + 
-                                                   "<img src='" + "<%=contextPath%>" +"/"+list[i].reviewImg +"'"+"class='review-detail-img' id='review-modal-btn'>" +
-                                               "</td>" + 
-                                           "</tr>" + 
-                                           "<tr>" +
-                                               "<td colspan='2'>" +  list[i].reviewContent + "</td>" + 
-                                           "</tr>" + 
-                                           "<tr>" + 
-                                               "<td colspan='2'>" + list[i].star + "</td>" + 
-                                           "</tr>"
-											+ "<br>" 
+                                                "</td>" + 
+                                                "<td>"+"<b>"+ list[i].reviewWriter+"</b>"+"</td>" +
+                                                "<td>"+ list[i].enrollDate+"</td>" +
+                                                "<td rowspan='3' >" + 
+                                                    "<img src='" +"/"+list[i].reviewImg +"'"+"class='review-detail-img' id='review-modal-btn'>" +
+                                                "</td>" + 
+                                            "</tr>" + 
+                                            "<tr>" +
+                                                "<td colspan='2'>" +  list[i].reviewContent + "</td>" + 
+                                            "</tr>" + 
+                                            "<tr>" + 
+                                                "<td colspan='2'>" + list[i].star + "</td>" + 
+                                            "</tr>"
+ 											+ "<br>" 
 											
 									
                           			}
@@ -945,20 +951,26 @@
                             		
                             		for(var i in list){
                             			result += 
-                            				
-                            			"<br>"	+	
-                            				"<tr>" +
-	                                        "<td style='width: 20%;'>" + "<b>" + list[i].replyWriter + "</b>" + "</td>" +
-	                                        "<td style='width: 10%;'>" + list[i].enrollDate + "</td>" + 
-	                                        "<td style='color: gray;'>" + "<a href='' class='report-user-btn'>" + "신고하기" + "</a>" + "</td>" + 
-		                                    "</tr>" + 
-		                                    
-		                                  	 "<tr class='reply-deatil-content'>" + 
-		                                        "<td colspan='3'>" + list[i].replyContent  + "</td>" + 
-		                                    "</tr>" +
-		                                    
-		                               		"</tr>" +
-		                                "<br>"
+                           				
+                           				
+                               			"<br>"	+	
+                           				"<td>"+
+   	                                        "<div class='box' style='background: #BDBDBD;''>" + 
+   	                                        "<img class='profile' src='" + list[i].profileImg + "'>" + 
+   	                               			 "</div>" +
+                                  			"</td>" + 	
+
+                               				//"<td>" + "<img class='profile' src='" + "<%=contextPath%>" + list[i].profileImg + "'>" +"</td>" +
+   	                                        "<td>" + "<b>" + list[i].replyWriter + "</b>" + "</td>" +
+   	                                        "<td>" + list[i].enrollDate + "</td>" + 
+   	                                        "<td style='color: gray;'>" + "<a href='' class='report-user-btn'>" + "신고하기" + "</a>" + "</td>" + 
+   		                                    "<br>" +
+   		                                  	 "<tr class='reply-deatil-content'>" + 
+   		                                        "<td colspan='3'>" + list[i].replyContent  + "</td>" + 
+   		                                    "</tr>" +
+   		                                    
+   		                               		"</tr>" +
+   		                                "<br>"
 		                                    
                             		} 
 	

@@ -11,11 +11,14 @@ public class Review {
 	private int reviewNo;
 	private int userNo;
 	private int recipeNo;
+	private String reviewWriter; // 성은추가
 	private String reviewContent;
 	private double star;
+	private String reviewImg; // 성은추가
 	private String imgName;
 	private Date enrollDate;
 	private Date modifyDate;
+	private String profileImg;
 	
 	public Review() {}
 
@@ -55,6 +58,54 @@ public class Review {
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 	}
+	
+	/**
+	 * 레시피 후기 상세 조회하기 기능 
+	 * @author seong
+	 */
+	public Review(int reviewNo, String reviewWriter, String reviewContent, double star, String reviewImg,
+			Date enrollDate, String profileImg) {
+		super();
+		this.reviewNo = reviewNo;
+		this.reviewWriter = reviewWriter;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.reviewImg = reviewImg;
+		this.enrollDate = enrollDate;
+		this.profileImg = profileImg;
+	}
+	
+	
+
+	public String getReviewWriter() {
+		return reviewWriter;
+	}
+
+
+	public void setReviewWriter(String reviewWriter) {
+		this.reviewWriter = reviewWriter;
+	}
+
+
+	public String getReviewImg() {
+		return reviewImg;
+	}
+
+
+	public void setReviewImg(String reviewImg) {
+		this.reviewImg = reviewImg;
+	}
+
+
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -120,11 +171,18 @@ public class Review {
 		this.modifyDate = modifyDate;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", userNo=" + userNo + ", recipeNo=" + recipeNo + ", reivewContent="
-				+ reviewContent + ", star=" + star + ", imgName=" + imgName + ", enrollDate=" + enrollDate
-				+ ", modifyDate=" + modifyDate + "]";
+		return "Review [reviewNo=" + reviewNo + ", userNo=" + userNo + ", recipeNo=" + recipeNo + ", reviewWriter="
+				+ reviewWriter + ", reviewContent=" + reviewContent + ", star=" + star + ", reviewImg=" + reviewImg
+				+ ", imgName=" + imgName + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", profileImg="
+				+ profileImg + "]";
 	}
+
+
+	
+	
+	
 	
 }

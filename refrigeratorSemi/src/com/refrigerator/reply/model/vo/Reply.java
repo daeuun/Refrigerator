@@ -14,7 +14,7 @@ public class Reply {
 	private String reportStatus;
 	private String recipeTitle;
 	
-	
+	private String profileImg;
 
 	public Reply() {}
 
@@ -50,8 +50,23 @@ public class Reply {
 	}
 	
 	
+	public Reply(int replyNo, String replyWriter, String replyContent, Date enrollDate, String profileImg) {
+		super();
+		this.replyNo = replyNo;
+		this.replyWriter = replyWriter;
+		this.replyContent = replyContent;
+		this.enrollDate = enrollDate;
+		this.profileImg = profileImg;
+	}
 	
-	
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
 	public String getReplyWriter() {
 		return replyWriter;
 	}
@@ -137,9 +152,10 @@ public class Reply {
 		return "Reply [replyNo=" + replyNo + ", userNo=" + userNo + ", replyWriter=" + replyWriter + ", recipeNo="
 				+ recipeNo + ", replyContent=" + replyContent + ", enrollDate=" + enrollDate + ", modifyDate="
 				+ modifyDate + ", deleteStatus=" + deleteStatus + ", reportStatus=" + reportStatus + ", recipeTitle="
-				+ recipeTitle + "]";
+				+ recipeTitle + ", profileImg=" + profileImg + "]";
 	}
 
+	
 	
 	
 

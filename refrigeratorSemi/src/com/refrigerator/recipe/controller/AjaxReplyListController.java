@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.refrigerator.recipe.model.service.RecipeService;
-import com.refrigerator.recipe.model.vo.Reply;
+import com.refrigerator.reply.model.vo.Reply;
 
 /**
  * @author seong

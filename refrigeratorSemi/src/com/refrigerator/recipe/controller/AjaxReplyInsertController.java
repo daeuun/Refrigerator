@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.recipe.model.service.RecipeService;
-import com.refrigerator.recipe.model.vo.Reply;
+import com.refrigerator.reply.model.vo.Reply;
 
 /**
  * Servlet implementation class AjaxReplyInsertController

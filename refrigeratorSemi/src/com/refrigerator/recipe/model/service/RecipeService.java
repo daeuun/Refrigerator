@@ -14,8 +14,8 @@ import com.refrigerator.ingre.model.vo.SubIngre;
 import com.refrigerator.ingre_search.model.vo.IngreSearch;
 import com.refrigerator.recipe.model.dao.RecipeDao;
 import com.refrigerator.recipe.model.vo.Recipe;
-import com.refrigerator.recipe.model.vo.Reply;
-import com.refrigerator.recipe.model.vo.Review;
+import com.refrigerator.reply.model.vo.Reply;
+import com.refrigerator.review.model.vo.Review;
 import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
 
 public class RecipeService {

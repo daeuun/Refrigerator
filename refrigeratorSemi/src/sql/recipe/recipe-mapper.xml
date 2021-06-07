@@ -7,17 +7,17 @@
 	<!-- 레시피 상세 페이지의 댓글 전체 목록 조회 리스트  -->
 	<entry key="selectReplyList">
 	
-		
+			
 		SELECT REPLY_NO
-		    ,NICKNAME
-		    ,TO_CHAR(R.ENROLL_DATE,'YY/MM/DD') CREATE_DATE
-		    ,REPLY_CONTENT
-		FROM REPLY R
-		JOIN MEMBER M USING (USER_NO)
-		WHERE M.STATUS = 'Y'
-		AND RECIPE_NO = ?
-		ORDER BY R.ENROLL_DATE DESC
-	
+			    ,NICKNAME
+			    ,REPLY_CONTENT
+			    ,R.ENROLL_DATE
+			    ,PROFILE_IMG
+			FROM REPLY R
+			JOIN MEMBER M USING (USER_NO)
+			WHERE M.STATUS = 'Y'
+			AND RECIPE_NO = ?
+			ORDER BY R.ENROLL_DATE DESC
 	</entry>
 	
 	<!-- @author seong -->
@@ -53,7 +53,7 @@
 		    ,STAR
 		    ,IMG_NAME
 		    ,R.ENROLL_DATE ENROLL_DATE
-		   
+		   ,PROFILE_IMG
 		    
 		FROM REVIEW R
 		JOIN MEMBER USING(USER_NO)
