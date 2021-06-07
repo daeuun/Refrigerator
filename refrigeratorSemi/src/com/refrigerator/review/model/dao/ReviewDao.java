@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
-import com.refrigerator.recipe.model.vo.Review;
 import com.refrigerator.review.model.vo.AdmReview;
+import com.refrigerator.review.model.vo.Review;
 
 
 
@@ -263,7 +263,38 @@ public class ReviewDao {
 		
 		return result;
 	}
-	
-	
+
+	/**
+	 * 마이페이지_ 수정버튼 클릭시 리뷰 조회
+	 * @author HeeRak
+	 */
+	public Review selectReview(Connection conn, int reviewNo) {
+		Review rv = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				rv = new Review(rset.getInt("REVIEW_NO"),
+								rset.getInt("USER_NO"),
+								rset.getInt("RECIPE_NO"),
+								rset.getString("REVIEW_CONTENT"),
+								rset.getDouble("STAR"),
+								rset.getString("IMG_NAME"),
+								rset.getDate("MODIFY_DATE")
+								);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rv;
+	}
 	
 }

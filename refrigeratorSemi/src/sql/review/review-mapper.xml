@@ -90,5 +90,19 @@ SELECT *
 	 WHERE REVIEW_NO = ?
 </entry>
 
+<!-- 마이페이지_수정버튼 클릭시 리뷰 정보 조회 -->
+<!-- @author Heerak-->
+<entry key="selectReview">
+	SELECT REVIEW_NO
+		 , USER_NO
+		 , RECIPE_NO
+		 , REVIEW_CONTENT
+		 , STAR
+		 , IMG_NAME
+		 , MODIFY_DATE
+	  FROM REVIEW
+	 WHERE REVIEW_NO = ?
+</entry>
+
 
 </properties>

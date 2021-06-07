@@ -1,20 +1,17 @@
 package com.refrigerator.review.model.service;
 
 import static com.refrigerator.common.JDBCTemplate.close;
-import static com.refrigerator.common.JDBCTemplate.getConnection;
 import static com.refrigerator.common.JDBCTemplate.commit;
+import static com.refrigerator.common.JDBCTemplate.getConnection;
 import static com.refrigerator.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.refrigerator.common.model.vo.PageInfo;
-import com.refrigerator.recipe.model.vo.Review;
 import com.refrigerator.review.model.dao.ReviewDao;
 import com.refrigerator.review.model.vo.AdmReview;
-
-import oracle.jdbc.OracleConnection.CommitOption;
+import com.refrigerator.review.model.vo.Review;
 
 
 /**
@@ -127,6 +124,19 @@ public class ReviewService {
 		}
 		close(conn);
 		return result;
+	}
+
+
+
+	/**
+	 * 마이페이지_ 수정버튼 클릭시 리뷰 조회
+	 * @author HeeRak
+	 */
+	public Review selectReview(int reviewNo) {
+		Connection conn = getConnection();
+		Review rv = new ReviewDao().selectReview(conn, reviewNo);
+		close(conn);
+		return rv;
 	}
 	
 	

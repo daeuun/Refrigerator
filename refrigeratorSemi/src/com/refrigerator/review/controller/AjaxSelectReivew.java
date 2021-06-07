@@ -1,4 +1,4 @@
-package com.refrigerator.member.controller;
+package com.refrigerator.review.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.refrigerator.member.model.service.MemberService;
-import com.refrigerator.member.model.vo.Member;
+import com.google.gson.Gson;
+import com.refrigerator.review.model.service.ReviewService;
+import com.refrigerator.review.model.vo.Review;
 
 /**
- * Servlet implementation class MemberDeleteController
+ * Servlet implementation class AjaxSelectReivew
  */
-@WebServlet("/jqAjaxDelete.me")
-public class AjaxDeleteMember extends HttpServlet {
+@WebServlet("/jqAjaxSelect.rv")
+public class AjaxSelectReivew extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxDeleteMember() {
+    public AjaxSelectReivew() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +32,13 @@ public class AjaxDeleteMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		
-		Member m = (Member)request.getSession().getAttribute("loginUser");
-		int userNo = m.getUserNo();
+		Review rv = new ReviewService().selectReview(reviewNo);
 		
-		String userPwd = request.getParameter("userPwd");
+		response.setContentType("application/json; charset=utf-8");
 		
-		int result = new MemberService().deleteUserMember(userNo, userPwd);
-		
-		if(result > 0) {
-			
-			request.getSession().invalidate();
-			response.setContentType("text/html; charset=utf-8");
-			response.getWriter().print(result);
-			
-		}else {
-			
-			response.setContentType("text/html; charset=utf-8");
-			response.getWriter().print(result);
-		}
-		
+		new Gson().toJson(rv, response.getWriter());
 	}
 
 	/**

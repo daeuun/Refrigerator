@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.member.model.vo.Member;
-import com.refrigerator.recipe.model.vo.Review;
 import com.refrigerator.review.model.service.ReviewService;
+import com.refrigerator.review.model.vo.Review;
 
 /**
  * [사용자] 마이페이지_후기&별점관리 메뉴 View 화면전달처리
