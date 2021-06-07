@@ -2,6 +2,7 @@ package com.refrigerator.common.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.refrigerator.category.model.service.MainCategoryService;
 import com.refrigerator.category.model.service.SubCategoryService;
 import com.refrigerator.category.model.vo.MainCategory;
 import com.refrigerator.category.model.vo.SubCategory;
 
 /**
- * Servlet implementation class Menubar
+ * Servlet implementation class BringCategoryToMenubarController
  */
-// 메뉴바로 가는 임시 서블릿
-@WebServlet("/menubar")
-public class Menubar extends HttpServlet {
+@WebServlet("/bringCat.cat")
+public class AjaxBringCategoryToMenubarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Menubar() {
+    public AjaxBringCategoryToMenubarController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +35,20 @@ public class Menubar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<MainCategory> mainList = new MainCategoryService().selectMainList(); 
+		ArrayList<SubCategory> subList = new SubCategoryService().selectSubList(); 
+		/*
+		request.getSession().setAttribute("mainList", mainList);
+		request.getSession().setAttribute("subList", subList);
+		*/
+		HashMap<String, ArrayList> map = new HashMap<>();
+		map.put("main", mainList);
+		map.put("sub", subList);
 		
-		request.getRequestDispatcher("views/common/user/menubar.jsp").forward(request, response);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(map, response.getWriter());
+
 		
 	}
 

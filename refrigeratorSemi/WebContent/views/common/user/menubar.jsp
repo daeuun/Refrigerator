@@ -3,7 +3,13 @@
 <%@ page import="com.refrigerator.common.model.vo.PageInfo, 
 				 java.util.ArrayList, 
 				 com.refrigerator.recipe.model.vo.Recipe,
-				 com.refrigerator.member.model.vo.Member"%>
+				 com.refrigerator.member.model.vo.Member,
+				 com.refrigerator.category.model.vo.*,
+				 com.refrigerator.category.model.service.MainCategoryService,
+				 com.refrigerator.category.model.service.SubCategoryService,
+				 com.refrigerator.category.model.vo.MainCategory,
+				 com.refrigerator.category.model.vo.SubCategory"				 
+				 %>
 
 <%
 	String contextPath = request.getContextPath();
@@ -216,7 +222,6 @@
     /* 카테고리 클릭시 열리는 세부카테고리 div */
      #inner-category{
          width: 900px; 
-         height: 360px;
          border: 1px solid lightgreen;
          border-top: none;
          border-radius: 3px;
@@ -225,11 +230,17 @@
          position: absolute;
          transform: translateY(50px);
          z-index: 10000;
-         background-color: rgba(255,255,255,0.95);
+         background-color: rgba(255,255,255,0.87);
      }
 
+	 #for-area{
+	 	width: 100%;
+	 	display:flex;
+	 	justify-content:flex-start;
+	 }
+
      /* 세부카테고리 안에 테이블 스타일 */
-     #inner-category > table{
+     #inner-category table{
          padding-top: 10px;
          padding-left: 5px;
      }
@@ -237,18 +248,29 @@
      /* 세부카테고리 각각의 셀 스타일 */
      #inner-category tr, #inner-category a{
          color: black;
-         font-size: 14px;
-         line-height: 35px;
+         font-size: 13px;
+         line-height: 25px;
          text-align: center;
          text-decoration: none;
          }
 
      #inner-category th{
-         color: tomato;
-         border: 1px solid green;
-         border-radius: 10px;
+         color: rgb(247,220,113);
+         font-weight:bold;
+         border-top:none;
+         height: 25px;
+         background-color: rgba(0,151,80,0.8);         
      }
-
+     
+     #inner-category td:hover{
+     	background-color: rgba(238,234,189,.5);
+     	font-weight:bold;
+     }
+     	
+	 #forblock{
+	 	 display:block;
+	 	 margin-top:40px
+	 }
      /* 하단에 나가기 버튼 */
      #inner-category button{
          bottom: 10px;
@@ -261,7 +283,6 @@
          border:none;
 		 font-weight:bold;         
      }   
-    
     
 </style>
 </head>
@@ -326,36 +347,56 @@
 						})
 					})
 					</script>
-
+					
+					<!-- ajax로 카테고리들 세션에 담아와보자!  -->
+					<!-- 짜주신 구문  분석해서 커스터 마이징 하자! HashMap을 썼다. -->
+					<script>
+						$.ajax({ 
+							url : "bringCat.cat",
+							type:"post", 
+							success: function(result){ 
+								console.log(result.sub);
+								console.log(result.main);
+								
+								var value="";
+								for(var i in result.main){
+									value += "<tr>"
+				                           +     "<th width=100 >" + result.main[i].categoryName + "</th>";
+				                    for(var s in result.sub){
+				                    	if(result.main[i].categoryMainNo == result.sub[s].categoryMainNo){
+				                    		
+				                    		// ★ a태그들안에 !!! 내가만든 서블릿 요청을 꼭 해줘야해!!! 
+				                    		value += "<td width=84><a href='<%=contextPath%>/saerchCat.cat?currentPage=1&sno=" 
+				                    				+ result.sub[s].categorySubNo+ "'" 
+				                    				 + ">" 
+				                    				  + result.sub[s].ingredientName + "</a></td>" ;
+				                    	}
+				                    }
+				                    value += "</tr>";
+								}
+								$("#inner-category table").html(value);
+							},
+							error:function(){
+								console.log("ajax통신실패");
+								alert("예상치 못한 오류로 인해 조회가 불가합니다 개발자에게 문의하세요")
+							}
+						})
+					</script>
+					 
+					
                     <!--메뉴바-->
                     <nav class="navigation-secondary_menu">
                         <a class="navigation-secondary_menu_item menu menu1">홈</a>
                         <a href="javascript:showDiv()" class="navigation-secondary_menu_item menu menu2">카테고리</a>
                        	<!-- Jaewon -->
                         <div id="inner-category" align="center">
-                        <table>
-                            <!-- 어짜피 카테고리명 재료명을 조회해와서 뿌려줘야한다.!!! 
-					                                즉 상단에 스크립틀릿으로 카테고리 번호 카테고리명 재료명을 가져올것이다. 
-					                                이를 출력문으로 뿌려줄때에!! 
-					                                servlet 하나 만들어두고 ! 해당 카테고리 number를 넘기는 식으로 하면된다.  
-					                                위치는 잡아줬다. 아래는 반복문으로 만들어줄것이다. 
-					                                ★ 다만 좀 수정봐야하는게 대분류가 몇개가 될지는 아직 미지수이다 이부분 CSS처리해줘야한다.  
-					                            -->
-	                            <tr>
-	                                <th width=120 >육류</th>
-	                                <td width=86><a href="">소고기</a></td>
-	                                <td width=86><a href="">돼지고기</a></td> 
-	                                <td width=86><a href="">닭고기</a></td>
-	                                <td width=86><a href="">양고기</a></td> 
-	                                <td width=86><a href="">말고기</a></td>
-	                                <td width=86><a href="">리코타치즈</a></td>
-	                                <td width=86><a href="">다섯글자임</a></td>
-	                                <td width=86><a href="">예시예시</a>
-	                                <td width=86><a href="">예시예시</a></td>
-	                                <td width=86><a href="">예시예시</a></td>
-	                            </tr>
-	                        </table>
-	                        <button onclick="showDiv()">닫기버튼</button>
+	                        <div id="for-area">
+	                        	<table>
+	                        	</table>
+	                        </div>
+	                        <div id="forblock">
+		                        <button onclick="showDiv()">닫기버튼</button>
+	                        </div>
 	                    </div>               
                         <script>
 			                // 세부카테고리페이지 열고닫히기 용 스크립트
@@ -427,8 +468,10 @@
 			sessionStorage.setItem("recentRecipeNo", getCookie("recentRecipeNo"));
 		})
 		</script>
-        
-        
+		<!-- 세션 비워주기용 -->
+ 		<% session.removeAttribute("mainList"); %>
+		<% session.removeAttribute("subList"); %>
+   		
     </header>
 
 </body>

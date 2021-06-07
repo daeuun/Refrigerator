@@ -34,6 +34,7 @@ public class AjaxMainPageNavMenuConteoller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<NavMenu> list = new NavMenuService().seletNavMenuList();
 		//gson객체에 담아서 넘김 
+		
 		response.setContentType("application/json; charset=utf-8"); 
 		new Gson().toJson(list, response.getWriter());
 

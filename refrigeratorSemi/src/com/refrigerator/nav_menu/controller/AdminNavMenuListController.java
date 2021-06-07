@@ -33,7 +33,7 @@ public class AdminNavMenuListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ArrayList<NavMenu> list = new NavMenuService().seletNavMenuList();
-	
+		
 		request.setAttribute("navlist", list);
 
 		request.getRequestDispatcher("/views/nav_menu/adminNavbarChangePage.jsp").forward(request, response);
