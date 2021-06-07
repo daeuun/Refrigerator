@@ -1,4 +1,4 @@
-package com.refrigerator.category.controller;
+package com.refrigerator.banner.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.refrigerator.category.model.service.SubCategoryService;
-import com.refrigerator.category.model.vo.SubCategory;
+import com.refrigerator.banner.model.service.BannerService;
+import com.refrigerator.banner.model.vo.Banner;
 
 /**
- * 메인카테고리 번호 받아 sub카테고리 목록 반환
- * @author HeeRak
- * Servlet implementation class AjaxSubCatgoryListController
+ * Servlet implementation class MainPageBringBannerInfoController
  */
-@WebServlet("/jqAjaxSbCatList.rcp")
-public class AjaxSubCatgoryListController extends HttpServlet {
+@WebServlet("/bringBanner.ba")
+public class MainPageBringBannerInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxSubCatgoryListController() {
+    public MainPageBringBannerInfoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,15 +32,10 @@ public class AjaxSubCatgoryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int mcNo = Integer.parseInt(request.getParameter("mcNo"));
-		
-		ArrayList<SubCategory> Bannerlist = new SubCategoryService().selectSubListByMainCategory(mcNo);
-		
-		response.setContentType("application/json; charset=utf-8");
-		
-		new Gson().toJson(Bannerlist, response.getWriter());
-		
+		ArrayList<Banner> BannerInfo = new BannerService().selectBannerInfo();
+		response.setContentType("application/json; charset=utf-8");		
+		new Gson().toJson(BannerInfo, response.getWriter());
+
 	}
 
 	/**

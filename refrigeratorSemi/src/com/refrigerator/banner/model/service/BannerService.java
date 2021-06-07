@@ -93,7 +93,15 @@ public class BannerService {
 		return result;		
 	}
 	
-	
+//------------------------------------------------------------------------------------------------
+	public ArrayList<Banner> selectBannerInfo(){
+		// 넘겨받은 페이지정보 객체를 doa에 넘기고 받아와오는 메소드  
+		Connection conn = getConnection();
+		ArrayList<Banner> list = new BannerDao().selectBannerInfo(conn);
+		close(conn);
+		return list;	
+	}
+//--------------------------------------------------------------------------------------------------
 	
 	/** 배너 관리자페이지 : 메인 레시피 리스트 조회
 	 * @author daeun

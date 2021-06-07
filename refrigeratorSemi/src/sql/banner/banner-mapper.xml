@@ -95,6 +95,25 @@
 		 WHERE BANNER_NO = ?
 	</entry>
 	
+	<entry key="selectBannerInfo">
+       SELECT 
+              BANNER_NAME
+            , BANNER_IMG
+            , PAGE
+        FROM BANNER  
+	   WHERE BANNER_STATUS = 'Y'
+	     AND PAGE = 'banner1'
+         AND SYSDATE BETWEEN START_DATE AND END_DATE
+          OR BANNER_STATUS = 'Y'
+         AND PAGE = 'banner2'
+         AND SYSDATE BETWEEN START_DATE AND END_DATE
+          OR BANNER_STATUS = 'Y'
+         AND PAGE = 'banner3'
+         AND SYSDATE BETWEEN START_DATE AND END_DATE
+       ORDER
+          BY PAGE 
+	</entry>	
+	
 	<!-- @author daeun -->
 	<!-- 배너 관리자페이지 : 메인 레시피 조회 -->
 	<entry key="selectBannerRecipeList">

@@ -487,21 +487,29 @@
 
                                 </div>
 
-                            </야>
                         </article>
 
                     </div>
 
-                    <!-- (2) 이벤트/광고 슬라이드 배너 flex item_2--> 
-					<style>
-
-						  
-					</style>
                     <!-- (2) 이벤트/광고 슬라이드 배너 flex item_2    이미지 삽입은 가로 300px 세로 500px 짜리로 만들어서 삽입해야한다.--> 
                     <!-- 스크립트로 가져와서 해결해야한다. -->
                     <script>
-						// 서브릿부터 작업해주자                    
-                    
+					$.ajax({ 
+						url : "bringBanner.ba",
+						type : "post", 
+						success: function(miniBanner){ 
+							console.log(miniBanner);
+							
+							$("#firstBanner").attr("src", miniBanner[0].bannerImg);
+							$("#secondBanner").attr("src", miniBanner[1].bannerImg);
+							$("#thirdBanner").attr("src", miniBanner[2].bannerImg);
+
+						},
+						error:function(){
+							console.log("ajax통신실패");
+							alert("예상치 못한 오류로 인해 조회가 불가합니다 개발자에게 문의하세요")
+						}
+                    })	
                     </script>
                     
                     <div>
@@ -514,20 +522,20 @@
 						  <div class="carousel-inner miniBanner" style="overFlow:; width:300px; height:500px;">
 						    <div class="carousel-item active">
 							  <!--  <a href="www.naver.com" class="overray">이벤트로 이동 </a> -->						    
-						      <img id="firstBanner" src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F2438573358070C1535" width="300" height="500">
+						      <img id="firstBanner" src="<%= request.getContextPath() %>/resources/banner_upfiles/standardbanner.png" width="300" height="500">
 						      
 						      <div class="carousel-caption">
 						      </div>   
 						    </div>
 						    <div class="carousel-item">
    							  <!-- <a href="www.naver.com" class="overray">공모전으로 이동 </a>	 -->					    					    
-						      <img id="secondBanner" src="http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg" width="300" height="500">
+						      <img id="secondBanner" src="<%= request.getContextPath() %>/resources/banner_upfiles/standardbanner.png" width="300" height="500">
 						      <div class="carousel-caption">
 						      </div>   
 						    </div>
 						    <div class="carousel-item">
     						  <!-- <a href="www.naver.com" class="overray">광고로 이동 </a>	-->
-						      <img id="thirdBanner" src="https://files.itworld.co.kr/archive/image/2017/12/GettyImages-889581518.jpg" width="300" height="500">
+						      <img id="thirdBanner" src="<%= request.getContextPath() %>/resources/banner_upfiles/standardbanner.png" width="300" height="500">
 						      <div class="carousel-caption">
 						      </div>   
 						    </div>

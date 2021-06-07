@@ -60,6 +60,15 @@ public class Banner {
 		this.page = page;
 	}
 	
+	
+	
+	public Banner(String bannerName, String bannerImg, String page) {
+		super();
+		this.bannerName = bannerName;
+		this.bannerImg = bannerImg;
+		this.page = page;
+	}
+
 	/** 배너 레시피 등록
 	 * @author daeun
 	 */
@@ -75,7 +84,7 @@ public class Banner {
 		this.endDate = endDate;
 		this.bannerImg = bannerImg;
 	}
-
+	
 	public int getBannerNo() {
 		return bannerNo;
 	}

@@ -105,7 +105,6 @@
     }
     
     /* Jaewon 각각 메뉴들 위치가 바뀌었을시의 위치잡기용 */
-    /*.menu{position: absolute;}*/
     .menu1{width:55px;}
     .menu2{width:100px;}
     .menu3{width:85px;}

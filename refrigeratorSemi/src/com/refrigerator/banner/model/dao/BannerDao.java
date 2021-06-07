@@ -221,7 +221,35 @@ public class BannerDao {
 		
 		return result;
 	}
-	
+
+//---------------------------------------------------------------------------------------------------------------------------
+		public ArrayList<Banner> selectBannerInfo(Connection conn){
+			// 넘겨받은 페이지정보 객체를 doa에 활용하여 일부의 list를 뽑아오는 메소드 그후 반환
+			//select문 => resultSet (여러행)
+			ArrayList<Banner> list = new ArrayList<>();
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectBannerInfo");
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rset = pstmt.executeQuery();
+
+				while(rset.next()) {
+					list.add(new Banner(rset.getString("banner_name"),
+	             					    rset.getString("banner_img"),
+	             					    rset.getString("page")));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+					
+			return list;
+		}	
 //-----------------------------------------------------------------------------------------
 	
 	/** 배너 관리자페이지 : 메인 레시피 리스트 조회
