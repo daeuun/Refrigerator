@@ -40,6 +40,19 @@
 		     )
 	</entry>
 	
+	<!-- @author seong -->
+	<!-- 스크랩 카운트 증가 -->
+	<entry key="increaseScrapCount">
+	
+		UPDATE RECIPE
+		SET SCRAP_COUNT = SCRAP_COUNT +1
+		WHERE RECIPE_NO = ( SELECT RECIPE_NO 
+		                    FROM SCRAP
+		                    WHERE USER_NO = ?
+		                    AND RECIPE_NO = ?)
+		 
+	</entry>
+	
 	
 	
 </properties>

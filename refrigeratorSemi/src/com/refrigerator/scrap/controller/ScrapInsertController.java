@@ -34,10 +34,13 @@ public class ScrapInsertController extends HttpServlet {
 		// 수정하기
 		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		
+	
 		int result = new ScrapService().insertScrap(recipeNo, userNo);
 		
+		int scrapCount = new ScrapService().increaseScrapCount(recipeNo,userNo);
+		
 		if(result>0) {
+			
 			
 			request.getSession().setAttribute("alertMsg", " 이 레피시를 찜했습니다! ");
 			response.sendRedirect(request.getContextPath() + "/detail.recipe?rno=" + recipeNo);

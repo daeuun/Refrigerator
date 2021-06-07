@@ -39,8 +39,6 @@ public class RecipeDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 로그인한 유저 객체 => 요리 후기 작성과 댓글  , 
-		//Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		// 레시피 번호 
 		int recipeNo = Integer.parseInt(request.getParameter("rno"));
@@ -53,7 +51,6 @@ public class RecipeDetailController extends HttpServlet {
 		
 		//필수 재료 조회
 		ArrayList <Ingre> ingre = new RecipeService().selectMainIngreList(recipeNo);
-		
 		
 		//부가 재료 조회 
 		ArrayList<SubIngre> subIngre = new RecipeService().selectSubIngreList(recipeNo);
