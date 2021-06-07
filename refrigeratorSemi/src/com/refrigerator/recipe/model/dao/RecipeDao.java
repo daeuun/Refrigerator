@@ -1303,8 +1303,75 @@ public class RecipeDao{
 		return list;
 	}
 	
-	
-	
+	/** 카테고리별 검색 메소드 (오버로딩개념)
+	 * @author Jaewon 
+	 */ 
+	public int selectListCount(Connection conn, int subCatNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCatListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, subCatNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+	/** 소분류에 따라 레시피 리스트 가져오는 메소드 (오버로딩 개념 )
+	 * @author Jaewon 
+	 */ 
+	public ArrayList<Recipe> selectRecipeList(Connection conn, PageInfo pi, int subCatNo){
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectbyCatList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+						
+			pstmt.setInt(1, subCatNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+								    rset.getInt("user_no"),
+								    rset.getString("nickname"),
+								    rset.getString("recipe_title"),
+								    rset.getString("recipe_intro"),
+								    rset.getDouble("avrg_star_point"),
+								    rset.getInt("count"),
+								    rset.getString("recipe_enroll_date"),
+								    rset.getString("main_img")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
 	
 }

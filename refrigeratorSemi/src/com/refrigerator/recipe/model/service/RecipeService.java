@@ -475,7 +475,26 @@ public class RecipeService {
 		return list;
 	}
 	
-	
+	/** 카테고리별 검색 메소드 (오버로딩개념)
+	 * @author Jaewon 
+	 */ 
+	public int selectListCount(int subCatNo) {
+		Connection conn = getConnection();
+		int listCount = new RecipeDao().selectListCount(conn, subCatNo);
+		close(conn);
+		return listCount;
+	}
+
+	/** 소분류에 따라 레시피 리스트 가져오는 메소드 (오버로딩 개념 )
+	 * @author Jaewon 
+	 */ 
+	public ArrayList<Recipe> selectRecipeList(PageInfo pi, int subCatNo){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn, pi, subCatNo);
+		
+		close(conn);
+		return list;
+	}
 	
 
 }

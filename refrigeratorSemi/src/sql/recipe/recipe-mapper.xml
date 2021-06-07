@@ -685,5 +685,43 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<!-- @author Jaewon -->
+	<!-- 카테고리별 검색 메소드 페이징 바를 위한 값 가져오는 SQL문   -->
+	<entry key="selectCatListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM RECIPE  
+          JOIN INGRE USING (RECIPE_NO)
+        WHERE STATUS = 'N' 
+          AND CATEGORY_SNO = ?
+	</entry>
+	
+	<!-- @author Jaewon -->
+	<!-- 카테고리별 검색 메소드  SQL문   -->
+	<entry key="selectbyCatList">
+		SELECT *
+		  FROM (
+			    SELECT ROWNUM RNUM, A.*
+		          FROM (
+				        SELECT
+				               RECIPE_NO
+				             , USER_NO
+		                     , NICKNAME
+                             , RECIPE_TITLE
+                             , RECIPE_INTRO
+                             , AVRG_STAR_POINT
+                             , COUNT
+                             , RECIPE_ENROLL_DATE
+                             , MAIN_IMG
+		                  FROM RECIPE R
+                          JOIN MEMBER M USING (USER_NO)
+                          JOIN INGRE I USING(RECIPE_NO)
+                         WHERE CATEGORY_SNO = ? 
+		                 ORDER
+		                    BY RECIPE_ENROLL_DATE DESC
+		                ) A
+		        )
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 </properties>
