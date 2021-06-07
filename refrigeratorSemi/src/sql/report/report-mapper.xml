@@ -59,5 +59,11 @@
 		     , 2
 		     )
 	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 검색한 회원 총 count --> 
+	<entry key="selectUserListCount">
+        
+	</entry>
 
 </properties>

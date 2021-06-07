@@ -1248,7 +1248,6 @@ public class RecipeDao{
 		 
 		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		String sql = prop.getProperty("selectSearchListCount");
 		
 		try {

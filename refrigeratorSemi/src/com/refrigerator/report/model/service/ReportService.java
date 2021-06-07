@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.member.model.dao.MemberDao;
 import com.refrigerator.report.model.dao.ReportDao;
 import com.refrigerator.report.model.vo.Report;
 
@@ -69,5 +70,31 @@ public class ReportService {
 		return result;
 	}
 	
+	/**
+	 * @author leeyeji
+	 * 검색한 총 회원 count
+	 */
+	public int selectUserListCount(String userId) {
+		Connection conn = getConnection();
+		int result = new ReportDao().selectUserListCount(conn, userId);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 회원 검색 결과
+	 */
+	public ArrayList<Report> selectSearchUserList(PageInfo pi, String userId){
+		Connection conn = getConnection();
+		ArrayList<Report> list = new ReportDao().selectSearchUserList(conn, pi, userId);
+		close(conn);
+		return list;
+	}
 	
 }
