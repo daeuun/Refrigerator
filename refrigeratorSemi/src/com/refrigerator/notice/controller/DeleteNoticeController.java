@@ -37,9 +37,13 @@ public class DeleteNoticeController extends HttpServlet {
 		
 		if(result > 0) {
 			
+			request.getSession().setAttribute("alertMsg", "공지사항 삭제 성공");
 			response.sendRedirect(request.getContextPath() + "/adList.no?currentPage=1");
 			
 		}else {
+			
+			request.setAttribute("errorTitleMsg", "공지사항 삭제 실패");
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 			
 		}
 		

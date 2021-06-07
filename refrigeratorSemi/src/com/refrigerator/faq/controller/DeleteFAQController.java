@@ -36,9 +36,13 @@ public class DeleteFAQController extends HttpServlet {
 		
 		if(result > 0) {
 			
+			request.getSession().setAttribute("alertMsg", "FAQ 삭제 성공");
 			response.sendRedirect(request.getContextPath() + "/adList.faq?currentPage=1");
 			
 		}else {
+			
+			request.setAttribute("errorTitleMsg", "faq 삭제 실패");
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 			
 		}
 		

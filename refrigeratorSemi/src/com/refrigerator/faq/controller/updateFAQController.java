@@ -48,9 +48,13 @@ public class updateFAQController extends HttpServlet {
 		
 		if(result > 0) {
 			
+			request.getSession().setAttribute("alertMsg", "FAQ 수정 성공");
 			response.sendRedirect(request.getContextPath() + "/adList.faq?currentPage=1");
 			
 		}else {
+			
+			request.setAttribute("errorTitleMsg", "faq 수정 실패");
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 			
 		}
 		

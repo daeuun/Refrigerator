@@ -45,9 +45,13 @@ public class AdminUpdateInquiryController extends HttpServlet {
 		
 		if(result > 0) {
 			
+			request.getSession().setAttribute("alertMsg", "문의 답변 성공");
 			response.sendRedirect(request.getContextPath() + "/adList.inq?unSolCurrentPage=1&solCurrentPage=1");
 			
 		}else {
+			
+			request.setAttribute("errorTitleMsg", "문의 답변 실패");
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 			
 		}
 		

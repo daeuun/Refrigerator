@@ -45,10 +45,14 @@ public class InsertFAQController extends HttpServlet {
 		
 		if(result > 0) {
 			
+			request.getSession().setAttribute("alertMsg", "FAQ 등록 성공");
 			response.sendRedirect(request.getContextPath() + "/adList.faq?currentPage=1");
 			
 			
 		}else {
+			
+			request.setAttribute("errorTitleMsg", "faq 등록 실패");
+			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 			
 		}
 	}
