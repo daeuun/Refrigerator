@@ -21,9 +21,8 @@
 	int reviewCount = (int)request.getAttribute("reviewCount");
 	int replyCount = (int)request.getAttribute("replyCount");
 	
-	
 	Recipe rc = (Recipe)request.getAttribute("rc");
-	
+
 	/*menubar.jsp로 가져갈 구문*/
 	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
@@ -40,6 +39,9 @@
 
 <style>
 
+	@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
     .total-outer{
         margin:auto;
         margin-top:50px;
@@ -356,7 +358,7 @@
                 <img src="<%=rc.getMainImg()%>" id="main-img">
                 <span class="text" align="right" style="width: 580px;">
                     <span><img src="<%=contextPath%>/resources/image/icon-star.png" alt=""><%=rc.getAvrgStarPoint()%></span>
-                    <span><img src="<%=contextPath%>/resources/image/icon-bookmark.png" alt=""><%=rc.getScrapCount() %></span>
+                    <span><img src="<%=contextPath%>/resources/image/icon-bookmark.png" alt=""><%=rc.getScrapCount()%></span>
                     <span></spn><img src="<%=contextPath%>/resources/image/icon-view.png" alt=""><%=rc.getCount() %></span>
                 </span>
             </div>
@@ -469,6 +471,7 @@
 				
 					 <hr width="100px">
 					
+					
 						<!-- 필수 재료 출력되는 구문 -->
 						<% for(int i=0; i<ingre.size();i++) { %>
 		                    <tr>
@@ -478,7 +481,7 @@
 
 		                    </tr>
 						<%} %>
-						       
+				
                 </table>
             
             </div>
@@ -490,12 +493,12 @@
                 <table align="center">
                 
 						<!-- 부가재료 출력되는 구문 -->
-						<%for(SubIngre si : subIngre) { %>
+						<%for(int i=0; i<subIngre.size();i++) {%>
 		                  
 		                    <tr>
-		                        <th><%=si.getSubIngreName()%></th>
-		                        <td><%=si.getSubIngreAmount() / rc.getSeveralServings() %></td>
-		                        <td><%=si.getSubIngreUnit() %></td>
+		                        <th><%=subIngre.get(i).getSubIngreName()%></th>
+		                        <td id="sub<%=i%>"><%=subIngre.get(i).getSubIngreAmount() / rc.getSeveralServings()%></td>
+		                        <td><%=subIngre.get(i).getSubIngreUnit() %></td>
 		                    </tr>
 		                    
 						<%} %>
@@ -556,17 +559,19 @@
                             <script>
 	                            
 	                            function calculator(){
+	                            	
 	                                var servings = $("#select-servings").children("option:selected").val();
 	                                
 	                                for(var i=0; i<<%=ingre.size()%>;i++) {
-	                                	
 	                                   var ing = $("#ing" + i).text();
-	                                   
 	                                   $("#ing" + i).text(ing*servings);
 	                                   
 	                                }
 	                                
-	                                
+                                   for(var i=0;i<<%=subIngre.size()%>;i++){
+	                                	var sub = $("#sub" + i).text();
+	                                	$("#sub" + i).text(sub*servings);
+	                                }
 	                                
 	                                
 	                            }
