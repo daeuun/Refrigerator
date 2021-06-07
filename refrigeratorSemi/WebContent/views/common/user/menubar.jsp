@@ -313,6 +313,16 @@
                 </div>
 
             </div>
+            
+            <script>
+                	function searchClick(searchBtn){
+                		
+                		var searchWord = $(searchBtn).sblings("input[type='text']").val();
+	
+                		window.location.href = "<%=contextPath%>/searchList.recipe?currentPage=1&cateNo=" + searchWord;
+
+                	}
+                </script>
 
             <!-- 메뉴바 + 로그인 -->
             <div class="navigation-secondary-warp">
