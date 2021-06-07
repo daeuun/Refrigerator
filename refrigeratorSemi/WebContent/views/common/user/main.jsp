@@ -165,7 +165,6 @@
             border-radius: 9px;
             font-size: 15px;
             position: relative;
-            top: 240px;
         }
         .main-recipe_content-more:hover{
             background-color:#009764;
@@ -225,7 +224,7 @@
         .home-category{         
             position: relative;
             display: inline-block;
-            top: 480px;
+            top: 50px;
         }
         .home-category ul{
             display: flex;
@@ -271,14 +270,12 @@
         .home-view-recipe{
             position: relative;
             display: inline-block;
-            top: 480px;
         }
 
         /************************쉐프가 선택한 레시피************************/
         .home-star-recipe{
             position: relative;
             display: inline-block;
-            top: 480px;
             width: 100%;
             margin: 100px 0;
         }
@@ -325,7 +322,6 @@
         .home-chefs{
             display: inline-block;
             position: relative;
-            top: 480px;
             width: 100%;
         }
 
@@ -400,6 +396,42 @@
         }
 
         
+        /* Jaewon 슬라이드*/
+	  #minibanner-box{
+        margin-left: 10px;
+	  }
+	  
+	  .miniBanner img {
+	    width: 100%;
+	    height: 500px;
+	    object-fit:cover;
+	    transform:translateX(-50%)
+	  }
+	  
+	  .miniBanner{
+        border-radius: 10px;
+	  	overflow:hidden;
+	    position:relative;
+	    display:inline-block;
+	  }
+	  
+	  .overray{
+	  	width:100px;
+	  	color:red;
+	  	font-size:12px;
+	  	font-weight:bold;
+	  	text-align:center;
+	  	border:1px solid orange;
+	  	border-radius:5px;
+	  	padding:2px;
+	  	position:absolute;
+	  	left:-53px;
+	  	bottom:-50px;
+	  	z-index:1000;
+	  	background-color:rgba(255,255,255,0.6);
+	  }
+        
+        
     </style>
 </head>
 <body>
@@ -461,41 +493,54 @@
                     </div>
 
                     <!-- (2) 이벤트/광고 슬라이드 배너 flex item_2--> 
-                    <div class="home-header_banner-wrap">
+					<style>
 
-                        <div class="home-header_banner-container">
-                            
-                            <a class="main-event-link" href="http://www.naver.com">
-
-                                <!-- * 이벤트 이미지-->
-                                <div class="main-event_image-warp"> 
-                                    <img class="main-event_image" src="<%=contextPath%>/resources/image/eventimg.jpg">
-                                </div>
-
-                                <!-- * 메인 내용 -->
-                                <div class="main-event_content-warp"> 
-
-                                    <!--이벤트 카테고리-->
-                                    <div class="main-event_content-category"> 
-                                        <!-- 카테고리 이름 -->
-                                        <span class="main-event_content-category_name">이벤트</span>
-                                    </div>
-
-                                    <!-- 이벤트 제목 텍스트 영역-->
-                                    <div class="main-event_content"> 
-                                        <!--이벤트 제목 텍스트-->
-                                        <div class="main-event_content-title"> 
-                                            뼛속까지 시원한 레시피를 알려주세요!
-                                        </div>
-                                    </div>    
-                                    
-                                </div>
-
-                            </a>
-
-                        </div>
-                    </div>
-
+						  
+					</style>
+                    <!-- (2) 이벤트/광고 슬라이드 배너 flex item_2    이미지 삽입은 가로 300px 세로 500px 짜리로 만들어서 삽입해야한다.--> 
+                    <!-- 스크립트로 가져와서 해결해야한다. -->
+                    <script>
+						// 서브릿부터 작업해주자                    
+                    
+                    </script>
+                    
+                    <div>
+						<div id="minibanner-box" class="carousel slide" data-ride="carousel" style="width:300px; height:500px;">
+						  <ul class="carousel-indicators">
+						    <li data-target="#demo" data-slide-to="0" class="active"></li>
+						    <li data-target="#demo" data-slide-to="1"></li>
+						    <li data-target="#demo" data-slide-to="2"></li>
+						  </ul>
+						  <div class="carousel-inner miniBanner" style="overFlow:; width:300px; height:500px;">
+						    <div class="carousel-item active">
+							  <!--  <a href="www.naver.com" class="overray">이벤트로 이동 </a> -->						    
+						      <img id="firstBanner" src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F2438573358070C1535" width="300" height="500">
+						      
+						      <div class="carousel-caption">
+						      </div>   
+						    </div>
+						    <div class="carousel-item">
+   							  <!-- <a href="www.naver.com" class="overray">공모전으로 이동 </a>	 -->					    					    
+						      <img id="secondBanner" src="http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg" width="300" height="500">
+						      <div class="carousel-caption">
+						      </div>   
+						    </div>
+						    <div class="carousel-item">
+    						  <!-- <a href="www.naver.com" class="overray">광고로 이동 </a>	-->
+						      <img id="thirdBanner" src="https://files.itworld.co.kr/archive/image/2017/12/GettyImages-889581518.jpg" width="300" height="500">
+						      <div class="carousel-caption">
+						      </div>   
+						    </div>
+						  </div>
+						  <a class="carousel-control-prev" href="#minibanner-box" data-slide="prev">
+						    <span class="carousel-control-prev-icon"></span>
+						  </a>
+						  <a class="carousel-control-next" href="#minibanner-box" data-slide="next">
+						    <span class="carousel-control-next-icon"></span>
+						  </a>
+						</div>
+					</div>
+				<!-- Jaewon 영역 끝 -->
                 </div>
                 
                 
