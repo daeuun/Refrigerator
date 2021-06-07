@@ -88,12 +88,8 @@
 
 	<div class="top-nav">
 
-        <div class="logo" a> 
-<<<<<<< Updated upstream
+        <div class="logo"> 
             <img src="<%=request.getContextPath() %>/resources/image/logo_pic.png" width="" align="left">
-=======
-            <img src="<%= request.getContextPath() %>/resources/image/logo_pic.png" width="" align="left">
->>>>>>> Stashed changes
         </div>
 
         <div class="home-btn">
