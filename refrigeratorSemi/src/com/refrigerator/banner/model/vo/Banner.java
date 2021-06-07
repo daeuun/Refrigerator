@@ -59,6 +59,22 @@ public class Banner {
 		this.bannerImg = bannerImg;
 		this.page = page;
 	}
+	
+	/** 배너 레시피 등록
+	 * @author daeun
+	 */
+	public Banner(int bannerNo, String bannerCategory, String bannerName, String companyName, String bannerStatus,
+			String startDate, String endDate, String bannerImg) {
+		super();
+		this.bannerNo = bannerNo;
+		this.bannerCategory = bannerCategory;
+		this.bannerName = bannerName;
+		this.companyName = companyName;
+		this.bannerStatus = bannerStatus;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.bannerImg = bannerImg;
+	}
 
 	public int getBannerNo() {
 		return bannerNo;

@@ -92,4 +92,47 @@ public class BannerService {
 				
 		return result;		
 	}
+	
+	
+	
+	/** 배너 관리자페이지 : 메인 레시피 리스트 조회
+	 * @author daeun
+	 */
+	public ArrayList<Banner> selectBannerRecipeList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Banner> list = new BannerDao().selectBannerRecipeList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	
+	/** 배너 관리자페이지 : 메인 레시피 등록
+	 * @author daeun
+	 */
+	public int insertBannerRecipe(Banner ba) {
+		Connection conn = getConnection();
+		int result = new BannerDao().insertBannerRecipe(conn, ba);
+		close(conn);
+		return result;
+	}
+	
+	/** 배너 관리자페이지 : 메인 레시피 수정
+	 * @author daeun
+	 */
+	public int updateBannerRecipe(Banner ba) {
+		Connection conn = getConnection();
+		int result = new BannerDao().updateBannerRecipe(conn, ba);
+		close(conn);
+		return result;
+	}
+	
+	/** 배너 관리자페이지 : 메인 레시피 삭제
+	 * @author daeun
+	 */
+	public int deleteBannerRecipe(int bannerNo) {
+		Connection conn = getConnection();
+		int result = new BannerDao().deleteBannerRecipe(conn, bannerNo);
+		close(conn);
+		return result;
+	}
 }

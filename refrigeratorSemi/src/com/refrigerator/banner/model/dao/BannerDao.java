@@ -223,4 +223,137 @@ public class BannerDao {
 	}
 	
 //-----------------------------------------------------------------------------------------
+	
+	/** 배너 관리자페이지 : 메인 레시피 리스트 조회
+	 * @author daeun
+	 */
+	public ArrayList<Banner> selectBannerRecipeList(Connection conn, PageInfo pi){
+		// select => Rset
+		ArrayList<Banner> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBannerRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			// 페이징 (레시피 갯수에 따라 끝페이지, 마지막페이지 구하기)
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+						
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Banner(rset.getInt("banner_no"),
+ 					                rset.getString("banner_name"),
+ 					                rset.getString("company_name"),
+ 					                rset.getString("banner_category"),
+ 					                rset.getString("banner_status"),
+ 					                rset.getDate("enroll_date"),
+ 					                rset.getDate("modify_date"),
+ 					                rset.getString("start_date"),
+ 					                rset.getString("end_date"),
+ 					                rset.getString("banner_img"),
+ 					                rset.getString("page")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
+	/** 배너 관리자페이지 : 메인 레시피 등록
+	 * @author daeun
+	 */
+	public int insertBannerRecipe(Connection conn, Banner ba){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertBannerRecipe");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setInt(1, ba.getBannerNo());
+			pstmt.setString(1, ba.getBannerCategory());
+			pstmt.setString(2, ba.getBannerName());
+			pstmt.setString(3, ba.getCompanyName());
+			pstmt.setString(4, ba.getBannerStatus());
+			pstmt.setString(5, ba.getStartDate());
+			pstmt.setString(6, ba.getEndDate());
+			pstmt.setString(7, ba.getBannerImg());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	/** 배너 관리자페이지 : 메인 레시피 수정
+	 * @author daeun
+	 */
+	public int updateBannerRecipe(Connection conn, Banner ba) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBannerRecipe");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, ba.getBannerCategory());
+			pstmt.setString(2, ba.getBannerName());
+			pstmt.setString(3, ba.getCompanyName());
+			pstmt.setString(4, ba.getBannerStatus());
+			pstmt.setString(5, ba.getStartDate());
+			pstmt.setString(6, ba.getEndDate());
+			pstmt.setString(7, ba.getBannerImg());
+			pstmt.setInt(8, ba.getBannerNo());
+			System.out.println(ba);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	/** 배너 관리자페이지 : 메인 레시피 삭제
+	 * @author daeun
+	 */
+	public int deleteBannerRecipe(Connection conn, int bannerNo) {
+		
+		// delete문 => 처리된 행 수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBannerRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bannerNo);
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
