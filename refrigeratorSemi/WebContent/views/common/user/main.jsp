@@ -4,11 +4,6 @@
 				 com.refrigerator.recipe.model.vo.Recipe,
 				 com.refrigerator.member.model.vo.Member"%>
    
-<%
-	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
-
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,58 +21,12 @@
             margin: 30px;
         }
         .home-chefs-list-wrap{
+            position: relative;
             margin: 100px 0;
         }
-        
         .home-chef-wrap {text-align: center;}
         .home-chef li {display: inline-block;}
-        .bx-wrapper {position: relative;}
-        .bx-controls-direction {font-size: 60px;}
-        .bx-controls-direction a {
-            position: absolute;
-            top: 50%;
-            display: block; 
-            width: 60px; 
-            height: 70px; 
-            overflow: hidden;
-            transform: translateY(-50%);
-            text-decoration: none;
-            color: rgb(122, 122, 122);
-        }
-        .bx-controls-direction .bx-prev{left: 0;}
-        .bx-controls-direction .bx-next{right: 0;}
-        .bx-controls-direction .bx-prev:before{
-            content: "\e93d"; 
-            font-family: 'xeicon';
-        }
-        .bx-controls-direction .bx-next:before{
-            content: "\e940"; 
-            font-family: 'xeicon';
-            
-        }
-        .bx-pager{
-            position: absolute; 
-            left: 0;
-            bottom: -92px;
-            width: 100%;
-            text-align: center;
-        }
-        .bx-pager div{
-            display: inline-block;
-            padding: 5px;
-        }
-        .bx-pager div a{
-            display: block;
-            font-size: 0;
-            color: transparent;
-            width: 24px;
-            height: 3px;
-            background: #999;
-        }
-        .bx-pager div a.active{ background: #000;}
-
         
-
         /*전체영역*/
         .home-outer{
             position: absolute;
@@ -439,11 +388,24 @@
             text-decoration: none;
             cursor: pointer;
         }
+        html {
+
+        position: relative;
+        min-height: 100%;
+        margin: 0;
+        }
+
+        body {
+        min-height: 100%;
+        }
+
         
     </style>
 </head>
 <body>
+
 	<%@ include file="menubar.jsp" %>
+	
     
     <div class="home-outer">
 
@@ -459,7 +421,7 @@
                     <div class="home-header_recipe">
                         
                         <article class="main-recipe-link_image">
-                            <div class="main-recipe-link" onclick="location.href='http://www.naver.com';">
+                            <div class="main-recipe-link" onclick="location.href='';">
                                 
                                 <!-- * 메인 이미지-->
                                 <div class="main-recipe_image-warp"> 
@@ -699,7 +661,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            제목
+                                            	제목	
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -710,7 +672,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                닉네임
+                                                
                                             </span>
 
                                         </div>
@@ -720,7 +682,7 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (2) -->
+                        <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
                             <input type="hidden" name="recipeNo" value="">
 
@@ -735,7 +697,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            제목
+                                            	제목	
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -746,7 +708,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                닉네임
+                                                
                                             </span>
 
                                         </div>
@@ -756,7 +718,7 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (3) -->
+                        <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
                             <input type="hidden" name="recipeNo" value="">
 
@@ -771,7 +733,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            제목
+                                            	제목	
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -782,7 +744,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                닉네임
+                                                
                                             </span>
 
                                         </div>
@@ -792,7 +754,7 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (4) -->
+                        <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
                             <input type="hidden" name="recipeNo" value="">
 
@@ -807,7 +769,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            제목
+                                            	제목	
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -818,7 +780,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                닉네임
+                                                
                                             </span>
 
                                         </div>
@@ -828,7 +790,7 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (5) -->
+                        <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
                             <input type="hidden" name="recipeNo" value="">
 
@@ -843,7 +805,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            제목
+                                            	제목	
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -854,7 +816,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                닉네임
+                                                
                                             </span>
 
                                         </div>
@@ -864,7 +826,7 @@
                             </a>
                         </div>
 
-                        <!-- 개별 레시피 (6) -->
+                        <!-- 개별 레시피 (1) -->
                         <div class="home-viewRecipe"> 
                             <input type="hidden" name="recipeNo" value="">
 
@@ -879,7 +841,7 @@
                                         
                                         <!-- 레시피 제목 -->
                                         <div class="home-viewRecipe_content-title">
-                                            제목
+                                            	제목	
                                         </div>
 
                                         <!-- 레시피 작성자-->
@@ -890,7 +852,7 @@
 
                                             <!-- 작성자 닉네임 -->
                                             <span class="home-viewRecipe_content-user_name">
-                                                닉네임
+                                                
                                             </span>
 
                                         </div>
@@ -922,12 +884,12 @@
                                 <div>
                                     <div class="home-starRecipe_content">
                                         <div class="home-starRecipe_content-title">
-                                          제목
+                                            제목
                                         </div>
                                         <div class="home-starRecipe_content-user">
                                             <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
-                                               닉네임
+                                                닉네임
                                             </span>
                                         </div>
                                     </div>
@@ -1085,8 +1047,8 @@
         </div>
     </div>
     
+    <%@ include file="footer.jsp" %>
     
-
 
 </body>
 </html>

@@ -15,6 +15,7 @@
 <title>냉뭐? footer</title>
     <style>
         footer{width: 1200px; margin: auto; height: 150px; box-sizing: border-box; padding-top: 22px; clear: both;}
+        footer{position: relative; bottom: -3400px;}/*author:다은 content영역이랑 안맞아서 위치 추가했습니다*/
         footer > div{margin-top: 30px;}
         footer a {text-decoration: none; color: black; padding: 2px; letter-spacing: -1.2px; font-weight: 500;}
         footer p{font-size: 10px;}
