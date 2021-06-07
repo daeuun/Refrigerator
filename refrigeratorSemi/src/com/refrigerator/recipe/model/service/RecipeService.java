@@ -452,6 +452,30 @@ public class RecipeService {
 		
 	}
 	
-
+	
+	/**
+	 * @author leeyeji
+	 * 레시피 검색 총 갯수
+	 */
+	public int selectSearchListCount(String query) {
+		Connection conn= getConnection();
+		int listCount = new RecipeDao().selectSearchListCount(conn, query);
+		close(conn);
+		return listCount;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 검색어로 레시피 검색
+	 */
+	public ArrayList<Recipe> selectSearchList(PageInfo pi, String query){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectSearchList(conn, pi, query);
+		close(conn);
+		return list;
+	}
+	
+	
+	
 
 }

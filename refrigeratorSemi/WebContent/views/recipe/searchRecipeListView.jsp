@@ -8,6 +8,7 @@
 <%
 	ArrayList<Recipe> pageList = (ArrayList<Recipe>)request.getAttribute("pageList");
 	int listCount = (int)request.getAttribute("listCount");
+	String searchWord = (String)request.getAttribute("searchWord");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -33,7 +34,6 @@
     .thumb-list-sec {
         width: 1000px;
         margin: auto;
-        margin-top: 20px
     }
     .search-content {
         width: 950px;
@@ -87,12 +87,10 @@
         /*border: 1px solid rgb(0, 120, 51);*/
         /*background: rgba(0, 120, 52, 0.1);*/
     }
+    .thumbnail>p{height: 120px;}
     #recipe-img img{
         box-sizing: border-box;
         border-radius: 20px;
-    }
-    #recipe-title{
-    	height: 50px;
     }
 </style>
 
@@ -107,7 +105,7 @@
             <div class="search-content">
 
                 <div class="search-info">
-                    <p>"<span id="search-title">별점순 레시피</span>"에 대한 검색결과</p>
+                    <p>"<span id="search-title"><%=searchWord %></span>"에 대한 검색결과</p>
                     <p>
                         총 
                         <span id="search-num"><%=listCount %></span>
@@ -126,38 +124,39 @@
 
             <div class="thumb-list-area">
 
-	            <%for(Recipe r : pageList) {%>
+				<%for(Recipe r : pageList) {%>
 	                <div class="thumbnail" align="center">
-		                    <!-- input value에 각 레시피 번호-->
-		                    <input type="hidden" value="<%=r.getRecipeNo()%>">
-		                    <div id="recipe-img">
-		                        <img src="<%=r.getMainImg() %>" width="200" height="150">
-		                    </div>
-		
-		                    <p style="margin-top: 5px;">
-		                        <span id="recipe-title" style="height:50"><b><%=r.getRecipeTitle() %></b></span><br>
-		                        <span style="font-size:14px"><%=r.getRecipeWriter() %></span> <br>
-		                        <span style="font-size:14px">별점 : <%=r.getAvrgStarPoint() %>(5.0) &nbsp;|&nbsp; 조회수 : <%=r.getCount() %></span> 
-		                    </p>
+	                    <!-- input value에 각 레시피 번호-->
+	                    <input type="hidden" value="<%=r.getRecipeNo()%>">
+	                    <div id="recipe-img">
+	                        <img src="<%=r.getMainImg() %>" width="200" height="150">
+	                    </div>
+	
+	                    <p style="margin-top: 5px;">
+	                        <b><%=r.getRecipeTitle() %></b><br>
+	                        <span style="font-size:14px"><%=r.getRecipeWriter() %></span> <br>
+	                        <span style="font-size:14px">별점 : <%=r.getAvrgStarPoint() %>(5.0) &nbsp;|&nbsp; 조회수 : <%=r.getCount() %></span> 
+	                    </p>
+	
 	                </div>
-				<%} %>
+	            <% } %>
                 
             </div>
 
         </section>
         
-        <br><br>
+		<br><br>
         <!-- 페이징 -->
         <div align="center" class="paging-area">
 		        
 			<% if(currentPage != 1) { %>
-				<button onclick="location.href='<%= contextPath%>/starRtng.recipe?currentPage=<%=currentPage-1%>';"> &lt; </button>
+				<button onclick="location.href='<%= contextPath%>/searchList.recipe?currentPage=<%=currentPage-1%>';"> &lt; </button>
 			<% } %>
 						
 				<% for(int p=startPage; p<=endPage; p++) {%>
 			            	
 					<% if(p != currentPage){ %>
-						<button onclick="location.href='<%= contextPath%>/starRtng.recipe?currentPage=<%=p%>';"><%= p %></button>
+						<button onclick="location.href='<%= contextPath%>/searchList.recipe?currentPage=<%=p%>';"><%= p %></button>
 					<% }else{ %>
 						<button disabled><%= p %></button>
 					<%} %>
@@ -165,12 +164,11 @@
 				<% } %>
 			
 			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%= contextPath%>/starRtng.recipe?currentPage=<%=currentPage+1%>'"> &gt; </button>
+				<button onclick="location.href='<%= contextPath%>/searchList.recipe?currentPage=<%=currentPage+1%>'"> &gt; </button>
 			<% } %>
 					
 		</div>
 		<br><br>
-        
     </div>
     <script>
 
@@ -184,6 +182,7 @@
         })
 
     </script>
+
 
 </body>
 </html>

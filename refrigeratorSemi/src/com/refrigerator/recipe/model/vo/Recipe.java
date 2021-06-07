@@ -131,6 +131,17 @@ public class Recipe {
 	}
 
 	
+	public Recipe(int recipeNo, String recipeWriter, String recipeTitle, double avrgStarPoint, int count,
+			String mainImg) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeWriter = recipeWriter;
+		this.recipeTitle = recipeTitle;
+		this.avrgStarPoint = avrgStarPoint;
+		this.count = count;
+		this.mainImg = mainImg;
+	}
+
 	/** 마이페이지 내가쓴레시피 조회해온것 담아오는것 
 	 * @author Jaewon
 	 */

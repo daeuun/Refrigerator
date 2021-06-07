@@ -652,6 +652,38 @@
 
 	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 	
+	<!-- @author leeyeji -->
+	<!-- 레시피 검색 총 갯수 -->
+	<entry key="selectSearchListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM RECIPE
+         WHERE RECIPE_TITLE LIKE ?	
+	</entry>
+	
+	<!-- @author leeyeji -->
+	<!-- 검색어로 레시피 검색 -->
+	<entry key="selectSearchList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+                               RECIPE_NO
+                             , NICKNAME
+                             , RECIPE_TITLE
+                             , AVRG_STAR_POINT
+                             , COUNT
+                             , MAIN_IMG
+                          FROM RECIPE R
+                          JOIN MEMBER USING(USER_NO)
+                         WHERE RECIPE_TITLE LIKE ?
+                         ORDER
+		                    BY R.RECIPE_ENROLL_DATE DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 	
 </properties>

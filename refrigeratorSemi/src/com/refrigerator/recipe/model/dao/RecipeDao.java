@@ -1237,6 +1237,73 @@ public class RecipeDao{
 	}
 	
 	
+	/**
+	 * @author leeyeji
+	 * 레시피 검색 총 갯수
+	 */
+	public int selectSearchListCount(Connection conn, String query) {
+		 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSearchListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + query + "%");
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * @author leeyeji
+	 * 검색어로 레시피 검색
+	 */
+	public ArrayList<Recipe> selectSearchList(Connection conn, PageInfo pi, String query){
+		
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setString(1, "%" + query + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+									rset.getString("nickname"),
+									rset.getString("recipe_title"),
+									rset.getDouble("avrg_star_point"),
+									rset.getInt("count"),
+									rset.getString("main_img")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	
 	
 	
 }
