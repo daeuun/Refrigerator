@@ -160,8 +160,8 @@
 				<% for(Scrap s : list) {%>
 					<div class="mini-box">
 						<div class="thumbnail-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= s.getRecipeNo() %>">
-							<img src="<%= request.getContextPath() %>/<%= s.getMainImg() %>"> <br>
-							<img src="<%= request.getContextPath() %>/<%= s.getProfileImg() %>"><br>
+							<img src="<%= s.getMainImg() %>"> <br>
+							<img src="<%= s.getProfileImg() %>"><br>
 							<span><%= s.getNickName() %></span>
 							<p><%= s.getRecipeTitle() %></p>
 							<div class="star-box">

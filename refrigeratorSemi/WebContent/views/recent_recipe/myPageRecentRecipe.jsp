@@ -145,8 +145,8 @@
 						<% for(RecentRecipe rr : firstRow){ %>
 							<td>
 								<div class="thumbnail-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= rr.getRecipeNo() %>">
-									<img src="<%= request.getContextPath() %>/<%= rr.getMainImg() %>"> <br>
-									<img src="<%= request.getContextPath() %>/<%= rr.getProfileImg() %>"><br>
+									<img src="<%= rr.getMainImg() %>"> <br>
+									<img src="<%= rr.getProfileImg() %>"><br>
 									<span><%= rr.getNickName() %></span>
 									<p><%= rr.getRecipeTitle() %></p>
 									<div class="star-box">
