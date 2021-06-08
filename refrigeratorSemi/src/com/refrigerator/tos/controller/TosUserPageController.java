@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.tos.model.service.TosService;
 import com.refrigerator.tos.model.vo.Tos;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class TosUserPageController
  */
@@ -30,6 +32,8 @@ public class TosUserPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* Author : Jaewon */
+
 		String page = request.getParameter("page");
 	
 		switch(page) {
@@ -41,14 +45,11 @@ public class TosUserPageController extends HttpServlet {
 				
 		Tos t = new TosService().selectUsableTos(page); 
 		
-		// 해당하는 것이없으면 !!! null이 담겨있을수있다!!! 
-		if(t != null) { // 성공했을 경우 => / url재요청  => 리스트페이지가 보여지도록 alert도 보여지게
-			//이제 url 재요청
+		if(t != null) { 
 			request.setAttribute("tos", t);	
 			request.getRequestDispatcher("views/common/user/tosPage.jsp").forward(request, response);
 		
-
-		}else { // 실패했을경우 error페이지가 보여지도록 에러문구 (error페이지로 forwarding 하는것)			
+		}else { 			
 			request.setAttribute("tosTitleMsg", "준비중"); 
 			request.setAttribute("tosMsg", "<p style='text-align:center; font-size:20px; font-weight:bold;'>이용약관을 준비중 입니다 가까운 시일 내로 공지하겠습니다. <br> 감사합니다.</p>");
 			request.getRequestDispatcher("views/common/user/tosPage.jsp").forward(request, response);

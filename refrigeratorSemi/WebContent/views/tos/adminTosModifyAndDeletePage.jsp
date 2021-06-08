@@ -2,30 +2,19 @@
     pageEncoding="UTF-8" %>
 <%@ page import="com.refrigerator.tos.model.vo.Tos"%>   
 
-<%
-	Tos t = (Tos)request.getAttribute("tos");
-%>    
-    
+<% Tos t = (Tos)request.getAttribute("tos"); %>    
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon -->
 
 <title>관리자 이용약관 수정페이지</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<%-- font-awesome CDN --%>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-<!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
-<!-- --------------------------------------------------------------------------------------------------- -->
+<%-----------------------------------------------------------------------------------------------------%>
 <style>
     #for-height{height: 1170px;} 
     div{box-sizing: border-box;}
@@ -111,7 +100,6 @@
         border: none;
     }
 
-/* ------------------------------------------------------------------------------------------------------------ */
 /* ----------------------- 삭제 모달 영역임 ---------------------------------- */
 	.delete-box{
 		text-align: center;
@@ -137,12 +125,11 @@
     <div class="wrap">
    	<%@ include file="../common/admin/adminSideBarView.jsp" %> 
         <div id="content">
-<!-------------------------------------------------------------------------------------------------------------->            
             <div class="outer" style="float:right;">
                 <div class="top-box">
-                    <a href="">홈</a> >
-                    <a href="">싸이트관리</a> >
-                    <a href="">이용약관관리</a>
+                    <span>홈</span> >
+                    <span>싸이트관리</span> >
+                    <span><b>이용약관관리</b></span>
                 </div>
                 <div class="outer-body">
                     <h2><b>이용약관 수정 및 삭제</b></h2>
@@ -173,7 +160,7 @@
                             </tr>
                             <tr>
                                 <th>작성자</th>
-                                <td><b>냉장고에 뭐있지?</b></td>
+                                <td><b>냉장고에 뭐있지? admin</b></td>
                             </tr>
                             <tr>
                                 <th>사용될 페이지 영역</th>
@@ -183,13 +170,16 @@
                                         <option value="FOOTER_2">푸터 개인정보취급방침</option>
                                         <option value="MEMBER_ENROLL_1">회원가입 이용약관</option>
                                         <option value="MEMBER_ENROLL_2">회원가입 개인정보취급방침</option>
-                                        <option value="undecided_1">테스트용01</option>                                        
-                                        <option value="undecided_2">테스트용02</option>                                        
-                                        <option value="undecided_3">테스트용03</option>                                        
-                                        <option value="undecided_4">테스트용04</option>                                        
-                                        <option value="undecided_5">테스트용05</option>                                        
-                                        <option value="undecided_6">테스트용06</option>                                        
-                                        <option value="undecided_7">테스트용07</option>                                        
+                                        <option value="undecided_1">테스트용 페이지01</option>                                        
+                                        <option value="undecided_2">테스트용 페이지02</option>                                        
+                                        <option value="undecided_3">테스트용 페이지03</option>                                        
+                                        <option value="undecided_4">테스트용 페이지04</option>                                        
+                                        <option value="undecided_5">테스트용 페이지05</option>                                        
+                                        <option value="undecided_6">테스트용 페이지06</option>                                        
+                                        <option value="undecided_7">테스트용 페이지07</option>
+                                        <option value="undecided_8">테스트용 페이지08</option>                                        
+                                        <option value="undecided_9">테스트용 페이지09</option>                                        
+                                        <option value="undecided_10">테스트용 페이지10</option>                                        
                                     </select>
 									<span style="color:red; font-size:12px"><b>※ 페이지 변경시 기존에 지정하지 않은 페이지를 선택해야합니다.</b></span>
                                     
@@ -207,7 +197,7 @@
                             <tr>
                                 <th style="height: 38px;">비고</th>
                                 <td>
-                                    <input type="text" name="tosNote" placeholder="내용을 입력해주세요" value="<% if(t.getTosNote() !=null){%><%= t.getTosNote() %><%}else{} %>">
+                                    <input type="text" name="tosNote" maxlength="6" placeholder="내용을 입력해주세요" value="<% if(t.getTosNote() !=null){%><%= t.getTosNote() %><%}else{} %>">
                                 </td>
                             </tr>
                             <tr>
@@ -220,7 +210,7 @@
                     </div>
                 </form>
             </div>
-            <!-- 글자수 제한 스크립트  -->
+            <%-- 글자수 제한 스크립트  --%>
             <script type="text/javascript">
              $(document).ready(function() {
                  $('#tos-write').on('keyup', function() {
@@ -238,8 +228,7 @@
              })
             </script>
            
-<!------------------------------------------------------------------------------------------------------------->    
-<!------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------%>
 			<!-- The Modal -->
 			<div class="modal fade" id="tos-del-modal">
 				<div class=" modal-dialog modal-sm">
@@ -261,12 +250,11 @@
 						<div class="modal-footer" style="justify-content: space-around; border-top: none;">
 							<button type="button" class="btn btn-light btn-bg" data-dismiss="modal" style="background-color: #BEBEBE; color: white;">취소</button>
 							<button type="button" class="btn btn-danger btn-bg" data-dismiss="modal" onclick="location.href='<%= request.getContextPath() %>/delete.tos?bno=<%= t.getTosNo() %>';">삭제</button>
-						</div>
-					
+						</div>				
 					</div>
 				</div>
 			</div>
-<!------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------%>
         </div>
     </div>
 </body>

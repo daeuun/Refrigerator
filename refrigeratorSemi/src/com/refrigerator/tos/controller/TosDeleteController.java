@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.tos.model.service.TosService;
 
+/* Author Jaewon */
+
 /**
  * Servlet implementation class TosDeleteController
  */
@@ -29,19 +31,15 @@ public class TosDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// Author : Jaewon
 		int tosNo = Integer.parseInt(request.getParameter("bno"));
-		
 		int result = new TosService().deleteTos(tosNo);
 		
-		//요청 처리후 성공했을시 실패했을시 
-		if(result > 0 ) { // 성공했을 경우 => /list.tos url재요청  => 리스트페이지가 보여지도록 alert도 보여지게
-			// alert문구는 세션에 담고서 url 재요청해주면된다. 
+		if(result > 0 ) { 
 			request.getSession().setAttribute("alertMsg", "성공적으로 이용약관을 삭제했습니다.");
-			//이제 url 재요청
 			response.sendRedirect(request.getContextPath() + "/list.tos?currentPage=1");
 			
-		}else { // 실패했을경우 error페이지가 보여지도록 에러문구 (error페이지로 forwarding 하는것)
+		}else { 
 			request.setAttribute("errorTitleMsg", "이용약관 삭제 실패");
 			request.setAttribute("errorMsg", "비정상적인 접근입니다. 이미 없는 항목일수도 있습니다. <br> 또는 인위적으로 url을 조작했을수도 있습니다. <br> 공격하지마세요~");
 			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);

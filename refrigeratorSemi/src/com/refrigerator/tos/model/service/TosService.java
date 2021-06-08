@@ -12,6 +12,8 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.dao.TosDao;
 import com.refrigerator.tos.model.vo.Tos;
 
+/* Author : Jaewon */
+
 public class TosService {
 //------------------------------------------------------
 	public int selectListCount() {

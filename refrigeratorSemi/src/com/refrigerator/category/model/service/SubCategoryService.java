@@ -12,11 +12,12 @@ import com.refrigerator.category.model.dao.MainCategoryDao;
 import com.refrigerator.category.model.dao.SubCategoryDao;
 import com.refrigerator.category.model.vo.SubCategory;
 
+/* Author : Jaewon  */
+
 public class SubCategoryService {
 
 	public ArrayList<SubCategory> selectSubList(){
 		Connection conn = getConnection();
-		//	변수명칭은 list로 받아줘도 문제 없다 	
 		ArrayList<SubCategory> list = new SubCategoryDao().selectSubList(conn);
 		close(conn);
 		return list;	

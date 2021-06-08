@@ -7,11 +7,6 @@
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Tos> list = (ArrayList<Tos>)request.getAttribute("list");
-	// 페이징바를 만들기위해서 필요한것들을!! 바로 가져다 쓸수있게 변수에 기록을해주자!!! 
-	// list에 지금은 이용약관번호, 이용약관 카테고리, 이용약관 사용페이지, 게시등록일,등록일, 수정일, 비고 , 이용약관제목, 이용약관 내용 모두 들어가 있는 상태이다. 
-	// 즉 나중에 이용약관 관련한 정보를 뽑아오고자 한다면 지금 만들어놓은 Service단에; selectList 메소드를 호출해주면된다는것이다.! 
-	
-	// 아래는 현재 페이지에서 필요한 페이징 변수들이다. 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -23,12 +18,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon -->
 
 <title>관리자 이용약관 조회페이지</title>
+<%-- font-awesome CND --%>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-<!-- 관리자단의 top nav 쪽에 예지님이 cdn으로 박아주셨다 나머지는 내 페이지에서 작업하면된다.  -->
-<!-- --------------------------------------------------------------------------------------------------- -->
 <style>
     #for-height{height: 720px;} 
     div{box-sizing: border-box;}
@@ -113,18 +107,19 @@
     <div class="wrap">
 	<%@ include file="../common/admin/adminSideBarView.jsp" %>
         <div id="content">     
-<!-------------------------------------------------------------------------------------------------------------->            
+        	<%-- include된곳에서 이미 css를 지정하여 inline스타일로 우선순위를 높임 --%>
             <div class="outer" style="float:right;">
                 <div class="top-box">
-                    <a href="어드민 페이지 HOME이 있나?">홈</a> >
+                    <span>홈</span> >
                     <%-- ANCHOR태그 안달아도 된다 --%>
-                    <a href="#">싸이트관리</a> >
-                    <a href="#">이용약관관리</a>
+                    <span>싸이트관리</span> >
+                    <span><b>이용약관관리</b></span>
                 </div>
                 <div class="outer-body">
                     <h2><b>이용약관 관리</b></h2>
-                    
+                    <span style="color:red;">※ 해당 이용약관 클릭시 이용약관 수정 삭제페이지로 이동합니다.</span>
                     <%-- 전제 조건이 어드민 페이지는 로그인이 되어있어야지만 들어올수가 있어서 따로 등록버튼은 안보이게 할필요가 없다!!!  --%>
+                    <%-- 등록페이지로 이동하는 메소드를 설정 --%>
                     <button type="button" onclick="moveEnroll();">이용약관 등록</button>
                     <br style="clear: both;">
                     <table border="1" style="border: rgb(204,204,204);">
@@ -140,10 +135,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <%-- 각각의 TR들은 완성이 되어있어야하고 각각의 TR 자리에 뿌려줘야한다. 
-                        	방법은 아주 간단하다!!!! 각각의 페이지는 !! 조건문 달고 ! 무조건 최소한 10번은 반복문 돌게 만들어주면된다! 
-                        	그러고 ! 빈곳은 그냥 TR만 생성되겠끔 하면 되는것이다. 
-                        --%>
+                        <%-- db에서 이용약관 관련하여 값을 가져와 동적으로 뿌려줌  --%>
     	                   	<%if(list.isEmpty()){ %>
 			            		<tr>
 			            			<td colspan="7">조회된 리스트가 없습니다. </td>
@@ -173,6 +165,7 @@
 						                    </td>
 						                </tr>
 					                <% } %>	
+					                <%-- 최대행은 10중이나 혹여나 비어있다면 빈 이용약관이 들어갈수있게 해주는 장치  --%>
 					                <% for(int i=0; i<(pi.getBoardLimit()-list.size()); i++){ %>
 					                	<tr >
 					                		<td></td>
@@ -229,7 +222,7 @@
                     </table>
                 </div>
 
-<!------------------------------------- 페이징바 영역 --------------------------------------------------------->
+<%------------------------------------- 페이징바 영역 ---------------------------------------------------------%>
 
 		        <div align="center" class="paging-area">
 		
@@ -255,8 +248,7 @@
 				
 
             </div>
-<!----------------------------------------- 이용약관 관리 list페이지 HTML끝 ------------------------------------->
-<!------------------------------------------------------------------------------------------------------------->            
+<%-------------------------------------------------------------------------------------------------------------%>            
         </div>
     </div>
 </body>

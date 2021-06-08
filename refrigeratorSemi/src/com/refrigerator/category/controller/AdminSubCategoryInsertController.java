@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.category.model.service.SubCategoryService;
 import com.refrigerator.category.model.vo.SubCategory;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class AdminSubCategoryInsertController
  */
@@ -42,13 +44,11 @@ public class AdminSubCategoryInsertController extends HttpServlet {
 	
 		int result = new SubCategoryService().insertSubCategory(sc);
 		
-		//요청 처리후 성공했을시 실패했을시 
-		if(result > 0 ) { // 성공했을 경우
+		if(result > 0 ) { 
 			request.getSession().setAttribute("alertMsg", "성공적으로 소분류 카테고리가 등록되었습니다.");
-			//이제 url 재요청
 			response.sendRedirect(request.getContextPath() + "/list.cat");
 			
-		}else { // 실패했을경우 error페이지가 보여지도록 에러문구 (error페이지로 forwarding 하는것)
+		}else {
 			request.setAttribute("errorTitleMsg", "db에 저장실패");
 			request.setAttribute("errorMsg", "error 발생");
 			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);

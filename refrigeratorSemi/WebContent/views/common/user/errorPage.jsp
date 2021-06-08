@@ -5,14 +5,15 @@
 	String errorTitleMsg = (String)request.getAttribute("errorTitleMsg");
 	String errorMsg = (String)request.getAttribute("errorMsg"); 
 %>   
-<%-- errorMsg 담을때 br 태그를 넣어서 줄바꿈 생각해서 넘기기 아니면. css로 해결해야하는데 css로 해결하면 팀원이 원하는 형태로 진행되지 않을것이다. --%>
+<%-- errorMsg는 innerHTML개념으로 들어가겠끔 설정 --%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon  -->
+
 <title>냉뭐? Error Page</title>
     <style>
         #logo-area{width: 800px; height: 180px; margin: auto; text-align: center;}
@@ -27,28 +28,21 @@
     </style>
 </head>
 <body>
-    <%-- 단순한 에러페이지이기에 로그인 정보같은것을 넘겨받을 필요가 없다. 단순히 에러페이지 제목과 세부 문구를 전달해주면된다. 
-        servlet에서 request에 attribute에 담아서 이페이지에서 받아주고 그리고 뿌려주기만 하면 된다. --%>
     <div id="logo-area"><img src="<%= request.getContextPath() %>/resources/image/logo.png"></div>
-    <%-- 팀프로젝트로 옮길때! 이미지 위치 다시 잡아줘야한다. --%>
     <div id="err-info-area">
         <table align="center">
             <tr>
                 <td rowspan="3" width=220><img src="<%= request.getContextPath() %>/resources/image/exclamationmark.png" width="215"><br><br><br><br><br><br> </td>
-                <%-- 팀프로젝트로 옮길때! 이미지 위치 다시 잡아줘야한다. --%>
-                <th height=70><%= errorTitleMsg %></th><%-- <%errorTitleMsg%> 출력식으로 대체해주면된다 --%>
+                <th height=70><%= errorTitleMsg %></th>
             </tr>
             <tr> 
                 <td height=100><%= errorMsg %></td>
-                    <%-- <%errorMsg%> 출력식으로 대체해주면된다 --%>
             </tr>
             <tr>
                 <td><button onclick="history.back()">이전 페이지로</button></td> 
             </tr>
         </table>
     </div>
-
-    <%-- 기능구현 끝 팀프로젝트로 옮겼을시에 조금 손봐주면 된다. --%>
 
 </body>
 </html>

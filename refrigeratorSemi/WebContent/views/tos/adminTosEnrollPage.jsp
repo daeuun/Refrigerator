@@ -5,14 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
-<!-- ★★★ AJAX 처리해줘야한다!!! select 박스에 option태그 비교해서 disabled 먹이는 !!! ★★★★ -->
+<!-- Author : Jaewon -->
 
 <title>관리자 이용약관 등록 페이지</title>
-
+<%-- font-awesome CDN --%>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-<!-- header에서 연동되어있다. 나머지만 내가넣으면된다. -->
-<!-- --------------------------------------------------------------------------------------------------- -->
 <style>
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
@@ -109,15 +106,13 @@
     <div class="wrap">
     	<%@ include file="../common/admin/adminSideBarView.jsp" %>
         <div id="content">
-<!-------------------------------------------------------------------------------------------------------------->            
             <div class="outer" style="float:right;">
                 <div class="top-box">
-                    <a href="">홈</a> >
-                    <a href="">싸이트관리</a> >
-                    <a href="">이용약관관리</a>
+                    <span>홈</span> >
+                    <span>싸이트관리</span> >
+                    <span><b>이용약관관리</b></span>
                 </div>
                 <div class="outer-body">
-                	<!--  이용약관 등록에서 넘기는 값은 tos제목, tos카테고리, tos사용페이지, tos내용, tos비고 정도이다. -->
                     <h2><b>이용약관 등록</b></h2>
                     <form action="insert.tos" method="POST">
                         <table border="1" style="border: rgb(204,204,204);">
@@ -142,26 +137,25 @@
                             </tr>
                             <tr>
                                 <th>사용될 페이지 영역</th>
-                                <td>
-                                	<!-- 어케될지 모르지만 일단 4개만 넣어두자! -->
-                              	    <!-- value값은 다다르게 들어가야한다.  -->
-                                	
-                                    <select id="needOptionCheck" name="tosPage" id="" style="width: 300px;" >
+                                <td>                                	
+                                    <select id="needOptionCheck" name="tosPage" style="width: 300px;" >
                                         <option value="FOOTER_1" >푸터 이용약관 </option>
                                         <option value="FOOTER_2">푸터 개인정보취급방침</option>
                                         <option value="MEMBER_ENROLL_1">회원가입 이용약관</option>
                                         <option value="MEMBER_ENROLL_2">회원가입 개인정보취급방침</option>
-                                        <option value="undecided_1">테스트용01</option>                                        
-                                        <option value="undecided_2">테스트용02</option>                                        
-                                        <option value="undecided_3">테스트용03</option>                                        
-                                        <option value="undecided_4">테스트용04</option>                                        
-                                        <option value="undecided_5">테스트용05</option>                                        
-                                        <option value="undecided_6">테스트용06</option>                                        
-                                        <option value="undecided_7">테스트용07</option>                                        
+                                      	<option value="undecided_1">테스트용 페이지01</option>                                        
+                                        <option value="undecided_2">테스트용 페이지02</option>                                        
+                                        <option value="undecided_3">테스트용 페이지03</option>                                        
+                                        <option value="undecided_4">테스트용 페이지04</option>                                        
+                                        <option value="undecided_5">테스트용 페이지05</option>                                        
+                                        <option value="undecided_6">테스트용 페이지06</option>                                        
+                                        <option value="undecided_7">테스트용 페이지07</option>
+                                        <option value="undecided_8">테스트용 페이지08</option>                                        
+                                        <option value="undecided_9">테스트용 페이지09</option>                                        
+                                        <option value="undecided_10">테스트용 페이지10</option>                                            
                                     </select>
                                     
                                     <span style="color:red;">※ 기존에 지정하지않은 페이지를 선택해야합니다.</span>
-                                   
                                 </td>
                             </tr>
                             <tr class="tos-area">
@@ -183,7 +177,7 @@
                		</form>
                	</div>
                     
-                    <!-- 글자수 제한 스크립트  -->
+                    <%-- 글자수 제한 스크립트  --%>
                     <script type="text/javascript">
 	                    $(document).ready(function() {
 	                        $('#tos-write').on('keyup', function() {
@@ -197,7 +191,6 @@
 	                    });
                     </script>
             </div>
-<!------------------------------------------------------------------------------------------------------------->            
         </div>
     </div>
 </body>

@@ -16,6 +16,8 @@ import java.util.Properties;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.vo.Tos;
 
+/* Author : Jaewon */
+
 public class TosDao {
 	
 	// 실행되는 sql문을 실행할 xml파일을 등록을 해주자! 

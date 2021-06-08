@@ -13,6 +13,8 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class SearchCategoryViewController
  */
@@ -32,10 +34,8 @@ public class SearchCategoryViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//여기 작업해주면 된다!! !!!!!!!! 
 		int subCatNo= Integer.parseInt(request.getParameter("sno"));	
 		
-		// 페이징처리 셋팅
 		int listCount; 	
 		int currentPage;
 		int pageLimit;	
@@ -45,9 +45,7 @@ public class SearchCategoryViewController extends HttpServlet {
 		int startPage;
 		int endPage;
 						
-		// ★ 여기서 부터 커스터마이징 하면됨!!! 
 		listCount = new RecipeService().selectListCount(subCatNo);
-		// SNO가 5라면 여기 3개 담겨있을것이다. 
 						
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));		
 		
@@ -67,7 +65,6 @@ public class SearchCategoryViewController extends HttpServlet {
 						
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		//★★★★★  이름은 똑같이 가되!!!! 메소드를 달리해줘야해!!! 
 		ArrayList<Recipe> pageList = new RecipeService().selectRecipeList(pi, subCatNo);
 		
 		request.setAttribute("pi", pi);

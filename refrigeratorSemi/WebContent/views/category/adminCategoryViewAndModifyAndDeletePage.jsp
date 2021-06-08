@@ -3,7 +3,6 @@
     
 <%@ page import="java.util.ArrayList , com.refrigerator.category.model.vo.*"%>    
    
-
 <%
 	ArrayList<MainCategory> mainList = (ArrayList<MainCategory>)request.getAttribute("mainList");
 	ArrayList<SubCategory> subList = (ArrayList<SubCategory>)request.getAttribute("subList");	
@@ -14,19 +13,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon -->
 
 <title>관리자 카테고리 페이지</title>
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-<!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
-<!-- --------------------------------------------------------------------------------------------------- -->
 <style>
     #for-height{height: 700px;} 
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
     .outer{ width: 1000px; height: 700px; margin-right: 5px;}
-
 /* ----------------------------------------------------------------------------------------------------------- */
     .outer{
         margin-right: 10px;
@@ -82,16 +77,16 @@
         font-weight: bold;
     }
 
-    .for-seperate button:nth-child(1){
+   /* .for-seperate button:nth-child(1){
         background-color: rgb(231,76,60);
-        margin-left: 5px;
-    }
+    }*/
 
-    .for-seperate button:nth-child(2){
+    .for-seperate button:nth-child(1){
+        margin-left: 5px;
         background-color: rgb(52,152,219);
-        margin-right: 120px;
+        margin-right: 170px;
     }
-    .for-seperate button:nth-child(3){
+    .for-seperate button:nth-child(2){
         background-color: rgb(0,153,102);
     }
 	
@@ -124,7 +119,6 @@
         display: none;   
     }    
     
-/* ------------------------------------------------------------------------------------------------------------ */
 /* ----------------------- 삭제 모달 영역임 -------------------------------------------------------------------- */
 
 	.modal-title{
@@ -296,7 +290,6 @@
         <div id="content">
        	<%@ include file="../common/admin/adminSideBarView.jsp" %>
         
-<!---------------------------------------------------------------------------------------------------------------------->            
             <script>
                 $(document).ready(function() {
                     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
@@ -334,7 +327,7 @@
                                 <thead>
                                     <tr>
                                         <td colspan="3">
-                                            <button onclick="mainDelExamination();">삭제</button>
+                                            <!--  <button onclick="mainDelExamination();">삭제</button> -->
                                             <button onclick="mainModifyExamination();">수정</button>
                                             <button  data-toggle="modal" data-target="#major-enroll-modal"> 대분류 카테고리 등록</button>
                                         </td>
@@ -393,7 +386,7 @@
                                 <thead>
                                     <tr>
                                         <td colspan="6">
-                                            <button  onclick="subDelExamination();">삭제</button>
+                                            <!-- <button  onclick="subDelExamination();">삭제</button>  -->
                                             <button  onclick="subModifyExamination()">수정</button>
                                             <button  data-toggle="modal" data-target="#minor-enroll-modal"> 소분류 카테고리 등록</button>
                                         </td>
@@ -451,8 +444,7 @@
                     </div>
                 </div>
             </div>
-<!------------------------------------------------------------------------------------------------------------->            
-<!------------------------------대분류 삭제모달 영역임  --------------------------------------------------------->
+<%------------------------------대분류 삭제모달 영역임  ---------------------------------------------------------%>
 			<script>
                 function mainDelExamination(){
                    var mainCheck = $('input[type="checkbox"][name="categoryMainNo"]:checked');
@@ -505,8 +497,8 @@
 					</div>
 				</div>
 			</div>
-<!------------------------------대분류 삭제모달 영역임  --------------------------------------------------------->
-<!------------------------------소분류 삭제모달 영역임  --------------------------------------------------------->
+<%-----------------------------대분류 삭제모달 영역임  ---------------------------------------------------------%>
+<%-----------------------------소분류 삭제모달 영역임  ---------------------------------------------------------%>
              <script>  
                 function subDelExamination(){
                    var subCheck = $('input[type="checkbox"][name="categorySubNo"]:checked');
@@ -560,8 +552,8 @@
 					</div>
 				</div>
 			</div>
-<!------------------------------소분류 삭제모달 영역임  -------------------------------------------------------------->
-<!------------------------------대분류 수정모달 영역임  -------------------------------------------------------------->
+<%-----------------------------소분류 삭제모달 영역임  --------------------------------------------------------------%>
+<%------------------------------대분류 수정모달 영역임  --------------------------------------------------------------%>
 			<script>
                 function mainModifyExamination(){
                    var mainCheck = $('input[type="checkbox"][name="categoryMainNo"]:checked');
@@ -608,8 +600,8 @@
 					</div>
 				</div>
 			</div>
-<!------------------------------대분류 수정모달 영역 끝  ------------------------------------------------------------------->
-<!------------------------------소분류 수정모달 영역임  -------------------------------------------------------------------->
+<%------------------------------대분류 수정모달 영역 끝  -------------------------------------------------------------------%>
+<%------------------------------소분류 수정모달 영역임  --------------------------------------------------------------------%>
 			<!-- The Modal -->
 			<script>
                
@@ -654,8 +646,9 @@
 						</div>
                         <form action="<%=contextPath%>/subCatModify.cat" method="POST">
                             <!-- Modal body -->
-                            <span id="selectMainCatSpan" >대분류 선택 :</span>
-                            <select name="selectMainCat" id="selectMainCat">
+                            <span id="selectMainCatSpan" >대분류 :</span>
+                            <!-- 성은님 위해서 막음  -->
+                            <select name="selectMainCat" id="selectMainCat" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
 				                <% for(MainCategory m : mainList){ %>
 	                            	<option value="<%= m.getCategoryMainNo() %>"><%= m.getCategoryName() %></option>							
 								<%} %>
@@ -675,8 +668,8 @@
                     </div>
 				</div>
 			</div>
-<!------------------------------ 소분류 수정모달 영역 끝  ----------------------------------------------------------------------->
-<!-- ----------------------------대분류 카테고리 등록 영역 시작---------------------------------------------------------------- -->
+<%----------------------------- 소분류 수정모달 영역 끝  -----------------------------------------------------------------------%>
+<%-- ----------------------------대분류 카테고리 등록 영역 시작---------------------------------------------------------------- --%>
 			<!-- The Modal -->
 			<div class="modal fade" id="major-enroll-modal">
 				<div class="modal-dialog modal-lg">
@@ -709,8 +702,8 @@
                     </div>
 				</div>
 			</div>
-<!-- ----------------------------대분류 카테고리 등록 영역 끝------------------------------------------------------------------- -->
-<!-- ----------------------------소분류 카테고리 등록 영역 시작----------------------------------------------------------------- -->
+<%-- ----------------------------대분류 카테고리 등록 영역 끝------------------------------------------------------------------- --%>
+<%-- ----------------------------소분류 카테고리 등록 영역 시작----------------------------------------------------------------- --%>
 			<!-- The Modal -->
 			<div class="modal fade" id="minor-enroll-modal">
 				<div class="modal-dialog modal-lg">
@@ -748,7 +741,7 @@
                     </div>
 				</div>
 			</div>			
-<!-- ----------------------------소분류 카테고리 등록 영역 끝---------------------------------------------------------------------- -->
+<%-- ----------------------------소분류 카테고리 등록 영역 끝---------------------------------------------------------------------- --%>
         </div>
     </div>
 </body>

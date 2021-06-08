@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.tos.model.service.TosService;
 import com.refrigerator.tos.model.vo.Tos;
+/* Author : Jaewon */
 
 /**
  * Servlet implementation class TosModifyDeleteFormController
@@ -30,18 +31,12 @@ public class TosModifyDeleteFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		/* Author : Jaewon */
 		int tosNo = Integer.parseInt(request.getParameter("bno"));
 		
-		
 		Tos t = new TosService().selectTos(tosNo);
-		
 		request.setAttribute("tos", t);
-		
-		request.getRequestDispatcher("views/tos/adminTosModifyAndDeletePage.jsp").forward(request, response);
-		// adminTosPage.jsp 페이지 가서 작업해주자 !!
-		// ★★★★ 그리고 나중에는 이 servlet을 호출해주는 방식으로 사용하면된다!!!! (여기서는 새로운 페이지로 넘어가기에 !! AJAX를 사용하는게 아니다!)
-	
+		request.getRequestDispatcher("views/tos/adminTosModifyAndDeletePage.jsp").forward(request, response);	
 	}
 
 	/**

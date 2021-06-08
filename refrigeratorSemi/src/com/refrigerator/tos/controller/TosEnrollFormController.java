@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/* Author Jaewon */
+
 /**
  * Servlet implementation class TosEnrollController
  */
@@ -26,10 +28,8 @@ public class TosEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// Author : Jaewon url 가리기용(mapping값으로) servlet
 		request.getRequestDispatcher("views/tos/adminTosEnrollPage.jsp").forward(request, response);
-
-	
 	}
 
 	/**

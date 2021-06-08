@@ -14,6 +14,8 @@ import com.refrigerator.category.model.service.SubCategoryService;
 import com.refrigerator.category.model.vo.MainCategory;
 import com.refrigerator.category.model.vo.SubCategory;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class AdminCategoryListController
  */

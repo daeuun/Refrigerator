@@ -15,6 +15,8 @@ import com.refrigerator.banner.model.service.BannerService;
 import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.MyFileRenamePolicy;
 
+/* Author Jaewon */
+
 /**
  * Servlet implementation class AdminBannerInsertController
  */
@@ -34,20 +36,15 @@ public class AdminBannerInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		//이미지는 banner_upfiles 라는 폴더에 보관을 할것이다. post로 넘어왔으니 일단 인코딩 세팅부터
 		request.setCharacterEncoding("UTF-8");
 
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
-			int maxSize = 10 * 1024 * 1024; //(byte기준이다.)
-			
+			int maxSize = 10 * 1024 * 1024; 
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/banner_upfiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			// 이미 어떤분이 MyFileRenamePolicy() 클래스 만들어주셨다.
 			
-			//DB에 전달할 값 뽑기 
 			String bannerName = multiRequest.getParameter("bannerName");
 			String companyName = multiRequest.getParameter("companyName");
 			String bannerCategory = multiRequest.getParameter("bannerCategory");
@@ -65,13 +62,11 @@ public class AdminBannerInsertController extends HttpServlet {
 			
 			int result = new BannerService().insertBanner(ba);
 
-			//요청 처리후 성공했을시 실패했을시 
-			if(result > 0 ) { // 성공했을 경우
+			if(result > 0 ) {
 				request.getSession().setAttribute("alertMsg", "성공적으로 대분류 배너가 등록되었습니다.");
-				//이제 url 재요청
 				response.sendRedirect(request.getContextPath() + "/adlist.ba?currentPage=1");
 				
-			}else { // 실패했을경우 error페이지가 보여지도록 에러문구 (error페이지로 forwarding 하는것)
+			}else { 
 				request.setAttribute("errorTitleMsg", "배너 등록 실패");
 				request.setAttribute("errorMsg", "error 발생");
 				request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);
