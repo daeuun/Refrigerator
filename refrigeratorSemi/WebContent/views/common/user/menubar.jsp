@@ -440,7 +440,13 @@
                                 <ul id="login-area_profile"> 
                                     <li id="lihover"><a href="">프사</a>
                                         <ul id="profileImg-outer">
-                                            <li><a href="">최근본레시피</a></li>
+                        					<script>
+												function moveToRecent(){
+													var rcpNo = sessionStorage.getItem("recentRecipeNo");
+													location.href="<%=request.getContextPath()%>/myRecent.rcp?rcpNo=" +rcpNo; 						
+												}
+											</script>
+                                            <li><a onclick="moveToRecent();">최근본레시피</a></li>
                                             <li><a href="<%=contextPath%>/updateForm.pro"">마이페이지</a></li>
                                             <li><a href="<%=contextPath%>/logout.member">로그아웃</a></li>
                                         </ul>
