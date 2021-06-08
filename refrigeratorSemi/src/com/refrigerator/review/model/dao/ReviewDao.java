@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.review.model.vo.AdmReview;
 import com.refrigerator.review.model.vo.Review;
 
@@ -334,6 +335,68 @@ public class ReviewDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * 아이디 검색 총 갯수
+	 */
+	public int selectUserListCount(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectUserListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;		
+	}
+	
+	/**
+	 * 아이디 검색 목록 조회
+	 */
+	public ArrayList<AdmReview> selectSearchUserList(Connection conn, PageInfo pi, String userId){
+		
+		ArrayList<AdmReview> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSearchUserList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setString(1, "%"+ userId + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new AdmReview(rset.getInt("user_no"),
+									   rset.getString("user_id"),
+									   rset.getString("recipe_title"),
+									   rset.getDouble("star"),
+									   rset.getString("review_content"),
+									   rset.getDate("enroll_date")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	
 	
 }

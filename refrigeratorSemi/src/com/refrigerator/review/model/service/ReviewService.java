@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.refrigerator.common.model.vo.PageInfo;
+import com.refrigerator.member.model.dao.MemberDao;
+import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.review.model.dao.ReviewDao;
 import com.refrigerator.review.model.vo.AdmReview;
 import com.refrigerator.review.model.vo.Review;
@@ -155,6 +157,32 @@ public class ReviewService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	
+	/**
+	 * 아이디 검색 총 갯수
+	 */
+	public int selectUserListCount(String userId) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().selectUserListCount(conn, userId);
+		if(result > 0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	/**
+	 * 아이디 검색 목록 조회
+	 */
+	public ArrayList<AdmReview> selectSearchUserList(PageInfo pi, String userId){
+		Connection conn = getConnection();
+		ArrayList<AdmReview> list = new ReviewDao().selectSearchUserList(conn, pi, userId);
+		close(conn);
+		return list;
 	}
 	
 }
