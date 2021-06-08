@@ -286,7 +286,7 @@
 	                   			//$("#userNo-modify").val($(event.target).parent().siblings("input[type=hidden]").val());
 	                   			
 	                   			var userNo = $(event.target).parent().siblings("input[type=hidden]").val();
-	                            console.log(userNo);
+	                            //console.log(userNo);
 	                            $("#userNo-modify").val(userNo);
 	                            
 	                            <% for(Member m : list) {%>

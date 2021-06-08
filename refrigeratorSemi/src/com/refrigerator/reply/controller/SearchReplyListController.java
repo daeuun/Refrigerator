@@ -1,4 +1,4 @@
-package com.refrigerator.recipe.controller;
+package com.refrigerator.reply.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.common.model.vo.PageInfo;
-import com.refrigerator.recipe.model.service.RecipeService;
-import com.refrigerator.recipe.model.vo.Recipe;
+import com.refrigerator.reply.model.service.ReplyService;
+import com.refrigerator.reply.model.vo.AdmReply;
 
 /**
- * @author leeyeji
- * 
- * Servlet implementation class SearchRecipeListController
+ * Servlet implementation class SearchReplyListController
  */
-@WebServlet("/searchList.recipe")
-public class SearchRecipeListController extends HttpServlet {
+@WebServlet("/searchList.reply")
+public class SearchReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchRecipeListController() {
+    public SearchReplyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,49 +33,47 @@ public class SearchRecipeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
-		
-		String query =  request.getParameter("searchWord");
+		String userId = request.getParameter("userId");
 		
 		// 페이징처리 셋팅
 		int listCount; 	
 		int currentPage;
 		int pageLimit;	
 		int boardLimit;	
-						
+		
 		int maxPage;
 		int startPage;
 		int endPage;
-										
+		
 		// 총 갯수
-		listCount = new RecipeService().selectSearchListCount(query);
-								
+		listCount = new ReplyService().selectUserListCount(userId);
+		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-								
-		pageLimit = 5;
-										
-		boardLimit = 12;
-										
+		
+		pageLimit = 10;
+		
+		boardLimit = 10;
+		
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
-										
+		
 		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
-										
+		
 		endPage = startPage + pageLimit - 1;
-									
+		
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-								
+		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-				
-		ArrayList<Recipe> pageList = new RecipeService().selectSearchList(pi, query);
-				
+		
+		ArrayList<AdmReply> searchList = new ReplyService().selectSearchUserList(pi, userId);
+		
 		request.setAttribute("pi", pi);
-		request.setAttribute("searchWord", query);
-		request.setAttribute("pageList", pageList);
-		request.setAttribute("listCount", listCount);
-
-		request.getRequestDispatcher("views/recipe/searchRecipeListView.jsp").forward(request, response);
+		request.setAttribute("searchList", searchList);
+		
+		
+		request.getRequestDispatcher("views/member/adminReportListView.jsp").forward(request, response);
+		
 	}
 
 	/**

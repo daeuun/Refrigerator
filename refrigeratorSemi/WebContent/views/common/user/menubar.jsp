@@ -300,27 +300,30 @@
                     </div>
 
                     <!--중앙 검색창 form -->
-                    <form action="<%=contextPath %>/search.main?currentPage=1" method="post">
+                    
                     <div class="navigation-search">
                         <div class="navigation-search_content">
                             <input type="text" name="searchWord" value="${param.searchWord}" placeholder="알고 싶은 레시피나 가진 재료로 검색해보세요!">
                             <button class="btn-search" type="submit"><img style="width: 20px; height: 20px;" src="<%=contextPath%>/resources/css/searchicon.png"></button>
                         </div>
                     </div>
-                    </form>
+
 
                 </div>
 
             </div>
             
             <script>
-                	function searchClick(searchBtn){
-                		
-                		var searchWord = $(searchBtn).sblings("input[type='text']").val();
-	
-                		window.location.href = "<%=contextPath%>/searchList.recipe?currentPage=1&cateNo=" + searchWord;
-
-                	}
+                	
+            		
+                	
+                	$(function(){
+						$(".btn-search").click(function(){
+							var searchWord = $(this).siblings("input[name=searchWord]").val();
+							window.location.href = "<%=contextPath%>/searchList.recipe?currentPage=1&searchWord=" + searchWord;
+						})
+                	})
+                	
                 </script>
 
             <!-- 메뉴바 + 로그인 -->
