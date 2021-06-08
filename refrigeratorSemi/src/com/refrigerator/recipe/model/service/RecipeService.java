@@ -504,6 +504,16 @@ public class RecipeService {
 		close(conn);
 		return result;
 	}
+	
+	/** 메인페이지 - 오늘의 레시피 정보 조회
+	 * @author daeun
+	 */
+	public ArrayList<Recipe> selectTodayRecipe(){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectTodayRecipe(conn);
+		close(conn);
+		return list;
+	}
 
 
 }

@@ -430,6 +430,11 @@
 	  	z-index:1000;
 	  	background-color:rgba(255,255,255,0.6);
 	  }
+	  
+	  footer{position:relative; width: 1200px; margin: auto; height: 150px; box-sizing: border-box; padding-top: 22px; clear: both; bottom:-3400px;}
+        footer > div{margin-top: 30px;}
+        footer a {text-decoration: none; color: black; padding: 2px; letter-spacing: -1.2px; font-weight: 500;}
+        footer p{font-size: 10px;}
         
         
     </style>
@@ -571,7 +576,7 @@
                 <ul class="home-category-list-warp"> 
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=1" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/meat.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -581,7 +586,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=5" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/spinach.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -591,7 +596,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=7" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/fish.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -601,7 +606,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=10" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/egg.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -611,7 +616,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=14" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/wheat-sack.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -621,7 +626,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=19" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/soybean.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -631,7 +636,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=28" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/healthy-food.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -641,7 +646,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=13" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/canned-food.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -651,7 +656,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=23" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/mushroom.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -660,7 +665,7 @@
                     </li>
 
                     <li class="home-category-item-wrap">
-                        <a href="해당 재료카테고리 결과페이지 경로" class="item_link">
+                        <a href="<%=contextPath%>/saerchCat.cat?currentPage=1&sno=31" class="item_link">
                             <!-- 재료 이미지 -->
                             <div class="home-category-item"> <img class="home-category-item_image" src="<%=contextPath%>/resources/css/kimchi.png"></img></div>
                             <!-- 재료 텍스트 -->
@@ -680,6 +685,39 @@
                     })
         
                 })
+                
+                
+                $.ajax({
+    			url:"today.recipe",
+    			method: "post",
+    			dataType: "json",
+    			contentType : "application/json; charset:UTF-8",
+    			enctype:'multipart/form-data',
+    			success:function(list){
+    				
+    	            var result = "";
+    	            
+    	            for(var i in list){
+    	            	
+    	            	result +=
+    	            		
+    	            		" <input type='hidden' name='recipeNo' value=' " + list[i].recipeNo + " '> " +
+                        " <a class='home-viewRecipe_link' href= " + "<%= contextPath%>/detail.recipe?rno="  + list[i].recipeNo + " '> "  
+                        +    "<div>" + "<img class='home-viewRecipe_image' src='" + list[i].mainImg + "'>"
+                        + "<div class='home-viewRecipe_content'>" + "<div class='home-viewRecipe_content-title' id='today-1'> " + list[i].recipeTitle + "</div>" 
+                        + "<div class='home-viewRecipe_content-user'>"
+                        + "<span class='home-viewRecipe_content-user_name'> " +  list[i].recipeWriter  + "</span></div></div></div></a>"
+    	            	
+    	            }
+    	            
+    	            $("#home-viewRecipe").html(result);
+    				
+    			},error:function(){
+    				console.log("오늘의 레시피 등록 ajax 통신실패");
+    			}
+    		});
+                
+
         
             </script>
 
@@ -693,234 +731,19 @@
                 <div>
 
                     <div class="home-section_more"> <!-- 더보기 버튼-->
-                        <a class="home-section_more-btn" href="오늘의레시피 목록페이지 경로">더보기</a>
+                        <a class="home-section_more-btn" href="<%=contextPath%>/recipeView.main?currentPage=1">더보기</a>
                     </div>
 
                     <!-- 레시피 전체 목록 -->
                     <div class="home-viewRecipes_content"> 
 
                         <!-- 개별 레시피 (1) -->
-                        <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="">
-
-                            <a class="home-viewRecipe_link" href="상세레시피경로">
-
-                                <div>
-                                    <!--레시피 대표 이미지-->
-                                    <img class="home-viewRecipe_image" src="레시피대표이미지경로"> 
-                                    
-                                    <!--제목/작성자wrap-->
-                                    <div class="home-viewRecipe_content">
-                                        
-                                        <!-- 레시피 제목 -->
-                                        <div class="home-viewRecipe_content-title">
-                                            	제목	
-                                        </div>
-
-                                        <!-- 레시피 작성자-->
-                                        <div class="home-viewRecipe_content-user">
-                                            
-                                            <!-- 프로필사진 -->
-                                            <img class="home-viewRecipe_content-user_img" src="유저프로필이미지경로">
-
-                                            <!-- 작성자 닉네임 -->
-                                            <span class="home-viewRecipe_content-user_name">
-                                                
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 개별 레시피 (1) -->
-                        <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="">
-
-                            <a class="home-viewRecipe_link" href="상세레시피경로">
-
-                                <div>
-                                    <!--레시피 대표 이미지-->
-                                    <img class="home-viewRecipe_image" src="레시피대표이미지경로"> 
-                                    
-                                    <!--제목/작성자wrap-->
-                                    <div class="home-viewRecipe_content">
-                                        
-                                        <!-- 레시피 제목 -->
-                                        <div class="home-viewRecipe_content-title">
-                                            	제목	
-                                        </div>
-
-                                        <!-- 레시피 작성자-->
-                                        <div class="home-viewRecipe_content-user">
-                                            
-                                            <!-- 프로필사진 -->
-                                            <img class="home-viewRecipe_content-user_img" src="유저프로필이미지경로">
-
-                                            <!-- 작성자 닉네임 -->
-                                            <span class="home-viewRecipe_content-user_name">
-                                                
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 개별 레시피 (1) -->
-                        <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="">
-
-                            <a class="home-viewRecipe_link" href="상세레시피경로">
-
-                                <div>
-                                    <!--레시피 대표 이미지-->
-                                    <img class="home-viewRecipe_image" src="레시피대표이미지경로"> 
-                                    
-                                    <!--제목/작성자wrap-->
-                                    <div class="home-viewRecipe_content">
-                                        
-                                        <!-- 레시피 제목 -->
-                                        <div class="home-viewRecipe_content-title">
-                                            	제목	
-                                        </div>
-
-                                        <!-- 레시피 작성자-->
-                                        <div class="home-viewRecipe_content-user">
-                                            
-                                            <!-- 프로필사진 -->
-                                            <img class="home-viewRecipe_content-user_img" src="유저프로필이미지경로">
-
-                                            <!-- 작성자 닉네임 -->
-                                            <span class="home-viewRecipe_content-user_name">
-                                                
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 개별 레시피 (1) -->
-                        <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="">
-
-                            <a class="home-viewRecipe_link" href="상세레시피경로">
-
-                                <div>
-                                    <!--레시피 대표 이미지-->
-                                    <img class="home-viewRecipe_image" src="레시피대표이미지경로"> 
-                                    
-                                    <!--제목/작성자wrap-->
-                                    <div class="home-viewRecipe_content">
-                                        
-                                        <!-- 레시피 제목 -->
-                                        <div class="home-viewRecipe_content-title">
-                                            	제목	
-                                        </div>
-
-                                        <!-- 레시피 작성자-->
-                                        <div class="home-viewRecipe_content-user">
-                                            
-                                            <!-- 프로필사진 -->
-                                            <img class="home-viewRecipe_content-user_img" src="유저프로필이미지경로">
-
-                                            <!-- 작성자 닉네임 -->
-                                            <span class="home-viewRecipe_content-user_name">
-                                                
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 개별 레시피 (1) -->
-                        <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="">
-
-                            <a class="home-viewRecipe_link" href="상세레시피경로">
-
-                                <div>
-                                    <!--레시피 대표 이미지-->
-                                    <img class="home-viewRecipe_image" src="레시피대표이미지경로"> 
-                                    
-                                    <!--제목/작성자wrap-->
-                                    <div class="home-viewRecipe_content">
-                                        
-                                        <!-- 레시피 제목 -->
-                                        <div class="home-viewRecipe_content-title">
-                                            	제목	
-                                        </div>
-
-                                        <!-- 레시피 작성자-->
-                                        <div class="home-viewRecipe_content-user">
-                                            
-                                            <!-- 프로필사진 -->
-                                            <img class="home-viewRecipe_content-user_img" src="유저프로필이미지경로">
-
-                                            <!-- 작성자 닉네임 -->
-                                            <span class="home-viewRecipe_content-user_name">
-                                                
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 개별 레시피 (1) -->
-                        <div class="home-viewRecipe"> 
-                            <input type="hidden" name="recipeNo" value="">
-
-                            <a class="home-viewRecipe_link" href="상세레시피경로">
-
-                                <div>
-                                    <!--레시피 대표 이미지-->
-                                    <img class="home-viewRecipe_image" src="레시피대표이미지경로"> 
-                                    
-                                    <!--제목/작성자wrap-->
-                                    <div class="home-viewRecipe_content">
-                                        
-                                        <!-- 레시피 제목 -->
-                                        <div class="home-viewRecipe_content-title">
-                                            	제목	
-                                        </div>
-
-                                        <!-- 레시피 작성자-->
-                                        <div class="home-viewRecipe_content-user">
-                                            
-                                            <!-- 프로필사진 -->
-                                            <img class="home-viewRecipe_content-user_img" src="유저프로필이미지경로">
-
-                                            <!-- 작성자 닉네임 -->
-                                            <span class="home-viewRecipe_content-user_name">
-                                                
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="home-viewRecipe" id="home-viewRecipe"> 
+                            <!-- ajax출력되는 div영역 -->
                         </div>
 
                     </div>
-                    
-
                 </div>
-
-
             </section>
 
             <!-- 4. 쉐프가 선택한 레시피 == 별점 높은 레시피 -->
@@ -940,7 +763,6 @@
                                             제목
                                         </div>
                                         <div class="home-starRecipe_content-user">
-                                            <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
                                                 닉네임
                                             </span>
@@ -951,7 +773,7 @@
                                         <span class="home-starRecipe-more_text">
                                             See more
                                         </span>
-                                        <img class="home-starRecipe-more_img" src="더보기버튼이미지">
+                                        <img class="home-starRecipe-more_img" src="">
                                     </div>
                                 </div>
                             </a>
@@ -965,7 +787,6 @@
                                             제목
                                         </div>
                                         <div class="home-starRecipe_content-user">
-                                            <img class="home-starRecipe_content-user_img" src="유저프로필이미지경로">
                                             <span class="home-starRecipe_content-user_name">
                                                 닉네임
                                             </span>
@@ -976,7 +797,7 @@
                                         <span class="home-starRecipe-more_text">
                                             See more
                                         </span>
-                                        <img class="home-starRecipe-more_img" src="더보기버튼이미지">
+                                        <img class="home-starRecipe-more_img" src="">
                                     </div>
                                 </div>
                             </a>
@@ -1010,7 +831,7 @@
                                 <ul class="home-chef-page">
                                     <li> <!-- 쉐프(1) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -1021,7 +842,7 @@
                                     </li>
                                     <li> <!-- 쉐프(2) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -1032,7 +853,7 @@
                                     </li>
                                     <li> <!-- 쉐프(3) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -1050,7 +871,7 @@
                                 <ul class="home-chef-page">
                                     <li> <!-- 쉐프(4) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding: 30px 15px 0 15px;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -1061,7 +882,7 @@
                                     </li>
                                     <li> <!-- 쉐프(5) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -1072,7 +893,7 @@
                                     </li>
                                     <li> <!-- 쉐프(6) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/userimg.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -1100,7 +921,16 @@
         </div>
     </div>
     
-    <%@ include file="footer.jsp" %>
+    <footer align="center">
+
+        <div>
+            <a href="<%= request.getContextPath() %>/tos.tos?page=service">이용약관</a> |
+            <a href="<%= request.getContextPath() %>/tos.tos?page=personal">개인정보취급방침</a> |
+            <a href="<%= request.getContextPath() %>/enrollForm.inq">문의하기</a> 
+            <%-- 1대1문의시에 로그인하지 않은 사람은 로그인페이지로 이동하게 inquiry쪽에 작성  --%>  
+        </div>
+        <p>Copyright 2021 What's in my refrigerator All rights reserved</p>
+    </footer>
     
 
 </body>

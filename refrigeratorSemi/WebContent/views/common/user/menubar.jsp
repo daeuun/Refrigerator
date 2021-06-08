@@ -295,7 +295,7 @@
 
                     <!--중앙 메인로고-->
                     <div class="navigation-first_logo">
-                        <a href=""><img style="width: 100px; height: 50px;" src="<%=contextPath%>/resources/css/mainIcon.png">
+                        <a href="<%=contextPath%>/main"><img style="width: 100px; height: 50px;" src="<%=contextPath%>/resources/css/mainIcon.png">
                         </a>
                     </div>
 
@@ -398,7 +398,7 @@
 					
                     <!--메뉴바-->
                     <nav class="navigation-secondary_menu">
-                        <a class="navigation-secondary_menu_item menu menu1">홈</a>
+                        <a class="navigation-secondary_menu_item menu menu1" href="<%=contextPath%>/main">홈</a>
                         <a href="javascript:showDiv()" class="navigation-secondary_menu_item menu menu2">카테고리</a>
                        	<!-- Jaewon -->
                         <div id="inner-category" align="center">

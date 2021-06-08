@@ -737,4 +737,30 @@
 		 WHERE RECIPE_NO = ?
 		   AND USER_NO = ?
 	</entry>
+	
+	<!-- @author daeun -->
+	<!-- 메인(오늘의 레시피)  조회수 내림차순 레시피 조회 -->
+	<entry key="selectTodayRecipe">
+		SELECT RECIPE_NO, RECIPE_TITLE, NICKNAME, COUNT, MAIN_IMG
+		FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT RECIPE_NO
+		                     ,  RECIPE_TITLE
+		                     , NICKNAME
+		                     , COUNT
+		                     , MAIN_IMG
+		                  FROM RECIPE R
+		                  JOIN MEMBER USING (USER_NO)
+		                 WHERE R.STATUS = 'N'
+		                 ORDER
+		                    BY COUNT DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN 1 AND 6
+	</entry>
+	
+	
+	
+	
 </properties>
