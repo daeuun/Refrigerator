@@ -89,7 +89,7 @@
 	<div class="top-nav">
 
         <div class="logo" a> 
-            <img src="../../resources/image/logo_pic.png" width="" align="left">
+            <img src="<%=request.getContextPath() %>/resources/image/logo_pic.png" width="" align="left">
         </div>
 
         <div class="home-btn">
