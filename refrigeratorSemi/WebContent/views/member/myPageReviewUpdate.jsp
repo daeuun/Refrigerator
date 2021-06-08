@@ -390,19 +390,18 @@ input[type=file]{
 	
 		// 체크박스 전체선택 기능
 		$(function() {
-			var $xx = $(".review-table input[type=checkbox]");
+			var $allCheck = $(".review-table input[type=checkbox]");
 
 			$("#all-checkbox").click(function() {
 
 				if ($(this).is(":checked")) {
-					$xx.attr("checked", true);
-					$xx.prop("checked", true);
+					$allCheck.attr("checked", true);
+					$allCheck.prop("checked", true);
 				} else {
-					$xx.attr("checked", false);
-					$xx.prop("checked", false);
+					$allCheck.attr("checked", false);
+					$allCheck.prop("checked", false);
 				}
 
-				console.log($xx);
 			})
 		})
 		
