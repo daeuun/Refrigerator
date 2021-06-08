@@ -175,7 +175,7 @@ input[type=file]{
 						<tr>
 							<td><input type="checkbox" name="deleteCheck<%=i + 1%>"
 								value="<%=list.get(i).getReviewNo()%>"></td>
-							<td><img src="<%=contextPath%><%=list.get(i).getImgName()%>" width="100"
+							<td><img src="<%=contextPath%>/<%=list.get(i).getImgName()%>" width="100"
 								height="100"></td>
 							<td><%=list.get(i).getReviewNo()%></td>
 							<td width="200"><%=list.get(i).getReviewContent()%></td>
@@ -347,7 +347,7 @@ input[type=file]{
 					$("#review-content").text(review.reviewContent);
 					$("#star-point").children("option").prop("selected", false);
 					$("#star-point").children("option[value='" + starPoint + "']").prop("selected", true);
-					$(".review-img").prop("src", "<%=contextPath%>" + review.imgName);
+					$(".review-img").prop("src", "<%=contextPath%>/" + review.imgName);
 					$("input[type=hidden]").val(rvNo);
 					
 				},errorPage:function(){

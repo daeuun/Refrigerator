@@ -182,12 +182,6 @@
                     
                 </table>
                 
-                <div align="center">
-                	<form action="<%=contextPath%>/adminDetail.no?title=수정&noticeNo=<%=noticeNo%>" method="post">
-		                <button type="submit" class="form-btn btn2">수정</a>                	
-                	</form>
-	            </div>
-                
             
         <%}else{ %>
         

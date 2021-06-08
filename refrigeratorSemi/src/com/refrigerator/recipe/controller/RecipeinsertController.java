@@ -189,9 +189,13 @@ public class RecipeinsertController extends HttpServlet {
 			
 			if(result > 0) {
 				
-				response.sendRedirect(request.getContextPath());
+				request.getSession().setAttribute("alertMsg", "레시피 등록 성공");
+				response.sendRedirect(request.getContextPath() + "/mylist.rcp?currentPage=1");
 				
 			}else {
+				
+				request.setAttribute("errorTitleMsg", "레시피 등록 실패");
+				request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 				
 			}
 			

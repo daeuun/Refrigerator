@@ -127,6 +127,11 @@
             margin-right:10px;
             float:left;
         }
+        .loadImg-area>img{
+        	
+        	width:110px;
+        	height:110px;
+        }
 
 		button{
 			border:none;

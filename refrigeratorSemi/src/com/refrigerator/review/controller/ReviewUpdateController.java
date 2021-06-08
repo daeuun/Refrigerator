@@ -50,7 +50,7 @@ public class ReviewUpdateController extends HttpServlet {
 			
 			if(multiRequest.getOriginalFileName("reviewImg") != null) {
 				
-				loadImg = "/resources/review_upfiles/" + multiRequest.getFilesystemName("reviewImg");
+				loadImg = "resources/review_upfiles/" + multiRequest.getFilesystemName("reviewImg");
 				
 			}
 			Review rv = new Review(reviewNo, reviewContent, star, loadImg);

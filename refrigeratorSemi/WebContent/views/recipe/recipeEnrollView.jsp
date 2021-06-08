@@ -252,9 +252,12 @@
         /*리모컨 버튼*/
         .up-btn{
         	margin:auto;
-            width:2150px;
+        	margin-left:1050px;
+            width:50px;
             height:50px;
             position:fixed;
+            top:430px;
+            display:none;
         }
 
         .up-btn:hover{
