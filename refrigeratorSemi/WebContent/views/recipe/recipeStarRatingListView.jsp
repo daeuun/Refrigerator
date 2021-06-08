@@ -93,6 +93,9 @@
     }
     #recipe-title{
     	height: 50px;
+    	display: inline-block;
+    	overflow: hidden; 
+    	text-overflow: ellipsis;
     }
 </style>
 

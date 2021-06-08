@@ -113,11 +113,11 @@
             <table id="pageBtn-area" >
                 <tr>
                     <th>이전글</th>
-                    <td><a href="">이전글들어갈자리</a></td>
+                    <td><a href="">이전글</a></td>
                 </tr>
                 <tr>
                     <th>다음글</th>
-                    <td><a href="">다음글들어갈자리~</a></td>
+                    <td><a href="">다음글</a></td>
                 </tr>
             </table>
 

@@ -92,6 +92,12 @@
         box-sizing: border-box;
         border-radius: 20px;
     }
+    #recipe-title{
+    	height: 50px;
+    	display: inline-block;
+    	overflow: hidden; 
+    	text-overflow: ellipsis;
+    }
 </style>
 
 <body>
@@ -133,7 +139,7 @@
 	                    </div>
 	
 	                    <p style="margin-top: 5px;">
-	                        <b><%=r.getRecipeTitle() %></b><br>
+	                        <span id="recipe-title" style="height:50"><b><%=r.getRecipeTitle() %></b></span><br>
 	                        <span style="font-size:14px"><%=r.getRecipeWriter() %></span> <br>
 	                        <span style="font-size:14px">별점 : <%=r.getAvrgStarPoint() %>(5.0) &nbsp;|&nbsp; 조회수 : <%=r.getCount() %></span> 
 	                    </p>
