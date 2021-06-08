@@ -141,6 +141,17 @@
 	.button-area > a:hover{
 		transform: scale(1.02);
 	}
+	
+	#none-area{
+		margin: auto;
+		font-size: 25px;
+		width: 600px;
+		font-weight:bolder;
+		margin-top: 100px;
+		text-align:center;
+		margin-right : 350px;
+		color:tomato;
+	}
 
 </style>
 <!--  이미 float right은 들어가있는상태이다 나머지는기호에따라 조금씩 움직여주면된다. -->
@@ -157,6 +168,10 @@
 			<p>찜한레시피</p> 
             <div class="division-line"></div>
 			<div id="mypage-thumbnail-table">
+				<% if(list.isEmpty()){ %>
+					<div id="none-area">찜한 레시피가 <br>없습니다!</div>
+				<% }; %>
+							
 				<% for(Scrap s : list) {%>
 					<div class="mini-box">
 						<div class="thumbnail-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= s.getRecipeNo() %>">
