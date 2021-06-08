@@ -21,7 +21,7 @@ int maxPage = pi.getMaxPage();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지_ 후기&별점관리</title>
 
 <style>
 .outer {
@@ -113,14 +113,15 @@ input[type=file]{
 	font-size: 22px;
 }
 
+.footer{
+	
+	margin-left:-250px;
+}
+
 
 </style>
 </head>
 <body>
-
-	<%@ include file="../common/user/menubar.jsp"%>
-	<%@ include file="../common/user/myPageVerticalNav.jsp"%>
-	
 	<script>
 		//alertMsg
 		var msg = "<%=alertMsg%>";
@@ -130,7 +131,10 @@ input[type=file]{
 		}
 	</script>
 
+	<%@ include file="../common/user/menubar.jsp"%>
+	<%@ include file="../common/user/myPageVerticalNav.jsp"%>
 	<div class="outer">
+	
 
 		<div class="menu-path" style="font-size: 12px;">
 			마이페이지 > <label>후기&별점관리</label>
@@ -321,12 +325,14 @@ input[type=file]{
 
 			<br>
 		</div>
-
+		<div class="footer">
+			<%@ include file="../common/user/footer.jsp" %>
+		</div>
 	</div>
 	
 	
 	
-		<%@ include file="../common/user/footer.jsp" %>
+	
 	
 	
 
