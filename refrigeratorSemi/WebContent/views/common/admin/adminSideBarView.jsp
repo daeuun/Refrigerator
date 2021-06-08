@@ -127,7 +127,7 @@
             </button>
             <div id="side-sub" class="collapse5">
                 <a href="">레시피 삭제</a><br>
-                <a href="">메인 노출 레시피</a><br>
+                <a href="<%=contextPath%>/adRecipeList.banner?currentPage=1">메인 배너 레시피</a><br>
                 <a href="">메인 레시피 목록</a><br>
             </div>
         </div>

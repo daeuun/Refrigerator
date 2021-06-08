@@ -7,7 +7,6 @@
 %>
 
 <%
-	String contextPath = request.getContextPath();
 	ArrayList<Banner> list = (ArrayList<Banner>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
@@ -29,6 +28,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <style>
+    @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+    body { font-family: 'Noto Sans KR', sans-serif; }
     .total_outer{
         color: black;
         width: 1200px;
@@ -38,6 +39,7 @@
         width: 1000px;
         height: 100px;
         font-size: 16px;
+        margin: 0 10px;
     }
 
     .select-list>a{
@@ -126,15 +128,15 @@
 
     <div class="total_outer">
 
-        <div> %@ include file="../common/admin/adminSideBarView.jsp" %> </div>  
+        <%@ include file="../common/admin/adminSideBarView.jsp" %> 
         
         <!-- 본문 내용 area -->
         <div class="outer">
 
             <div class="select-list"  align="right" style="width: 450px;" >
                 <a href="">홈</a> >
-                <a href="">게시판 관리</a> >
-                <a href="">이벤트</a>
+                <a href="">사이트 관리</a> >
+                <a href="">배너</a>
             </div>
             <br>
 
