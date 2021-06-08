@@ -2,7 +2,7 @@ package com.refrigerator.category.model.vo;
 
 public class SubCategory {
 
-	/* Author : Jaewon  */
+	/** @author Jaewon */
 	
 	private int categorySubNo;
 	private int categoryMainNo;

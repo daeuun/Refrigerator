@@ -13,7 +13,7 @@ import java.util.Properties;
 
 import com.refrigerator.category.model.vo.SubCategory;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class SubCategoryDao {
 

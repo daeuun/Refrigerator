@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.nav_menu.model.service.NavMenuService;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class AdminNavMenuUpdateController

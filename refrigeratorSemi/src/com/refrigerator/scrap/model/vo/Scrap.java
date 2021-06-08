@@ -1,6 +1,6 @@
 package com.refrigerator.scrap.model.vo;
 
-/* Author : Jaewon  */
+/** @author Jaewon */
 
 public class Scrap {
 	private int userNo; 

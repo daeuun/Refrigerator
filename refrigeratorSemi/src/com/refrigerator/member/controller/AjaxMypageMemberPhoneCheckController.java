@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.member.model.service.MemberService;
 import com.refrigerator.member.model.vo.Member;
 
+/** @author Jaewon */
+
 /**
  * Servlet implementation class AjaxMypageMemberPhoneCheckController
  */
@@ -33,7 +35,6 @@ public class AjaxMypageMemberPhoneCheckController extends HttpServlet {
 	
 		String newPhone = request.getParameter("newPhoneCheck");
 
-		//select로 조회해본다 그러고 하나의 행을 가져오는데 만약 뭤도 없으면 비어있는게 올것이고 아니면 뭔가 담겨있는게 올것이다. 
 		Member count = new MemberService().checkPhone(newPhone); 
 		
 		if(count != null) {

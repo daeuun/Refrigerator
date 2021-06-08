@@ -1,6 +1,6 @@
 package com.refrigerator.recent_recipe.model.vo;
 
-/* Author : Jaewon  */
+/** @author Jaewon */
 
 public class RecentRecipe {
 	private int recipeNo;  

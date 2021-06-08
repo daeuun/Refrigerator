@@ -20,6 +20,9 @@ import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
 import com.refrigerator.reicpe_order.model.vo.RecipeOrder;
 
+/** @author Jaewon */
+
+
 /**
  * Servlet implementation class MypageMyRecipeUpdateController
  */
@@ -44,15 +47,12 @@ public class MypageMyRecipeModifyFormController extends HttpServlet {
 		ArrayList<MainCategory> mList = new MainCategoryService().selectMainList();
 		ArrayList<SubCategory> sList = new SubCategoryService().selectSubListByMainCategory(1);
 		
-		// 얘도 post로 넘어오는데 가지고 노는 값이 숫자다 다만 전혀 적용도 안되고 문제도 없겠지만 일단 인코딩 작업해주자
-		// 문제가 없는이유는 db에 심어져있는것을 가지고 오는것 뿐이니까 딱히 내가 받아온값이 숫자밖에없기에 문제가 없다 하지만 혹시모르니 인코팅 작업 해주자
 		request.setCharacterEncoding("UTF-8");
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
 			
 		Recipe myRecipe = new RecipeService().selectMyRecipe(userNo, recipeNo);
-		// 아래 3개는 여러행 조회될 여지가 있다. 
 		ArrayList<IngreSearch> myIngreSearch = new RecipeService().selectMyIngreSearch(recipeNo);
 		ArrayList<Ingre> myIngre = new RecipeService().selectMyIngre(recipeNo);
 		ArrayList<RecipeOrder> myRecipeOrder = new RecipeService().selectMyRecipeOrder(recipeNo);

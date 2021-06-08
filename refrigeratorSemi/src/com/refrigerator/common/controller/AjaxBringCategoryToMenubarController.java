@@ -16,6 +16,8 @@ import com.refrigerator.category.model.service.SubCategoryService;
 import com.refrigerator.category.model.vo.MainCategory;
 import com.refrigerator.category.model.vo.SubCategory;
 
+/** @author Jaewon */
+
 /**
  * Servlet implementation class BringCategoryToMenubarController
  */

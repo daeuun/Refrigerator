@@ -2,7 +2,7 @@ package com.refrigerator.tos.model.vo;
 
 import java.sql.Date;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class Tos {
 

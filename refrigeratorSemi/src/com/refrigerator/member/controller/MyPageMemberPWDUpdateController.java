@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.member.model.service.MemberService;
 
+/** @author Jaewon */
+
 /**
  * Servlet implementation class MyPageMemberPWDUpdateController
  */
@@ -29,7 +31,6 @@ public class MyPageMemberPWDUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// 닥히 인코딩 처리는 안해줘도 되지만 일단은 해주자 
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");

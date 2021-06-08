@@ -13,7 +13,7 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.recipe.model.service.RecipeService;
 import com.refrigerator.recipe.model.vo.Recipe;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class SearchCategoryViewController

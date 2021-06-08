@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.reply.model.service.ReplyService;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class MypageMyReplyUpdateController

@@ -13,7 +13,7 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.reply.model.service.ReplyService;
 import com.refrigerator.reply.model.vo.AdmReply;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class SearchReplyListController

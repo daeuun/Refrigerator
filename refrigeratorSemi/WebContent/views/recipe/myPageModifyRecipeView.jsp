@@ -15,13 +15,9 @@
 	ArrayList<MainCategory> mList = (ArrayList<MainCategory>)request.getAttribute("mList");
 	ArrayList<SubCategory> sList = (ArrayList<SubCategory>)request.getAttribute("sList");
 	
-	// 레시피 Recipe vo객체에 담아온! 1행짜리 객체 
 	Recipe recipeInfo = (Recipe)request.getAttribute("myRecipe");
-	// 레시피 IngreSearch ArrayList로 여러행의 값을 등록시에 순차적으로 입력한 순서로 가져옴
 	ArrayList<IngreSearch> searchInfo = (ArrayList<IngreSearch>)request.getAttribute("myIngreSearch");
-	// 레시피 Ingre ArrayList로 여러행의 값을 등록시에 순차적으로 입력한 순서로 가져옴
 	ArrayList<Ingre> ingreInfo = (ArrayList<Ingre>)request.getAttribute("myIngre");
-   	// 레시피 RecipeOrder ArrayList로 여러행의 값을 등록시에 순차적으로 입력한 순서로 가져옴
 	ArrayList<RecipeOrder> orderInfo = (ArrayList<RecipeOrder>)request.getAttribute("myRecipeOrder");
 
 %>
@@ -32,9 +28,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon -->
 
-<title>Insert title here</title>
+<title>냉뭐?레시피 수정 페이지</title>
 <style>
 	.outer{
 		width: 900px;
@@ -302,8 +298,6 @@
 <body>
 	<%@ include file="../common/user/menubar.jsp" %>
 	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
-		<!-- 마이페이지 작업영역  시작-->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------- -->
     <div class="outer">
         <form action="<%=contextPath%>/modify.rcp" method="post" enctype="multipart/form-data">
         <!-- input type="hidden" 입력폼 개수 넘기기-->
@@ -393,7 +387,7 @@
             </div>
             
 
-<!-- 5) 마지막 버튼 영역-->
+<%--  마지막 버튼 영역--%>
 <div class="enroll-form5" align="center">
     <button class="btn btn-secondary" id="cancel-btn">취소 </button>
     <button type="submit" class="btn btn-success" id="enroll-btn">수정</button>
@@ -402,7 +396,6 @@
 
 </form>
 
-    <!--모든 스크립트 영역-->
     <script>
     
     /*2) 검색버튼기능 영역 [2~3 clone|remove] [1버튼 display:none <-> display:block] 개수전달 : sbCount*/ 
@@ -721,7 +714,7 @@
     </script>    
     </div>
 
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->    			
+<%-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------ --%>    			
 			
 		</div>
 		<!-- 마이페이지 작업영역  끝-->

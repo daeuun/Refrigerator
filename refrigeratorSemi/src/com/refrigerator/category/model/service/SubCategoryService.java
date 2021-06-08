@@ -12,7 +12,7 @@ import com.refrigerator.category.model.dao.MainCategoryDao;
 import com.refrigerator.category.model.dao.SubCategoryDao;
 import com.refrigerator.category.model.vo.SubCategory;
 
-/* Author : Jaewon  */
+/** @author Jaewon */
 
 public class SubCategoryService {
 

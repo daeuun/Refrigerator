@@ -17,7 +17,7 @@ import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.scrap.model.vo.Scrap;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class ScrapDao {
 	private Properties prop = new Properties();

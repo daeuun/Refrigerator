@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.recipe.model.service.RecipeService;
 
+/** @author Jaewon */
+
 /**
  * Servlet implementation class MypageMyRecipeDeleteContoller
  */
@@ -35,14 +37,11 @@ public class MypageMyRecipeDeleteContoller extends HttpServlet {
 		
 		int result = new RecipeService().deleteMyRecipe(userNo, recipeNo);
 		
-		//요청 처리후 성공했을시 실패했을시 
-		if(result > 0 ) { // 성공했을 경우 => /list.tos url재요청  => 리스트페이지가 보여지도록 alert도 보여지게
-			// alert문구는 세션에 담고서 url 재요청해주면된다. 
+		if(result > 0 ) { 
 			request.getSession().setAttribute("alertMsg", "성공적으로 레시피를 삭제하였습니다.");
-			//이제 url 재요청
 			response.sendRedirect(request.getContextPath() + "/mylist.rcp?currentPage=1");
 			
-		}else { // 실패했을경우 error페이지가 보여지도록 에러문구 (error페이지로 forwarding 하는것)
+		}else {
 			request.setAttribute("errorTitleMsg", "레시피 삭제 실패");
 			request.setAttribute("errorMsg", "너무 정성스럽게 작성하신 레시피라서 <br> 삭제하기 좀그렇네요 <br> 개발자에게 문의해주세요");
 			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);

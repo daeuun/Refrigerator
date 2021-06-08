@@ -14,7 +14,7 @@ import java.util.Properties;
 import com.refrigerator.recent_recipe.model.vo.RecentRecipe;
 import com.refrigerator.scrap.model.vo.Scrap;
 
-/* Author : Jaewon  */
+/** @author Jaewon */
 
 public class RecentRecipeDao {
 	private Properties prop = new Properties();

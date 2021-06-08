@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.tos.model.service.TosService;
 
-/* Author Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class TosDeleteController

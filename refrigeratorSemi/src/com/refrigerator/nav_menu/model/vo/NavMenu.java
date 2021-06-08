@@ -1,6 +1,6 @@
 package com.refrigerator.nav_menu.model.vo;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class NavMenu {
 	

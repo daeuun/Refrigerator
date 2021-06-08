@@ -13,7 +13,7 @@ import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.scrap.model.service.ScrapService;
 import com.refrigerator.scrap.model.vo.Scrap;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class MypageScrapListController

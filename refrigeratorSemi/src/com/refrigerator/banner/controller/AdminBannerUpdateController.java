@@ -15,7 +15,7 @@ import com.refrigerator.banner.model.service.BannerService;
 import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.MyFileRenamePolicy;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class AdminBannerUpdateController

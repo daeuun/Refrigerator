@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.tos.model.service.TosService;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class TosUserPageController

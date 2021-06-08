@@ -17,7 +17,7 @@ import com.refrigerator.nav_menu.model.vo.NavMenu;
 import com.refrigerator.tos.model.dao.TosDao;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class NavMenuDao {
 	private Properties prop = new Properties();

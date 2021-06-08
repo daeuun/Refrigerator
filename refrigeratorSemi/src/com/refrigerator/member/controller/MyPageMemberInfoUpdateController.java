@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.member.model.service.MemberService;
 import com.refrigerator.member.model.vo.Member;
 
+/** @author Jaewon */
+
 /**
  * Servlet implementation class myPageMemberInfoUpdateController
  */

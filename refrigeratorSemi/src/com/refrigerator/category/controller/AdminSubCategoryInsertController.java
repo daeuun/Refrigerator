@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.category.model.service.SubCategoryService;
 import com.refrigerator.category.model.vo.SubCategory;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class AdminSubCategoryInsertController

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import com.refrigerator.scrap.model.dao.ScrapDao;
 import com.refrigerator.scrap.model.vo.Scrap;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class ScrapService {
 //------------------------------------------------------------------------------------------------

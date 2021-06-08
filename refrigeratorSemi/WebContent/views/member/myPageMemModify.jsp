@@ -3,14 +3,12 @@
 <%
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
-<!-- 이미 header에 loginUser 값이 담겨있다 !  -->     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s / heerak.Y">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
-<!-- 희락님 탈퇴부분 모달 맡아주심 -->
+<!-- Author : Jaewon -->
 <title>마이페이지 회원정보수정</title>
 <%--  이미 float right은 들어가있는상태이다 나머지는기호에따라 조금씩 움직여주면된다. --%>
 <style>
@@ -194,7 +192,7 @@
                         </tr>
                         <tr>
                             <td><p>아이디</p></td>
-                            <td colspan="2"><%= loginUser.getUserId() %></td><%--조회해온 아이디 넣기--%>
+                            <td colspan="2"><%= loginUser.getUserId() %></td>
                         </tr>
                         <tr>
                             <td><p>비밀번호</p></td>
@@ -202,12 +200,11 @@
                         </tr>
                         <tr>
                            	<%
-                           		// 얘는 넘겨줄 필요가없다 보여주기만 하는것이다 ! date형식이 아니다보니 format도 먹지않는다 내가 노가다 뛰자! 
                            		String birthday = loginUser.getBirthday().substring(0, 4) + "년 " + loginUser.getBirthday().substring(4, 6) + "월 " + loginUser.getBirthday().substring(6, 8) + "일";
                         	%>
                         
                             <td><p>생년월일</p></td>
-                            <td colspan="2"><%= birthday %></td><%--조회해온 생년월일 넣기--%>
+                            <td colspan="2"><%= birthday %></td>
                         </tr>
                         <tr>
                             <td><p>성별</p></td>
@@ -277,7 +274,7 @@
                             <td><p>이메일 주소</p></td>
                             <td colspan="2"><input type="email" id="emailcheck" name="email" value="<%= loginUser.getEmail() %>">
                             <span id="emailbox" style="font-size:12px; color:red;"></span>
-                            </td><%--조회해온 이메일 넣기--%>
+                            </td>
                         </tr>
                         <tr>
                         	<%
@@ -289,13 +286,12 @@
                             	</script>
                             	<input type="text" id="tlno" name="phone" value="<%= phoneNo %>" maxlength="13" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" title="000-0000-0000형식으로 입력해주세요" placeholder="xxx-xxxx-xxxx">
                            		<span id="phoneBox" style="font-size:12px; color:red;"> * 전화번호는 "-"을 꼭 넣어서 입력해주세요.</span>
-                           	</td><%--조회해온 전화번호 넣기--%>
+                           	</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr align="center">
                             <td></td>
-                            <!-- 넘겨줄 값은 회원번호, 이름, 성별, 이메릴주소, 전화번호 3가지이다. ! 단 !! 전화번호는 서블릿 단에서 수정해줘야한다. -->
                             <td><button type="submit">정보수정</button></td>
                             <td width="150"><button type="button" data-toggle="modal" data-target="#memDelete-modal">탈퇴</button></td>
                         </tr>
@@ -304,7 +300,7 @@
             </form>
 
             
-<!----------------------------------------(희락님) 회원탈퇴 모달 영역 시작-------------------------------------------------------------------->
+<%----------------------------------------(희락님) 회원탈퇴 모달 영역 시작--------------------------------------------------------------------%>
             <div class="modal fade" id="memDelete-modal">
                 <div class="modal-dialog">
                     <div id="member-delete-modal" class="modal-content">
@@ -365,7 +361,7 @@
             	
             
             </script>
-<!----------------------------------------(희락님) 회원탈퇴 모달 영역 끝-------------------------------------------------------------------->
+<%----------------------------------------(희락님) 회원탈퇴 모달 영역 끝--------------------------------------------------------------------%>
 
         </div>
     </div><%-- 여기가 사실상 vertical-nav랑 .outer랑 묶은 div닫는 태그이다.  --%>

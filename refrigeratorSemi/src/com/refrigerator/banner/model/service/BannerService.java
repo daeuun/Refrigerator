@@ -13,7 +13,7 @@ import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.dao.TosDao;
 
-/* Author Jaewon */
+/** @author Jaewon */
 
 public class BannerService {
 //------------------------------------------------------------------------------------------------

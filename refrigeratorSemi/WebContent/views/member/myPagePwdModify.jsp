@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author: Jaewon -->
 
 <title>마이페이지 비밀번호 변경</title>
 <style>
@@ -91,12 +91,10 @@
 	<%@ include file="../common/user/tempJWHeader.jsp" %>
 
     <div class="outer">   
-        <!-- action 에 서블릿 호출 ~ -->
         <form action="pwdUpdate.me" method="post" id="pswModifyForm">
             <h3>비밀번호 변경</h3>
             <input type="hidden" name="userId" value="<%= userId %>">
             <input type="password" name="userPwd" placeholder="현재 비밀번호" required><br>
-            <!-- 이 아래의 span이 AJAX가 적용될 예정이다. -->
             <span>※ 영문자(대/소), 숫자, 특수문자를 포함하여 4자 이상 입력.</span><br>
             <input type="password" id="newPwd" name="newPwd" placeholder="새 비밀번호" required><br>
             <input type="password" id="newPWdCheck" placeholder="새 비밀 번호를 확인합니다" disabled required><br>

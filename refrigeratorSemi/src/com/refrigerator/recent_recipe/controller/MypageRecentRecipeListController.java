@@ -13,7 +13,7 @@ import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.recent_recipe.model.service.RecentRecipeService;
 import com.refrigerator.recent_recipe.model.vo.RecentRecipe;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class MypageRecentRecipeListController

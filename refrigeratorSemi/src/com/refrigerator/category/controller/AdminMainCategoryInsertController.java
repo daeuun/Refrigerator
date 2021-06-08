@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.refrigerator.category.model.service.MainCategoryService;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class AdminMainCategoryEnrollController

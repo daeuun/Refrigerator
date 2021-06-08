@@ -20,7 +20,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon  -->
 
 <title>마이페이지 내가 쓴 레시피</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
@@ -47,7 +47,6 @@
 		background-color: rgb(0,102,51);
 	}
 
-	/* 	나중에 tr hover시 여러 td에 스타일 먹이는 스크립트 구현해둬야한다. */
 	.recipe-list-table {
 		width: 100%;
 		border-top: none;
@@ -152,7 +151,6 @@
 <body>
 	<%@ include file="../common/user/menubar.jsp" %>
 	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
-		<!-- 마이페이지 작업영역  시작-->
 		<div class="outer">
 			<p>내가 쓴 레시피</p> 
             <div class="division-line"></div>
@@ -167,7 +165,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- 조회해와서 반복문으로 돌려줘야한다. -->
 					<% if(list.isEmpty()){%>
 						<tr>
 							<td colspan="5" style="width:100%; padding:100px; text-align:center; font-size: 25px; font-weight:bold; color:tomato;"> 
@@ -298,7 +295,7 @@
 					$("#delRecipeNo").val(recipeNumber);
 				}			
 			</script>
-<!------------------------------------- 페이징바 영역 --------------------------------------------------------->
+<%------------------------------------- 페이징바 영역 ---------------------------------------------------------%>
 			<%if(!list.isEmpty()){ %>
 		        <div align="center" class="paging-area">
 		
@@ -312,11 +309,9 @@
 		            		<button onclick="location.href='<%= request.getContextPath()%>/mylist.rcp?currentPage=<%= p %>';"><%= p %></button>
 		            	<%}else{ %>
 		         	    	<button id="dis-btn" disabled><%= p %></button>
-		    	    	    <!-- 현제 페이지수는 다시 클릭이 불가능하게 만들어주자! -->
 		            	<%}%>
 		            <%}%>
 			
-					<!-- 현재 보고있는 페이지가 마지막페이지일 떄 버튼 안보이게 하려면 아래와같이 -->
 					<% if(currentPage != maxPage){ %>                        
 		            	<button onclick="location.href='<%= request.getContextPath() %>/mylist.rcp?currentPage=<%= currentPage+1 %>';">&gt;</button>
 		            <%} %>
@@ -325,10 +320,9 @@
 
            </div>
 
-<!----------------------------------- 페이지바 영역 반복문 돌려줘야함 ----------------------------------------------->
 	</div>
 
-<!------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 삭제모달 영역임  --------------------------------------------------------------------------------------------------------------%>
 	<!-- The Modal -->
 	<div class="modal fade" id="recipe-del-modal">
 		<div class=" modal-dialog modal-sm">
@@ -356,7 +350,7 @@
 			</div>
 		</div>
 	</div>
-<!------------------------------ 삭제모달 영역임  -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 삭제모달 영역임  --------------------------------------------------------------------------------------------------------------%>
 	<%@ include file="../common/user/footer.jsp" %>
 	        	<!-- Jaewon.s -->
 	<script>

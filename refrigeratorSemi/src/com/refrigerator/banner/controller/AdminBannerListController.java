@@ -14,7 +14,7 @@ import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.service.TosService;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class AdminBannerListController

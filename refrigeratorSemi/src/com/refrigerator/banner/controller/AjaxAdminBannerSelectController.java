@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.refrigerator.banner.model.service.BannerService;
 import com.refrigerator.banner.model.vo.Banner;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 /**
  * Servlet implementation class AjaxAdminBannerSelectController

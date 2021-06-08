@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.member.model.service.MemberService;
 import com.refrigerator.member.model.vo.Member;
 
+/** @author Jaewon */
+
 /**
  * Servlet implementation class AjaxMypageMemberEmailCheckController
  */
@@ -31,10 +33,8 @@ public class AjaxMypageMemberEmailCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// 새로운 이메일 값 받아온것 
 		String newEmail = request.getParameter("newEmailCheck");
 
-		//select로 조회해본다 그러고 하나의 행을 가져오는데 만약 뭤도 없으면 비어있는게 올것이고 아니면 뭔가 담겨있는게 올것이다. 
 		Member count = new MemberService().checkEmail(newEmail); 
 		
 		if(count != null) {

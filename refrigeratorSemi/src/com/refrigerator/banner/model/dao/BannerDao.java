@@ -15,7 +15,7 @@ import com.refrigerator.banner.model.vo.Banner;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author Jaewon */
+/** @author Jaewon */
 
 public class BannerDao {
 	private Properties prop = new Properties();

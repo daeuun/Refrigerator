@@ -15,7 +15,7 @@ import com.refrigerator.category.model.vo.MainCategory;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class MainCategoryDao {
 

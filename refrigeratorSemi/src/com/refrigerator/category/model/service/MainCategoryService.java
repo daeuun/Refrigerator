@@ -12,7 +12,7 @@ import com.refrigerator.category.model.dao.MainCategoryDao;
 import com.refrigerator.category.model.vo.MainCategory;
 import com.refrigerator.tos.model.dao.TosDao;
 
-/* Author : Jaewon  */
+/** @author Jaewon */
 
 public class MainCategoryService {
 	public ArrayList<MainCategory> selectMainList(){

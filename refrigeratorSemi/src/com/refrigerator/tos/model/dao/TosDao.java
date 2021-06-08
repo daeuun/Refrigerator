@@ -16,7 +16,7 @@ import java.util.Properties;
 import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class TosDao {
 	

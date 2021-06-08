@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import com.refrigerator.recent_recipe.model.doa.RecentRecipeDao;
 import com.refrigerator.recent_recipe.model.vo.RecentRecipe;
 
-/* Author : Jaewon  */
+/** @author Jaewon */
 
 public class RecentRecipeService {
 	//------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@ package com.refrigerator.banner.model.vo;
 
 import java.sql.Date;
 
-/* Author Jaewon */
+/** @author Jaewon */
 
 public class Banner {
 	private int bannerNo;

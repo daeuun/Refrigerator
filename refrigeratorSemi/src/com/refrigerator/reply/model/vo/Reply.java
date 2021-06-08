@@ -2,7 +2,7 @@ package com.refrigerator.reply.model.vo;
 
 import java.sql.Date;
 
-/* Author : Jaewon*/
+/** @author Jaewon */
 
 public class Reply {
 	private int replyNo;

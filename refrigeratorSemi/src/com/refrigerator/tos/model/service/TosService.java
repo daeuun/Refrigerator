@@ -12,7 +12,7 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.tos.model.dao.TosDao;
 import com.refrigerator.tos.model.vo.Tos;
 
-/* Author : Jaewon */
+/** @author Jaewon */
 
 public class TosService {
 //------------------------------------------------------
