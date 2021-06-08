@@ -384,7 +384,7 @@
                     </div>
                     
                     <div class="form1-area2" >
-                        <div class="thumbnail-area" border="1"><img src="<%= request.getContextPath() %>/<%= recipeInfo.getMainImg() %>" width="200" height="200" id="thumbnail-img"></div>
+                        <div class="thumbnail-area" border="1"><img src="<%= recipeInfo.getMainImg() %>" width="200" height="200" id="thumbnail-img"></div>
                         <div align="center"><span>*</span><button type="button" id="insertMainImg" class="btn btn-secondary btn-sm">대표이미지 등록</button></div>
                         <div><input type="file" id="file11" class="file" name="file11" required onchange="loadImg(this, 11);"></div>
                     </div>
