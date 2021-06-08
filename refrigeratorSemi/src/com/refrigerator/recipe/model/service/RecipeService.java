@@ -495,5 +495,15 @@ public class RecipeService {
 		return list;
 	}
 	
+	/** 레시피 일부 수정 
+	 * @author Jaewon 
+	 */ 
+	public int updateRecipe(int recipeNo, int userNo, String recipeTitle,String recipeIntro,int servings,int time,String mainImg) {
+		Connection conn = getConnection();
+		int result = new RecipeDao().updateRecipe(conn, recipeNo, userNo, recipeTitle, recipeIntro, servings, time, mainImg);
+		close(conn);
+		return result;
+	}
+
 
 }

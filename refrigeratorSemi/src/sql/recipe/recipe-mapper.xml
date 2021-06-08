@@ -725,4 +725,16 @@
 		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<!-- Jaewon 레시피 일부 수정하는 메소드 -->
+	<entry key="updateRecipe">
+		UPDATE
+		       RECIPE
+		   SET RECIPE_TITLE = ?
+             , RECIPE_INTRO = ? 
+             , SEVERAL_SERVINGS = ?
+             , COOKING_TIME = ?    
+             , MAIN_IMG = ?       		   
+		 WHERE RECIPE_NO = ?
+		   AND USER_NO = ?
+	</entry>
 </properties>

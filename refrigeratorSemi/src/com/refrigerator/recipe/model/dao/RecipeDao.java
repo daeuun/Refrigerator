@@ -1371,5 +1371,34 @@ public class RecipeDao{
 	}
 
 	
+	/** 레시피 일부 수정 메소드 
+	 * @author Jaewon 
+	 */ 
+	public int updateRecipe(Connection conn,int recipeNo, int userNo, String recipeTitle,String recipeIntro,int servings,int time,String mainImg) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, recipeTitle);
+			pstmt.setString(2, recipeIntro);
+			pstmt.setInt(3, servings);
+			pstmt.setInt(4, time);
+			pstmt.setString(5, mainImg);
+			pstmt.setInt(6, recipeNo);
+			pstmt.setInt(7, userNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
 	
 }
