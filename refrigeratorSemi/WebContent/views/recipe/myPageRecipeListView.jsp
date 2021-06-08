@@ -182,7 +182,7 @@
 								<td  width="100"><%= r.getRecipeEnrollDate().substring(2, 10) %></td>
 								<td  class="list-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= r.getRecipeNo() %>">
 									<div>
-										<img src="<%= request.getContextPath() %>/<%= r.getMainImg() %>" width="110" height="110">
+										<img src="<%= r.getMainImg() %>" width="110" height="110">
 									</div>
 									<div>
 										<p style="font-weight:bold;"><%= r.getRecipeTitle() %></p>
@@ -240,7 +240,7 @@
 								<td width="100"><%= r.getRecipeEnrollDate().substring(2, 10) %></td>
 								<td  class="list-box" onclick="location.href='<%= request.getContextPath() %>/detail.recipe?rno='+ <%= r.getRecipeNo() %>">
 									<div>
-										<img src="<%= request.getContextPath() %>/<%= r.getMainImg() %>" width="110" height="110">
+										<img src="<%= r.getMainImg() %>" width="110" height="110">
 									</div>
 									<div>
 										<p style="font-weight:bold;"><%= r.getRecipeTitle() %></p>
