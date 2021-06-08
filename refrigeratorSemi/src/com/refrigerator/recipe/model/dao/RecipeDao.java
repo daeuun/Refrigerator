@@ -1370,6 +1370,20 @@ public class RecipeDao{
 		return list;
 	}
 
+	/**
+	 * @author leeyeji
+	 * 관리자단 레시피 목록 조회
+	 */
+	public ArrayList<Recipe> selectAdminRecipeList(Connection conn, PageInfo pi){
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAdminRecipeList");
+	}
+	
+	
+	
+	
 	
 	/** 레시피 일부 수정 메소드 
 	 * @author Jaewon 

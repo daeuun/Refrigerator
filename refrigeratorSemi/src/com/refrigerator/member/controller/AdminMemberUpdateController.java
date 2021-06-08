@@ -34,10 +34,10 @@ public class AdminMemberUpdateController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		String nickname = request.getParameter("nickname");
-		String email = request.getParameter("email");
-		String userPwd = request.getParameter("password");
-		String phone = request.getParameter("phone");
+		String nickname = request.getParameter("exstnNickname");
+		String email = request.getParameter("exstnEmail");
+		//String userPwd = request.getParameter("password");
+		String phone = request.getParameter("exstnPhone");
 		String gender = request.getParameter("gender");
 		String grade = request.getParameter("grade");
 		
@@ -45,7 +45,7 @@ public class AdminMemberUpdateController extends HttpServlet {
 		m.setUserNo(userNo);
 		m.setNickname(nickname);
 		m.setEmail(email);
-		m.setUserPwd(userPwd);
+		//m.setUserPwd(userPwd);
 		m.setPhone(phone);
 		m.setGender(gender);
 		m.setGrade(grade);

@@ -150,13 +150,6 @@
 	    
 	                                                <tr>
 	                                                    <td>
-	                                                        <div>비밀번호</div>
-	                                                    </td>
-	                                                    <td><input type="text" name="exstnPwd" id="exstnPwd"></td>
-	                                                </tr>
-	    
-	                                                <tr>
-	                                                    <td>
 	                                                        <div>전화번호</div>
 	                                                    </td>
 	                                                    <td><input type="text" name="exstnPhone" id="exstnPhone"></td>
@@ -295,7 +288,7 @@
 	                            		
 	                            		$("#exstnNickname").val("<%=m.getNickname()%>");
 	                            		$("#exstnEmail").val("<%=m.getEmail()%>");
-	                            		$("#exstnPwd").val("<%=m.getUserPwd()%>");
+	                            		$("#exstnPwd").val("<%=m.getUserPwd()%>")
 	                            		$("#exstnPhone").val("<%=m.getPhone()%>");
 	                            		$("#grade").val("<%=m.getGrade()%>");
 	                            		

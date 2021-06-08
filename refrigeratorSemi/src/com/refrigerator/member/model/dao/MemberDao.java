@@ -235,15 +235,16 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateMember");
 		
+		System.out.println(m);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, m.getUserPwd());
-			pstmt.setInt(2, Integer.parseInt(m.getGrade()));
-			pstmt.setString(3, m.getGender());
-			pstmt.setString(4, m.getEmail());
-			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getNickname());
-			pstmt.setInt(7, m.getUserNo());
+			pstmt.setInt(1, Integer.parseInt(m.getGrade()));
+			pstmt.setString(2, m.getGender());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setString(5, m.getNickname());
+			pstmt.setInt(6, m.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -252,7 +253,7 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}
-		System.out.print(result);
+		
 		return result;
 	}
 	
