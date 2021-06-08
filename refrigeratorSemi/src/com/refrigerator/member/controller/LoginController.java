@@ -44,14 +44,18 @@ public class LoginController extends HttpServlet {
 		if(loginUser == null) { // 로그인 실패 => error페이지 응답
 			
 			// 에러페이지 메세지 전달은 기술안함
-			request.getRequestDispatcher("views/common/user/errorPage.jsp");
+			request.setAttribute("errorTitleMsg", "제대로 입력해!!! ");
+			request.setAttribute("errorMsg", "제대로 입력해!!! ");
+			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);;
 			
 		}else if(loginUser.getUserNo() == 1) {
 			request.getSession().setAttribute("confirmMsg", "어드민 페이지로 이동하시고자 하면 확인을 클릭하세요");
 			//이제 url 재요청
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect(request.getContextPath());
 		
-		}else { // 로그인 성공 => index페이지 응답
+		}else { // 로그인 성공 => index페이지 응답 history.back();
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);

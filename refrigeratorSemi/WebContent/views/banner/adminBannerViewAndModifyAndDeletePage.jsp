@@ -546,7 +546,7 @@
 						url : "selectBanner.ba",
 						data : {bannerNo: bno},
 						type:"post", 
-						success: function(result){ /
+						success: function(result){ 
 							
 							$("#detailBanner input[name='bannerName']").val(result.bannerName);
 							$("#detailBanner input[name='companyName']").val(result.companyName);
@@ -573,7 +573,6 @@
 							alert("예상치 못한 오류로 인해 조회가 불가합니다 개발자에게 문의하세요")
 						}
 					})
-
 				};
 				
             	function deleteBanner(){

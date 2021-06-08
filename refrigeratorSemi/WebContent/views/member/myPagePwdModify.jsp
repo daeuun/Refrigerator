@@ -97,7 +97,7 @@
             <input type="hidden" name="userId" value="<%= userId %>">
             <input type="password" name="userPwd" placeholder="현재 비밀번호" required><br>
             <!-- 이 아래의 span이 AJAX가 적용될 예정이다. -->
-            <span>※ 영문자(대/소), 숫자, 특수문자를 포함하여 8자 이상 입력.</span><br>
+            <span>※ 영문자(대/소), 숫자, 특수문자를 포함하여 4자 이상 입력.</span><br>
             <input type="password" id="newPwd" name="newPwd" placeholder="새 비밀번호" required><br>
             <input type="password" id="newPWdCheck" placeholder="새 비밀 번호를 확인합니다" disabled required><br>
             <div id="checkPwdBox" style="display:none;">test</div>
@@ -112,13 +112,13 @@
                 var pwdLength = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{4,16}$/;
 
                 if(pwdLength.test(newPwd)){
-					$("#checkPwdBox").html("※ 유요한 비밀번호입니다!");
+					$("#checkPwdBox").html("※ 유효한 비밀번호입니다!");
 					$("#checkPwdBox").css("color","green");
 					$("#checkPwdBox").css("display", "");
 					$("#checkPwdBox").css("text-align", "left");
 					$("#newPWdCheck").prop("disabled" , false)
                 }else{
-					$("#checkPwdBox").html("※ 영문자, 숫자, 특수문자를 사용하여 8~16자로 설정해주세요");
+					$("#checkPwdBox").html("※ 영문자, 숫자, 특수문자를 사용하여 4~16자로 설정해주세요");
 					$("#checkPwdBox").css("color","red");
 					$("#checkPwdBox").css("display", "");
 					$("#checkPwdBox").css("text-align", "left");

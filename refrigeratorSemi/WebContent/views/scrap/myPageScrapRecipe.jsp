@@ -154,7 +154,7 @@
 			그다음  -->
 
 		<div class="outer">
-			<p>최근본레시피</p> 
+			<p>찜한레시피</p> 
             <div class="division-line"></div>
 			<div id="mypage-thumbnail-table">
 				<% for(Scrap s : list) {%>
