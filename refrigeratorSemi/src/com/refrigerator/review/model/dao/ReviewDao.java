@@ -380,12 +380,12 @@ public class ReviewDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new AdmReview(rset.getInt("user_no"),
-									   rset.getString("user_id"),
-									   rset.getString("recipe_title"),
-									   rset.getDouble("star"),
-									   rset.getString("review_content"),
-									   rset.getDate("enroll_date")));
+				list.add(new AdmReview(rset.getInt("REVIEW_NO"),
+									   rset.getString("USER_ID"),
+									   rset.getString("RECIPE_TITLE"),
+									   rset.getDouble("STAR"),
+									   rset.getString("REVIEW_CONTENT"),
+									   rset.getDate("ENROLL_DATE")));
 			}
 			
 		} catch (SQLException e) {

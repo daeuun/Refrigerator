@@ -11,7 +11,8 @@
 
 <% 	
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
-	ArrayList<AdmReview>list = (ArrayList<AdmReview>)request.getAttribute("list");
+	ArrayList<AdmReview>list = (ArrayList<AdmReview>)request.getAttribute("searchList");
+
 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -101,31 +102,17 @@
         <br><br>
 	
 		<!-- 요리 후기 삭제 기능 -->
-        
+        <form action="<%=contextPath%>/deleteReview.admin" id="admin-delete-review" >
 
             <div class="btn" align="right" style="width: 440px">
 
 		   		<div class="search-container" align="right" style="width:900px">
 
-		            
+		            <form action="" >
 		                <span id="" >회원 아이디</span>
-		                <input type="text" placeholder="아이디" name="userId">
-		                <button type="submit" class="btn btn-sm" id="searchBtn">조회</button>
-		          
-		            
-		           <script>
-		        
-			        	$(function(){
-			        		
-			        		$("#searchBtn").click(function(){
-			        			var userId = $(this).siblings("input[name=userId]").val();
-			        			location.href = "<%=contextPath%>/searchList.review?currentPage=1&userId=" + userId;
-			        		})
-			        		
-			        	})
-			        	
-					        
-		        </script>
+		                <input type="text" placeholder="아이디" name="">
+		                <button type="submit" class="btn btn-sm">조회</button>
+		            </form>
 
  				  </div>
                 <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#review-Delete-Modal" style="margin-left: -160px;" >삭제</a>
@@ -137,8 +124,7 @@
                 <div class="modal" id="review-Delete-Modal">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                        
-                    <form action="<%=contextPath%>/deleteReview.admin" id="admin-delete-review" >
+                    
                             <!-- Modal Header -->
                             <div class="modal-header">
                             <h4 class="modal-title">요리 후기 삭제</h4>
