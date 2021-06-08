@@ -3,7 +3,6 @@
 
 <%@ page import="java.util.ArrayList , com.refrigerator.nav_menu.model.vo.NavMenu"%>    
 
-
 <%
 	ArrayList<NavMenu> navList = (ArrayList<NavMenu>)request.getAttribute("navlist");	
 	NavMenu homeMenu = navList.get(0);
@@ -13,7 +12,6 @@
 	NavMenu csMenu = navList.get(4);
 	
 	String confirmMsg = (String)session.getAttribute("confirmMsg"); 
-
 %>    
     
 <!DOCTYPE html>
@@ -21,19 +19,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon -->
 
 <title>네비게이션바 관리 페이지</title>
+<!--  font awesome CDN -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-<!-- 일단은 관리자단 공통 부분을 예지님이 상단과 왼쪽을 담당했기에 !! 이같이 연동시켜줄것은 연동 시켜줘야한다.  -->
-<!-- --------------------------------------------------------------------------------------------------- -->
 <style>
     #for-height{height: 720px;} 
     div{box-sizing: border-box;}
     .wrap{margin: auto; width: 1200px; height: 750px;}
     .outer{ width: 1000px; float: right; margin-right: 25px;}
-/* ----------------------------------------------------------------------------------------------------------- */
-/* ------------------------------------------이용약관 관리 list페이지 CSS시작------------------------------------ */
+/* ------------------------------------------------------------------------------ */
     .top-box a{
         color: gray;
     }
@@ -220,7 +216,6 @@
     <div class="wrap">
 	<%@ include file="../common/admin/adminSideBarView.jsp" %>
         <div id="content">
-<!-------------------------------------------------------------------------------------------------------------->            
             <div class="outer" style="float:right">
                 <div class="top-box">
                     <a href="">홈</a> >
@@ -242,7 +237,7 @@
                         </div>
                     </div>
 
-                    <!-- 아래 영역 -->
+                    <%-- 아래 영역 --%>
                     <div class="sub-title">Navigation 목록 변경역역</div>
                     <div class="caution">
                     	※ 순서 입력란에는 ! 꼭 중복되지 않는 순서를 입력해주세요! 
@@ -362,7 +357,6 @@
                     </div>
                 </div>
             </div>
-<!------------------------------------------------------------------------------------------------------------->            
         </div>
     </div>
 </body>

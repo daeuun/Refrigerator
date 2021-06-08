@@ -13,6 +13,8 @@ import com.refrigerator.common.model.vo.PageInfo;
 import com.refrigerator.reply.model.service.ReplyService;
 import com.refrigerator.reply.model.vo.AdmReply;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class SearchReplyListController
  */
@@ -35,7 +37,6 @@ public class SearchReplyListController extends HttpServlet {
 
 		String userId = request.getParameter("userId");
 		
-		// 페이징처리 셋팅
 		int listCount; 	
 		int currentPage;
 		int pageLimit;	
@@ -45,7 +46,6 @@ public class SearchReplyListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		// 총 갯수
 		listCount = new ReplyService().selectUserListCount(userId);
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));

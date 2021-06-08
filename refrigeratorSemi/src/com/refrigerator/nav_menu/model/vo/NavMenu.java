@@ -1,5 +1,7 @@
 package com.refrigerator.nav_menu.model.vo;
 
+/* Author : Jaewon */
+
 public class NavMenu {
 	
 	private int menuNo;

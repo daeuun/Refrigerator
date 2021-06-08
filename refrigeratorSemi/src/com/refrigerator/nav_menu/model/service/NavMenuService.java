@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import com.refrigerator.nav_menu.model.dao.NavMenuDao;
 import com.refrigerator.nav_menu.model.vo.NavMenu;
 
+/* Author : Jaewon */
+
 public class NavMenuService {
 	public ArrayList<NavMenu> seletNavMenuList() {
 		Connection conn = getConnection();

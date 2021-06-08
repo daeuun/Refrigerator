@@ -20,7 +20,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
+<!-- Author : Jaewon  -->
 
 <title>마이페이지 내가 쓴 댓글</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
@@ -45,7 +45,7 @@
 		height: 0px;
 		background-color: rgb(0,102,51);
 	}
-	/* 얘도 나중에 tr hover시 여러 td에 스타일 먹이는 스크립트 구현해둬야한다.  */
+	
 	.reply-list-table {
 		width: 100%;
 		border-top: none;
@@ -249,7 +249,6 @@
 <body>
 	<%@ include file="../common/user/menubar.jsp" %>
 	<%@ include file="../common/user/myPageVerticalNav.jsp" %>
-		<!-- 마이페이지 작업영역  시작-->
 		<div class="outer">
 			<p>내 댓글 관리</p> 
 			<span style="color:blue; font-size:14px; margin-left:200px;"> ※  내용을 클릭시에 해당 레시피페이지로 이동합니다</span>
@@ -265,7 +264,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- 조회해와서 반복문으로 돌려줘야한다. -->
 					
 					<% if(list.size() < 5){ %>
 						<%for(Reply r : list){%>
@@ -310,11 +308,10 @@
 			<script>
 	
 				function modifyReply(standard){
-					// 기준점이 되는 tr을 선정함 
-					var standard = $(standard).parent().parent(); // 전역 변수로 쓸수가 없다.
-					var passReplyNo = $(standard).children("input").val();// 댓글번호
-					var passRecipeTitle = $(standard).children(".list-box").children().children("p").html();// 레시피 제목
-					var passReplyContent = $(standard).children(".list-box").children().children("pre").html();// 레시피 제목
+					var standard = $(standard).parent().parent(); 
+					var passReplyNo = $(standard).children("input").val();
+					var passRecipeTitle = $(standard).children(".list-box").children().children("p").html();
+					var passReplyContent = $(standard).children(".list-box").children().children("pre").html();
 					
 					$("#passedTtile").text("레시피 : " + passRecipeTitle);
 					$("#passedMReplyNo").val(passReplyNo);
@@ -327,20 +324,19 @@
 				}
 				
 				function deleteReply(standard){
-					var standard = $(standard).parent().parent(); // 전역 변수로 쓸수가 없다.
-					var passReplyNo = $(standard).children("input").val();// 댓글번호
-					var passRecipeTitle = $(standard).children(".list-box").children().children("p").html();// 레시피 제목
+					var standard = $(standard).parent().parent(); 
+					var passReplyNo = $(standard).children("input").val();
+					var passRecipeTitle = $(standard).children(".list-box").children().children("p").html();
 					$("#passedDReplyNo").val(passReplyNo);
 					$("#passedDRecipeTitle").text(passRecipeTitle);
 				}
 
 			</script>
 
-<!------------------------------------- 페이징바 영역 --------------------------------------------------------->
+<%------------------------------------- 페이징바 영역 ---------------------------------------------------------%>
 
 		        <div align="center" class="paging-area">
 		
-					<!-- 현재 보고있는 페이지가 1일 떄 버튼 안보이게 하려면 아래와같이 -->
 					<% if(currentPage != 1){ %>
 		            	<button onclick="location.href='<%= request.getContextPath() %>/mylist.rpl?currentPage=<%= currentPage-1 %>';">&lt;</button>
 		            <%} %>
@@ -350,11 +346,9 @@
 		            		<button onclick="location.href='<%= request.getContextPath()%>/mylist.rpl?currentPage=<%= p %>';"><%= p %></button>
 		            	<%}else{ %>
 		         	    	<button id="dis-btn" disabled><%= p %></button>
-		    	    	    <!-- 현제 페이지수는 다시 클릭이 불가능하게 만들어주자! -->
 		            	<%}%>
 		            <%}%>
 			
-					<!-- 현재 보고있는 페이지가 마지막페이지일 떄 버튼 안보이게 하려면 아래와같이 -->
 					<% if(currentPage != maxPage){ %>                        
 		            	<button onclick="location.href='<%= request.getContextPath() %>/mylist.rpl?currentPage=<%= currentPage+1 %>';">&gt;</button>
 		            <%} %>
@@ -362,7 +356,7 @@
 				
 
             </div>
-<!------------------------------ 수정모달 영역 시작  -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 수정모달 영역 시작  --------------------------------------------------------------------------------------------------------------%>
 
 			<!-- The Modal -->
 			<div class="modal fade" id="reply-modify-modal">
@@ -405,8 +399,8 @@
 					</div>
 				</div>
 			</div>
-<!------------------------------ 수정모달 영역 끝  -------------------------------------------------------------------------------------------------------------->
-<!------------------------------ 삭제모달 영역 시작 -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 수정모달 영역 끝  --------------------------------------------------------------------------------------------------------------%>
+<%------------------------------ 삭제모달 영역 시작 --------------------------------------------------------------------------------------------------------------%>
 			<!-- The Modal -->
 			<div class="modal fade" id="reply-del-modal">
 				<div class=" modal-dialog modal-sm">
@@ -414,7 +408,7 @@
 				
 						<!-- Modal Header -->
 						<div class="modal-header">
-							<h5 id="passedDRecipeTitle" class="modal-title">레시피 : 닭고기로 튀김을? 꿔바로우와 치킨의 그 사이...ㄴㅇㄹㄴㅇㄹㅁㄴㅇㄻㄴㅇㄹㄹㄴㅇ</h5>
+							<h5 id="passedDRecipeTitle" class="modal-title"></h5>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 						
@@ -435,7 +429,6 @@
 				</div>
 			</div>
 
-        	<!-- Jaewon.s -->
 			<script>
 			 	var msg = "<%= alertMsg %>"; 
 			 	if(msg != "null"){
@@ -443,9 +436,8 @@
 					<% session.removeAttribute("alertMsg"); %>
 			 	}
 			</script>
-<!------------------------------ 삭제모달 영역 끝  -------------------------------------------------------------------------------------------------------------->
+<%------------------------------ 삭제모달 영역 끝  --------------------------------------------------------------------------------------------------------------%>
 		</div>
-		<!-- 마이페이지 작업영역  끝-->
 	</div>
 	<%@ include file="../common/user/footer.jsp" %>
 
