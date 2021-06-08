@@ -1,33 +1,19 @@
 package com.refrigerator.scrap.model.vo;
 
-public class Scrap {
-	// 애초에 만들떄!!!! 중요한게 넘기는 값이 
-	// 회원번호와 레시피 번호 2개만 가지고 해결을 할수있게 만들어둬야지만 
-	// 나중에 최근본레시피 쿠기를 사용하여 조회해올때 이게 가능할듯하다. 
-	
-	// 기준점을 생각해주자! user가 여러개의 레시피를 스크랩을 할수있는것이다. 잘생각해야하는게
-	
-	// 순서가 찜하기 테이블에서 => recipe table갔다가 => review(요리후)테이블 과 
-	//                                    => 회원 테이블을 동시에 접근해줘야한다 
-	
-	// 아래의 회원번호 필드는 값을 넘길때 쓰는 필드
-	private int userNo; // ★  얘는 로그인한 회원을 회원번호이다. (즉 where절에서 해당 회원이 찜한 레시피들이 기준이 되는것이다.)
-	private int recipeNo; // 레시피 번호를 넘겨서 정보를 가져와야한다. 
-	//recipe테이블에서 레시피명  대표이미지  COOKING_TIME, LIKE_COUNT총 좋아요를 받아와야한다, 
-	private String recipeTitle; //recipe테이블의 레시피제목
-	private int cookingTime; //recipe테이블의 레시피 소요시간
-	private int likeCount; //recipe테이블의 총 좋요수 
-	private String mainImg;	 //recipe테이블의 대표이미지 경로 
-	//member테이블에서 프로필 이미지, 프로필명,
-	private String nickName; // member테이블의 프로필명
-	private String profileImg; // member테이블의 프로필 이미지 
-	
-	// REVIEW 테이블에서 별점 star가져와야한다. 
-	private double avgStar; // review테이블의  별점 
-	// 소수점 까지 받아줘야하기에 double로 받아라 
+/* Author : Jaewon  */
 
+public class Scrap {
+	private int userNo; 
+	private int recipeNo;  
+	private String recipeTitle;
+	private int cookingTime; 
+	private int likeCount; 
+	private String mainImg;	
+	private String nickName; 
+	private String profileImg; 
 	
-	// 일단은 여기까지만 받아보자 후에 뭔가 추가되면 변경한다 먼저 sql짜러가라 
+	private double avgStar; 
+	
 //---------------------------------------------------------------------------------------------------------------	
 	public Scrap() {}
 

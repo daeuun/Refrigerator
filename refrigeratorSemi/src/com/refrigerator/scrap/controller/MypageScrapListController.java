@@ -13,6 +13,8 @@ import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.scrap.model.service.ScrapService;
 import com.refrigerator.scrap.model.vo.Scrap;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class MypageScrapListController
  */
@@ -38,12 +40,10 @@ public class MypageScrapListController extends HttpServlet {
 		ArrayList<Scrap> list = new ArrayList<>();
 		if(loginUser != null) {
 			list = new ScrapService().selectList(loginUser.getUserNo()); 
-			// 몇개가 담겨 있는지 모른다. 
 		}
 				
 		request.setAttribute("myPageNo", 3);
 
-		// session에 지금 로그인 정보가 담겨있어야지만 이를 가지고 들어가서 작업할수가 있다. 
 		if(loginUser == null) {// 로그인 정보가 담겨있지 않다면 ! 로그인 페이지로 이동 
 			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 		}else {// 로그인 정보 담겨있으면 ! member 수정쪽으로 이동 

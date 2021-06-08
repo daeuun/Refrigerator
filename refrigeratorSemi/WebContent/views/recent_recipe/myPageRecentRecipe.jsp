@@ -12,9 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="jaewon.s">
-<!-- 작성자 : 재원      ※ 혹여나 해당 페이지에 작업시에 작업하신부분에 주석으로 성함과 영역을 표시해주세요! (혹여나 파일이 날라갈수있으니 push전에 백업부탁드려요~)  -->
-<!-- 최근본 레시피는 맥시멈 6개 정도만 남기는것으로 진행  -->
+<!-- Author : Jaewon  -->
 <title>마이페이지 최근본레시피</title>
+<!-- font awesome CDN -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 <style>
@@ -47,7 +47,6 @@
 	#mypage-thumbnail-table tr{
 		display: flex;
 		justify-content: flex-start;
-		/* justify-content: space-around; 나중에 2개의 데이터 조회되었을시에   */
 		margin-bottom: 20px;
 	}
 
@@ -242,7 +241,6 @@
 				</tr>
 			</table>
 		</div>
-		<!-- 마이페이지 작업영역  끝-->
 		
 	</div>
 	<%@ include file="../common/user/footer.jsp" %>

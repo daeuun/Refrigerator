@@ -1,14 +1,16 @@
 package com.refrigerator.recent_recipe.model.vo;
 
+/* Author : Jaewon  */
+
 public class RecentRecipe {
-	private int recipeNo; // 레시피 번호를 넘겨서 정보를 가져와야한다. 
-	private String recipeTitle; //recipe테이블의 레시피제목
-	private int cookingTime; //recipe테이블의 레시피 소요시간
-	private int likeCount; //recipe테이블의 총 좋요수 
-	private String mainImg;	 //recipe테이블의 대표이미지 경로 
-	private String nickName; // member테이블의 프로필명
-	private String profileImg; // member테이블의 프로필 이미지 	
-	private double avgStar; // member테이블의  별점 
+	private int recipeNo;  
+	private String recipeTitle; 
+	private int cookingTime; 
+	private int likeCount; 
+	private String mainImg;	
+	private String nickName; 
+	private String profileImg; 
+	private double avgStar; 
 	
 	public RecentRecipe() {}
 	

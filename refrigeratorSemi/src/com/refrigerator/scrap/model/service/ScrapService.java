@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import com.refrigerator.scrap.model.dao.ScrapDao;
 import com.refrigerator.scrap.model.vo.Scrap;
 
+/* Author : Jaewon */
+
 public class ScrapService {
 //------------------------------------------------------------------------------------------------
 	public ArrayList<Scrap> selectList(int loginUserNo){
-		// 넘겨받은 로그인 한 유저의 회원번호를 doa에 넘기고 받아와오는 메소드  
 		Connection conn = getConnection();
 		ArrayList<Scrap> list = new ScrapDao().selectList(conn, loginUserNo);
 		close(conn);

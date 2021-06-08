@@ -13,6 +13,8 @@ import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.recent_recipe.model.service.RecentRecipeService;
 import com.refrigerator.recent_recipe.model.vo.RecentRecipe;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class MypageRecentRecipeListController
  */
@@ -63,16 +65,10 @@ public class MypageRecentRecipeListController extends HttpServlet {
 
 		if(loginUser != null) {
 			list = new RecentRecipeService().selectList(recentRecipeNo); 
-			// 무조건 6개 담겨있다! 
 			
 			if(list.size()<4) {
-				// 3개 이하로 잡히면 그떄는 전체 리스트에 접근해줘도 된다. 
 				firstRow = list;			
 			}else {
-				// 혹여나 데이터의 갯수가 음 .. 4개가 넘고 이게 4개일지 5개일지 6개일지 모를떄는 !! 
-				// 일단은 3개가 넘는 다는 소리이다. 이렇게 되면 최소 4개 까지는 있다는 것이다. 
-				// 그럼 끝인덱스만을 알아오면 되는데 음 .. 
-				// E e = list.get(list.size() - 1);
 				for(int i=0; i<3; i++){
 					firstRow.add(list.get(i));
 				}
@@ -85,8 +81,7 @@ public class MypageRecentRecipeListController extends HttpServlet {
 
 		request.setAttribute("myPageNo", 2);
 
-		// session에 지금 로그인 정보가 담겨있어야지만 이를 가지고 들어가서 작업할수가 있다. 
-		if(loginUser == null) {// 로그인 정보가 담겨있지 않다면 ! 로그인 페이지로 이동 
+		if(loginUser == null) {
 			request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 		}else {// 로그인 정보 담겨있으면 ! member 수정쪽으로 이동 
 			request.setAttribute("firstRow", firstRow);

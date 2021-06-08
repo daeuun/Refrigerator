@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.refrigerator.member.model.vo.Member;
 import com.refrigerator.scrap.model.service.ScrapService;
 
+/* Author : Jaewon */
+
 /**
  * Servlet implementation class MypageScrapDeleteController
  */
