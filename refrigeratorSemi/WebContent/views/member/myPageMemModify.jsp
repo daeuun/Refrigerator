@@ -223,8 +223,61 @@
                             </td>
                         </tr>
                         <tr>
+                        	<script>	
+                        	$(function(){
+					            $("#emailcheck").focusout(function(){
+					                var newEmail = $("#emailcheck").val();
+									
+									$.ajax({
+										url : "AjaxEmailCheck.me",
+										data : {
+											newEmailCheck: newEmail
+										},
+										type:"post",
+										success:function(result){
+											if(result == "true"){
+												$("#emailbox").text("* 이미 사용하고 있는 e-mail입니다!");
+												$("#emailcheck").val("").focus();
+											}else{
+												$("#emailbox").text("* 사용가능한 이메일입니다.");
+											}
+										},error:function(){
+											console.log("Ajax 통신 실패");
+										}
+					         	   }) 
+					        	}) 
+                        	}); 	
+                        	
+                           	$(function(){		
+					            $("#tlno").focusout(function(){
+					                var beforePhone = $("#tlno").val();
+					                var newPhone = beforePhone.replace("-", "").replace("-","");
+
+									$.ajax({
+										url : "AjaxPhoneCheck.me",
+										data : {
+											newPhoneCheck: newPhone
+										},
+										type:"post",
+										success:function(result){
+											if(result == "true"){
+												$("#phoneBox").text("* 이미 사용하고 있는 전화번호입니다!");
+												$("#tlno").val("").focus();
+											}else{
+												$("#phoneBox").text("* 사용가능한 전화번호입니다!");
+											}
+										},error:function(){
+											console.log("Ajax 통신 실패");
+										}
+					            	});      
+                        		})    
+                        	})	
+                        	</script>
+                        
                             <td><p>이메일 주소</p></td>
-                            <td colspan="2"><input type="email" name="email" value="<%= loginUser.getEmail() %>"></td><%--조회해온 이메일 넣기--%>
+                            <td colspan="2"><input type="email" id="emailcheck" name="email" value="<%= loginUser.getEmail() %>">
+                            <span id="emailbox" style="font-size:12px; color:red;"></span>
+                            </td><%--조회해온 이메일 넣기--%>
                         </tr>
                         <tr>
                         	<%
@@ -235,7 +288,7 @@
                             	<script>
                             	</script>
                             	<input type="text" id="tlno" name="phone" value="<%= phoneNo %>" maxlength="13" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" title="000-0000-0000형식으로 입력해주세요" placeholder="xxx-xxxx-xxxx">
-                           		<span style="font-size:12px; color:red;"> * 전화번호는 "-"을 꼭 넣어서 입력해주세요.</span>
+                           		<span id="phoneBox" style="font-size:12px; color:red;"> * 전화번호는 "-"을 꼭 넣어서 입력해주세요.</span>
                            	</td><%--조회해온 전화번호 넣기--%>
                         </tr>
                     </tbody>

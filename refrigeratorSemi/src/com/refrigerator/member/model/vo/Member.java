@@ -123,6 +123,11 @@ public class Member {
 		this.nickname = nickname;
 		this.status = status;
 	}
+	
+	public Member(int userNo) {
+		super();
+		this.userNo = userNo;
+	}
 
 	public int getUserNo() {
 		return userNo;

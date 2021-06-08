@@ -533,5 +533,62 @@ public class MemberDao {
 		return list;
 	}
 	
+	/**
+	 * @Author Jaewon
+	 * 이메일 체크용
+	 */
+	public Member checkEmail(Connection conn, String newEmail) {
+		// select => ResultSet 한 행
+		Member count = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newEmail);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = new Member(rset.getInt("user_No"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+	/**
+	 * @Author Jaewon
+	 * 폰 체크용
+	 */
+	public Member checkPhone(Connection conn, String newPhone) {
+		// select => ResultSet 한 행
+		Member count = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkPhone");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPhone);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = new Member(rset.getInt("user_No"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
 
 }

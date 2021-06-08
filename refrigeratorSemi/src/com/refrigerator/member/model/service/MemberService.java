@@ -240,4 +240,27 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
+	
+	/**
+	 * @author Jaewon
+	 * 이메일 체크용 
+	 */
+	public Member checkEmail(String newEmail){
+		Connection conn = getConnection();
+		Member count = new MemberDao().checkEmail(conn, newEmail);
+		close(conn);
+		return count;
+	}
+	
+	/**
+	 * @author Jaewon
+	 * 폰 체크용 
+	 */
+	public Member checkPhone(String newPhone){
+		Connection conn = getConnection();
+		Member count = new MemberDao().checkPhone(conn, newPhone);
+		close(conn);
+		return count;
+	}
+	
 }
