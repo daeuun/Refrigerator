@@ -116,8 +116,7 @@
 	<entry key="updateMember">
 		UPDATE MEMBER 
 		   SET 
-		       USER_PWD = ?
-		     , GRADE = ?
+		       GRADE = ?
 		     , GENDER = ?
 		     , EMAIL = ?
 		     , PHONE = ?
