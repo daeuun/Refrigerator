@@ -470,7 +470,11 @@
                 <table class="ingredients-detail">
 				
 					 <hr width="100px">
-					
+						
+						<script>
+							var ingArr = [];
+							var subArr = [];
+						</script>
 					
 						<!-- 필수 재료 출력되는 구문 -->
 						<% for(int i=0; i<ingre.size();i++) { %>
@@ -478,8 +482,11 @@
 		                        <th><%=ingre.get(i).getIngreName()%></th>
 		                        <td id="ing<%=i%>"><%=ingre.get(i).getIngreAmount() / rc.getSeveralServings()%></td>
 		                        <td><%=ingre.get(i).getIngreUnit() %></td>
-
+								
 		                    </tr>
+		                    <script>
+		                    ingArr.push(<%=ingre.get(i).getIngreAmount() / rc.getSeveralServings()%>);
+							</script>
 						<%} %>
 				
                 </table>
@@ -500,6 +507,10 @@
 		                        <td id="sub<%=i%>"><%=subIngre.get(i).getSubIngreAmount() / rc.getSeveralServings()%></td>
 		                        <td><%=subIngre.get(i).getSubIngreUnit() %></td>
 		                    </tr>
+		                    
+		                    <script>
+		                    subArr.push(<%=subIngre.get(i).getSubIngreAmount() / rc.getSeveralServings()%>);
+							</script>
 		                    
 						<%} %>
 
@@ -563,14 +574,15 @@
 	                                var servings = $("#select-servings").children("option:selected").val();
 	                                
 	                                for(var i=0; i<<%=ingre.size()%>;i++) {
-	                                   var ing = $("#ing" + i).text();
-	                                   $("#ing" + i).text(ing*servings);
+	                                   //var ing = $("#ing" + i).text();
+	                                   
+	                                   $("#ing" + i).text(ingArr[i]*servings);
 	                                   
 	                                }
 	                                
                                    for(var i=0;i<<%=subIngre.size()%>;i++){
-	                                	var sub = $("#sub" + i).text();
-	                                	$("#sub" + i).text(sub*servings);
+	                                	//var sub = $("#sub" + i).text();
+	                                	$("#sub" + i).text(subArr[i]*servings);
 	                                }
 	                                
 	                                
