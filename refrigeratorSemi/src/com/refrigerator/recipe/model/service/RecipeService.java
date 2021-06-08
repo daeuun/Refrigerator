@@ -172,7 +172,6 @@ public class RecipeService {
 	public ArrayList<Recipe> selectMainSortViewList(PageInfo pi) {
 		Connection conn = getConnection();
 		ArrayList<Recipe> list = new RecipeDao().selectMainSortViewList(conn, pi);
-		System.out.println(list);
 		close(conn);
 		return list;
 	}

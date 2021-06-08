@@ -77,9 +77,6 @@ public class MainRecipeSortViewController extends HttpServlet {
 		
 		// 3. 게시글 리스트 ArrayList에 담아서 조회해오기
 		ArrayList<Recipe> list = new RecipeService().selectMainSortViewList(pi);
-		
-		System.out.println(pi);
-		System.out.println(list);
 				
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

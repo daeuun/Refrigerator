@@ -393,8 +393,6 @@ public class RecipeDao{
 									rset.getString("main_img")));
 			}
 			
-			System.out.println(list);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -911,7 +909,6 @@ public class RecipeDao{
 									));
 			}
 			
-			System.out.println(list);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
