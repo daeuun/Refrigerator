@@ -116,7 +116,7 @@
 	
 	<!-- @ -->
 	<!-- 아이디 검색 총 갯수 -->
-	<entry key="">
+	<entry key="selectUserListCount">
 		SELECT COUNT(*) COUNT
 		  FROM MEMBER
 		 WHERE USER_ID = (

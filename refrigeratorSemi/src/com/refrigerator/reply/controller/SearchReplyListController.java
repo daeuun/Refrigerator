@@ -71,8 +71,9 @@ public class SearchReplyListController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("searchList", searchList);
 		
+		request.getRequestDispatcher("views/reply/adminSearchListView.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("views/member/adminReportListView.jsp").forward(request, response);
+		
 		
 	}
 

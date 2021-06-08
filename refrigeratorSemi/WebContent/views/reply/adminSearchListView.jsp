@@ -17,7 +17,7 @@
 <% 	
 
 	Member loginUser = (Member)session.getAttribute("loginUser"); 
-	ArrayList<AdmReply>list = (ArrayList<AdmReply>)request.getAttribute("list");
+	ArrayList<AdmReply>list = (ArrayList<AdmReply>)request.getAttribute("searchList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -127,7 +127,7 @@
         		
         		$("#searchBtn").click(function(){
         			var userId = $(this).siblings("input[name=userId]").val();
-        			location.href = "<%=contextPath%>/searchList.reply?currentPage=1&userId=" + userId;
+        			location.href = "<%=request.getContextPath()%>/searchList.reply?currentPage=1&userId=" + userId;
         		})
         		
         	})
@@ -140,7 +140,7 @@
 
         
         <!--댓글 삭제 기능-->
-        <form action="<%=contextPath%>/deleteReply.admin" id="admin-delete-reply" >
+        <form action="<%=request.getContextPath()%>/deleteReply.admin" id="admin-delete-reply" >
 
             <div class="btn" align="right" style="width: 440px">
 
@@ -240,13 +240,13 @@
    		 <div class="paging-area" align="center">
 
 			<% if(currentPage != 1) { %>
-            <button onclick="location.href='<%=contextPath%>/rlist.admin?currentPage=<%=currentPage-1%>';">&lt;</button>
+            <button onclick="location.href='<%=request.getContextPath()%>/rlist.admin?currentPage=<%=currentPage-1%>';">&lt;</button>
 			<% } %>
 			
 			<% for(int p=startPage; p<=endPage;p++) {%>
 		
 				<% if(p != currentPage) {%>
-				<button onclick="location.href='<%=contextPath%>/rlist.admin?currentPage=<%=p%>';"><%=p%></button>
+				<button onclick="location.href='<%=request.getContextPath()%>/rlist.admin?currentPage=<%=p%>';"><%=p%></button>
 				<%} else { %>
 				<button disabled><%= p %></button>
 				<%} %>
@@ -254,7 +254,7 @@
 			<%} %>
 			
 			<%if(currentPage != maxPage) {%>
-            <button onclick="location.href='<%=contextPath%>/rlist.admin?currentPage=<%=currentPage+1%>';">&gt;</button>
+            <button onclick="location.href='<%=request.getContextPath()%>/rlist.admin?currentPage=<%=currentPage+1%>';">&gt;</button>
 			<%} %>
 			
 			
@@ -287,4 +287,4 @@
 
 
 </body>
-</html>
+</html>l>

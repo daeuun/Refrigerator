@@ -46,13 +46,9 @@ public class ReplyService {
 		
 		public ArrayList<AdmReply> adminSelectReplyList(PageInfo pi){
 			
-			
 			Connection conn = getConnection();
-			
 			ArrayList<AdmReply> list = new ReplyDao().adminSelectReplyList(conn,pi);
-			
 			close(conn);
-			
 			return list;
 			
 		}	

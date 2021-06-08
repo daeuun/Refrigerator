@@ -308,7 +308,7 @@ import com.refrigerator.reply.model.vo.Reply;
 	}
 	
 	/**
-	 * 아이디 검색 결과 목록 조
+	 * 아이디 검색 결과 목록 조회
 	 */
 	public ArrayList<AdmReply> selectSearchUserList(Connection conn, PageInfo pi, String userId){
 		
