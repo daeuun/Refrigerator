@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-
+	//Jaewon
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg"); 
 	
@@ -32,7 +32,7 @@
 	 </script>
 	
 
-
+	<!--Jaewon -->
 	<script>
 	 	var msg = "<%= alertMsg %>"; 
 	 	if(msg != "null"){
