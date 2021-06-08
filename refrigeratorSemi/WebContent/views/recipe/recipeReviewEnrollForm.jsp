@@ -98,6 +98,8 @@
 		<%@ include file="../common/user/menubar.jsp" %>
 		
 		<div class="total-outer">
+		
+				<a type="button" href="javascript:history.back();">&times;</a>
     		
 		    	<form action="<%=contextPath%>/insertReview.recipe" method="post" id="enroll-form" enctype="multipart/form-data">
 		        
@@ -105,7 +107,7 @@
 				<input type="hidden" name="recipeNo" value="<%=recipeNo%>">
 		        
 		        <div class="outer">
-		            <button type="button" class="close" data-dismiss="modal">&times;</button>
+		            
 		            <br><br> <br>
 		            <h5 align="center">후기를 남겨볼까요?</h5>
 		            
@@ -114,7 +116,7 @@
 		            <hr>
 		            <br>
 		            <div  align="center">
-		                <img src="" alt="" width="150px" height="150px">
+		                <img src="<%=contextPath%>/resources/image/sampleImg1.jpg" alt="" width="150px" height="150px">
 		            </div>
 		            <br>
 		            

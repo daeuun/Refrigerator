@@ -574,8 +574,8 @@
 	                                var servings = $("#select-servings").children("option:selected").val();
 	                                
 	                                for(var i=0; i<<%=ingre.size()%>;i++) {
-	                                   //var ing = $("#ing" + i).text();
-	                                   
+	                                   //var ing = $("#ing" + i).text();	                                   
+
 	                                   $("#ing" + i).text(ingArr[i]*servings);
 	                                   
 	                                }
@@ -623,7 +623,6 @@
                    
                     <a href="" class="selectView"><img src="<%=contextPath%>/resources/image/icon-grid.png" class="icon" ><br>텍스트 크게보기</a>
 
-
                     </div>
   
                 </div>
@@ -633,11 +632,6 @@
                 </div>
                 
                 <br><br>
-                <!--다음 페이지로 이동시에 보여지는 버튼이며, 첫 화면시에는 보이지 않다가. currentPage = 2일 때 보이게끔 노출한다.-->
-
-                <!--처음에는 재료 이미지가 먼저 보여지고, 그 다음에 요리 과정 이미지가 보여지게 출력한다.-->
-
-
          
 
             </div>
@@ -657,7 +651,7 @@
 		                            <img src="<%=ro.getRecipeImg()%>" class="cooking-order-img">
 		                            <br><br>
 		                            <div class="cooking-order-text">
-		                               <h1><%=ro.getRecipeExpln()%></h1>
+		                               <h6><%=ro.getRecipeExpln()%></h6>
 		                            </div>
 		                        </div>
                    			<% }  %>
@@ -793,50 +787,45 @@
                 
 				
                 <br>
+                
                 <!--댓글 입력하는 영역-->
                 
-                    <div align="center">
-                        
-                            <table style="width: 500px;">
-                                <tr>
-                                    <td rowspan="2">
-                                        <!--프로필 사진이 들어오는 영역-->
-                                        <div class="box" style="background: #BDBDBD;">
-                                            <img class="profile" src="<%=contextPath%>/resources/image/icon-user-profile.png">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                            		 <% if(loginUser != null) { %>
-                            		 
-	                                    <td style="width: 80%;">
-	                                        <div class="form-group">
-	                                        <label for="usr"></label>
-	                                        <input type="text" class="form-control" id="usr" placeholder="소중한 레시피에 쉐프님의 멋진 댓글을 남겨주세요 :) "  style="height: 30px;" name="<%=loginUser.getUserId()%>">
-	                                        </div>
-	                                    </td>
-	                                    
-	                                    <td><button class="btn btn-sm btn-success" onclick="insertReply();">등록</button></td>
-                                    <%}  else {%>
-                                    	
-	                                     <td style="width: 80%;">
-	                                        <div class="form-group">
-	                                        <label for="usr"></label>
-	                                        <input type="text" class="form-control" id="usr" placeholder="댓글은 로그인 후에 작성할 수 있어요!"  style="height: 30px;" disabled>
-	                                        </div>
-	                                    </td>
-	                                     
-	                                    <td><button class="btn btn-sm btn-success" onclick="insertReply();" disabled>등록</button></td>
-                                   <%} %>
-                                    
-                                </tr>
-                            	
-                            	
-                            </table>
-                            
-                            
-                    	
-                    </div>
+               <div align="center">
+                       <table style="width: 500px;">
+                           <tr>
+                               <td rowspan="2">
+                                   <!--프로필 사진이 들어오는 영역-->
+                                   <div class="box" style="background: #BDBDBD;">
+                                       <img class="profile" src="<%=contextPath%>/resources/image/icon-user-profile.png">
+                                   </div>
+                               </td>
+                           </tr>
+                           <tr>
+                       		 <% if(loginUser != null) { %>
+                       		 
+                                <td style="width: 80%;">
+                                    <div class="form-group">
+                                    <label for="usr"></label>
+                                    <input type="text" class="form-control" id="usr" placeholder="소중한 레시피에 쉐프님의 멋진 댓글을 남겨주세요 :) "  style="height: 30px;" name="<%=loginUser.getUserId()%>">
+                                    </div>
+                                </td>
+                                
+                                <td><button class="btn btn-sm btn-success" onclick="insertReply();">등록</button></td>
+                               <%}  else {%>
+                               	
+                                 <td style="width: 80%;">
+                                    <div class="form-group">
+                                    <label for="usr"></label>
+                                    <input type="text" class="form-control" id="usr" placeholder="댓글은 로그인 후에 작성할 수 있어요!"  style="height: 30px;" disabled>
+                                    </div>
+                                </td>
+                                 
+                                <td><button class="btn btn-sm btn-success" onclick="insertReply();" disabled>등록</button></td>
+                              <%} %>
+                               
+                           </tr>
+                       </table>
+               	</div>
                 
 
                <br>
@@ -863,33 +852,24 @@
 
                     
                    /*요리 후기 조회*/ 
+                   
                     function selectReviewList(){
                     	
-                    	
                 	   $.ajax({
-                		   
-                		   url: "list.review"
+                		    url: "list.review"
                            	,data : {recipeNo : <%=rc.getRecipeNo()%>}
                 	   		,enctype:'multipart/form-data'
-
                           	,success : function(list){
-                          			
                           			var result = "";
-                          		
                           			for(var i in list){
-                          				
-                          				
                           				
                           				result += 
                           					"<br>" + 
-                              				
                                             "<tr>" + 
                                                 "<td rowspan='3'>" +
-                                                    
                                                     "<div class='box' style='background: #BDBDBD;''>" + 
                                                         "<img class='profile' src='"  + list[i].profileImg +  "'>" + 
                                                     "</div>" +
-
                                                 "</td>" + 
                                                 "<td>"+"<b>"+ list[i].reviewWriter+"</b>"+"</td>" +
                                                 "<td>"+ list[i].enrollDate+"</td>" +
@@ -904,20 +884,10 @@
                                                 "<td colspan='2'>" + list[i].star + "</td>" + 
                                             "</tr>"
  											+ "<br>" 
-											
-									
                           			}
-                          			
-                          			
                           			$("#review-detail tbody").html(result);
-                          			
-                          		},error : function(){
-                          			
                           		}
-  
-                		   
                 	 		  })
-                    	
                   	 }
                     
 
@@ -928,8 +898,10 @@
                            setInterval(selectReplylist,1000);
                        })
                        
+                       /*댓글 작성*/
+                       
                        <%if(loginUser!=null){%>   
-             			/*댓글 작성*/
+             			
                        function insertReply(){
                        	$.ajax({
                        		url : "rinsert.recipe"
@@ -945,11 +917,6 @@
 	                        			selectReplyList();
 	                        			$("#usr").val("");
 	                        		}
-                       		
-                       		},error : function(){
-                       			
-                       		}, complete : function(){
-                       			
                        		}
                         	
                         	})
@@ -957,12 +924,14 @@
                        <%}%>
                         
                         /*댓글 조회 */
+                        /*레시피 숫자는 레시피 조회에서 숫자 받아오기*/
+                        
+                        
                         function selectReplyList(){
                         	
                         	$.ajax({
-                        		
                         	 	url : "rlist.recipe",
-                        	 	/*레시피 숫자는 레시피 조회에서 숫자 받아오기*/
+                        	 	
                             	data : {recipeNo: "<%=rc.getRecipeNo()%>"},
                             	success : function(list){
                             		
@@ -970,42 +939,28 @@
                             		
                             		for(var i in list){
                             			result += 
-                           				
-                           				
                                			"<br>"	+	
-                           				"<td>"+
-   	                                        "<div class='box' style='background: #BDBDBD;''>" + 
-   	                                        "<img class='profile' src='" + list[i].profileImg + "'>" + 
-   	                               			 "</div>" +
-                                  			"</td>" + 	
-
-                               				//"<td>" + "<img class='profile' src='" + "<%=contextPath%>" + list[i].profileImg + "'>" +"</td>" +
-   	                                        "<td>" + "<b>" + list[i].replyWriter + "</b>" + "</td>" +
+	                           				"<td>"+
+	   	                                        "<div class='box' style='background: #BDBDBD;''>" + 
+	   	                                       		 "<img class='profile' src='" + list[i].profileImg + "'>" + 
+	   	                               			 "</div>" +
+	                                		"</td>" + 	
+  	                                        "<td>" + "<b>" + list[i].replyWriter + "</b>" + "</td>" +
    	                                        "<td>" + list[i].enrollDate + "</td>" + 
    	                                        "<td style='color: gray;'>" + "<a href='' class='report-user-btn'>" + "신고하기" + "</a>" + "</td>" + 
    		                                    "<br>" +
    		                                  	 "<tr class='reply-deatil-content'>" + 
    		                                        "<td colspan='3'>" + list[i].replyContent  + "</td>" + 
    		                                    "</tr>" +
-   		                                    
-   		                               		"</tr>" +
    		                                "<br>"
-		                                    
                             		} 
-	
 									$("#reply-content-area tbody").html(result);	
-                            			
-                            	}, error : function(){
-                            		
-                            	},complete:function(){
-                            		console.log("화이팅:)")
                             	}
-                            	
-                            	
                         	})
-                       
                         }
 
+                        
+                        
                </script>
 
               
