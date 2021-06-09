@@ -373,12 +373,12 @@
             margin: 0;
         }
         #chefFriend1{
-            background-color: #ffffff;
+            background-color: #009764;
             margin: 10px;
             padding: 20x;
             border-radius: 4px;
             font-size: 20px;
-            color: #999;
+            color: #ffffff;
         }
         #chefFriend1:hover{
             text-decoration: none;
@@ -832,7 +832,7 @@
                                 <ul class="home-chef-page">
                                     <li> <!-- 쉐프(1) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/user.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png" style="width:150px; height:150px;">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -843,7 +843,7 @@
                                     </li>
                                     <li> <!-- 쉐프(2) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/user.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png" style="width:150px; height:150px;">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -854,7 +854,7 @@
                                     </li>
                                     <li> <!-- 쉐프(3) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/user.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png" style="width:150px; height:150px;">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -872,7 +872,7 @@
                                 <ul class="home-chef-page">
                                     <li> <!-- 쉐프(4) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding: 30px 15px 0 15px;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/user.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png" style="width:150px; height:150px;">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -883,7 +883,7 @@
                                     </li>
                                     <li> <!-- 쉐프(5) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/user.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png" style="width:150px; height:150px;">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
@@ -894,7 +894,7 @@
                                     </li>
                                     <li> <!-- 쉐프(6) -->
                                         <a class="home-chef_image" href="쉐프프로필페이지" style="display:table-cell;padding:30px 15px 0 15px;;" tabindex="0">
-                                            <img src="<%=contextPath%>/resources/image/user.png">
+                                            <img src="<%=contextPath%>/resources/image/user.png" style="width:150px; height:150px;">
                                         </a>
                                         <span class="home-chef_userNicname" id="chefFriend1_name" style="width:auto;">
                                             쉐프 닉네임
