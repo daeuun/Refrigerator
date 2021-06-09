@@ -121,10 +121,10 @@
             <div class="idPwd-find">
                 <ul>
                     <li>
-                        <a href="<%= contextPath %>/findId.member">아이디 찾기</a>
+                        <a href="<%= contextPath %>/findId.me">아이디 찾기</a>
                     </li>
                     <li>
-                        <a href="<%= contextPath %>/findPwd.member">비밀번호 재설정</a>
+                        <a href="<%= contextPath %>/findPwd.me">비밀번호 재설정</a>
                     </li>
                 </ul>
             </div>
