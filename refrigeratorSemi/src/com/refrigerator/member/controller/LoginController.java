@@ -44,8 +44,8 @@ public class LoginController extends HttpServlet {
 		if(loginUser == null) { // 로그인 실패 => error페이지 응답
 			
 			// 에러페이지 메세지 전달은 기술안함
-			request.setAttribute("errorTitleMsg", "제대로 입력해!!! ");
-			request.setAttribute("errorMsg", "제대로 입력해!!! ");
+			request.setAttribute("errorTitleMsg", "로그인에 실패하였습니다.");
+			request.setAttribute("errorMsg", "아이디 혹은 비밀번호를 다시 입력해주세요.");
 			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);;
 			
 		}else if(loginUser.getUserNo() == 1) {
