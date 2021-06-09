@@ -43,7 +43,8 @@ public class FindIdController extends HttpServlet {
 		System.out.println(findUser);
 		
 		if(findUser == null) { // 조회 결과없음 => 
-			request.setAttribute("errorMsg", "조회결과가 없습니다.");
+			request.setAttribute("errorTitleMsg", "회원정보 조회결과가 없습니다.");
+			request.setAttribute("errorMsg", "입력한 정보를 다시 확인해주세요.");
 			request.getRequestDispatcher("views/common/user/errorPage.jsp").forward(request, response);
 			
 		}else { // 조회결과 있음 => 아이디 알려주는 페이지로 이동

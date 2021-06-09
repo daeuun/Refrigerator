@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><style></style>
 <style>
+    @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+        body { font-family: 'Noto Sans KR', sans-serif; }
     .idPwd-outer{
         position: absolute;
         left: 50%;
@@ -115,6 +117,18 @@
         letter-spacing: -0.9px;
         height: 20px;
     }
+    .input-style02{
+        width: 460px;
+        height: 38px;
+        padding: 10px 15px 10px 15px;
+        margin: 2px 20px;
+        border: solid 1px #c2c2c2;
+        background: rgb(178, 218, 187);
+        border-radius: 6px;
+        font-size: 14px;
+        letter-spacing: -0.9px;
+        cursor: pointer;
+    }
     .blank{height: 4px;}
     .marT40 {
         margin: 30px 0 0;
@@ -128,6 +142,7 @@
         background: #009764;
         border: 0;
         outline: 0;
+        cursor: pointer;
     }
     .btn-next > a {
         display: block;
@@ -163,6 +178,7 @@
     .input-wrap{
         border: none;
     }
+    
     
 </style>
 </head>
@@ -204,49 +220,98 @@
                 </li>
             </ul>
 
-            <form action="<%= contextPath %>/" id="myFrm" method="post" name="myFrm" class="pwd-verify">
+            <form action="<%=contextPath%>/findPwd.member" id="myFrm" method="post" class="pwd-verify">
                 <h3 style="margin: 15px 0 0 27px;">간편찾기</h3>
                 
                 <p class="find-txt02">
-                    회원가입 시 등록하신 정보로 비밀번호를 재설정 합니다.<br>
-                    인증번호를 전송 받을 수단을 선택하시고 전송된 인증번호를 정확하게 <br>
-                    입력해주세요.
+			                    회원가입 시 등록하신 정보로 비밀번호를 재설정 합니다.<br>
+			                    인증번호를 전송 받을 수단을 선택하시고 전송된 인증번호를 정확하게 <br>
+			                    입력해주세요.
                 </p>
                 
                 <!--사용자 입력창-->
-                <span class="input-wrap">
 
-                    <div>   
-                        <label class="dsn" for="userName">아이디</label>
-                        <input type="text" placeholder="아이디" title="이름" class="input-style01" name="userName" id="userName" required>
-                    </div>
-                    
-                    <div>
-                        <label class="dsn" for="user-phone-email" id="user-phone-email-label">이메일 주소</label>
-                        <input type="text" placeholder="이메일 주소" title="휴대폰번호" class="input-style01 isPhoneEvent isPhone" name="phone" id="user-phone-email" required>
-                    </div>            
-                    
-                    <div>
-                        <label class="dsn" for="user-phone-email" id="user-phone-email-label">이메일 주소</label>
-                        <input type="text" placeholder="이메일 인증번호" title="이메일" class="input-style01 isEmailEvent isEmail" name="email" id="user-phone-email" required>
-                    </div>            
-                    
-                </span>
-
-                
-                <div class="marT40">
-                    <div >
-                        <button class="btn-next" type="submit">다음</button>
-                    </div>
-                </div>
+                    <span class="input-wrap">
+                        <div>   
+                            <label class="dsn" for="userId">아이디</label>
+                            <input type="text" placeholder="아이디" title="이름" class="input-style01" name="userId" id="userId" required>
+                        </div>
+                        
+                        <div>
+                            <label class="dsn" for="user-phone-email" id="user-phone-email-label">이메일 주소</label>
+                            <input type="text" placeholder="이메일 주소" title="휴대폰번호" class="input-style01 isPhoneEvent isPhone" 
+                                   name="email" id="user-phone-email">
+                            <input type="submit" value="이메일로 인증번호 전송" title="휴대폰번호" class="input-style02 isPhoneEvent isPhone" 
+                                   name="sendEmail" id="user-phone-email">
+                        </div>            
+                    </span>    
             </form>
+            
+            <form action="<%=contextPath%>/findPwdAfter.member" method="post">
+                        <div>
+                            <label class="dsn" for="user-phone-email" id="user-phone-email-label">이메일 주소</label>
+                            <input type="text" placeholder="이메일 인증번호를 입력하세요." title="인증번호" class="input-style01 isEmailEvent isEmail" 
+                                   name="authEmail" id="authEmail">
+                            <!-- 인증번호 유효성 검사 -->
+                            <div  id="authCheck" name="authCheck"></div>
+                            <div  class="compare-text" id="compare-text" name="compare-text"></div>
+                        </div>    
+                       
+                
+                    <div class="marT40">
+                        <div >
+                            <button class="btn-next" type="submit">다음</button>
+                        </div>
+                    </div>
+            </form>
+            
 
         </div>
+        
+        <script>
+            $("#authEmail").focusout(function() {
+            
+            // 아이디 유효성검사
+            var authEmail = $("#authEmail").val();
+            var authString = '인증번호';
+
+            if(authString.test(authEmail)){ //검증을 통과 했다면
+                $("#userId").css("border", "");
+                    
+            }else {//검증을 통과 하지 못했다면 
+                $("#authCheck").text("인증번호를 입력해주세요.");
+                $("#authEmail").css("border", "1px solid #009764");
+                $("#authCheck").css("color", "#009764");
+                $("#signUp_Submit").attr("disabled", true);
+                return;
+            }
+        });
+
+            $(".authCheck").on("propertychange change keyup paste input", function() {
+		        if ($(".authCheck").val() == checkNum) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+                    $(".compare-text").text("인증 성공!").css("color", "black");
+                    isCertification = true;  //인증 성공여부 check
+		        } else {
+                    $(".compare-text").text("불일치!").css("color", "red");
+                    isCertification = false; //인증 실패
+		        }
+	        });
+
+            $(".btn-next").click(function(){
+                if(isCertification==false){ //인증이 완료되지 않았다면
+                    alert("메일 인증이 완료되지 않았습니다.");
+                }
+            });
+        </script>
+
+        
 
         
 
 
     </div>
+    
+
 
 
 </body>
