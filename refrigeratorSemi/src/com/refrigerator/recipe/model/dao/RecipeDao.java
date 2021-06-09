@@ -1447,7 +1447,43 @@ public class RecipeDao{
 		
 		return list;
 	}
-
+	
+	
+	/** 메인페이지 - 쉐프가 선택한 레시피 정보 조회
+	 * @author daeun
+	 */
+	public ArrayList<Recipe> selectChefRecipe(Connection conn){
+		// select문 => 조회수 상위 6개 레시피 조회
+		ArrayList<Recipe> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectChefRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery(); 
+			
+			while(rset.next()) {
+				list.add(new Recipe(rset.getInt("recipe_no"),
+									rset.getString("recipe_title"),
+						            rset.getString("nickname"),
+						            rset.getString("main_img"),
+						            rset.getInt("like_count")
+						            ));
+			}
+			
+			System.out.println(list);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
 	
 }

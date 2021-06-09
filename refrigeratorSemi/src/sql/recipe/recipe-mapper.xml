@@ -760,6 +760,28 @@
 		 WHERE RNUM BETWEEN 1 AND 6
 	</entry>
 	
+	<!-- @author daeun -->
+	<!-- 메인(쉐프가 선택한 레시피)  좋아요수 내림차순 레시피 조회 -->
+	<entry key="selectChefRecipe">
+		SELECT RECIPE_NO, RECIPE_TITLE, NICKNAME, LIKE_COUNT, MAIN_IMG
+		FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT RECIPE_NO
+		                     , RECIPE_TITLE
+		                     , NICKNAME
+		                     , MAIN_IMG
+		                     , R.LIKE_COUNT
+		                  FROM RECIPE R
+		                  JOIN MEMBER USING (USER_NO)
+		                 WHERE R.STATUS = 'N'
+		                 ORDER
+		                    BY R.LIKE_COUNT DESC
+		                )A
+		    )
+		 WHERE RNUM BETWEEN 1 AND 1
+	</entry>
+	
 	
 	
 	

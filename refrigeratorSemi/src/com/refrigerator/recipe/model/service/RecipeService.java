@@ -514,6 +514,15 @@ public class RecipeService {
 		close(conn);
 		return list;
 	}
-
+	
+	/** 메인페이지 - 쉐프가 선택한 레시피 정보 조회
+	 * @author daeun
+	 */
+	public ArrayList<Recipe> selectChefRecipe(){
+		Connection conn = getConnection();
+		ArrayList<Recipe> list = new RecipeDao().selectChefRecipe(conn);
+		close(conn);
+		return list;
+	}
 
 }

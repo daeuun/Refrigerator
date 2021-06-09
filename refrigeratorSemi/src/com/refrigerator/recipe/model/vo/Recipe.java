@@ -203,6 +203,15 @@ public class Recipe {
 		this.count = count;
 		this.mainImg = mainImg;
 	}
+	
+	public Recipe(int recipeNo, String recipeTitle, String recipeWriter, String mainImg, int likeCount) {
+		super();
+		this.recipeNo = recipeNo;
+		this.recipeTitle = recipeTitle;
+		this.recipeWriter = recipeWriter;
+		this.count = likeCount;
+		this.mainImg = mainImg;
+	}
 
 	public int getRecipeNo() {
 		return recipeNo;

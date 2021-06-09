@@ -717,9 +717,51 @@
     			}
     		});
                 
+             // 쉐프가 선택한 레시피(좋아요순) 조회용 스크립트
+                
+                $.ajax({
+       			url:"chef.recipe",
+       			method: "post",
+       			dataType: "json",
+       			contentType : "application/json; charset:UTF-8",
+       			enctype:'multipart/form-data',
+       			success:function(list){
+       				
+       	            
+       	            var result = "";
+       	            
+       	            for(var i in list){
+       	            	
+       	            	result +=
+                
+                
+                					"<a class='home-starRecipe_link' href=' " + "<%= contextPath%>/detail.recipe?rno="  + list[i].recipeNo + "'>" 
+                					+ "<div><div class='home-starRecipe_content'><div class='home-starRecipe_content-title'>" 
+                               	+ list[i].recipeTitle 
+                               	+ "</div><div class='home-starRecipe_content-user'>" 
+                                   + "<span class='home-starRecipe_content-user_name'>"           
+                                   + list[i].recipeWriter
+                                   + "</span></div></div>"            
+                                   + "<img class='home-starRecipe_image' src='"    
+                                   + list[i].mainImg
+                                   + "'>" 
+                                   + "<div class='home-starRecipe-more'>" 
+                                   + "<span class='home-starRecipe-more_text'>See more</span></div></div></a>"    
+   						
+       	            	}
+       	            
+       	            $("#home-starRecipe").html(result);
+       				
+       			},error:function(){
+       				console.log("오늘의 레시피 등록 ajax 통신실패");
+       			}
+       		});
+                
 
         
             </script>
+            
+            
 
             <!-- 3. 오늘의 레시피 == 조회수 높은 레시피 -->
             <section class="home-section home-view-recipe"> 
@@ -746,6 +788,8 @@
                 </div>
             </section>
 
+
+
             <!-- 4. 쉐프가 선택한 레시피 == 별점 높은 레시피 -->
             <section class="home-section home-star-recipe"> 
                 <header class="home-section_header">
@@ -755,59 +799,16 @@
                 <div>
                     <div class="home-starRecipes_content"> <!-- 레시피 목록 -->
 
-                        <div class="home-starRecipe"> <!-- 레시피 (1) -->
-                            <a class="home-starRecipe_link" href="상세레시피경로">
-                                <div>
-                                    <div class="home-starRecipe_content">
-                                        <div class="home-starRecipe_content-title">
-                                            제목
-                                        </div>
-                                        <div class="home-starRecipe_content-user">
-                                            <span class="home-starRecipe_content-user_name">
-                                                닉네임
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <img class="home-starRecipe_image" src="<%=contextPath%>/resources/image/mainimage.png"> <!--레시피 대표 이미지-->
-                                    <div class="home-starRecipe-more"> <!-- 바로가기 버튼 -->
-                                        <span class="home-starRecipe-more_text">
-                                            See more
-                                        </span>
-                                        <img class="home-starRecipe-more_img" src="">
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="home-starRecipe" id="home-starRecipe"> <!-- 레시피 (1) -->
+                           <!-- ajax출력되는 div영역 --> 
                         </div>
-
-                        <div class="home-starRecipe"> <!-- 레시피 (2) -->
-                            <a class="home-starRecipe_link" href="상세레시피경로">
-                                <div>
-                                    <div class="home-starRecipe_content">
-                                        <div class="home-starRecipe_content-title">
-                                            제목
-                                        </div>
-                                        <div class="home-starRecipe_content-user">
-                                            <span class="home-starRecipe_content-user_name">
-                                                닉네임
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <img class="home-starRecipe_image" src="<%=contextPath%>/resources/image/mainimage.png"> <!--레시피 대표 이미지-->
-                                    <div class="home-starRecipe-more"> <!-- 바로가기 버튼 -->
-                                        <span class="home-starRecipe-more_text">
-                                            See more
-                                        </span>
-                                        <img class="home-starRecipe-more_img" src="">
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
 
                     </div>
                 </div>
             </section>
-
+            
+            
+            
             <!-- 5. 오늘의 쉐프 == 팔로우수 많은 쉐프 -->
             <section class="home-section home-chefs"> 
                 <header class="home-section_header">
