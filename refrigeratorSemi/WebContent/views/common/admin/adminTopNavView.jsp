@@ -93,7 +93,7 @@
         </div>
 
         <div class="home-btn">
-            <a class="nav-home" href="">Home</a>
+            <a class="nav-home" href="<%=request.getContextPath()%>/adList.me?currentPage=1"> Home</a>
         </div>
 
         <div class="admin-check">

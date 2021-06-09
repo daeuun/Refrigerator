@@ -31,7 +31,6 @@ public class ScrapInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 수정하기
 		int recipeNo = Integer.parseInt(request.getParameter("recipeNo"));
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 	
