@@ -118,6 +118,11 @@
         color:white;
         text-align: center;
     }
+    img {
+		  width: 200px;
+		  height: 150px;
+		  object-fit: cover;
+		}    
 
 </style>
 
@@ -190,7 +195,7 @@
                                     <th width="60"><%=ba.getEnrollDate() %></th>
                                     <th width="60"><%=ba.getModifyDate() %></th>
                                     <th width="60"><%=ba.getEndDate() %></th>
-                                    <th width="30"><%=ba.getBannerImg() %></th>
+                                    <th width="30" height="30"><img src="<%= contextPath%>/resources/banner_upfiles/<%=ba.getBannerImg()%>"></th>
                                     <td><button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#banner_modify_Modal" onclick="modifyBanner(this);">수정</button></td>
                                     <td><a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#banner_delete_Modal" onclick="deleteBanner();">삭제</a></td>
                                 </tr>
@@ -298,7 +303,7 @@
                         <div class="modal-content-wrap">
                             <!-- header -->
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">배너 등록</h4>
+                                <h4 class="modal-title" id="myModalLabel">배너 수정</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
 
