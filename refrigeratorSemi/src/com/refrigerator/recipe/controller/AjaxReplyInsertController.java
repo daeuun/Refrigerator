@@ -48,6 +48,7 @@ public class AjaxReplyInsertController extends HttpServlet {
 		
 		response.getWriter().print(result);
 		
+		
 	}
 
 	/**

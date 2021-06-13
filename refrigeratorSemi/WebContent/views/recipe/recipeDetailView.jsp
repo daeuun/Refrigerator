@@ -574,17 +574,12 @@
 	                                var servings = $("#select-servings").children("option:selected").val();
 	                                
 	                                for(var i=0; i<<%=ingre.size()%>;i++) {
-	                                   //var ing = $("#ing" + i).text();	                                   
-
 	                                   $("#ing" + i).text(ingArr[i]*servings);
-	                                   
 	                                }
 	                                
                                    for(var i=0;i<<%=subIngre.size()%>;i++){
-	                                	//var sub = $("#sub" + i).text();
 	                                	$("#sub" + i).text(subArr[i]*servings);
 	                                }
-	                                
 	                                
 	                            }
 
@@ -740,7 +735,6 @@
                     	
                     	</tbody>
                      
-						
                     </table>
 
                 </div>
@@ -780,7 +774,7 @@
             <div class="reply-area" >
 
                 <!--댓글 추가 및 삭제시 댓글 숫자 증감-->
-                <div class="area-header"><h5>댓글 <b><%=replyCount %></b></h5>
+                <div class="area-header"><h5>댓글 <b><%=replyCount%></b></h5>
                 
                 <hr> 
                 </div>
@@ -836,13 +830,7 @@
                     <div class="reply-detail" align="center" id="reply-content-area">
                         <table style="width: 500px;">
                             <tbody>
-					             <tr>
-                                    <td rowspan="3" style="width: 30px;">
-                                        <div class="box" style="background: #BDBDBD;">
-                                            <img class="profile" src="">
-                                        </div>
-                                    </td>
-								</tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -894,10 +882,10 @@
                    	
                        $(function(){
                        	selectReplyList();
+                        setInterval(selectReplyList,1000);
                        	selectReviewList();
-                           setInterval(selectReplylist,1000);
                        })
-                       
+                            
                        /*댓글 작성*/
                        
                        <%if(loginUser!=null){%>   
