@@ -114,7 +114,7 @@
                     <p>"<span id="search-title"><%=searchWord %></span>"에 대한 검색결과</p>
                     <p>
                         총 
-                        <span id="search-num"><%=listCount %></span>
+                        <span id="search-num">4</span>
                         개의 맛있는 레시피가 있습니다.
                     </p>
                 </div>

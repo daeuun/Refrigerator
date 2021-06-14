@@ -238,7 +238,7 @@
                                     <th width="250">이메일</th>
                                     <th width="120">회원등급</th>
                                     <th width="70">상태</th>
-                                   	<th width="100">회원수정</th>
+                                   	<th width="100">관리</th>
                                 </tr>
     
                             </thead>

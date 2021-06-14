@@ -118,7 +118,7 @@
 	                		
 	                        <!-- Modal body -->
 	                        <div class="modal-body">
-	                        	<Strong id="userId">user10</Strong> 회원을 <b style="color:rgb(0, 120, 51);">탈퇴 처리</b> 하시겠습니까?
+	                        	<Strong id="userId">user18</Strong> 회원을 <b style="color:rgb(0, 120, 51);">탈퇴 처리</b> 하시겠습니까?
 	                        </div>
 	                
 	                        <!-- Modal footer -->
