@@ -43,7 +43,6 @@ public class AjaxDetailReviewController extends HttpServlet {
 		ArrayList <Review> list = new RecipeService().selectReviewList(recipeNo);
 
 		response.setContentType("application/json;charset=utf-8");
-		request.setAttribute("list",list);
 		new Gson().toJson(list,response.getWriter());
 		
 		

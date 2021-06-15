@@ -729,7 +729,7 @@
                     	<div id="image_container"> <!-- 이미지 마크업 생성 공간 --> </div>
 
                     
-                    	<tbody id="review-detail-list">
+                    	<tbody>
                     	
                     	<!-- ajax로 받아온 리뷰 데이터가 데이터가 출력되는 곳 -->
                     	
@@ -830,7 +830,7 @@
                     <div class="reply-detail" align="center" id="reply-content-area">
                         <table style="width: 500px;">
                             <tbody>
-
+			
                             </tbody>
                         </table>
                     </div>
@@ -846,7 +846,6 @@
                 	   $.ajax({
                 		    url: "list.review"
                            	,data : {recipeNo : <%=rc.getRecipeNo()%>}
-                	   		,enctype:'multipart/form-data'
                           	,success : function(list){
                           			var result = "";
                           			for(var i in list){
