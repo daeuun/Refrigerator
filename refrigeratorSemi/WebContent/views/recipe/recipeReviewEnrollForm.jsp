@@ -24,7 +24,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피 작성하기</title>
 
    <style>
 
@@ -47,9 +47,10 @@
         margin: 20px;
     }
 
-    *{margin:0; padding:0;}
-
-
+	
+	#reviewImg:hover{
+		cursor:pointer;
+	}
 	
     .star{
     display:inline-block;
@@ -75,22 +76,12 @@
     }
 	
 
-
     </style>
-    
-     <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
-	<!-- jQuery library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
-	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-
 	
 	</head>
 	<body>
@@ -115,16 +106,14 @@
 		
 		            <hr>
 		            <br>
-		            <div  align="center">
-		                <img src="<%=contextPath%>/resources/image/sampleImg1.jpg" alt="" width="150px" height="150px">
+		            <div align="center">
+		                <img id="reviewImg"  width="150px" height="150px">
 		            </div>
 		            <br>
 		            
 		            <div align="center">
 		
 		                <h5>이 요리의 별점은?</h5>
-		
-		               
 						
 						<!-- 별점은 아래의 코드로 입력 부탁드립니다.-->
 						<div>
@@ -222,8 +211,30 @@
 	
 									*/
 									
+							/*리뷰 이미지 미리보기 기능*/
 		
-	
+							
+							function loadImg(inputFile,num){
+										
+								 	if(inputFile.files.length == 1){
+
+								 		var reader = new FileReader();
+								 		 
+								 		reader.readAsDataURL(inputFile.files[0]);
+								 		reader.onload = function(e){
+								 			 $("#reviewImg").attr("src",e.target.result);
+								 		 }
+								 		
+								 	}else{
+								 		
+								 		$("#reviewImg").attr("src",null);
+								 		
+								 	}
+										
+										
+							}
+							
+							
 		                    </script>
 							
 		
@@ -236,8 +247,8 @@
 
 		                
 
-		                <div class="input-type">
-		                    <input type="file" class="form-control-file border" name="reviewUpfile" required>
+		                <div class="input-type" id="file-area">
+		                    <input type="file" id="reviewImg1" onchange="loadImg(this,1)" class="form-control-file border" name="reviewUpfile" required>
 		                </div>
 		
 		                <div class="input-type">
@@ -248,19 +259,25 @@
 		                    <button type="submit" class="btn btn-block" style="background-color: rgb(0, 153, 102); color:white" >완료</button>
 		                </div>
 		
-		                <!--파일 선택후 div 화면에 미리보기-->
-		                <script>
-		                
-		
-		                </script>
-		
+
 		            </div>
 		        </div>
-		        	
 		    </form> 
-	    
 	    </div>
-
+	    
+	    
+		               	<!-- 이미지 영역 클릭시 파일 삽입 -->
+		               
+		                <script>
+		                $(function(){
+		                	
+		                	$("#file-area").hide();
+		                	$("#reviewImg").click(function(){
+		                		$("#reviewImg1").click();	
+		                	})
+		                })
+		
+		                </script>
 
 
 
