@@ -106,29 +106,44 @@
 		
 		            <hr>
 		            <br>
-		            <div align="center">
-		                <img id="reviewImg"  width="150px" height="150px">
-		            </div>
+		           
+			            <div align="center">
+				            <h6>
+						                    한 장이라도 좋아요 <br>
+						                    완성된 요리를 자랑해주세요
+			                </h6><br><br>
+				             <a data-toggle="tooltip" title="인증샷 자랑하기! ">
+				                <img id="reviewImg" width="150px" height="150px">
+				             </a>
+			            </div>
+		          
+		            
+		            <script>
+                        $(document).ready(function(){
+                          $('[data-toggle="tooltip"]').tooltip();
+                        });
+                    </script>
+		            
 		            <br>
 		            
 		            <div align="center">
 		
-		                <h5>이 요리의 별점은?</h5>
+		                <h6>이 요리의 별점은?</h6>
 						
 						<!-- 별점은 아래의 코드로 입력 부탁드립니다.-->
 						<div>
 							<br>
 							<select name="starCount" id="starCount" >
-								<option value="0.5">0.5</option>
-								<option value="1">1</option>
-								<option value="1.5">1.5</option>
-								<option value="2">2</option>
-								<option value="2.5">2.5</option>
-								<option value="3" selected>3</option>
-								<option value="3.5">3.5</option>
-								<option value="4">4</option>
-								<option value="4.5">4.5</option>
-								<option value="5">5</option>
+								<option value="0.5">😢 많이 별로였어요..</option>
+								<option value="1"> 😓 조금 곤란한 맛이에요 </option>
+								<option value="1.5">🤔 그냥 그랬어요</option>
+								<option value="2"> 😐 나쁘지는 않아요</option>
+								<option value="2.5"> 😗 괜찮았는데 아쉬웠어요  </option>
+								<option value="3" selected> 😊 감사해요  </option>
+								<option value="3.5"> 😋  냠냠</option>
+								<option value="4"> 😝 맛있어요!</option>
+								<option value="4.5"> 😘 다음에 또 만들어볼래요!</option>
+								<option value="5">🥰완전 최고! 이 레시피를 추천할래요</option>
 							</select>
 						</div>
 						
@@ -226,24 +241,15 @@
 								 		 }
 								 		
 								 	}else{
-								 		
 								 		$("#reviewImg").attr("src",null);
-								 		
 								 	}
-										
 										
 							}
 							
 							
 		                    </script>
 							
-		
-						<br>
-		                <p>
-					                    한 장이라도 좋아요 <br>
-					                    완성된 요리를 자랑해주세요
-		                </p>
-						<br>
+	
 
 		                
 
