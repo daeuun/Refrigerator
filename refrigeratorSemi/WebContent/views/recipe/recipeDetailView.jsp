@@ -350,14 +350,14 @@
 	  <!--전체 감싸는 div-->
     <div class="total-outer">
     
-		
+		<%-- 
 		<jsp:include page="../common/user/recipeSideBar.jsp">
 			<jsp:param name="userNo" value="<%= loginUser.getUserNo() %>"/>
 			<jsp:param name="recipeNo" value="<%= recipeNo %>"/>
 			<jsp:param name="ingre" value="<%= ingre %>"/>
 			<jsp:param name="subIngre" value="<%= subIngre %>"/>
 		</jsp:include>
-
+		--%>
         
         <div align="center">
             <div class="bannner">
